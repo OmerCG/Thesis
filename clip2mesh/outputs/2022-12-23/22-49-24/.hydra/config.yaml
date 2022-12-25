@@ -1,0 +1,18 @@
+output_path: /home/nadav2/dev/data/CLIP2Shape/images/flame_exp_py3d_male
+gender: male
+img_tag: null
+model_type: flame
+with_face: true
+num_of_imgs: 2000
+sides: false
+texture: /home/nadav2/dev/repos/CLIP2Shape/SMPLX/textures/smplx_texture_m_alb.png
+renderer:
+  name: pytorch3d
+  kwargs:
+    img_size:
+    - 512
+    - 512
+    tex_path: ${texture}
+    dist: 0.5
+    elev: 0.0
+    azim: 0.0

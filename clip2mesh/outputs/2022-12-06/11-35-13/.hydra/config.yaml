@@ -1,0 +1,16 @@
+output_path: /home/nadav2/dev/data/CLIP2Shape/images/flame_shape_py3d_angles
+gender: neutral
+img_tag: null
+model_type: flame
+with_face: false
+num_of_imgs: 1
+texture: /home/nadav2/dev/repos/CLIP2Shape/Flame/flame2020/mesh.png
+renderer:
+  name: pytorch3d
+  kwargs:
+    img_size:
+    - 512
+    - 512
+    tex_path: ${texture}
+    dist: 0.8
+    elev: 0.0

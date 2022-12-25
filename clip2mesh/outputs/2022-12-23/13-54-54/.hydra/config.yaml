@@ -1,0 +1,23 @@
+images_dir: /home/nadav2/dev/data/CLIP2Shape/images/real_images_face_expression/archive
+  (1)/Humans
+images_collage_path: /home/nadav2/dev/data/CLIP2Shape/outs/images_to_shape/flame_expression
+verbose: false
+display_images: false
+with_face: true
+model_type: flame
+model_path: /home/nadav2/dev/repos/CLIP2Shape/production/flame_expression.ckpt
+texture: null
+sliders_max_value: 30
+labels_weights:
+- 0.5
+- 0.6
+- 0.8
+- 0.6
+renderer_kwargs:
+  img_size:
+  - 512
+  - 512
+  tex_path: ${texture}
+  dist: 0.5
+  elev: 0.0
+  azim: 0.0

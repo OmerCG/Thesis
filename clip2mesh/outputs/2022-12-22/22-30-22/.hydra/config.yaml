@@ -1,0 +1,14 @@
+images_dir: /home/nadav2/dev/data/CLIP2Shape/images/real_images_face_expression
+with_face: false
+model_type: flame
+model_path: /home/nadav2/dev/repos/CLIP2Shape/production/flame_shape.ckpt
+texture: /home/nadav2/dev/repos/CLIP2Shape/Flame/flame2020/mesh.png
+sliders_max_value: 30
+renderer_kwargs:
+  img_size:
+  - 512
+  - 512
+  tex_path: ${texture}
+  dist: 0.5
+  elev: 0.0
+  azim: 0.0

@@ -1,0 +1,12 @@
+repo_path: /home/nadav2/dev/repos/CLIP2Shape
+data_path: /home/nadav2/dev/data/CLIP2Shape
+demo_kwargs:
+  data_dir: ${data_path}/images/flame_expressions_new
+  texture: ${repo_path}/Flame/flame2020/mesh.png
+  model_path: ${repo_path}/pre_production/flame-data_new_best.ckpt
+  model_type: flame
+  with_face: true
+  device: cuda
+  on_parameters: false
+  gender: neutral
+  out_dir: null

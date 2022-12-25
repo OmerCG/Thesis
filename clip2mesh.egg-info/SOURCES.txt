@@ -1,0 +1,6 @@
+README.md
+setup.py
+clip2mesh.egg-info/PKG-INFO
+clip2mesh.egg-info/SOURCES.txt
+clip2mesh.egg-info/dependency_links.txt
+clip2mesh.egg-info/top_level.txt

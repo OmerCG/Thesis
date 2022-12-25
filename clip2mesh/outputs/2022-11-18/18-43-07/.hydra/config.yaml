@@ -1,0 +1,10 @@
+home_dir: /home/nadav2/dev/data/Thesis/Repositories/SMPLX_CLIP
+hollywood_kwargs:
+  data_dir: ${home_dir}/images/flame_textured
+  texture: ${home_dir}/Flame/flame2020/mesh.png
+  model_path: ${home_dir}/production/clip_2_flame.ckpt
+  model_type: flame
+  with_face: false
+  device: cuda
+  on_parameters: false
+  gender: neutral

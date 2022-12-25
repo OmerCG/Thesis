@@ -1,0 +1,64 @@
+repo_path: /home/nadav2/dev/repos/CLIP2Shape
+data_path: /home/nadav2/dev/data/CLIP2Shape
+
+demo_kwargs:
+
+  # General cfg
+  out_dir: ${data_path}/outs/objs  # for caputring obj
+  # out_dir: ${data_path}/outs/images_from_demo  # for caputring png
+  gender: male
+  device: cuda
+
+  # # FLAME - expression
+  # texture: #${repo_path}/Flame/flame2020/mesh.png
+  # model_path: ${repo_path}/production/flame_expression.ckpt
+  # model_type: flame
+  # with_face: True
+  # on_parameters: False
+
+  # # FLAME - shape
+  # texture: #${repo_path}/Flame/flame2020/mesh.png
+  # model_path: ${repo_path}/production/flame_shape.ckpt
+  # model_type: flame
+  # with_face: False
+  # on_parameters: False
+
+  # SMPLX
+  texture: #${repo_path}/SMPLX/textures/smplx_texture_m_alb.png
+  model_path: ${repo_path}/production/smplx_male.ckpt
+  model_type: smplx
+  with_face: False
+  on_parameters: False
+
+  # # SMAL
+  # texture:  # there is no texture for smal yet
+  # model_path: ${repo_path}/production/smal.ckpt
+  # model_type: smal
+  # with_face: False
+  # on_parameters: False
+
+  # GENERIC
+  # with_face: True
+  # model_type: flame
+  # texture: #${repo_path}/Flame/flame2020/mesh.png
+  # model_path: # keep empty
+  # on_parameters: True
+
+  renderer_kwargs:
+    img_size: [512, 512]
+    tex_path: ${demo_kwargs.texture}
+
+    # # FLAME cam params
+    # dist: 0.5
+    # elev: 0.0
+    # azim: 0.0
+
+    # SMPLX cam params
+    dist: 2.4
+    elev: 8.6
+    azim: 2.1
+
+    # # SMAL cam params
+    # dist: 4.0
+    # elev: 20.0
+    # azim: 2.1

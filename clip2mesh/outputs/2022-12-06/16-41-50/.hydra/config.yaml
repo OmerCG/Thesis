@@ -1,0 +1,11 @@
+data_path: /home/nadav2/dev/data/CLIP2Shape/images
+repo_path: /home/nadav2/dev/repos/CLIP2Shape
+optimization_cfg:
+  clip_scores_path: ${data_path}/flame_expressions_new/12_labels.json
+  texture: ${repo_path}/Flame/flame2020/mesh.png
+  model_type: flame
+  text: angry
+  device: cuda
+  total_steps: 300
+  optimize_features: expression_params
+  output_dir: /home/nadav2/dev/repos/CLIP2Shape/outs

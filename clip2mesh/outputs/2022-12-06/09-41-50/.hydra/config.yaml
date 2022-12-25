@@ -1,0 +1,12 @@
+repo_path: /home/nadav2/dev/repos/CLIP2Shape
+data_path: /home/nadav2/dev/data/CLIP2Shape
+demo_kwargs:
+  data_dir: ${data_path}/images/smal
+  texture: null
+  model_path: ${repo_path}/production/smal.ckpt
+  model_type: smal
+  with_face: false
+  device: cuda
+  on_parameters: false
+  gender: neutral
+  out_dir: /home/nadav2/dev/repos/CLIP2Shape/objs

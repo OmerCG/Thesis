@@ -1,0 +1,15 @@
+data_path: /home/nadav2/dev/data/CLIP2Shape/images
+repo_path: /home/nadav2/dev/repos/CLIP2Shape
+main_output_dir: /home/nadav2/dev/data/CLIP2Shape/outs/vids/optimization
+optimization_cfg:
+  texture: null
+  model_type: flame
+  text: smile
+  device: cuda
+  total_steps: 100
+  optimize_features: expression_params
+  output_dir: ${main_output_dir}
+  dist: 0.8
+  elev: 0.0
+  azim: 0.0
+  lr: 0.1

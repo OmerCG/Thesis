@@ -1,0 +1,11 @@
+repo_path: /home/nadav2/dev/repos/CLIP2Shape
+data_path: /home/nadav2/dev/data/CLIP2Shape
+demo_kwargs:
+  with_face: true
+  device: cuda
+  on_parameters: true
+  gender: neutral
+  model_type: smal
+  texture: null
+  model_path: null
+  out_dir: ${data_path}/images/flame_expressions_new

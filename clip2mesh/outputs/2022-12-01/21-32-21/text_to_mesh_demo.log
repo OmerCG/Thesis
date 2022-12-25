@@ -1,0 +1,2 @@
+[2022-12-01 21:32:23,942][sentence_transformers.SentenceTransformer][INFO] - Load pretrained SentenceTransformer: paraphrase-MiniLM-L6-v2
+[2022-12-01 21:32:24,218][sentence_transformers.SentenceTransformer][INFO] - Use pytorch device: cuda

@@ -1,0 +1,11 @@
+home_dir: /home/nadav2/dev/data/Thesis/Repositories/SMPLX_CLIP
+hollywood_kwargs:
+  data_dir: ${home_dir}/images/smal
+  texture: null
+  model_path: ${home_dir}/production/clip_2_smal_all_data.ckpt
+  model_type: smal
+  with_face: false
+  device: cuda
+  on_parameters: false
+  gender: neutral
+  out_dir: null

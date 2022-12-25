@@ -1,0 +1,9 @@
+data_path: /home/nadav2/dev/data/CLIP2Shape/images
+repo_path: /home/nadav2/dev/repos/CLIP2Shape
+optimization_cfg:
+  clip_scores_path: ${data_path}/smplx_py3d/14_labels.json
+  texture: ${repo_path}/SMPLX/textures/smplx_texture_m_alb.png
+  model_type: smplx
+  device: cuda
+  total_steps: 2000
+  optimize_features: betas

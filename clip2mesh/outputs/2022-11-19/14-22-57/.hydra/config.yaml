@@ -1,0 +1,7 @@
+output_path: /home/nadav2/dev/data/Thesis/Repositories/SMPLX_CLIP/images/smal
+gender: neutral
+rest_pose: false
+img_tag: null
+texture: null
+model_type: smal
+with_face: false
