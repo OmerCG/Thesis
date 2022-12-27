@@ -1,4 +1,4 @@
-repo_path: /home/nadav2/dev/repos/CLIP2Shape
+repo_path: /home/nadav2/dev/repos/Thesis
 data_path: /home/nadav2/dev/data/CLIP2Shape
 
 demo_kwargs:
@@ -25,7 +25,7 @@ demo_kwargs:
 
   # SMPLX
   texture: #${repo_path}/SMPLX/textures/smplx_texture_m_alb.png
-  model_path: ${repo_path}/production/smplx_male.ckpt
+  model_path: ${repo_path}/pre_production/correlations_check.ckpt
   model_type: smplx
   with_face: False
   on_parameters: False

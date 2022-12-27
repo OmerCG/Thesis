@@ -301,6 +301,15 @@ class Pytorch3dRenderer:
             materials=materials,
             blend_params=blend_params,
         )
+        self._load_renderer()
+        self._load_depth_rasterizer()
+
+    def _load_renderer(self):
+        self.raster_settings = RasterizationSettings(image_size=(self.height, self.width))
+        self.renderer = MeshRenderer(
+            rasterizer=MeshRasterizer(cameras=self.cameras, raster_settings=self.raster_settings),
+            shader=self.shader,
+        )
 
     @staticmethod
     def get_texture(device, vt, ft, texture):
@@ -315,6 +324,9 @@ class Pytorch3dRenderer:
             verts_uvs=verts_uvs[None],
         )
         return texture
+
+    def _load_depth_rasterizer(self):
+        self.depth_rasterizer = MeshRasterizer(cameras=self.cameras, raster_settings=self.raster_settings)
 
     @staticmethod
     def get_lights(device):
@@ -358,12 +370,7 @@ class Pytorch3dRenderer:
         if len(faces.size()) == 2:
             faces = faces[None]
         mesh = Meshes(verts=verts, faces=faces, textures=texture)
-        raster_settings = RasterizationSettings(image_size=(self.height, self.width))
-        renderer = MeshRenderer(
-            rasterizer=MeshRasterizer(cameras=self.cameras, raster_settings=raster_settings),
-            shader=self.shader,
-        )
-        rendered_mesh = renderer(mesh, cameras=self.cameras)
+        rendered_mesh = self.renderer(mesh, cameras=self.cameras)
         return rendered_mesh
 
     @staticmethod
@@ -378,8 +385,8 @@ class Pytorch3dRenderer:
 class Utils:
     def __init__(self, device: str = "cuda"):
         self.device = device
-        self.body_pose = torch.tensor(np.load("/home/nadav2/dev/repos/CLIP2Shape/SMPLX/rest_pose.npy"))
-        self.production_dir = "/home/nadav2/dev/repos/CLIP2Shape/pre_production"
+        self.body_pose = torch.tensor(np.load("/home/nadav2/dev/repos/Thesis/SMPLX/rest_pose.npy"))
+        self.production_dir = "/home/nadav2/dev/repos/Thesis/pre_production"
 
     @staticmethod
     def find_multipliers(value: int) -> list:
@@ -622,13 +629,13 @@ class Utils:
     @staticmethod
     def get_labels() -> List[List[str]]:
         # labels = [["big cat"], ["cow"], ["donkey"], ["hippo"]]  # SMAL animals
-        labels = [
-            ["fat"],
-            ["broad shoulders"],
-            ["hourglass"],
-            ["pear shaped"],
-            ["skinny legs"],
-        ]  # SMPLX body
+        # labels = [
+        #     ["fat"],
+        #     ["broad shoulders"],
+        #     ["hourglass"],
+        #     ["pear shaped"],
+        #     ["skinny legs"],
+        # ]  # SMPLX body
         # labels = [
         #     ["smile"],
         #     ["angry"],
@@ -644,7 +651,43 @@ class Utils:
         #     ["ears sticking-out"],
         #     ["big forehead"],
         #     ["small chin"],
+        #     ["big mouth"],
+        #     ["thin lips"],
+        #     ["big nose"],
+        #     ["long head"],
+        #     ["big eyebrows"],
+        #     ["big eyes"],
         # ]  # FLAME shape
+        labels = [
+            "fat",
+            "thin",
+            "muscular",
+            "short",
+            "long legs",
+            "narrow waist",
+            "skinny",
+            "tall",
+            "rectangular",
+            "pear shaped",
+            "average",
+            "big",
+            "curvy",
+            "lean",
+            "masculine",
+            "proportioned",
+            "stocky",
+            "sexy",
+            "sturdy",
+            "broad shoulders",
+            "fit",
+            "round apple",
+            "built",
+            "heavyset",
+            "petite",
+            "small",
+        ]
+        if not isinstance(labels[0], list):
+            labels = [[label] for label in labels]
         return labels
 
     def get_antonyms_of_labels(self, labels: List[List[str]]):
@@ -836,18 +879,15 @@ class ModelsFactory:
         self.model_type = model_type
         self.utils = Utils()
 
-    def get_model(self, **kwargs) -> nn.Module:
+    def get_model(self, **kwargs) -> Tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray]:
         if self.model_type == "smplx":
             return self.utils.get_smplx_model(**kwargs)
+        elif self.model_type == "flame":
+            return self.utils.get_flame_model(**kwargs)
         else:
             if "gender" in kwargs:
                 kwargs.pop("gender")
-
-            if self.model_type == "flame":
-                return self.utils.get_flame_model(**kwargs)
-
-            else:
-                return self.utils.get_smal_model(**kwargs)
+            return self.utils.get_smal_model(**kwargs)
 
     def get_default_params(self, with_face: bool = False) -> Dict[str, torch.tensor]:
 

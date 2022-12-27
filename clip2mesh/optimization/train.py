@@ -13,7 +13,7 @@ from clip2mesh.data_management.dataset import CLIP2MESHDataset
 from clip2mesh.utils import C2M_pl, CreateModelMeta
 
 
-@hydra.main(config_path="config", config_name="train")
+@hydra.main(config_path="../config", config_name="train")
 def main(config: DictConfig) -> None:
 
     seed_everything(config.seed)

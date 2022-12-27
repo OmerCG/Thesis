@@ -7,7 +7,7 @@ models_dir: /home/nadav2/dev/repos/CLIP2Shape/models
 seed: 42
 
 tensorboard_logger:
-  name: smplx_female # IMPORTANT
+  name: correlations_check # IMPORTANT
   save_dir: /home/nadav2/dev/data/CLIP2Shape/runs
   log_graph: True
 
@@ -38,10 +38,10 @@ trainer:
   log_every_n_steps: 3
 
 dataset:
-  data_dir: /home/nadav2/dev/data/CLIP2Shape/images/smplx_py3d_female
+  data_dir: /home/nadav2/dev/data/CLIP2Shape/images/smplx_py3d_male_test
   optimize_features:
     - betas
 
 model_conf:
-  num_stats: 5
-  hidden_size: 400
+  num_stats: 26
+  hidden_size: 600
