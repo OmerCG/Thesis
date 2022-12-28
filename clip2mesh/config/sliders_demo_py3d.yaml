@@ -16,19 +16,19 @@ demo_kwargs:
   # with_face: True
   # on_parameters: False
 
-  # # FLAME - shape
-  # texture: #${repo_path}/Flame/flame2020/mesh.png
-  # model_path: ${repo_path}/production/flame_shape.ckpt
-  # model_type: flame
-  # with_face: False
-  # on_parameters: False
-
-  # SMPLX
-  texture: #${repo_path}/SMPLX/textures/smplx_texture_m_alb.png
-  model_path: ${repo_path}/pre_production/correlations_check.ckpt
-  model_type: smplx
+  # FLAME - shape
+  texture: #${repo_path}/Flame/flame2020/mesh.png
+  model_path: ${repo_path}/pre_production/correlations_check_flame_shape.ckpt
+  model_type: flame
   with_face: False
   on_parameters: False
+
+  # SMPLX
+  # texture: #${repo_path}/SMPLX/textures/smplx_texture_m_alb.png
+  # model_path: ${repo_path}/pre_production/correlations_check_smplx.ckpt
+  # model_type: smplx
+  # with_face: False
+  # on_parameters: False
 
   # # SMAL
   # texture:  # there is no texture for smal yet
@@ -48,15 +48,15 @@ demo_kwargs:
     img_size: [512, 512]
     tex_path: ${demo_kwargs.texture}
 
-    # # FLAME cam params
-    # dist: 0.5
-    # elev: 0.0
-    # azim: 0.0
+    # FLAME cam params
+    dist: 0.5
+    elev: 0.0
+    azim: 0.0
 
-    # SMPLX cam params
-    dist: 2.4
-    elev: 8.6
-    azim: 2.1
+    # # SMPLX cam params
+    # dist: 2.4
+    # elev: 8.6
+    # azim: 2.1
 
     # # SMAL cam params
     # dist: 4.0

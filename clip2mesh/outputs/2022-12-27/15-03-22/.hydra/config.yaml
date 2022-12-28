@@ -1,0 +1,15 @@
+out_dir: /home/nadav2/dev/data/CLIP2Shape/outs/depth_maps/flame
+model_type: flame
+gender: male
+parameter: betas
+iou_threshold: 0.0
+get_rgb: true
+renderer_kwargs:
+  img_size:
+  - 512
+  - 512
+  tex_path: /home/nadav2/dev/repos/Thesis/Flame/flame2020/mesh.png
+  texture_optimization: false
+  dist: 0.8
+  elev: 0.0
+  azim: 0.0

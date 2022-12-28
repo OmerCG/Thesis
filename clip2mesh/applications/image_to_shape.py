@@ -218,7 +218,7 @@ class Image2Shape:
                         )
 
 
-@hydra.main(config_path="config", config_name="image_to_shape")
+@hydra.main(config_path="../config", config_name="image_to_shape")
 def main(args: DictConfig):
     image2shape = Image2Shape(args)
     image2shape()

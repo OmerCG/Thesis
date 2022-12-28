@@ -7,7 +7,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 from tqdm import tqdm
 from pathlib import Path
-from typing import Union, Tuple
+from typing import Literal
 from omegaconf import DictConfig
 from clip2mesh.utils import Utils, ModelsFactory
 
@@ -31,7 +31,7 @@ class DescriptorsAnalysis:
         self._load_df(args.jsons_dir)
         self._load_model(args.model_path)
         self._load_renderer(args.renderer_kwargs)
-        self._load_model_kwargs()
+        self._load_model_kwargs(args.gender)
 
     def _load_renderer(self, kwargs):
         self.renderer = self.models_factory.get_renderer(py3d=True, **kwargs)
@@ -39,11 +39,14 @@ class DescriptorsAnalysis:
     def _load_model(self, model_path):
         self.model, self.labels = self.utils.get_model_to_eval(model_path)
 
-    def _load_model_kwargs(self):
-        verts, faces, _, _ = self.models_factory.get_model()
-        self.verts = torch.tensor(verts).to(self.device)
-        self.faces = torch.tensor(faces).to(self.device)
-        self.verts_color = (torch.ones(self.verts.shape[0], 3) * 0.7)[None].to(self.device)
+    def _load_model_kwargs(self, gender: Literal["male", "female", "neutral"]):
+        verts, faces, _, _ = self.models_factory.get_model(gender=gender)
+        if isinstance(verts, np.ndarray):
+            verts = torch.tensor(verts)
+            faces = torch.tensor(faces)
+        self.verts = verts.to(self.device)
+        self.faces = faces.to(self.device)
+        self.verts_color = (torch.ones(self.verts.shape[-2], 3) * 0.7)[None].to(self.device)
 
     def _load_df(self, jsons_dir):
         json_files = [f for f in Path(jsons_dir).rglob("*_labels.json")]
@@ -63,7 +66,7 @@ class DescriptorsAnalysis:
         corr = corr.stack().reset_index()
         corr.columns = ["label1", "label2", "correlation"]
         corr = corr[corr["correlation"].abs() > self.corr_threshold]
-        corr.sort_values(by="correlation", ascending=False)
+        corr = corr.sort_values(by="correlation", ascending=False)
 
         return corr
 
@@ -82,11 +85,17 @@ class DescriptorsAnalysis:
         verts_1, _, _, _ = self.models_factory.get_model(**{self.parameter: coeff_pred_1})
         verts_2, _, _, _ = self.models_factory.get_model(**{self.parameter: coeff_pred_2})
 
-        verts_1 = torch.tensor(verts_1)
-        verts_2 = torch.tensor(verts_2)
+        if isinstance(verts_1, np.ndarray):
+            verts_1 = torch.tensor(verts_1)
+            verts_2 = torch.tensor(verts_2)
 
         diff = torch.abs(verts_1 - verts_2)
-        indices = diff.sum(dim=1).topk(self.top_k).indices
+        indices = diff.sum(dim=-1).topk(self.top_k).indices
+
+        if diff.size().__len__() == 3:
+            diff = diff.squeeze()
+        if indices.size().__len__() == 2:
+            indices = indices.squeeze()
 
         return indices, diff
 

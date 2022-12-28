@@ -349,6 +349,11 @@ class Pytorch3dRenderer:
         return blend_params
 
     def render_mesh(self, verts, faces, vt=None, ft=None, texture_color_values: torch.Tensor = None) -> torch.Tensor:
+        mesh = self.get_mesh(verts, faces, vt, ft, texture_color_values)
+        rendered_mesh = self.renderer(mesh, cameras=self.cameras)
+        return rendered_mesh
+
+    def get_mesh(self, verts, faces, vt=None, ft=None, texture_color_values: torch.Tensor = None) -> Meshes:
         verts = torch.as_tensor(verts, dtype=torch.float32, device=self.device)
         faces = torch.as_tensor(faces, dtype=torch.long, device=self.device)
         if self.tex_map is not None:
@@ -370,8 +375,7 @@ class Pytorch3dRenderer:
         if len(faces.size()) == 2:
             faces = faces[None]
         mesh = Meshes(verts=verts, faces=faces, textures=texture)
-        rendered_mesh = self.renderer(mesh, cameras=self.cameras)
-        return rendered_mesh
+        return mesh
 
     @staticmethod
     def save_rendered_image(image, path):
@@ -643,49 +647,49 @@ class Utils:
         #     ["lifted eyebrows"],
         #     ["opened eyes"],
         # ]  # FLAME expression
-        # labels = [
-        #     ["fat"],
-        #     ["long neck"],
-        #     ["chubby cheeks"],
-        #     ["nose sticking-out"],
-        #     ["ears sticking-out"],
-        #     ["big forehead"],
-        #     ["small chin"],
-        #     ["big mouth"],
-        #     ["thin lips"],
-        #     ["big nose"],
-        #     ["long head"],
-        #     ["big eyebrows"],
-        #     ["big eyes"],
-        # ]  # FLAME shape
         labels = [
-            "fat",
-            "thin",
-            "muscular",
-            "short",
-            "long legs",
-            "narrow waist",
-            "skinny",
-            "tall",
-            "rectangular",
-            "pear shaped",
-            "average",
-            "big",
-            "curvy",
-            "lean",
-            "masculine",
-            "proportioned",
-            "stocky",
-            "sexy",
-            "sturdy",
-            "broad shoulders",
-            "fit",
-            "round apple",
-            "built",
-            "heavyset",
-            "petite",
-            "small",
-        ]
+            ["fat"],
+            ["long neck"],
+            ["chubby cheeks"],
+            ["nose sticking-out"],
+            ["ears sticking-out"],
+            ["big forehead"],
+            ["small chin"],
+            ["big mouth"],
+            ["thin lips"],
+            ["big nose"],
+            ["long head"],
+            ["big eyebrows"],
+            ["big eyes"],
+        ]  # FLAME shape
+        # labels = [
+        #     "fat",
+        #     "thin",
+        #     "muscular",
+        #     "short",
+        #     "long legs",
+        #     "narrow waist",
+        #     "skinny",
+        #     "tall",
+        #     "rectangular",
+        #     "pear shaped",
+        #     "average",
+        #     "big",
+        #     "curvy",
+        #     "lean",
+        #     "masculine",
+        #     "proportioned",
+        #     "stocky",
+        #     "sexy",
+        #     "sturdy",
+        #     "broad shoulders",
+        #     "fit",
+        #     "round apple",
+        #     "built",
+        #     "heavyset",
+        #     "petite",
+        #     "small",
+        # ]
         if not isinstance(labels[0], list):
             labels = [[label] for label in labels]
         return labels

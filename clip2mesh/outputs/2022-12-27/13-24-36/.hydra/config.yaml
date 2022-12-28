@@ -1,0 +1,18 @@
+jsons_dir: /home/nadav2/dev/data/CLIP2Shape/images/flame_shape_py3d_male
+output_dir: /home/nadav2/dev/data/CLIP2Shape/outs/vertices_heatmap/flame_shape
+corr_threshold: 0.5
+top_k: 1000
+model_path: /home/nadav2/dev/repos/Thesis/pre_production/correlations_check_flame_shape.ckpt
+model_type: flame
+gender: male
+parameter: shape_params
+iou_threshold: 0.0
+renderer_kwargs:
+  img_size:
+  - 512
+  - 512
+  tex_path: null
+  texture_optimization: true
+  dist: 0.8
+  elev: 0.0
+  azim: 0.0

@@ -1,6 +1,6 @@
 images_dir: /home/nadav2/dev/data/CLIP2Shape/outs/images_to_shape/smplx_shape/shapy_cherry_pick/shapy_results/raw_images
-images_out_path: /home/nadav2/dev/data/CLIP2Shape/outs/images_to_shape/smplx_shape/shapy_cherry_pick/shapy_results/pred_w_obj
-rest_pose_path: /home/nadav2/dev/repos/CLIP2Shape/SMPLX/rest_pose.npy
+images_out_path: /home/nadav2/dev/data/CLIP2Shape/outs/images_to_shape/smplx_shape/shapy_cherry_pick/shapy_results/new_pose
+rest_pose_path: /home/nadav2/dev/repos/Thesis/SMPLX/test.npy
 verbose: False
 display_images: False
 collage: False
@@ -9,7 +9,7 @@ save_orig_name: True
 comparison_mode: False
 comparison_data_path: #/home/nadav2/dev/repos/shapy/datasets/ssp_3d/labels/shapes.npy
 save_obj: True
-gender: male
+gender: female
 suffix: jpg
 
 # # FLAME - EXPRESSION
@@ -31,9 +31,9 @@ suffix: jpg
 # SMPLX
 with_face: False
 model_type: smplx
-model_path: /home/nadav2/dev/repos/CLIP2Shape/pre_production/smplx_male.ckpt
+model_path: /home/nadav2/dev/repos/CLIP2Shape/pre_production/smplx_female.ckpt
 texture: #/home/nadav2/dev/repos/CLIP2Shape/SMPLX/textures/smplx_texture_m_alb.png
-labels_weights: [1.0, 0.8, 1.0, 1.2, 0.8]
+labels_weights: #[1.0, 0.8, 1.0, 1.2, 0.8]
 # labels_weights: 
 
 # # SMAL
