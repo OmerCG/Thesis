@@ -80,6 +80,11 @@ class CompareToShapy:
         faces = torch.tensor(faces).squeeze()
         save_obj(f=obj_out_path, verts=verts, faces=faces)
 
+    def save_shape_tensor(self, shape_tesnor: torch.Tensor, file_path: Union[str, Path]):
+        file_path = Path(file_path)
+        shape_tesnor = shape_tesnor.cpu().numpy()
+        np.save(file_path, shape_tesnor)
+
     def save_images(
         self,
         orig_image: np.ndarray,
@@ -223,6 +228,8 @@ class CompareToShapy:
         self.save_images(np.array(img), pred_mesh_img, shapy_mesh_img, output_path, l2_loss)
         self.save_obj(output_path / f"{img_id}_pred.obj", **pred_mesh_kwargs)
         self.save_obj(output_path / f"{img_id}_shapy.obj", **shapy_mesh_kwargs)
+        self.save_shape_tensor(pred_shape_tensor, output_path / f"{img_id}_pred_shape_tensor.npy")
+        self.save_shape_tensor(shapy_shape_tensor, output_path / f"{img_id}_shapy_shape_tensor.npy")
 
     def __call__(self):
         files_generator = list(self.shapy_dir.rglob("*hd_imgs.png"))

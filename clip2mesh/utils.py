@@ -361,6 +361,17 @@ class Pytorch3dRenderer:
         blend_params = BlendParams(sigma=1e-6, gamma=1e-6, background_color=(255.0, 255.0, 255.0))
         return blend_params
 
+    @staticmethod
+    def rotate_smplx_verts(verts: torch.Tensor, degrees: float, axis: Literal["x", "y", "z"]) -> Meshes:
+        rotation_matrix = Rotation.from_euler(axis, degrees, degrees=True).as_matrix()
+        mesh_center = verts.mean(axis=1)
+        mesh_center = torch.tensor(mesh_center.detach().clone()).to(verts.device).float()
+        rotation_matrix = torch.tensor(rotation_matrix).to(verts.device).float()
+        verts = verts - mesh_center
+        verts = verts @ rotation_matrix
+        verts = verts + mesh_center
+        return verts
+
     def render_mesh(
         self,
         verts: Union[torch.Tensor, np.ndarray] = None,
@@ -369,12 +380,16 @@ class Pytorch3dRenderer:
         vt: Optional[Union[torch.Tensor, np.ndarray]] = None,
         ft: Optional[Union[torch.Tensor, np.ndarray]] = None,
         texture_color_values: Optional[torch.Tensor] = None,
+        rotate_mesh: Dict[str, Any] = None,
     ) -> torch.Tensor:
         assert mesh is not None or (
             verts is not None and faces is not None
         ), "either mesh or verts and faces must be provided"
         if mesh is None:
+            if rotate_mesh is not None:
+                verts = self.rotate_smplx_verts(verts, **rotate_mesh)
             mesh = self.get_mesh(verts, faces, vt, ft, texture_color_values)
+
         rendered_mesh = self.renderer(mesh, cameras=self.cameras)
         return rendered_mesh
 
