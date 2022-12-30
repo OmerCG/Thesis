@@ -1,35 +1,61 @@
 data_path: /home/nadav2/dev/data/CLIP2Shape/images
 repo_path: /home/nadav2/dev/repos/CLIP2Shape
-main_output_dir: /home/nadav2/dev/data/CLIP2Shape/outs/vids/optimization
+main_output_dir: /home/nadav2/dev/data/CLIP2Shape/shape_vectors
 
 
 optimization_cfg:
 
-  # FLAME
-  texture: #${repo_path}/Flame/flame2020/mesh.png
-  model_type: flame
-  text: chubby cheeks
-  device: cuda
-  total_steps: 500
-  optimize_features: shape_params
-  output_dir: ${main_output_dir}
-  dist: 0.8
-  elev: 0.0
-  azim: 0.0
-  lr: 0.01
-
-  # SMPLX
-  # texture: #${repo_path}/SMPLX/textures/smplx_texture_m_alb.png
-  # model_type: smplx
+  # # FLAME
+  # texture: #${repo_path}/Flame/flame2020/mesh.png
+  # model_type: flame
+  # text: chubby cheeks
   # device: cuda
-  # text: muscular
   # total_steps: 500
-  # optimize_features: betas
+  # optimize_features: shape_params
   # output_dir: ${main_output_dir}
-  # dist: 2.5
-  # elev: 15.0
+  # dist: 0.8
+  # elev: 0.0
   # azim: 0.0
   # lr: 0.01
+
+  # SMPLX
+  texture: #${repo_path}/SMPLX/textures/smplx_texture_m_alb.png
+  model_type: smplx
+  gender: male
+  device: cuda
+  text: 
+    - "thin"
+    - "muscular"
+    - "short"
+    - "long legs"
+    - "narrow waist"
+    - "skinny"
+    - "tall"
+    - "rectangular"
+    - "pear shaped"
+    - "average"
+    - "big"
+    - "curvy"
+    - "lean"
+    - "masculine"
+    - "proportioned"
+    - "stocky"
+    - "sexy"
+    - "sturdy"
+    - "broad shoulders"
+    - "fit"
+    - "round apple"
+    - "built"
+    - "heavyset"
+    - "petite"
+    - "small"
+  total_steps: 100
+  optimize_features: betas
+  output_dir: ${main_output_dir}
+  dist: 2.5
+  elev: 15.0
+  azim: 0.0
+  lr: 0.07
 
   # SMAL
   # texture:  # keep empty for random texture

@@ -1,11 +1,7 @@
-jsons_dir: /home/nadav2/dev/data/CLIP2Shape/images/smplx_py3d_male_test
-output_dir: /home/nadav2/dev/data/CLIP2Shape/outs/vertices_heatmap/smplx
+descriptors_dir: /home/nadav2/dev/data/CLIP2Shape/shape_vectors
 corr_threshold: 0.7
-top_k: 500
-model_path: /home/nadav2/dev/repos/Thesis/pre_production/correlations_check_smplx.ckpt
 model_type: smplx
 gender: male
-parameter: betas
 iou_threshold: 0.3
 
 

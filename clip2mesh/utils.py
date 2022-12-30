@@ -376,9 +376,9 @@ class Pytorch3dRenderer:
         self,
         verts: Union[torch.Tensor, np.ndarray] = None,
         faces: Union[torch.Tensor, np.ndarray] = None,
-        mesh: Meshes = None,
         vt: Optional[Union[torch.Tensor, np.ndarray]] = None,
         ft: Optional[Union[torch.Tensor, np.ndarray]] = None,
+        mesh: Meshes = None,
         texture_color_values: Optional[torch.Tensor] = None,
         rotate_mesh: Dict[str, Any] = None,
     ) -> torch.Tensor:
