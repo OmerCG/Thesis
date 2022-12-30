@@ -5,8 +5,9 @@ import numpy as np
 import torch.nn as nn
 from tqdm import tqdm
 from typing import Tuple
+from pytorch3d.ops import SubdivideMeshes
 from pytorch3d.io import load_objs_as_meshes
-from utils import Pytorch3dRenderer
+from clip2mesh.utils import Pytorch3dRenderer
 from clip2mesh.optimization.optimization import CLIPLoss
 
 device = "cuda" if torch.cuda.is_available() else "cpu"
@@ -15,16 +16,31 @@ device = "cuda" if torch.cuda.is_available() else "cpu"
 class OptimizeVertexColors(nn.Module):
     def __init__(self, params_size: Tuple[int, int]):
         super().__init__()
-        self.weights = nn.Parameter(torch.randn(params_size))
-        self.sigmoid = nn.Sigmoid()
+        self.weights = nn.Parameter(torch.rand(params_size))
 
     def forward(self):
-        return self.sigmoid(self.weights)
+        return self.weights
 
 
 initial_mesh = load_objs_as_meshes(["/home/nadav2/dev/data/CLIP2Shape/outs/objs/0.obj"]).to(device)
+subdivide_mesh = SubdivideMeshes(initial_mesh)
+initial_mesh = subdivide_mesh(initial_mesh)
+initial_mesh = subdivide_mesh(initial_mesh)
+# initial_mesh = subdivide_mesh(initial_mesh)
+# initial_mesh = subdivide_mesh(initial_mesh)
+# initial_mesh = subdivide_mesh(initial_mesh)
+# initial_mesh = subdivide_mesh(initial_mesh)
+# initial_mesh = subdivide_mesh(initial_mesh)
+# initial_mesh = subdivide_mesh(initial_mesh)
+# initial_mesh = subdivide_mesh(initial_mesh)
+# initial_mesh = subdivide_mesh(initial_mesh)
+# initial_mesh = subdivide_mesh(initial_mesh)
+# initial_mesh = subdivide_mesh(initial_mesh)
+
 verts = initial_mesh.verts_packed().unsqueeze(0)
 faces = initial_mesh.faces_packed().unsqueeze(0)
+print("the number of vertices is:", verts.shape[1])
+print("the number of faces is:", faces.shape[1])
 frontal_renderer = Pytorch3dRenderer(
     tex_path=None, azim=2.1, elev=20.0, dist=4.0, texture_optimization=True, img_size=(224, 224)
 )
@@ -41,8 +57,9 @@ lower_renderer = Pytorch3dRenderer(
     tex_path=None, azim=2.1, elev=-20.0, dist=4.0, texture_optimization=True, img_size=(224, 224)
 )
 
+
 clip_model, image_encoder = clip.load("ViT-B/32", device=device)
-encoded_text = clip.tokenize("a cow").to(device)
+encoded_text = clip.tokenize("cow").to(device)
 loss_fn = CLIPLoss()
 
 model = OptimizeVertexColors(params_size=(initial_mesh.verts_packed().shape[0], 3)).to(device)
@@ -61,7 +78,7 @@ for i in progress_bar:
     right_image = right_renderer.render_mesh(verts=verts, faces=faces, texture_color_values=verts_rgb)
     upper_image = upper_renderer.render_mesh(verts=verts, faces=faces, texture_color_values=verts_rgb)
     lower_image = lower_renderer.render_mesh(verts=verts, faces=faces, texture_color_values=verts_rgb)
-    # image = renderer.render_mesh(verts=verts, faces=faces, texture_color_values=verts_rgb)
+    # # image = renderer.render_mesh(verts=verts, faces=faces, texture_color_values=verts_rgb)
 
     # Forward pass: compute the loss
     loss = loss_fn(front_image[..., :3].permute(0, 3, 1, 2), encoded_text)

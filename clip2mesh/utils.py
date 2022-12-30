@@ -196,7 +196,14 @@ class Open3dRenderer:
 
 
 class SMPLXParams:
-    def __init__(self, betas: torch.tensor = None, expression: torch.tensor = None, body_pose: torch.tensor = None):
+    def __init__(
+        self,
+        betas: torch.tensor = None,
+        expression: torch.tensor = None,
+        body_pose: torch.tensor = None,
+        global_orient: torch.tensor = None,
+        transl: torch.tensor = None,
+    ):
         if betas is not None:
             betas: torch.Tensor = betas
         else:
@@ -211,8 +218,14 @@ class SMPLXParams:
             body_pose = torch.eye(3).expand(1, 21, 3, 3)
         left_hand_pose: torch.Tensor = torch.eye(3).expand(1, 15, 3, 3)
         right_hand_pose: torch.Tensor = torch.eye(3).expand(1, 15, 3, 3)
-        global_orient: torch.Tensor = torch.eye(3).expand(1, 1, 3, 3)
-        transl: torch.Tensor = torch.zeros(1, 3)
+        if global_orient is not None:
+            global_orient: torch.Tensor = global_orient
+        else:
+            global_orient: torch.Tensor = torch.eye(3).expand(1, 1, 3, 3)
+        if transl is not None:
+            transl: torch.Tensor = transl
+        else:
+            transl: torch.Tensor = torch.zeros(1, 3)
         jaw_pose: torch.Tensor = torch.eye(3).expand(1, 1, 3, 3)
         self.params = {
             "betas": betas,
@@ -348,8 +361,20 @@ class Pytorch3dRenderer:
         blend_params = BlendParams(sigma=1e-6, gamma=1e-6, background_color=(255.0, 255.0, 255.0))
         return blend_params
 
-    def render_mesh(self, verts, faces, vt=None, ft=None, texture_color_values: torch.Tensor = None) -> torch.Tensor:
-        mesh = self.get_mesh(verts, faces, vt, ft, texture_color_values)
+    def render_mesh(
+        self,
+        verts: Union[torch.Tensor, np.ndarray] = None,
+        faces: Union[torch.Tensor, np.ndarray] = None,
+        mesh: Meshes = None,
+        vt: Optional[Union[torch.Tensor, np.ndarray]] = None,
+        ft: Optional[Union[torch.Tensor, np.ndarray]] = None,
+        texture_color_values: Optional[torch.Tensor] = None,
+    ) -> torch.Tensor:
+        assert mesh is not None or (
+            verts is not None and faces is not None
+        ), "either mesh or verts and faces must be provided"
+        if mesh is None:
+            mesh = self.get_mesh(verts, faces, vt, ft, texture_color_values)
         rendered_mesh = self.renderer(mesh, cameras=self.cameras)
         return rendered_mesh
 
@@ -387,10 +412,11 @@ class Pytorch3dRenderer:
 
 
 class Utils:
-    def __init__(self, device: str = "cuda"):
+    def __init__(self, device: str = "cuda", comparison_mode: bool = False):
         self.device = device
         self.body_pose = torch.tensor(np.load("/home/nadav2/dev/repos/Thesis/SMPLX/rest_pose.npy"))
         self.production_dir = "/home/nadav2/dev/repos/Thesis/pre_production"
+        self.comparison_mode = comparison_mode
 
     @staticmethod
     def find_multipliers(value: int) -> list:
@@ -469,15 +495,22 @@ class Utils:
 
     def get_smplx_model(
         self,
-        betas: torch.tensor = None,
-        body_pose: torch.tensor = None,
-        expression: torch.tensor = None,
+        betas: torch.Tensor = None,
+        body_pose: torch.Tensor = None,
+        expression: torch.Tensor = None,
+        global_orient: torch.Tensor = None,
+        transl: torch.Tensor = None,
         gender: Literal["neutral", "male", "female"] = "neutral",
         device: Optional[Literal["cuda", "cpu"]] = "cpu",
     ) -> Tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray]:
-        smplx_model = SMPLXParams(betas=betas, body_pose=body_pose, expression=expression)
-        if not hasattr(self, "smplx_layer") or not hasattr(self, "smplx_faces"):
+        smplx_model = SMPLXParams(
+            betas=betas, body_pose=body_pose, expression=expression, global_orient=global_orient, transl=transl
+        )
+        if self.comparison_mode:
             self._get_smplx_layer(gender)
+        else:
+            if not hasattr(self, "smplx_layer") or not hasattr(self, "smplx_faces"):
+                self._get_smplx_layer(gender)
 
         if device == "cuda":
             smplx_model.params = smplx_model.to(device)

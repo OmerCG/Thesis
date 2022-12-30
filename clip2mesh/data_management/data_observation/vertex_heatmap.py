@@ -43,6 +43,7 @@ class DescriptorsAnalysis:
         verts, faces, _, _ = self.models_factory.get_model(gender=gender)
         if isinstance(verts, np.ndarray):
             verts = torch.tensor(verts)
+        if isinstance(faces, np.ndarray):
             faces = torch.tensor(faces)
         self.verts = verts.to(self.device)
         self.faces = faces.to(self.device)

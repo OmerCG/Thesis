@@ -1,5 +1,5 @@
-images_dir: /home/nadav2/dev/data/CLIP2Shape/outs/images_to_shape/smplx_shape/shapy_cherry_pick/shapy_results/raw_images
-images_out_path: /home/nadav2/dev/data/CLIP2Shape/outs/images_to_shape/smplx_shape/shapy_cherry_pick/shapy_results/new_pose
+images_dir: /home/nadav2/dev/data/CLIP2Shape/GT_data/people_snapshot_public/female-1-casual/imgs
+images_out_path: /home/nadav2/dev/data/CLIP2Shape/GT_data/people_snapshot_public/female-1-casual/outs
 rest_pose_path: /home/nadav2/dev/repos/Thesis/SMPLX/test.npy
 verbose: False
 display_images: False
@@ -10,7 +10,7 @@ comparison_mode: False
 comparison_data_path: #/home/nadav2/dev/repos/shapy/datasets/ssp_3d/labels/shapes.npy
 save_obj: True
 gender: female
-suffix: jpg
+suffix: png
 
 # # FLAME - EXPRESSION
 # with_face: True
