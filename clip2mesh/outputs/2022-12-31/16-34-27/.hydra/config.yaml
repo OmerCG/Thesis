@@ -1,0 +1,33 @@
+images_dir: /home/nadav2/dev/data/CLIP2Shape/outs/images_to_shape/NeuralBody_DATA/raw_images_dataset
+images_out_path: /home/nadav2/dev/data/CLIP2Shape/outs/images_to_shape/NeuralBody_DATA/our_predictions
+rest_pose_path: null
+verbose: false
+display_images: false
+collage: false
+with_orig_image: true
+save_orig_name: true
+comparison_mode: false
+comparison_data_path: null
+save_obj: true
+suffix: png
+model_type: smplx
+with_face: false
+smplx_models_paths:
+  smplx_male: /home/nadav2/dev/repos/Thesis/production/smplx_male.ckpt
+  smplx_female: /home/nadav2/dev/repos/Thesis/production/smplx_female.ckpt
+labels_weights:
+  male:
+  - 0.9
+  - 0.8
+  - 0.9
+  - 1.2
+  - 0.8
+  female: null
+renderer_kwargs:
+  img_size:
+  - 450
+  - 300
+  tex_path: null
+  dist: 2.4
+  elev: 8.6
+  azim: 2.1

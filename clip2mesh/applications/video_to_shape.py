@@ -17,11 +17,11 @@ from clip2mesh.utils import Utils, Pytorch3dRenderer
 from clip2mesh.applications.image_to_shape import Image2Shape
 
 
-class Video2Shape:
+class Video2Shape(Image2Shape):
     def __init__(self, args):
+        super().__init__(args)
         self.data_dir = Path(args.data_dir)
-        self.output_path = Path(args.output_path)
-        self.utils = Utils()
+        self.utils = Utils(comparison_mode=True)
         self.device = "cuda" if torch.cuda.is_available() else "cpu"
         self.model_type = args.model_type
         self.display = args.display
@@ -44,63 +44,63 @@ class Video2Shape:
         rendered_img = self.adjust_rendered_img(rendered_img)
         return rendered_img, shape_vector
 
-    def _load_renderer(self, kwargs: Union[DictConfig, Dict[str, Any]]):
-        return Pytorch3dRenderer(**kwargs)
+    # def _load_renderer(self, kwargs: Union[DictConfig, Dict[str, Any]]):
+    #     return Pytorch3dRenderer(**kwargs)
 
-    def _load_weights(self, labels_weights: Dict[str, float]):
-        self.labels_weights = {}
-        for gender, weights in labels_weights.items():
-            self.labels_weights[gender] = (
-                torch.tensor(weights).to(self.device)
-                if weights is not None
-                else torch.ones(len(self.labels[gender])).to(self.device)
-            )
+    # def _load_weights(self, labels_weights: Dict[str, float]):
+    #     self.labels_weights = {}
+    #     for gender, weights in labels_weights.items():
+    #         self.labels_weights[gender] = (
+    #             torch.tensor(weights).to(self.device)
+    #             if weights is not None
+    #             else torch.ones(len(self.labels[gender])).to(self.device)
+    #         )
 
-    def _get_smplx_attributes(
-        self, pred_vec: torch.Tensor, gender: Literal["male", "female", "neutral"]
-    ) -> Tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray]:
-        betas = pred_vec.cpu()
-        if hasattr(self, "rest_pose"):
-            body_pose = self.rest_pose
-        else:
-            body_pose = None
-        smplx_out = self.utils.get_smplx_model(betas=betas, gender=gender, body_pose=body_pose)
-        return smplx_out
+    # def _get_smplx_attributes(
+    #     self, pred_vec: torch.Tensor, gender: Literal["male", "female", "neutral"]
+    # ) -> Tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray]:
+    #     betas = pred_vec.cpu()
+    #     if hasattr(self, "rest_pose"):
+    #         body_pose = self.rest_pose
+    #     else:
+    #         body_pose = None
+    #     smplx_out = self.utils.get_smplx_model(betas=betas, gender=gender, body_pose=body_pose)
+    #     return smplx_out
 
-    @staticmethod
-    def adjust_rendered_img(img: torch.Tensor):
-        img = np.clip(img.cpu().numpy()[0, ..., :3] * 255, 0, 255).astype(np.uint8)
-        return img
+    # @staticmethod
+    # def adjust_rendered_img(img: torch.Tensor):
+    #     img = np.clip(img.cpu().numpy()[0, ..., :3] * 255, 0, 255).astype(np.uint8)
+    #     return img
 
-    def get_render_mesh_kwargs(
-        self, pred_vec: torch.Tensor, gender: Literal["male", "female", "neutral"]
-    ) -> Dict[str, np.ndarray]:
-        out = self._get_smplx_attributes(pred_vec=pred_vec, gender=gender)
+    # def get_render_mesh_kwargs(
+    #     self, pred_vec: torch.Tensor, gender: Literal["male", "female", "neutral"]
+    # ) -> Dict[str, np.ndarray]:
+    #     out = self._get_smplx_attributes(pred_vec=pred_vec, gender=gender)
 
-        kwargs = {"verts": out[0], "faces": out[1], "vt": out[2], "ft": out[3]}
+    #     kwargs = {"verts": out[0], "faces": out[1], "vt": out[2], "ft": out[3]}
 
-        return kwargs
+    #     return kwargs
 
-    @staticmethod
-    def _flatten_list_of_lists(list_of_lists):
-        return [item for sublist in list_of_lists for item in sublist]
+    # @staticmethod
+    # def _flatten_list_of_lists(list_of_lists):
+    #     return [item for sublist in list_of_lists for item in sublist]
 
-    def _load_smplx_models(self, smplx_male: str, smplx_female: str) -> Tuple[nn.Module, nn.Module]:
-        smplx_female, labels_female = self.utils.get_model_to_eval(smplx_female)
-        smplx_male, labels_male = self.utils.get_model_to_eval(smplx_male)
-        labels_female = self._flatten_list_of_lists(labels_female)
-        labels_male = self._flatten_list_of_lists(labels_male)
-        self.model = {"male": smplx_male, "female": smplx_female}
-        self.labels = {"male": labels_male, "female": labels_female}
+    # def _load_smplx_models(self, smplx_male: str, smplx_female: str) -> Tuple[nn.Module, nn.Module]:
+    #     smplx_female, labels_female = self.utils.get_model_to_eval(smplx_female)
+    #     smplx_male, labels_male = self.utils.get_model_to_eval(smplx_male)
+    #     labels_female = self._flatten_list_of_lists(labels_female)
+    #     labels_male = self._flatten_list_of_lists(labels_male)
+    #     self.model = {"male": smplx_male, "female": smplx_female}
+    #     self.labels = {"male": labels_male, "female": labels_female}
 
-    def _encode_labels(self):
-        self.encoded_labels = {
-            gender: clip.tokenize(self.labels[gender]).to(self.device) for gender in self.labels.keys()
-        }
+    # def _encode_labels(self):
+    #     self.encoded_labels = {
+    #         gender: clip.tokenize(self.labels[gender]).to(self.device) for gender in self.labels.keys()
+    #     }
 
-    def normalize_scores(self, scores: torch.Tensor, gender: Literal["male", "female", "neutral"]) -> torch.Tensor:
-        normalized_score = scores * self.labels_weights[gender]
-        return normalized_score.float()
+    # def normalize_scores(self, scores: torch.Tensor, gender: Literal["male", "female", "neutral"]) -> torch.Tensor:
+    #     normalized_score = scores * self.labels_weights[gender]
+    #     return normalized_score.float()
 
     def create_video_from_dir(self, dir_path: Union[str, Path], image_shape: Tuple[int, int]):
         dir_path = Path(dir_path)

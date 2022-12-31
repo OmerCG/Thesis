@@ -1,6 +1,6 @@
 images_dir: /home/nadav2/dev/data/CLIP2Shape/outs/images_to_shape/NeuralBody_DATA/raw_images_dataset
 images_out_path: /home/nadav2/dev/data/CLIP2Shape/outs/images_to_shape/NeuralBody_DATA/our_predictions
-rest_pose_path:
+body_pose_path:
 verbose: False
 display_images: False
 collage: False
@@ -10,6 +10,8 @@ comparison_mode: False
 comparison_data_path: #/home/nadav2/dev/repos/shapy/datasets/ssp_3d/labels/shapes.npy
 save_obj: True
 suffix: png
+model_type: smplx
+with_face: False
 
 # # FLAME - EXPRESSION
 # with_face: True
@@ -32,7 +34,7 @@ smplx_models_paths:
   smplx_female: /home/nadav2/dev/repos/Thesis/production/smplx_female.ckpt
 
 labels_weights:
-  male: [1.0, 0.8, 1.0, 1.2, 0.8]
+  male: [0.9, 0.8, 0.9, 1.0, 0.8]
   female:
 
 # # SMAL
@@ -43,7 +45,7 @@ labels_weights:
 
 renderer_kwargs:
     img_size: [450, 300]
-    tex_path: ${texture}
+    tex_path:
 
     # SMPLX cam params
     dist: 2.4
