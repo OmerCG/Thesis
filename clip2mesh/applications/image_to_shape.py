@@ -4,6 +4,7 @@ import torch
 import hydra
 import random
 import numpy as np
+from torch import nn
 from tqdm import tqdm
 from PIL import Image
 from pathlib import Path
@@ -42,7 +43,7 @@ class Image2Shape:
             self._load_body_pose(args.rest_pose_path)
 
         self._load_renderer(args.renderer_kwargs)
-        self._load_model(args.model_path)
+        self._load_smplx_models(**args.smplx_models_paths)
         self._load_clip_model()
         self._encode_labels()
         self._load_images_generator()
@@ -57,11 +58,22 @@ class Image2Shape:
     def _load_body_pose(self, rest_pose_path: str):
         self.rest_pose = torch.from_numpy(np.load(rest_pose_path))
 
-    def _load_model(self, model_path: str):
-        self.model, labels = self.utils.get_model_to_eval(model_path)
-        self.labels = self._flatten_list_of_lists(labels)
-        if not hasattr(self, "labels_weights"):
-            self.labels_weights = torch.ones(len(self.labels)).to(self.device)
+    def _load_smplx_models(self, smplx_male: str, smplx_female: str) -> Tuple[nn.Module, nn.Module]:
+        smplx_female, labels_female = self.utils.get_model_to_eval(smplx_female)
+        smplx_male, labels_male = self.utils.get_model_to_eval(smplx_male)
+        labels_female = self._flatten_list_of_lists(labels_female)
+        labels_male = self._flatten_list_of_lists(labels_male)
+        self.model = {"male": smplx_male, "female": smplx_female}
+        self.labels = {"male": labels_male, "female": labels_female}
+
+    def _load_weights(self, labels_weights: Dict[str, float]):
+        self.labels_weights = {}
+        for gender, weights in labels_weights.items():
+            self.labels_weights[gender] = (
+                torch.tensor(weights).to(self.device)
+                if weights is not None
+                else torch.ones(len(self.labels[gender])).to(self.device)
+            )
 
     def _load_comparison_data(self, path):
         self.comparison_data = torch.from_numpy(np.load(path))
@@ -76,7 +88,9 @@ class Image2Shape:
         self.clip_model, self.clip_preprocess = clip.load("ViT-B/32", device=self.device)
 
     def _encode_labels(self):
-        self.encoded_labels = clip.tokenize(self.labels).to(self.device)
+        self.encoded_labels = {
+            gender: clip.tokenize(self.labels[gender]).to(self.device) for gender in self.labels.keys()
+        }
 
     @staticmethod
     def _flatten_list_of_lists(list_of_lists):
@@ -115,12 +129,7 @@ class Image2Shape:
         return kwargs
 
     def normalize_scores(self, scores: torch.Tensor) -> torch.Tensor:
-        clip_min_value = 15
-        clip_max_value = 30
-        # normalized_score = (scores - clip_min_value) / (clip_max_value - clip_min_value)
         normalized_score = scores * self.labels_weights
-        # normalized_score = torch.clamp(normalized_score, 12, 30)
-        # normalized_score *= 40
         return normalized_score.float()
 
     @staticmethod
