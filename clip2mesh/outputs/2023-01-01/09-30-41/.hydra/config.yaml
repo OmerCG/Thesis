@@ -1,0 +1,26 @@
+data_dir: /home/nadav2/dev/data/CLIP2Shape/outs/images_to_shape/NeuralBody_DATA/data
+predictions_dir: /home/nadav2/dev/data/CLIP2Shape/outs/images_to_shape/NeuralBody_DATA/predicitons
+output_dir: /home/nadav2/dev/data/CLIP2Shape/outs/images_to_shape/NeuralBody_DATA/comparison_neutral
+gt_dir: /home/nadav2/dev/data/CLIP2Shape/GT_data/people_snapshot_public
+comparison_kwargs:
+  raw_imgs_dir: ${data_dir}/sampled_images_females
+  gt_dir: ${gt_dir}
+  output_path: ${output_dir}
+  comparison_dirs:
+    shapy: ${predictions_dir}/shapy_predictions
+    spin: ${predictions_dir}/spin_predictions
+    pixie: ${predictions_dir}/pixie_predictions
+  smplx_models_paths:
+    smplx_male: /home/nadav2/dev/repos/Thesis/production/smal.ckpt
+    smplx_female: /home/nadav2/dev/repos/Thesis/production/smal.ckpt
+  labels_weights:
+    male: null
+    female: null
+  renderer_kwargs:
+    img_size:
+    - 450
+    - 300
+    tex_path: null
+    dist: 2.4
+    elev: 8.6
+    azim: 2.1

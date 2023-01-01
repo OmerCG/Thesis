@@ -183,7 +183,10 @@ class CompareToShapy:
         encoded_image = self.clip_preprocess(img).unsqueeze(0).to(self.device)
 
         # get gender
-        gender = self.gender_dict[img_id]
+        if hasattr(self, "gender_dict"):
+            gender = self.gender_dict[img_id]
+        else:
+            gender = img_path.stem.split("-")[0]
 
         # get shapy data
         shapy_data = self.get_npz_data(self.shapy_dir / f"{img_id}.npz")
