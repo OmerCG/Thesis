@@ -1,0 +1,30 @@
+data_path: /home/nadav2/dev/data/CLIP2Shape/images
+repo_path: /home/nadav2/dev/repos/CLIP2Shape
+main_output_dir: /home/nadav2/dev/data/CLIP2Shape/outs/vertices_heatmap/optimizations/flame_shape_multiview
+optimization_cfg:
+  texture: null
+  model_type: flame
+  device: cuda
+  gender: neutral
+  text:
+  - thin
+  - big forhead
+  - big eyes
+  - big nose
+  - big mouth
+  - ears sticking-out
+  - big eyebrows
+  - thin lips
+  - small chin
+  - long neck
+  - fat
+  - chubby cheeks
+  - long head
+  total_steps: 70
+  optimize_features: shape_params
+  output_dir: ${main_output_dir}
+  dist: 0.8
+  elev: 0.0
+  azim: 0.0
+  lr: 0.1
+  display: false

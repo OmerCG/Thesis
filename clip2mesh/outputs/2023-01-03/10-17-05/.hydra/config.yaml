@@ -1,0 +1,41 @@
+data_path: /home/nadav2/dev/data/CLIP2Shape/images
+repo_path: /home/nadav2/dev/repos/CLIP2Shape
+main_output_dir: /home/nadav2/dev/data/CLIP2Shape/outs/vertices_heatmap/optimizations/smplx_multiview
+optimization_cfg:
+  texture: null
+  model_type: smplx
+  gender: male
+  device: cuda
+  text:
+  - thin
+  - muscular
+  - short
+  - long legs
+  - narrow waist
+  - skinny
+  - tall
+  - rectangular
+  - pear shaped
+  - average
+  - big
+  - curvy
+  - lean
+  - masculine
+  - proportioned
+  - stocky
+  - sexy
+  - sturdy
+  - broad shoulders
+  - fit
+  - round apple
+  - built
+  - heavyset
+  - petite
+  - small
+  total_steps: 50
+  optimize_features: betas
+  output_dir: ${main_output_dir}
+  dist: 2.5
+  elev: 15.0
+  azim: 0.0
+  lr: 0.07

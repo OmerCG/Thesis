@@ -1,0 +1,30 @@
+data_path: /home/nadav2/dev/data/CLIP2Shape/images
+repo_path: /home/nadav2/dev/repos/CLIP2Shape
+main_output_dir: /home/nadav2/dev/data/CLIP2Shape/outs/vertices_heatmap/optimizations/flame_exp_multiview
+optimization_cfg:
+  texture: null
+  model_type: flame
+  device: cuda
+  gender: neutral
+  text:
+  - happy
+  - sad
+  - worried
+  - angry
+  - surprised
+  - disgusted
+  - afraid
+  - bored
+  - open mouth
+  - raise eyebrows
+  - smile
+  - frown
+  - open eyes
+  total_steps: 50
+  optimize_features: expression_params
+  output_dir: ${main_output_dir}
+  dist: 0.5
+  elev: 0.0
+  azim: 0.0
+  lr: 0.1
+  display: false

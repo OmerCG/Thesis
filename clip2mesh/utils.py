@@ -366,9 +366,10 @@ class Pytorch3dRenderer:
         return blend_params
 
     @staticmethod
-    def rotate_smplx_verts(verts: torch.Tensor, degrees: float, axis: Literal["x", "y", "z"]) -> Meshes:
+    def rotate_3dmm_verts(verts: torch.Tensor, degrees: float, axis: Literal["x", "y", "z"]) -> Meshes:
         rotation_matrix = Rotation.from_euler(axis, degrees, degrees=True).as_matrix()
-        mesh_center = verts.mean(axis=1)
+        axis = 0 if verts.dim() == 2 else 1
+        mesh_center = verts.mean(axis=axis)
         mesh_center = torch.tensor(mesh_center.detach().clone()).to(verts.device).float()
         rotation_matrix = torch.tensor(rotation_matrix).to(verts.device).float()
         verts = verts - mesh_center
@@ -391,7 +392,7 @@ class Pytorch3dRenderer:
         ), "either mesh or verts and faces must be provided"
         if mesh is None:
             if rotate_mesh is not None:
-                verts = self.rotate_smplx_verts(verts, **rotate_mesh)
+                verts = self.rotate_3dmm_verts(verts, **rotate_mesh)
             mesh = self.get_mesh(verts, faces, vt, ft, texture_color_values)
 
         rendered_mesh = self.renderer(mesh, cameras=self.cameras)

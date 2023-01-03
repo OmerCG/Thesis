@@ -1,6 +1,6 @@
 data_dir: /home/nadav2/dev/data/CLIP2Shape/outs/images_to_shape/NeuralBody_DATA/data
 predictions_dir: /home/nadav2/dev/data/CLIP2Shape/outs/images_to_shape/NeuralBody_DATA/predicitons
-output_dir: /home/nadav2/dev/data/CLIP2Shape/outs/images_to_shape/NeuralBody_DATA/comparison
+output_dir: /home/nadav2/dev/data/CLIP2Shape/outs/images_to_shape/NeuralBody_DATA/comparison_males
 gt_dir: /home/nadav2/dev/data/CLIP2Shape/GT_data/people_snapshot_public
 
 comparison_kwargs:
@@ -19,7 +19,7 @@ comparison_kwargs:
     smplx_female: /home/nadav2/dev/repos/Thesis/production/smplx_female.ckpt
 
   labels_weights:
-    male: [1.0, 0.8, 1.0, 1.2, 0.8]
+    male: #[1.0, 0.8, 1.0, 1.2, 0.8]
     female:
 
   renderer_kwargs:

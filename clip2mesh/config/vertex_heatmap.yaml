@@ -1,8 +1,11 @@
-descriptors_dir: /home/nadav2/dev/data/CLIP2Shape/shape_vectors
+descriptors_dir: /home/nadav2/dev/data/CLIP2Shape/outs/vertices_heatmap/optimizations/smplx_multiview
 corr_threshold: 0.7
 model_type: smplx
 gender: male
 iou_threshold: 0.3
+optimize_feature: betas
+color_map: YlOrRd
+color_threshold: 0.6
 
 
 renderer_kwargs:

@@ -80,9 +80,6 @@ class MultiViewCompare:
     def __call__(self):
         for person_dir in self.results_dir.iterdir():
 
-            if (person_dir / "out_vid.mp4").exists():
-                continue
-
             print(f"Processing {person_dir.name}...")
 
             orig_image = cv2.imread(str(person_dir / "orig.png"))
