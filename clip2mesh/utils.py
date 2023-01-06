@@ -366,7 +366,13 @@ class Pytorch3dRenderer:
         return blend_params
 
     @staticmethod
-    def rotate_3dmm_verts(verts: torch.Tensor, degrees: float, axis: Literal["x", "y", "z"]) -> Meshes:
+    def rotate_3dmm_verts(
+        verts: Union[torch.Tensor, np.ndarray], degrees: float, axis: Literal["x", "y", "z"]
+    ) -> Meshes:
+        convert_back_to_numpy = False
+        if isinstance(verts, np.ndarray):
+            convert_back_to_numpy = True
+            verts = torch.tensor(verts).float()
         rotation_matrix = Rotation.from_euler(axis, degrees, degrees=True).as_matrix()
         axis = 0 if verts.dim() == 2 else 1
         mesh_center = verts.mean(axis=axis)
@@ -375,6 +381,8 @@ class Pytorch3dRenderer:
         verts = verts - mesh_center
         verts = verts @ rotation_matrix
         verts = verts + mesh_center
+        if convert_back_to_numpy:
+            verts = verts.cpu().numpy()
         return verts
 
     def render_mesh(
@@ -694,26 +702,22 @@ class Utils:
         #     ["skinny legs"],
         # ]  # SMPLX body
         # labels = [
-        #     ["smile"],
+        #     ["happy"],
         #     ["angry"],
         #     ["opened mouth"],
-        #     ["lifted eyebrows"],
-        #     ["opened eyes"],
+        #     ["raise eyebrows"],
         # ]  # FLAME expression
         labels = [
             ["fat"],
+            ["big eyes"],
             ["long neck"],
             ["chubby cheeks"],
             ["nose sticking-out"],
             ["ears sticking-out"],
             ["big forehead"],
             ["small chin"],
-            ["big mouth"],
-            ["thin lips"],
-            ["big nose"],
             ["long head"],
-            ["big eyebrows"],
-            ["big eyes"],
+            ["small head"],
         ]  # FLAME shape
         # labels = [
         #     "fat",
@@ -789,14 +793,16 @@ class Utils:
     @staticmethod
     def get_random_shape() -> torch.tensor:
         """FLAME face shape"""
-        shape = torch.rand(1, 10) * torch.randint(-3, 6, (1, 10)).float()
-        return torch.cat([shape, torch.zeros(1, 90)], dim=1)
+        shape = torch.rand(1, 100) * torch.randint(-3, 3, (1, 100)).float()
+        # return torch.cat([shape, torch.zeros(1, 90)], dim=1)
+        return shape
 
     @staticmethod
     def get_random_expression_flame() -> torch.tensor:
         """FLAME face expression"""
-        expression = torch.randn(1, 10)  # * torch.randint(-2, 2, (1, 10)).float()
-        return torch.cat([expression, torch.zeros(1, 40)], dim=1)
+        expression = torch.randn(1, 50) * torch.randint(-2, 2, (1, 50)).float()
+        # return torch.cat([expression, torch.zeros(1, 40)], dim=1)
+        return expression
 
     @staticmethod
     def convert_str_list_to_float_tensor(strs_list: List[str]) -> torch.tensor:
@@ -872,6 +878,19 @@ class Utils:
             min_max_dict[key] = (np.min(stats[key]), np.max(stats[key]), np.mean(stats[key]))
         return min_max_dict
 
+    @staticmethod
+    def video_to_frames(video_path: Union[str, Path]):
+        video_path = Path(video_path)
+        frames_dir = video_path.parent / f"{video_path.stem}_frames"
+        frames_dir.mkdir(exist_ok=True)
+        vidcap = cv2.VideoCapture(video_path.as_posix())
+        success, image = vidcap.read()
+        count = 0
+        while success:
+            cv2.imwrite(f"{frames_dir}/{count:05d}.png", image)
+            success, image = vidcap.read()
+            count += 1
+
 
 class C2M_pl(pl.LightningModule):
     def __init__(
@@ -884,6 +903,7 @@ class C2M_pl(pl.LightningModule):
         )
         self.lr = lr
         self.utils = Utils()
+        self.out_features = out_features
 
     def forward(self, x):
         return self.model(x)
@@ -892,7 +912,7 @@ class C2M_pl(pl.LightningModule):
         parameters, clip_labels = batch
         b = parameters.shape[0]
         parameters_pred = self(clip_labels)
-        parameters_pred = parameters_pred.reshape(b, 1, 10)
+        parameters_pred = parameters_pred.reshape(b, 1, self.out_features)
         loss = F.mse_loss(parameters, parameters_pred)
         return loss
 

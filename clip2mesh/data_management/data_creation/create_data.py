@@ -4,10 +4,13 @@ from pathlib import Path
 from clip2mesh.utils import Utils, ModelsFactory
 
 
-@hydra.main(config_path="config", config_name="create_data")
+@hydra.main(config_path="../../config", config_name="create_data")
 def main(cfg):
 
     assert cfg.renderer.name in ["pytorch3d", "open3d"], "Renderer not supported"
+
+    utils = Utils()
+    models_factory = ModelsFactory(cfg.model_type)
 
     for _ in tqdm(range(cfg.num_of_imgs), total=cfg.num_of_imgs, desc="creating data"):
         try:
@@ -22,9 +25,6 @@ def main(cfg):
         except IndexError:
             img_id = 0
         img_name = cfg.img_tag if cfg.img_tag is not None else str(img_id)
-
-        utils = Utils()
-        models_factory = ModelsFactory(cfg.model_type)
 
         model_kwargs = models_factory.get_random_params(with_face=cfg.with_face)
 
@@ -48,10 +48,11 @@ def main(cfg):
             if cfg.sides:
                 for azim in [0.0, 90.0]:
                     img_suffix = "front" if azim == 0.0 else "side"
-                    renderer_kwargs = {"py3d": True, "azim": azim}
-                    renderer_kwargs.update(cfg.renderer.kwargs)
-                    py3d_renderer = models_factory.get_renderer(**renderer_kwargs)
-                    img = py3d_renderer.render_mesh(verts=verts, faces=faces[None], vt=vt, ft=ft)
+                    # renderer_kwargs.update(cfg.renderer.kwargs)
+                    py3d_renderer = models_factory.get_renderer(py3d=True, **cfg.renderer.kwargs)
+                    img = py3d_renderer.render_mesh(
+                        verts=verts, faces=faces[None], vt=vt, ft=ft, rotate_mesh={"degrees": azim, "axis": "y"}
+                    )
                     py3d_renderer.save_rendered_image(img, f"{cfg.output_path}/{img_name}_{img_suffix}.png")
             else:
                 renderer_kwargs = {"py3d": True}

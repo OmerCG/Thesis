@@ -7,7 +7,7 @@ models_dir: /home/nadav2/dev/repos/CLIP2Shape/models
 seed: 42
 
 tensorboard_logger:
-  name: correlations_check_flame_shape # IMPORTANT
+  name: super_data_flame_epxression # IMPORTANT
   save_dir: /home/nadav2/dev/data/CLIP2Shape/runs
   log_graph: True
 
@@ -26,22 +26,24 @@ callbacks:
     auto_insert_metric_name: False
 
 dataloader:
-  batch_size: 500
+  batch_size: 5000
   num_workers: 1
   shuffle: True
   drop_last: False
 
 trainer:
   gpus: 1
-  max_epochs: 100
-  check_val_every_n_epoch: 10
+  max_epochs: 20
+  check_val_every_n_epoch: 5
   log_every_n_steps: 3
 
 dataset:
-  data_dir: /home/nadav2/dev/data/CLIP2Shape/images/flame_shape_py3d_male
+  data_dir: /home/nadav2/dev/data/CLIP2Shape/images/flame_expression_super_data
   optimize_features:
-    - shape_params
+    - expression_params
+  out_features: ${model_conf.out_features}
 
 model_conf:
-  num_stats: 13
-  hidden_size: 600
+  num_stats: 6
+  hidden_size: 1000
+  out_features: 50

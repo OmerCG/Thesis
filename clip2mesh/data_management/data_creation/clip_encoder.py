@@ -51,7 +51,7 @@ def main(args):
 
 def parse_args():
     parser = argparse.ArgumentParser()
-    parser.add_argument("imgs_dir", type=str, default="/home/nadav2/dev/data/CLIP2Shape/images/flame_shape_py3d_angles")
+    parser.add_argument("imgs_dir", type=str)
     parser.add_argument("--device", type=str, default="cuda" if torch.cuda.is_available() else "cpu")
     parser.add_argument("-s", "--side", action="store_true", default=False)
     return parser.parse_args()

@@ -1,0 +1,29 @@
+data_dir: /home/nadav2/dev/data/CLIP2Shape/outs/images_to_shape/ZjuMocap_DATA/data
+predictions_dir: /home/nadav2/dev/data/CLIP2Shape/outs/images_to_shape/ZjuMocap_DATA/predictions
+output_dir: /home/nadav2/dev/data/CLIP2Shape/outs/images_to_shape/ZjuMocap_DATA/comparison
+
+comparison_kwargs:
+  
+  raw_imgs_dir: ${data_dir}
+  gt_dir: ${data_dir}
+  output_path: ${output_dir}
+  
+  comparison_dirs:
+    shapy: ${predictions_dir}/shapy_predictions
+    spin: ${predictions_dir}/spin_predictions
+    # pixie: ${predictions_dir}/pixie_predictions
+  
+  smplx_models_paths:
+    smplx_male: /home/nadav2/dev/repos/Thesis/production/smplx_male.ckpt
+    smplx_female: /home/nadav2/dev/repos/Thesis/production/smplx_female.ckpt
+
+  labels_weights:
+    male:
+    female:
+
+  renderer_kwargs:
+      img_size: [450, 300]
+      tex_path:
+      dist: 2.4
+      elev: 8.6
+      azim: 2.1

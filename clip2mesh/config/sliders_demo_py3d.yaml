@@ -9,12 +9,12 @@ demo_kwargs:
   gender: neutral
   device: cuda
 
-  # # FLAME - expression
-  # texture: #${repo_path}/Flame/flame2020/mesh.png
-  # model_path: ${repo_path}/production/flame_expression.ckpt
-  # model_type: flame
-  # with_face: True
-  # on_parameters: False
+  # FLAME - expression
+  texture: #${repo_path}/Flame/flame2020/mesh.png
+  model_path: ${repo_path}/pre_production/super_data_flame_epxression.ckpt
+  model_type: flame
+  with_face: True
+  on_parameters: False
 
   # # FLAME - shape
   # texture: #${repo_path}/Flame/flame2020/mesh.png
@@ -30,12 +30,12 @@ demo_kwargs:
   # with_face: False
   # on_parameters: False
 
-  # SMAL
-  texture:  # there is no texture for smal yet
-  model_path: ${repo_path}/production/smal.ckpt
-  model_type: smal
-  with_face: False
-  on_parameters: False
+  # # SMAL
+  # texture:  # there is no texture for smal yet
+  # model_path: ${repo_path}/production/smal.ckpt
+  # model_type: smal
+  # with_face: False
+  # on_parameters: False
 
   # GENERIC
   # with_face: True
@@ -48,17 +48,17 @@ demo_kwargs:
     img_size: [512, 512]
     tex_path: ${demo_kwargs.texture}
 
-    # # FLAME cam params
-    # dist: 0.5
-    # elev: 0.0
-    # azim: 0.0
+    # FLAME cam params
+    dist: 0.5
+    elev: 0.0
+    azim: 0.0
 
     # # SMPLX cam params
     # dist: 2.4
     # elev: 8.6
     # azim: 2.1
 
-    # SMAL cam params
-    dist: 4.0
-    elev: 20.0
-    azim: 2.1
+    # # SMAL cam params
+    # dist: 4.0
+    # elev: 20.0
+    # azim: 2.1

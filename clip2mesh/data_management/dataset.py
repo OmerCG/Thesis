@@ -6,13 +6,10 @@ from torch.utils.data import Dataset
 
 
 class CLIP2MESHDataset(Dataset):
-    def __init__(
-        self,
-        data_dir: str,
-        optimize_features: List[str],
-    ):
+    def __init__(self, data_dir: str, optimize_features: List[str], out_features: int = 10):
 
         self.data_dir = data_dir
+        self.out_features = out_features
         self.optimize_features = optimize_features
         self.files = [file for file in Path(data_dir).rglob("*_labels.json")]
         self.files.sort()
@@ -42,8 +39,8 @@ class CLIP2MESHDataset(Dataset):
             if feature not in dict:
                 raise ValueError(f"Feature {feature} not in dict {dict}")
             feature_data = dict[feature][0]
-            if feature_data.__len__() > 10:
-                feature_data = feature_data[:10]
+            if feature_data.__len__() > self.out_features:
+                feature_data = feature_data[: self.out_features]
             parameters_tensor = torch.cat((parameters_tensor, torch.tensor(feature_data)[None]))
         return parameters_tensor
 
