@@ -7,7 +7,7 @@ models_dir: /home/nadav2/dev/repos/CLIP2Shape/models
 seed: 42
 
 tensorboard_logger:
-  name: super_data_flame_epxression # IMPORTANT
+  name: super_data_smplx_female_multiview # IMPORTANT
   save_dir: /home/nadav2/dev/data/CLIP2Shape/runs
   log_graph: True
 
@@ -26,24 +26,24 @@ callbacks:
     auto_insert_metric_name: False
 
 dataloader:
-  batch_size: 5000
+  batch_size: 2000
   num_workers: 1
   shuffle: True
   drop_last: False
 
 trainer:
   gpus: 1
-  max_epochs: 20
+  max_epochs: 30
   check_val_every_n_epoch: 5
   log_every_n_steps: 3
 
 dataset:
-  data_dir: /home/nadav2/dev/data/CLIP2Shape/images/flame_expression_super_data
+  data_dir: /home/nadav2/dev/data/CLIP2Shape/images/smplx_female_multiview
   optimize_features:
-    - expression_params
+    - betas
   out_features: ${model_conf.out_features}
 
 model_conf:
-  num_stats: 6
-  hidden_size: 1000
-  out_features: 50
+  num_stats: 7
+  hidden_size: 800
+  out_features: 10

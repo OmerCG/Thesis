@@ -226,9 +226,10 @@ class SlidersApp:
     def update_camera_azim(self, value: float):
         if isinstance(value, str):
             value = float(value)
-        self.renderer_kwargs.update({"azim": value})
-        self.renderer = self.models_factory.get_renderer(**self.renderer_kwargs)
-        img = self.renderer.render_mesh(verts=self.verts, faces=self.faces[None], vt=self.vt, ft=self.ft)
+        rotate_mesh_kwargs = {"degrees": value, "axis": "y"}
+        img = self.renderer.render_mesh(
+            verts=self.verts, faces=self.faces[None], vt=self.vt, ft=self.ft, rotate_mesh=rotate_mesh_kwargs
+        )
         img = self.adjust_rendered_img(img)
         self.img = img
         img = ImageTk.PhotoImage(image=img)
@@ -238,9 +239,10 @@ class SlidersApp:
     def update_camera_elev(self, value: float):
         if isinstance(value, str):
             value = float(value)
-        self.renderer_kwargs.update({"elev": value})
-        self.renderer = self.models_factory.get_renderer(**self.renderer_kwargs)
-        img = self.renderer.render_mesh(verts=self.verts, faces=self.faces[None], vt=self.vt, ft=self.ft)
+        rotate_mesh_kwargs = {"degrees": value, "axis": "x"}
+        img = self.renderer.render_mesh(
+            verts=self.verts, faces=self.faces[None], vt=self.vt, ft=self.ft, rotate_mesh=rotate_mesh_kwargs
+        )
         img = self.adjust_rendered_img(img)
         self.img = img
         img = ImageTk.PhotoImage(image=img)

@@ -1,0 +1,19 @@
+repo_path: /home/nadav2/dev/repos/Thesis
+data_path: /home/nadav2/dev/data/CLIP2Shape
+demo_kwargs:
+  out_dir: ${data_path}/outs/objs
+  gender: female
+  device: cuda
+  texture: null
+  model_path: ${repo_path}/pre_production/super_data_smplx_female_multiview.ckpt
+  model_type: smplx
+  with_face: false
+  on_parameters: false
+  renderer_kwargs:
+    img_size:
+    - 512
+    - 512
+    tex_path: ${demo_kwargs.texture}
+    dist: 0.5
+    elev: 0.0
+    azim: 0.0

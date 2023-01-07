@@ -17,7 +17,6 @@ from PIL import Image
 from io import BytesIO
 from tqdm import tqdm
 from omegaconf import DictConfig
-from typing import Any, List, Optional, Tuple
 from torch import nn
 from pathlib import Path
 from scipy.spatial.transform import Rotation
@@ -38,7 +37,6 @@ from pytorch3d.renderer import (
     TexturesUV,
     BlendParams,
     Materials,
-    AmbientLights,
 )
 from clip2mesh.three_dmm.smal_layer import get_smal_layer
 from clip2mesh.three_dmm.flame import FLAME
@@ -48,10 +46,14 @@ class C2M(nn.Module):
     def __init__(self, num_stats: int, hidden_size: int, out_features: int, num_hiddens: int = 0):
         super().__init__()
         self.fc1 = nn.Linear(num_stats, hidden_size)
+        self.fc2 = nn.Linear(hidden_size, hidden_size)
         self.fc5 = nn.Linear(hidden_size, out_features)
+        self.dropout = nn.Dropout(0.2)
 
     def forward(self, x):
         x = F.relu(self.fc1(x))
+        x = F.relu(self.dropout(self.fc2(x)))
+        # x = F.relu(self.fc2(x))
         x = self.fc5(x)
         return x
 
@@ -508,11 +510,11 @@ class Utils:
 
     def _get_smplx_layer(self, gender: str):
         if gender == "neutral":
-            smplx_path = "/home/nadav2/dev/repos/CLIP2Shape/SMPLX/SMPLX_NEUTRAL_2020.npz"
+            smplx_path = "/home/nadav2/dev/repos/Thesis/SMPLX/SMPLX_NEUTRAL_2020.npz"
         elif gender == "male":
-            smplx_path = "/home/nadav2/dev/repos/CLIP2Shape/SMPLX/SMPLX_MALE.npz"
+            smplx_path = "/home/nadav2/dev/repos/Thesis/SMPLX/SMPLX_MALE.npz"
         else:
-            smplx_path = "/home/nadav2/dev/repos/CLIP2Shape/SMPLX/SMPLX_FEMALE.npz"
+            smplx_path = "/home/nadav2/dev/repos/Thesis/SMPLX/SMPLX_FEMALE.npz"
         self.smplx_layer = smplx.build_layer(model_path=smplx_path, num_expression_coeffs=10)
         model_data = np.load(smplx_path, allow_pickle=True)
         self.smplx_faces = model_data["f"].astype(np.int32)
@@ -530,6 +532,7 @@ class Utils:
         transl: torch.Tensor = None,
         gender: Literal["neutral", "male", "female"] = "neutral",
         device: Optional[Literal["cuda", "cpu"]] = "cpu",
+        get_smpl: bool = False,
     ) -> Tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray]:
         smplx_model = SMPLXParams(
             betas=betas, body_pose=body_pose, expression=expression, global_orient=global_orient, transl=transl
@@ -549,22 +552,20 @@ class Utils:
             verts = verts.detach().cpu().numpy()
         verts = (verts.squeeze() - verts.min()) / (verts.max() - verts.min())
         verts = self.translate_mesh_smplx(verts)
-        if not hasattr(self, "vt") and not hasattr(self, "ft"):
+        if not hasattr(self, "vt_smplx") and not hasattr(self, "ft_smpl"):
             self._get_vt_ft("smplx")
 
-        return verts, self.smplx_faces, self.vt, self.ft
+        return verts, self.smplx_faces, self.vt_smplx, self.ft_smplx
 
-    def _get_vt_ft(self, model_type: Literal["smplx", "flame"]) -> Tuple[np.ndarray, np.ndarray]:
+    def _get_vt_ft(self, model_type: Literal["smplx", "flame", "smpl"]) -> Tuple[np.ndarray, np.ndarray]:
         if model_type == "smplx":
-            vt = np.load("/home/nadav2/dev/repos/CLIP2Shape/SMPLX/textures/smplx_vt.npy")
-            ft = np.load("/home/nadav2/dev/repos/CLIP2Shape/SMPLX/textures/smplx_ft.npy")
+            self.vt_smplx = np.load("/home/nadav2/dev/repos/CLIP2Shape/SMPLX/textures/smplx_vt.npy")
+            self.ft_smplx = np.load("/home/nadav2/dev/repos/CLIP2Shape/SMPLX/textures/smplx_ft.npy")
         else:
             flame_uv_path = "/home/nadav2/dev/repos/CLIP2Shape/Flame/flame2020/flame_texture_data_v6.pkl"
             flame_uv = np.load(flame_uv_path, allow_pickle=True)
-            vt = flame_uv["vt_plus"]
-            ft = flame_uv["ft_plus"]
-        self.vt, self.ft = vt, ft
-        return vt, ft
+            self.vt_flame = flame_uv["vt_plus"]
+            self.ft_flame = flame_uv["ft_plus"]
 
     def _get_flame_faces(self) -> np.ndarray:
         flame_uv_path = "/home/nadav2/dev/repos/CLIP2Shape/Flame/flame2020/flame_texture_data_v6.pkl"
@@ -639,10 +640,10 @@ class Utils:
         if not hasattr(self, "flame_faces"):
             self._get_flame_faces()
 
-        if not hasattr(self, "vt") and not hasattr(self, "ft"):
+        if not hasattr(self, "vt_flame") and not hasattr(self, "ft_flame"):
             self._get_vt_ft("flame")
 
-        return verts, self.flame_faces, self.vt, self.ft
+        return verts, self.flame_faces, self.vt_flame, self.ft_flame
 
     def get_smal_model(
         self, beta: torch.tensor, device: Optional[Literal["cuda", "cpu"]] = "cpu", py3d: bool = True
@@ -694,31 +695,32 @@ class Utils:
     @staticmethod
     def get_labels() -> List[List[str]]:
         # labels = [["big cat"], ["cow"], ["donkey"], ["hippo"]]  # SMAL animals
-        # labels = [
-        #     ["fat"],
-        #     ["broad shoulders"],
-        #     ["hourglass"],
-        #     ["pear shaped"],
-        #     ["skinny legs"],
-        # ]  # SMPLX body
+        labels = [
+            ["fat"],
+            ["narrow waist"],
+            ["broad shoulders"],
+            ["tall"],
+            ["pear shaped"],
+            ["skinny legs"],
+        ]  # SMPLX body
         # labels = [
         #     ["happy"],
         #     ["angry"],
         #     ["opened mouth"],
         #     ["raise eyebrows"],
         # ]  # FLAME expression
-        labels = [
-            ["fat"],
-            ["big eyes"],
-            ["long neck"],
-            ["chubby cheeks"],
-            ["nose sticking-out"],
-            ["ears sticking-out"],
-            ["big forehead"],
-            ["small chin"],
-            ["long head"],
-            ["small head"],
-        ]  # FLAME shape
+        # labels = [
+        #     ["fat"],
+        #     ["big eyes"],
+        #     ["long neck"],
+        #     ["chubby cheeks"],
+        #     ["nose sticking-out"],
+        #     ["ears sticking-out"],
+        #     ["big forehead"],
+        #     ["small chin"],
+        #     ["long head"],
+        #     ["small head"],
+        # ]  # FLAME shape
         # labels = [
         #     "fat",
         #     "thin",
