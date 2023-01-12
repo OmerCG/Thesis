@@ -13,12 +13,13 @@ from clip2mesh.utils import Utils, ModelsFactory
 class SlidersApp:
     def __init__(self, cfg):
 
-        self.root = None
-        self.img_label = None
-        self.device = cfg.device
-        self.texture = cfg.texture
+        self.root: str = None
+        self.img_label: str = None
+        self.device: str = cfg.device
+        self.texture: str = cfg.texture
+        # self.num_coeffs: int = cfg.num_coef
 
-        self.on_parameters = cfg.on_parameters
+        self.on_parameters: bool = cfg.on_parameters
 
         assert cfg.model_type in ["smplx", "flame", "smal"], "Model type should be smplx, flame or smal"
         self.model_type = cfg.model_type
@@ -252,6 +253,13 @@ class SlidersApp:
     def get_key_for_model(self) -> str:
         return self.models_factory.get_key_name_for_model(self.model_type)
 
+    def mouse_wheel(self, action):
+        """
+        control the scrollbar using the mousewheel
+        """
+        scroll = -1 if action.delta > 0 else 1
+        self.parameters_canvas.yview(scroll, "units")
+
     def save_png(self):
         if self.on_parameters:  # TODO
             self.renderer.visualizer.capture_screen_image(self.outpath.as_posix())
@@ -371,11 +379,11 @@ class SlidersApp:
         # ------------------------------------------------------------
 
         # ----------------------- Parameters -------------------------
-        parameters_canvas = tkinter.Canvas(
+        self.parameters_canvas = tkinter.Canvas(
             parameters_main_frame, bg="white", highlightbackground="white", borderwidth=0
         )
-        parameters_canvas.pack(side=tkinter.LEFT, padx=0, pady=0, anchor="nw")
-        parameters_canvas.create_window((0, 0), window=parameters_frame, anchor=tkinter.NW)
+        self.parameters_canvas.pack(side=tkinter.LEFT, padx=0, pady=0, anchor="nw")
+        self.parameters_canvas.create_window((0, 0), window=parameters_frame, anchor=tkinter.NW)
         # ------------------------------------------------------------
 
         # ------------------- Parameters Scale Bars ------------------
@@ -493,6 +501,29 @@ class SlidersApp:
         elev_scale.set(self.default_elev)
         elev_scale.pack()
         self.camera_scales["elev"] = elev_scale
+        # ------------------------------------------------------------
+
+        # ------------------------ Scroll Bar ------------------------
+        # adding Scrollbar
+        y_scroll = tkinter.Scrollbar(
+            img_frame,
+            orient=tkinter.VERTICAL,
+            command=self.parameters_canvas.yview,
+            bg="white",
+            troughcolor="white",
+            activebackground="black",
+            highlightbackground="white",
+            width=8,
+        )
+        parameters_main_frame.bind(
+            "<Configure>", lambda e: self.parameters_canvas.configure(scrollregion=self.parameters_canvas.bbox("all"))
+        )
+        self.parameters_canvas.configure(yscrollcommand=y_scroll.set)
+        y_scroll.pack(
+            fill=tkinter.Y,
+            side=tkinter.LEFT,
+        )
+        # ------------------------------------------------------------
 
         # ------------------------ Buttons --------------------------
         reset_button_kwargs = self.get_reset_button_kwargs()
@@ -539,7 +570,7 @@ class SlidersApp:
         )
         random_params_button.pack(fill=tkinter.BOTH, expand=True, side=tkinter.TOP)
         # ------------------------------------------------------------
-
+        self.parameters_canvas.bind("<MouseWheel>", self.mouse_wheel)
         self.root.mainloop()
 
     def get_zoom_scale_kwargs(self) -> Dict[str, Any]:

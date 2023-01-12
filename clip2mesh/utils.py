@@ -46,31 +46,33 @@ class C2M(nn.Module):
     def __init__(self, num_stats: int, hidden_size: int, out_features: int, num_hiddens: int = 0):
         super().__init__()
         self.fc1 = nn.Linear(num_stats, hidden_size)
-        self.fc2 = nn.Linear(hidden_size, hidden_size)
-        self.fc5 = nn.Linear(hidden_size, out_features)
+        self.fc2 = nn.Linear(hidden_size, hidden_size - 200)
+        self.fc5 = nn.Linear(hidden_size - 200, out_features)
         self.dropout = nn.Dropout(0.2)
 
     def forward(self, x):
         x = F.relu(self.fc1(x))
-        x = F.relu(self.dropout(self.fc2(x)))
-        # x = F.relu(self.fc2(x))
+        # x = F.relu(self.dropout(self.fc2(x)))
+        x = F.relu(self.fc2(x))
         x = self.fc5(x)
         return x
 
 
 class C2M_new(nn.Module):
-    def __init__(self, num_stats: int, hidden_size: int, out_features: int, num_hiddens: int = 0):
+    def __init__(self, num_stats: int, hidden_size: Union[List[int], int], out_features: int, num_hiddens: int = 0):
         super().__init__()
-        self.layers = nn.ModuleList()
-        self.layers.append(nn.Linear(num_stats, hidden_size))
+        if isinstance(hidden_size, int):
+            hidden_size = [hidden_size]
+        self.fc_layers = []
+        self.fc_layers.extend([nn.Linear(num_stats, hidden_size[0]), nn.ReLU()])  # , nn.Dropout(0.2)])
         if num_hiddens > 0:
-            for _ in range(num_hiddens):
-                self.layers.append(nn.Linear(hidden_size, hidden_size))
-        self.out_layer = nn.Linear(hidden_size, out_features)
+            for i in range(num_hiddens):
+                self.fc_layers.extend([nn.Linear(hidden_size[i], hidden_size[i + 1]), nn.ReLU()])
+        self.fc_layers = nn.Sequential(*self.fc_layers)
+        self.out_layer = nn.Linear(hidden_size[-1], out_features)
 
     def forward(self, x):
-        for layer in self.layers:
-            x = F.relu(layer(x))
+        x = self.fc_layers(x)
 
         return self.out_layer(x)
 
@@ -209,6 +211,7 @@ class SMPLXParams:
         body_pose: torch.tensor = None,
         global_orient: torch.tensor = None,
         transl: torch.tensor = None,
+        smpl_model: bool = False,
     ):
         if betas is not None:
             betas: torch.Tensor = betas
@@ -233,16 +236,21 @@ class SMPLXParams:
         else:
             transl: torch.Tensor = torch.zeros(1, 3)
         jaw_pose: torch.Tensor = torch.eye(3).expand(1, 1, 3, 3)
-        self.params = {
-            "betas": betas,
-            "body_pose": body_pose,
-            "left_hand_pose": left_hand_pose,
-            "right_hand_pose": right_hand_pose,
-            "global_orient": global_orient,
-            "transl": transl,
-            "jaw_pose": jaw_pose,
-            "expression": expression,
-        }
+        if smpl_model:
+            self.params = {
+                "betas": betas,
+            }
+        else:
+            self.params = {
+                "betas": betas,
+                "body_pose": body_pose,
+                "left_hand_pose": left_hand_pose,
+                "right_hand_pose": right_hand_pose,
+                "global_orient": global_orient,
+                "transl": transl,
+                "jaw_pose": jaw_pose,
+                "expression": expression,
+            }
 
     def to(self, device):
         return {param_name: param.to(device) for param_name, param in self.params.items()}
@@ -503,21 +511,29 @@ class Utils:
     def create_metadata(metadata: Dict[str, torch.tensor], file_path: str):
         # write tensors to json
         for key, value in metadata.items():
-            metadata[key] = value.tolist()
+            if isinstance(value, torch.Tensor):
+                value = value.tolist()
+            metadata[key] = value
 
         with open(file_path, "w") as f:
             json.dump(metadata, f)
 
-    def _get_smplx_layer(self, gender: str):
-        if gender == "neutral":
-            smplx_path = "/home/nadav2/dev/repos/Thesis/SMPLX/SMPLX_NEUTRAL_2020.npz"
-        elif gender == "male":
-            smplx_path = "/home/nadav2/dev/repos/Thesis/SMPLX/SMPLX_MALE.npz"
+    def _get_smplx_layer(self, gender: str, num_coeffs: int, get_smpl: bool):
+        if get_smpl:
+            smplx_path = "/home/nadav2/dev/repos/Thesis/SMPL/SMPL_NEUTRAL.pkl"
         else:
-            smplx_path = "/home/nadav2/dev/repos/Thesis/SMPLX/SMPLX_FEMALE.npz"
-        self.smplx_layer = smplx.build_layer(model_path=smplx_path, num_expression_coeffs=10)
-        model_data = np.load(smplx_path, allow_pickle=True)
-        self.smplx_faces = model_data["f"].astype(np.int32)
+            if gender == "neutral":
+                smplx_path = "/home/nadav2/dev/repos/Thesis/SMPLX/SMPLX_NEUTRAL_2020.npz"
+            elif gender == "male":
+                smplx_path = "/home/nadav2/dev/repos/Thesis/SMPLX/SMPLX_MALE.npz"
+            else:
+                smplx_path = "/home/nadav2/dev/repos/Thesis/SMPLX/SMPLX_FEMALE.npz"
+        self.smplx_layer = smplx.build_layer(model_path=smplx_path, num_expression_coeffs=10, num_betas=num_coeffs)
+        if get_smpl:
+            self.smplx_faces = self.smplx_layer.faces_tensor
+        else:
+            model_data = np.load(smplx_path, allow_pickle=True)
+            self.smplx_faces = model_data["f"].astype(np.int32)
 
     def _get_flame_layer(self, gender: Literal["male", "female", "neutral"]) -> FLAME:
         cfg = self.get_flame_model_kwargs(gender)
@@ -532,16 +548,22 @@ class Utils:
         transl: torch.Tensor = None,
         gender: Literal["neutral", "male", "female"] = "neutral",
         device: Optional[Literal["cuda", "cpu"]] = "cpu",
+        num_coeffs: int = 10,
         get_smpl: bool = False,
     ) -> Tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray]:
         smplx_model = SMPLXParams(
-            betas=betas, body_pose=body_pose, expression=expression, global_orient=global_orient, transl=transl
+            betas=betas,
+            body_pose=body_pose,
+            expression=expression,
+            global_orient=global_orient,
+            transl=transl,
+            smpl_model=get_smpl,
         )
         if self.comparison_mode:
-            self._get_smplx_layer(gender)
+            self._get_smplx_layer(gender, num_coeffs, get_smpl)
         else:
             if not hasattr(self, "smplx_layer") or not hasattr(self, "smplx_faces"):
-                self._get_smplx_layer(gender)
+                self._get_smplx_layer(gender, num_coeffs, get_smpl)
 
         if device == "cuda":
             smplx_model.params = smplx_model.to(device)
@@ -694,15 +716,14 @@ class Utils:
 
     @staticmethod
     def get_labels() -> List[List[str]]:
-        # labels = [["big cat"], ["cow"], ["donkey"], ["hippo"]]  # SMAL animals
-        labels = [
-            ["fat"],
-            ["narrow waist"],
-            ["broad shoulders"],
-            ["tall"],
-            ["pear shaped"],
-            ["skinny legs"],
-        ]  # SMPLX body
+        labels = [["big cat"], ["cow"], ["donkey"], ["hippo"], ["dog"]]  # SMAL animals
+        # labels = [
+        #     ["fat"],
+        #     ["narrow waist"],
+        #     ["hourglass"],
+        #     ["tall"],
+        #     ["pear shaped"],
+        # ]  # SMPLX body
         # labels = [
         #     ["happy"],
         #     ["angry"],
@@ -777,32 +798,37 @@ class Utils:
         return len(self.get_labels())
 
     @staticmethod
-    def get_random_betas_smplx() -> torch.tensor:
+    def get_random_betas_smplx(num_coeffs: int = 10, smpl: bool = False) -> torch.tensor:
         """SMPLX body shape"""
-        return torch.randn(1, 10) * torch.randint(-2, 2, (1, 10)).float()
+        if smpl:
+            return torch.randn(1, num_coeffs)
+        return torch.randn(1, num_coeffs) * torch.randint(-2, 2, (1, num_coeffs)).float()
 
     @staticmethod
-    def get_random_betas_smal() -> torch.tensor:
+    def get_random_betas_smal(num_coeffs: int = 10) -> torch.tensor:
         """SMAL body shape"""
-        shape = torch.randn(1, 10)  # * torch.randint(-1, 1, (1, 10)).float()
-        return torch.cat([shape, torch.zeros(1, 31)], dim=1)
+        shape = torch.rand(1, num_coeffs) * torch.cat(
+            [torch.randint(-1, 1, (1, 10)), torch.ones(1, num_coeffs - 10)], 1
+        )  # * torch.randint(-1, 1, (1, 10)).float()
+        # return torch.cat([shape, torch.zeros(1, 31)], dim=1)
+        return shape
 
     @staticmethod
-    def get_random_expression() -> torch.tensor:
+    def get_random_expression(num_coeffs: int = 10) -> torch.tensor:
         """SMPLX face expression"""
-        return torch.randn(1, 10) * torch.randint(-1, 1, (1, 10)).float()
+        return torch.randn(1, num_coeffs) * torch.randint(-1, 1, (1, num_coeffs)).float()
 
     @staticmethod
-    def get_random_shape() -> torch.tensor:
+    def get_random_shape(num_coeffs: int = 10) -> torch.tensor:
         """FLAME face shape"""
-        shape = torch.rand(1, 100) * torch.randint(-3, 3, (1, 100)).float()
+        shape = torch.rand(1, num_coeffs) * torch.randint(-3, 3, (1, num_coeffs)).float()
         # return torch.cat([shape, torch.zeros(1, 90)], dim=1)
         return shape
 
     @staticmethod
-    def get_random_expression_flame() -> torch.tensor:
+    def get_random_expression_flame(num_coeffs: int = 50) -> torch.tensor:
         """FLAME face expression"""
-        expression = torch.randn(1, 50) * torch.randint(-2, 2, (1, 50)).float()
+        expression = torch.randn(1, num_coeffs) * torch.randint(-2, 2, (1, num_coeffs)).float()
         # return torch.cat([expression, torch.zeros(1, 40)], dim=1)
         return expression
 
@@ -818,10 +844,27 @@ class Utils:
             data[key] = (value - min_val) / (max_val - min_val)
         return data
 
-    @staticmethod
-    def filter_params_hack(ckpt: Dict) -> Dict:
+    def filter_params_hack(self, ckpt: Dict[str, Any], convert_legacy: bool = False) -> Dict[str, Any]:
         hack = {key.split("model.")[-1]: ckpt["state_dict"][key] for key in ckpt["state_dict"].keys() if "model" in key}
+        if convert_legacy:
+            hack = self.convert_legacy(hack)
         return hack
+
+    @staticmethod
+    def convert_legacy(legacy_dict: Dict[str, Any]) -> Dict[str, Any]:
+        converted_dict = {}
+        layers_counter = 0
+        last_layer = (legacy_dict.keys().__len__() // 2) - 1
+        layers_renumbered = np.linspace(0, last_layer, 2)
+        for key in legacy_dict.keys():
+            if layers_counter == last_layer:
+                prefix = "out_layer"
+            else:
+                prefix = f"fc_layers.{int(layers_renumbered[layers_counter])}"
+            converted_dict[f"{prefix}.{key.split('.')[-1]}"] = legacy_dict[key]
+            if "bias" in key and not prefix == "out_layer":
+                layers_counter += 1
+        return converted_dict
 
     def get_model_to_eval(self, model_path: str) -> nn.Module:
         model_meta_path = model_path.replace(".ckpt", "_metadata.json")
@@ -836,18 +879,19 @@ class Utils:
 
         # load model
         ckpt = torch.load(model_path)
-        filtered_params_hack = self.filter_params_hack(ckpt)
-        model = C2M(**model_meta).to(self.device)
+        convert_legacy = False if "fc_layers" in list(ckpt["state_dict"].keys())[0] else True
+        filtered_params_hack = self.filter_params_hack(ckpt, convert_legacy=convert_legacy)
+        model = C2M_new(**model_meta).to(self.device)
         model.load_state_dict(filtered_params_hack)
         model.eval()
 
         return model, labels
 
     @staticmethod
-    def get_default_parameters(body_pose: bool = False) -> torch.tensor:
+    def get_default_parameters(body_pose: bool = False, num_coeffs: int = 10) -> torch.tensor:
         if body_pose:
             return torch.eye(3).expand(1, 21, 3, 3)
-        return torch.zeros(1, 10)
+        return torch.zeros(1, num_coeffs)
 
     @staticmethod
     def get_default_face_shape() -> torch.tensor:
@@ -896,11 +940,18 @@ class Utils:
 
 class C2M_pl(pl.LightningModule):
     def __init__(
-        self, num_stats: int, lr: float = 0.0001, out_features: int = 10, hidden_size: int = 300, num_hiddens: int = 0
+        self,
+        num_stats: int,
+        lr: float = 0.0001,
+        out_features: int = 10,
+        hidden_size: Union[int, List[int]] = 300,
+        num_hiddens: int = 0,
     ):
         super().__init__()
+        if isinstance(hidden_size, int):
+            hidden_size = [hidden_size]
         self.save_hyperparameters()
-        self.model = C2M(
+        self.model = C2M_new(
             num_stats=num_stats, out_features=out_features, hidden_size=hidden_size, num_hiddens=num_hiddens
         )
         self.lr = lr
@@ -945,8 +996,9 @@ class CreateModelMeta(Callback):
         ckpt_new_path = ckpt_path.replace(ckpt_path.split("/")[-1], ckpt_new_name)
         os.rename(ckpt_path, ckpt_new_path)
         shutil.copy(ckpt_new_path, f"{self.utils.production_dir}/{ckpt_new_name}")
+        pl_module.hparams.hidden_size = list(pl_module.hparams.hidden_size)
         metadata = {"labels": self.utils.get_labels()}
-        metadata.update(pl_module.hparams)
+        metadata.update(dict(pl_module.hparams))
         with open(
             f"{self.utils.production_dir}/{ckpt_new_path.split('/')[-1].replace('.ckpt', '_metadata.json')}", "w"
         ) as f:
@@ -954,12 +1006,12 @@ class CreateModelMeta(Callback):
 
 
 class ModelsFactory:
-    def __init__(self, model_type: Literal["flame", "smplx", "smal"]):
+    def __init__(self, model_type: Literal["flame", "smplx", "smal", "smpl"]):
         self.model_type = model_type
         self.utils = Utils()
 
     def get_model(self, **kwargs) -> Tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray]:
-        if self.model_type == "smplx":
+        if self.model_type == "smplx" or self.model_type == "smpl":
             return self.utils.get_smplx_model(**kwargs)
         elif self.model_type == "flame":
             return self.utils.get_flame_model(**kwargs)
@@ -968,13 +1020,13 @@ class ModelsFactory:
                 kwargs.pop("gender")
             return self.utils.get_smal_model(**kwargs)
 
-    def get_default_params(self, with_face: bool = False) -> Dict[str, torch.tensor]:
+    def get_default_params(self, with_face: bool = False, num_coeffs: int = 10) -> Dict[str, torch.tensor]:
 
         params = {}
 
         if self.model_type == "smplx":
             params["body_pose"] = self.utils.get_default_parameters(body_pose=True)
-            params["betas"] = self.utils.get_default_parameters()
+            params["betas"] = self.utils.get_default_parameters(num_coeffs=num_coeffs)
             expression = None
             if with_face:
                 expression = self.utils.get_default_face_expression()
@@ -997,28 +1049,31 @@ class ModelsFactory:
             return Pytorch3dRenderer(**kwargs)
         return Open3dRenderer(**kwargs)
 
-    def get_random_params(self, with_face: bool = False, rest_pose: bool = False) -> Dict[str, torch.tensor]:
+    def get_random_params(
+        self, with_face: bool = False, rest_pose: bool = False, num_coeffs: int = 10
+    ) -> Dict[str, torch.tensor]:
         params = {}
-        if self.model_type == "smplx":
-            params["betas"] = self.utils.get_random_betas_smplx()
+        if self.model_type == "smplx" or self.model_type == "smpl":
+            smpl = True if self.model_type == "smpl" else False
+            params["betas"] = self.utils.get_random_betas_smplx(num_coeffs, smpl)
             if with_face:
-                params["expression"] = self.utils.get_random_expression()
+                params["expression"] = self.utils.get_random_expression(num_coeffs)
             else:
-                params["expression"] = self.utils.get_default_parameters()
+                params["expression"] = self.utils.get_default_parameters(num_coeffs)
             if rest_pose:
-                params["body_pose"] = self.utils.get_body_pose()
+                params["body_pose"] = self.utils.get_body_pose(num_coeffs)
             else:
                 params["body_pose"] = torch.eye(3).expand(1, 21, 3, 3)
         elif self.model_type == "flame":
             if with_face:
-                params["expression_params"] = self.utils.get_random_expression_flame()
-                params["shape_params"] = self.utils.get_default_face_shape()
+                params["expression_params"] = self.utils.get_random_expression_flame(num_coeffs)
+                params["shape_params"] = self.utils.get_default_face_shape(num_coeffs)
             else:
-                params["expression_params"] = self.utils.get_default_face_expression()
-                params["shape_params"] = self.utils.get_random_shape()
+                params["expression_params"] = self.utils.get_default_face_expression(num_coeffs)
+                params["shape_params"] = self.utils.get_random_shape(num_coeffs)
 
         else:
-            params["beta"] = self.utils.get_random_betas_smal()
+            params["beta"] = self.utils.get_random_betas_smal(num_coeffs)
 
         return params
 
@@ -1093,7 +1148,7 @@ def plot_scatter_with_thumbnails(
     if labels is not None:
         chart = chart.encode(color="label:N")
 
-    return chart
+    return chart.display()
 
 
 class Image2ShapeUtils:

@@ -7,7 +7,7 @@ models_dir: /home/nadav2/dev/repos/CLIP2Shape/models
 seed: 42
 
 tensorboard_logger:
-  name: super_data_smplx_female_multiview # IMPORTANT
+  name: smplx_female_uniform # IMPORTANT
   save_dir: /home/nadav2/dev/data/CLIP2Shape/runs
   log_graph: True
 
@@ -26,24 +26,25 @@ callbacks:
     auto_insert_metric_name: False
 
 dataloader:
-  batch_size: 2000
+  batch_size: 1000
   num_workers: 1
   shuffle: True
   drop_last: False
 
 trainer:
   gpus: 1
-  max_epochs: 30
+  max_epochs: 50
   check_val_every_n_epoch: 5
   log_every_n_steps: 3
 
 dataset:
-  data_dir: /home/nadav2/dev/data/CLIP2Shape/images/smplx_female_multiview
+  data_dir: /home/nadav2/dev/data/CLIP2Shape/images/smplx_female_uniform_multiview
   optimize_features:
     - betas
   out_features: ${model_conf.out_features}
 
 model_conf:
-  num_stats: 7
-  hidden_size: 800
+  num_stats: 5
+  hidden_size: [700, 500]
   out_features: 10
+  num_hiddens: 1

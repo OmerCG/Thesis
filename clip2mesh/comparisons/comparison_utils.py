@@ -3,10 +3,10 @@ import torch
 import logging
 import numpy as np
 import pandas as pd
-import torch.nn.functional as F
+import matplotlib.pyplot as plt
 from pathlib import Path
-from typing import Dict, Tuple, Literal
 from pytorch3d.structures import Meshes
+from typing import Dict, Tuple, Literal, List
 from clip2mesh.utils import Image2ShapeUtils, Utils
 
 
@@ -140,8 +140,7 @@ class ComparisonUtils(Image2ShapeUtils):
             # if there are less methods than the video structure allows, add empty image
             # +1 because we have also the raw image
             if len(rendered_imgs) + 1 < num_rows * num_cols:
-                empty_img = np.zeros_like(rendered_imgs["gt"])
-
+                empty_img = np.ones_like(rendered_imgs["gt"])
                 for _ in range(num_rows * num_cols - len(rendered_imgs)):
                     rendered_imgs["empty"] = empty_img
 
@@ -163,3 +162,56 @@ class ComparisonUtils(Image2ShapeUtils):
 
             final_img = cv2.cvtColor(final_img, cv2.COLOR_RGB2BGR)
             cv2.imwrite(str(frames_dir / f"{frame_idx}.png"), final_img)
+
+    @staticmethod
+    def create_vid_with_history_plot(
+        distances_dict: Dict[str, torch.Tensor], data_dir_path: Path, vid_shape: Tuple[int, int]
+    ):
+        """
+        Create a video with a plot of the history of the loss
+
+        data_dir_path: Path to the directory containing the frames directories, e.g.:
+            |
+            frames_dir
+                |
+                frames
+                    |
+                    0.png
+        """
+        sorted_dir = sorted(data_dir_path.iterdir(), key=lambda x: int(x.stem))
+        out_vid = cv2.VideoWriter(
+            str(data_dir_path.parent / f"{data_dir_path.name}.mp4"),
+            cv2.VideoWriter_fourcc(*"mp4v"),
+            15,
+            (vid_shape[0] * 2, vid_shape[1]),
+        )
+        fig, ax = plt.subplots(1, 1, figsize=(10, 10))
+        for i in range(history_len):
+            img_path = sorted_dir[i] / "frames" / "0.png"
+            temp_plot = sorted_dir[i].parent / "temp_plot.png"
+            img = cv2.imread(str(img_path))
+            if i == 0:
+                reference = {method: body_shape[i] for method, body_shape in history.items()}
+            else:
+                # plot history is the norm of the difference between the current and the reference
+                if history_plot is None:
+                    history_plot = {k: [torch.norm(v[i] - reference[k], dim=1).item()] for k, v in history.items()}
+                else:
+                    # extend the history plot
+                    for k, v in history.items():
+                        history_plot[k].extend([torch.norm(v[i - 1] - reference[k], dim=1).item()])
+                # plot history
+                for key in history_plot:
+                    ax.plot(history_plot[key], label=key)
+                ax.legend(loc="upper right")
+                ax.set_yticks([])
+                fig.savefig(temp_plot)
+                ax.clear()
+                history_plot_img = cv2.imread(str(temp_plot))
+                history_plot_img = cv2.resize(history_plot_img, img.shape[:2][::-1])
+
+                # write the plot on the image to the video
+                img = np.concatenate([img, history_plot_img], axis=1)
+                out_vid.write(img)
+                temp_plot.unlink()
+        out_vid.release()

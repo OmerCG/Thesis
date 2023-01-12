@@ -1,5 +1,6 @@
 import cv2
 import json
+from matplotlib import pyplot as plt
 import torch
 import hydra
 import numpy as np
@@ -8,7 +9,7 @@ from PIL import Image
 from pathlib import Path
 from omegaconf import DictConfig
 from pytorch3d.structures import Meshes
-from typing import Dict, Tuple, Literal
+from typing import Dict, Tuple, Literal, List
 from clip2mesh.comparisons.comparison_utils import ComparisonUtils
 
 
@@ -36,7 +37,7 @@ class Human3DComparison(ComparisonUtils):
         """
         Assuming the following directory structure:
         - gt_dir
-        |    - person
+            - person
                 - video
                     -take
                         - img
@@ -51,7 +52,7 @@ class Human3DComparison(ComparisonUtils):
 
         # ground truth shape
         h3d_json_id = f"{person_id}_{video_id}"
-        frame_idx = int(img_id)
+        frame_idx = int(img_id) - 2
         gt_body_shape = self.get_gt_data(h3d_json_id, frame_idx)
 
         # shapy prediction
@@ -93,9 +94,13 @@ class Human3DComparison(ComparisonUtils):
                 for take in video.iterdir():
                     if "frames" not in take.name:
                         continue
-                    for img in take.iterdir():
-                        self.logger.info(f"Processing {img}...\n")
-
+                    sorted_takes = sorted(list(take.iterdir()), key=lambda x: int(x.stem))
+                    predictions_history = {method: [] for method in self.comparison_dirs.keys()}
+                    predictions_history["ours"] = []
+                    for i, img in enumerate(sorted_takes):
+                        self.logger.info(f"Processing {person.name}/{video.name}/{take.name}/{img.stem}...\n")
+                        if i >= self.gt_jsons["_".join(img.parts[-4:-2])]["body_pose"].__len__():
+                            break
                         output_path = self.output_path / person.name / video.name / take.name / img.stem
                         output_path.mkdir(parents=True, exist_ok=True)
 
@@ -103,6 +108,12 @@ class Human3DComparison(ComparisonUtils):
 
                         body_shapes, raw_img = self.get_body_shapes(raw_img_path=img, gender=gender)
                         body_pose: torch.Tensor = body_shapes.pop("body_pose")
+
+                        # save history
+                        for method, body_shape in body_shapes.items():
+                            if method == "gt":
+                                continue
+                            predictions_history[method].append(body_shape)
 
                         l2_losses: Dict[str, torch.Tensor] = self.calc_distances(body_shapes)
 
@@ -140,7 +151,8 @@ class Human3DComparison(ComparisonUtils):
                         )
                         self.results_df = pd.concat([self.results_df, single_img_results])
 
-                    self.results_df.to_csv(self.output_path / "results.csv", index=False)
+                    self.create_vid_with_history_plot(l2_losses, output_path.parent, video_shape)
+        self.results_df.to_csv(self.output_path / "results.csv", index=False)
 
 
 @hydra.main(config_path="../config", config_name="human3d_comparison")

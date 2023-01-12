@@ -8,8 +8,8 @@ from torch.utils.data import DataLoader
 from pytorch_lightning.callbacks import Callback
 from pytorch_lightning.utilities.seed import seed_everything
 from pytorch_lightning.loggers import TensorBoardLogger
-from clip2mesh.data_management.dataset import CLIP2MESHDataset
 from clip2mesh.utils import C2M_pl, CreateModelMeta
+from clip2mesh.data_management.dataset import CLIP2MESHDataset
 
 
 @hydra.main(config_path="../config", config_name="train")

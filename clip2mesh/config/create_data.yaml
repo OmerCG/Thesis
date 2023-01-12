@@ -1,12 +1,13 @@
-output_path: /home/nadav2/dev/data/CLIP2Shape/images/smplx_female_multiview # Path to save the images
-gender: female
+output_path: /home/nadav2/dev/data/CLIP2Shape/images/smpl_male_multiview # Path to save the images
+gender: male
 img_tag:
-model_type: smplx
+model_type: smpl
 with_face: False
-num_of_imgs: 20000
+num_of_imgs: 30000
+num_coeffs: 10
 sides: True
 # texture: #/home/nadav2/dev/repos/CLIP2Shape/Flame/flame2020/mesh.png  # FLAME texture
-texture: /home/nadav2/dev/repos/CLIP2Shape/SMPLX/textures/smplx_texture_m_alb.png  # SMPLX texture
+texture: #/home/nadav2/dev/repos/CLIP2Shape/SMPLX/textures/smplx_texture_m_alb.png  # SMPLX texture
 # texture:  # SMAL texture (keep empty for random texture)
 
 renderer:
@@ -17,9 +18,14 @@ renderer:
     img_size: [512, 512]
     tex_path: ${texture}
 
-    # SMPLX cam params
+    # # SMPLX cam params
+    # dist: 2.5
+    # elev: 15.0
+    # azim: 0.0
+
+    # SMPL cam params
     dist: 2.5
-    elev: 15.0
+    elev: 10.0
     azim: 0.0
 
     # # FLAME shape cam params
@@ -32,10 +38,10 @@ renderer:
     # elev: 0.0
     # azim: 0.0
 
-    # SMAL cam params
-    # dist: 3.8
+    # # SMAL cam params
+    # dist: 5.8
     # elev: 20.0
-    # azim: 0.0
+    # azim: -20.0
 
   # ------ Open3D ------
   # name: open3d

@@ -15,6 +15,10 @@ class SlidersApp:
         self.device = cfg.device
         self.texture = cfg.texture
 
+        self.num_coeffs = None
+        if "num_coeffs" in cfg:
+            self.num_coeffs = cfg.num_coeffs
+
         self.on_parameters = cfg.on_parameters
 
         assert cfg.model_type in ["smplx", "flame", "smal"], "Model type should be smplx, flame or smal"
@@ -36,7 +40,7 @@ class SlidersApp:
         self.gender = cfg.gender
         self.body_pose = torch.eye(3).expand(1, 21, 3, 3)
         self.with_face = cfg.with_face
-        self.model_kwargs = self.models_factory.get_default_params(cfg.with_face)
+        self.model_kwargs = self.models_factory.get_default_params(cfg.with_face, num_coeffs=self.num_coeffs)
         verts, faces, vt, ft = self.models_factory.get_model(**self.model_kwargs)
         renderer_kwargs = self.get_renderer_kwargs(verts, faces, vt, ft)
         self.renderer = self.models_factory.get_renderer(**renderer_kwargs)

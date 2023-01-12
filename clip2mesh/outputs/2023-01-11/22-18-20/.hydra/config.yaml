@@ -1,0 +1,19 @@
+output_path: /home/nadav2/dev/data/CLIP2Shape/images/smpl_male_multiview
+gender: male
+img_tag: null
+model_type: smpl
+with_face: false
+num_of_imgs: 30000
+num_coeffs: 10
+sides: true
+texture: null
+renderer:
+  name: pytorch3d
+  kwargs:
+    img_size:
+    - 512
+    - 512
+    tex_path: ${texture}
+    dist: 2.5
+    elev: 10.0
+    azim: 0.0

@@ -11,14 +11,17 @@ class DataCreator:
         self.sides: bool = cfg.sides
         self.img_tag: str = cfg.img_tag
         self.with_face: bool = cfg.with_face
+        self.num_coeffs: int = cfg.num_coeffs
         self.num_of_imgs: int = cfg.num_of_imgs
         self.output_path: Path = Path(cfg.output_path)
+        self.model_type: Literal["smpl", "smal", "smplx", "flame"] = cfg.model_type
         self.gender: Literal["male", "female", "neutral"] = cfg.gender
         self.renderer_type: Literal["pytorch3d", "open3d"] = cfg.renderer.name
+        self.get_smpl = True if self.model_type == "smpl" else False
 
         # utils
         self.utils: Utils = Utils()
-        self.models_factory: ModelsFactory = ModelsFactory(cfg.model_type)
+        self.models_factory: ModelsFactory = ModelsFactory(self.model_type)
         renderer_kwargs: Dict[str, Any] = self._get_renderer_kwargs(cfg)
         self._load_renderer(renderer_kwargs)
 
@@ -64,10 +67,15 @@ class DataCreator:
             img_name = self.img_tag if self.img_tag is not None else str(img_id)
 
             # get random 3DMM parameters
-            model_kwargs = self.models_factory.get_random_params(with_face=self.with_face)
+            model_kwargs = self.models_factory.get_random_params(with_face=self.with_face, num_coeffs=self.num_coeffs)
+
+            if self.get_smpl:
+                model_kwargs["get_smpl"] = True
 
             # extract verts, faces, vt, ft
-            verts, faces, vt, ft = self.models_factory.get_model(**model_kwargs, gender=self.gender)
+            verts, faces, vt, ft = self.models_factory.get_model(
+                **model_kwargs, gender=self.gender, num_coeffs=self.num_coeffs
+            )
 
             # render mesh and save image
             if self.renderer_type == "open3d":

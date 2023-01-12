@@ -15,9 +15,9 @@ def main(args):
 
     labels = utils.get_labels()
     if args.side:
-        files_generator = list(Path(args.imgs_dir).rglob("*front.png"))
+        files_generator = sorted(list(Path(args.imgs_dir).rglob("*front.png")), key=lambda x: int(x.stem.split("_")[0]))
     else:
-        files_generator = list(Path(args.imgs_dir).rglob("*.png"))
+        files_generator = sorted(list(Path(args.imgs_dir).rglob("*.png")), key=lambda x: int(x.stem.split("_")[0]))
     dir_length = len(files_generator)
     encoded_labels = {label[0]: clip.tokenize(label).to(args.device) for label in labels}
 
@@ -28,11 +28,15 @@ def main(args):
 
         encoded_frontal_image = preprocess(Image.open(file.as_posix())).unsqueeze(0).to(args.device)
         if args.side:
-            encoded_side_image = (
-                preprocess(Image.open((file.parent / file.name.replace("front", "side")).as_posix()))
-                .unsqueeze(0)
-                .to(args.device)
-            )
+            try:
+                encoded_side_image = (
+                    preprocess(Image.open((file.parent / file.name.replace("front", "side")).as_posix()))
+                    .unsqueeze(0)
+                    .to(args.device)
+                )
+            except FileNotFoundError:
+                print(f"Side image not found for {file.name}")
+                continue
 
         with torch.no_grad():
 

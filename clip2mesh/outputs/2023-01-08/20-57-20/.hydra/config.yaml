@@ -1,0 +1,18 @@
+output_path: /home/nadav2/dev/data/CLIP2Shape/images/smal_multiview
+gender: neutral
+img_tag: null
+model_type: smal
+with_face: false
+num_of_imgs: 20000
+sides: true
+texture: null
+renderer:
+  name: pytorch3d
+  kwargs:
+    img_size:
+    - 512
+    - 512
+    tex_path: ${texture}
+    dist: 5.8
+    elev: 20.0
+    azim: 0.0
