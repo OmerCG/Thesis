@@ -1,15 +1,17 @@
-descriptors_dir: /home/nadav2/dev/data/CLIP2Shape/outs/vertices_heatmap/optimizations/smplx_multiview
+descriptors_dir: /home/nadav2/dev/data/CLIP2Shape/outs/vertices_heatmap/optimizations/compared_to_inv/smplx_female_multiview_diff_coord
 corr_threshold: 0.7
 model_type: smplx
-gender: male
+gender: female
 iou_threshold: 0.3
 optimize_feature: betas
 color_map: YlOrRd
-color_threshold: 0.6
+effect_threshold: 0.8
+method: diff_coords
+compare_to_default_mesh: False
 
 
 renderer_kwargs:
-    img_size: [512, 512]
+    img_size: [1024, 1024]
     tex_path:
     texture_optimization: True
 

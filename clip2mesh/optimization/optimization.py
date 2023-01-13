@@ -151,7 +151,7 @@ class Optimization:
                 else:
                     loss_fn = CLIPLoss(inverse=False)
                 video_recorder = self.record_video(self.fps, output_dir, f"{word_desciptor}_{phase}")
-                model = Model(slid).to(self.device)
+                model = Model().to(self.device)
                 optimizer = torch.optim.Adam(model.parameters(), lr=self.lr)
                 pbar = tqdm(range(self.total_steps))
                 for _ in pbar:

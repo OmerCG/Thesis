@@ -2,26 +2,32 @@ import cv2
 import torch
 import hydra
 import shutil
+import trimesh
 import numpy as np
 import pandas as pd
+import networkx as nx
 import matplotlib.pyplot as plt
 from tqdm import tqdm
 from pathlib import Path
-from typing import List
 from omegaconf import DictConfig
+from itertools import combinations
+from typing import List, Literal, Tuple
 from clip2mesh.utils import Utils, Pytorch3dRenderer, ModelsFactory
 
 
 class VertexHeatmap:
     def __init__(self, args):
 
-        self.utils = Utils()
-        self.descriptors_dir = Path(args.descriptors_dir)
-        self.iou_threshold = args.iou_threshold
-        self.corr_threshold = args.corr_threshold
-        self.gender = args.gender
-        self.color_threshold = args.color_threshold
-        self.optimize_feature = args.optimize_feature
+        self.utils: Utils = Utils()
+        self.descriptors_dir: Path = Path(args.descriptors_dir)
+        self.iou_threshold: float = args.iou_threshold
+        self.corr_threshold: float = args.corr_threshold
+        self.model_type: Literal["flame", "smplx", "smpl", "smal"] = args.model_type
+        self.compare_to_default_mesh: bool = args.compare_to_default_mesh
+        self.gender: Literal["male", "female", "neutral"] = args.gender
+        self.method: Literal["L2", "diff_coords"] = args.method
+        self.effect_threshold: float = args.effect_threshold
+        self.optimize_feature: Literal["betas", "shape_params", "expression_params"] = args.optimize_feature
         self.color_map = plt.get_cmap(args.color_map)
         self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
         self.view_angles = range(0, 360, 45)
@@ -29,6 +35,7 @@ class VertexHeatmap:
 
         self.num_rows, self.num_cols = self.get_collage_shape()
 
+        self._assertions()
         self._load_renderer(args.renderer_kwargs)
         self._load_def_mesh()
         self._initialize_df()
@@ -37,7 +44,22 @@ class VertexHeatmap:
         self.renderer = Pytorch3dRenderer(**kwargs)
 
     def _initialize_df(self):
-        self.df = pd.DataFrame(columns=["descriptor", "effect", "sorted_indices", "total_effective_vertices"])
+        self.df = pd.DataFrame(columns=["descriptor", "effect", "effective_vertices"])
+
+    def _assertions(self):
+        assert self.method in ["L2", "diff_coords"], "method must be either L2 or diff_coords"
+        assert self.model_type in [
+            "flame",
+            "smplx",
+            "smpl",
+            "smal",
+        ], "model_type must be either flame, smplx, smpl or smal"
+        assert self.optimize_feature in [
+            "betas",
+            "shape_params",
+            "expression_params",
+        ], "optimize_feature must be either betas, shape_params or expression_params"
+        assert self.gender in ["male", "female", "neutral"], "gender must be either male, female or neutral"
 
     def _load_def_mesh(self):
         verts, faces, vt, ft = self.models_factory.get_model()
@@ -49,6 +71,12 @@ class VertexHeatmap:
             self.def_faces = self.def_faces.unsqueeze(0)
         self.def_vt = torch.tensor(vt).to(self.device)
         self.def_ft = torch.tensor(ft).to(self.device)
+        if self.method == "diff_coords":
+            if verts.shape.__len__() == 3:
+                verts = verts[0]
+            if faces.shape.__len__() == 3:
+                faces = faces[0]
+            self.def_diff_coords = self.get_verts_diff_coords(verts, trimesh.Trimesh(vertices=verts, faces=faces))
 
     @staticmethod
     def adjust_rendered_img(img: torch.Tensor):
@@ -76,45 +104,101 @@ class VertexHeatmap:
         scale = np.linspace(0, 1, 11)
         fig = plt.figure(figsize=(10, 1))
         plt.imshow([scale], cmap=self.color_map, aspect=0.1, extent=[0, 1, 0, 1])
-        plt.axvline(x=self.color_threshold, color="black", linewidth=1)
+        plt.axvline(x=self.effect_threshold, color="black", linewidth=1)
         plt.axis("off")
         # annotate threshold
         plt.annotate(
-            f"threshold: {self.color_threshold}",
-            xy=(self.color_threshold, 0.5),
-            xytext=(self.color_threshold + 0.1, 0.5),
+            f"threshold: {self.effect_threshold}",
+            xy=(self.effect_threshold, 0.5),
+            xytext=(self.effect_threshold + 0.1, 0.5),
             arrowprops=dict(facecolor="black", shrink=0.05),
         )
         fig.savefig(path)
 
     def get_model(self, shape_vec):
         model_kwargs = {self.optimize_feature: shape_vec, "gender": self.gender}
-        verts, _, _, _ = self.models_factory.get_model(**model_kwargs)
-        return verts
+        verts, faces, _, _ = self.models_factory.get_model(**model_kwargs)
+        return verts, faces
+
+    def get_verts_diff_coords(self, verts: np.ndarray, mesh: trimesh.Trimesh) -> List[torch.Tensor]:
+        g = nx.from_edgelist(mesh.edges_unique)
+        one_ring = [list(g[i].keys()) for i in range(len(mesh.vertices))]
+        verts_diff_coords = np.zeros_like(verts)
+        for i, v in enumerate(verts):
+            verts_diff_coords[i] = v - verts[one_ring[i]].mean()
+        return verts_diff_coords
+
+    def create_ious_csv(self, path):
+        df = self.df
+        df["effective_vertices"] = df["effective_vertices"].apply(lambda x: np.array(x))
+        combs = list(combinations(df["descriptor"].values, 2))
+        ious_df = pd.DataFrame()
+        for comb in combs:
+            comb_df = df[df["descriptor"].isin(comb)]
+            comb_df = comb_df.sort_values("descriptor")
+            iou = len(
+                np.intersect1d(comb_df["effective_vertices"].values[0], comb_df["effective_vertices"].values[1])
+            ) / len(np.union1d(comb_df["effective_vertices"].values[0], comb_df["effective_vertices"].values[1]))
+            ious_df = pd.concat([ious_df, pd.DataFrame((comb[0], comb[1], iou)).T])
+        columns = ("descriptor_1", "descriptor_2", "iou")
+        ious_df.columns = columns
+        ious_df = ious_df.sort_values("iou", ascending=False)
+        ious_df.to_csv(path, index=False)
+
+    def get_verts_faces_by_model_type(self, verts, faces):
+        if self.model_type in ["smpl", "smplx"]:
+            return verts, faces
+        return verts[0], faces
+
+    def get_diffs(
+        self, regular_features: Tuple[np.ndarray, np.ndarray], to_compare_features: Tuple[np.ndarray, np.ndarray]
+    ) -> np.ndarray:
+        verts_regular, faces_regular = self.get_verts_faces_by_model_type(*regular_features)
+
+        if self.method == "L2":
+            diffs = np.linalg.norm(verts_regular - to_compare_features[0], axis=-1)
+            if diffs.ndim == 2:
+                diffs = diffs.squeeze()
+        else:
+            diff_coords_regular = self.get_verts_diff_coords(
+                verts_regular, trimesh.Trimesh(vertices=verts_regular, faces=faces_regular)
+            )
+            if not self.compare_to_default_mesh:
+                to_compare_features = self.get_verts_faces_by_model_type(*to_compare_features)
+                diff_coords_to_compare = self.get_verts_diff_coords(
+                    to_compare_features[0],
+                    trimesh.Trimesh(vertices=to_compare_features[0], faces=to_compare_features[1]),
+                )
+                diffs = np.linalg.norm(diff_coords_regular - diff_coords_to_compare, axis=-1)
+            diffs = np.linalg.norm(self.def_diff_coords - diff_coords_regular, axis=-1)
+        return diffs
 
     def __call__(self):
         descriptors_generator = list(self.descriptors_dir.iterdir())
-        for descriptor in descriptors_generator:
+        for descriptor in tqdm(descriptors_generator, desc="descriptors", total=len(descriptors_generator)):
             regular = torch.tensor(np.load(descriptor / f"{descriptor.name}.npy")).float()
-            inverse = torch.tensor(np.load(descriptor / f"{descriptor.name}_inverse.npy")).float()
             if regular.dim() == 1:
                 regular = regular.unsqueeze(0)
-            if inverse.dim() == 1:
-                inverse = inverse.unsqueeze(0)
-            regular_verts = self.get_model(regular)
-            inverse_verts = self.get_model(inverse)
+            regular_verts, regular_faces = self.get_model(regular)
 
-            # get interpolation of color from blue to red
-            # distances = np.linalg.norm(regular_verts - self.def_verts.cpu().squeeze().numpy(), axis=-1)
-            distances = np.linalg.norm(regular_verts - inverse_verts, axis=-1)
-            if distances.ndim == 2:
-                distances = distances.squeeze()
-            sorted_indices = np.argsort(distances)
+            if self.compare_to_default_mesh:
+                to_compare_verts, to_compare_faces = self.def_verts.cpu().numpy(), self.def_faces.cpu().numpy()
+                if to_compare_verts.ndim == 2:
+                    to_compare_verts = to_compare_verts.unsqueeze(0)
+                if to_compare_faces.ndim == 2:
+                    to_compare_faces = to_compare_faces.unsqueeze(0)
+            else:
+                inverse = torch.tensor(np.load(descriptor / f"{descriptor.name}_inverse.npy")).float()
+                if inverse.dim() == 1:
+                    inverse = inverse.unsqueeze(0)
+                to_compare_verts, to_compare_faces = self.get_model(inverse)
 
-            normalized_distances = distances / distances.max()
+            diffs = self.get_diffs((regular_verts, regular_faces), (to_compare_verts, to_compare_faces))
 
-            vertex_colors = self.color_map(normalized_distances)[:, :3]
-            total_verts_above_th = (vertex_colors > self.color_map(self.color_threshold)[:3]).all(axis=-1).sum()
+            diffs = diffs / diffs.max()
+
+            vertex_colors = self.color_map(diffs)[:, :3]
+            effective_indices = np.where(diffs > self.effect_threshold)[0]
 
             vertex_colors = torch.tensor(vertex_colors).float().to(self.device)
 
@@ -137,13 +221,13 @@ class VertexHeatmap:
             collage = self.get_collage(rend_imgs)
             collage = cv2.cvtColor(collage, cv2.COLOR_RGB2BGR)
             cv2.imwrite(str(descriptor / f"vertex_heatmap.png"), collage)
-            temp_df = pd.DataFrame((descriptor.name, distances.sum(), sorted_indices.tolist(), total_verts_above_th)).T
+            temp_df = pd.DataFrame((descriptor.name, diffs.sum(), effective_indices.tolist())).T
             temp_df.columns = self.df.columns
             self.df = pd.concat([self.df, temp_df])
 
         vertex_heatmaps_dir = self.descriptors_dir / "vertex_heatmaps"
         vertex_heatmaps_dir.mkdir(exist_ok=True)
-        self.df.to_csv(vertex_heatmaps_dir / "vertex_heatmaps.csv", index=False)
+        self.create_ious_csv(vertex_heatmaps_dir / "ious.csv")
         for vertex_heatmap_file in self.descriptors_dir.rglob("vertex_heatmap.png"):
             shutil.copy(vertex_heatmap_file, vertex_heatmaps_dir / (vertex_heatmap_file.parent.name + ".png"))
         self.save_color_bar_with_threshold(vertex_heatmaps_dir / "color_bar_w_threshold.png")

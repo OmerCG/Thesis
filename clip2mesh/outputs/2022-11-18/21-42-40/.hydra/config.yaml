@@ -1,7 +1,0 @@
-output_path: /home/nadav2/dev/data/Thesis/Repositories/SMPLX_CLIP/images/flame_textured_exp
-gender: neutral
-rest_pose: false
-img_tag: null
-texture: /home/nadav2/dev/data/Thesis/Repositories/SMPLX_CLIP/Flame/flame2020/mesh.png
-model_type: flame
-with_face: true

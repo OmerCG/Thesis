@@ -1,0 +1,23 @@
+images_dir: /home/nadav2/dev/data/CLIP2Shape/images/smplx_py3d_female
+out_path: /home/nadav2/dev/data/CLIP2Shape/outs/clustering_images/words_jsons
+descriptors:
+  - "fat"
+  - "thin"
+  - "hourglass"
+  - "short"
+  - "long legs"
+  - "narrow waist"
+  - "skinny"
+  - "tall"
+  - "broad shoulders"
+  - "pear shaped"
+  - "average"
+  - "big"
+  - "curvy"
+  - "lean"
+  - "proportioned"
+  - "sexy"
+  - "fit"
+  - "heavyset"
+  - "petite"
+  - "small"

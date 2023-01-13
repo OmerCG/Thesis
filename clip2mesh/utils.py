@@ -386,11 +386,11 @@ class Pytorch3dRenderer:
         rotation_matrix = Rotation.from_euler(axis, degrees, degrees=True).as_matrix()
         axis = 0 if verts.dim() == 2 else 1
         mesh_center = verts.mean(axis=axis)
-        mesh_center = torch.tensor(mesh_center.detach().clone()).to(verts.device).float()
+        mesh_center_cloned = torch.tensor(mesh_center.clone().detach()).to(verts.device).float()
         rotation_matrix = torch.tensor(rotation_matrix).to(verts.device).float()
-        verts = verts - mesh_center
+        verts = verts - mesh_center_cloned
         verts = verts @ rotation_matrix
-        verts = verts + mesh_center
+        verts = verts + mesh_center_cloned
         if convert_back_to_numpy:
             verts = verts.cpu().numpy()
         return verts
@@ -716,19 +716,31 @@ class Utils:
 
     @staticmethod
     def get_labels() -> List[List[str]]:
-        labels = [["big cat"], ["cow"], ["donkey"], ["hippo"], ["dog"]]  # SMAL animals
+        # labels = [["big cat"], ["cow"], ["donkey"], ["hippo"], ["dog"]]  # SMAL animals
+        labels = [
+            ["hourglass"],
+            ["lean"],
+            ["thin"],
+            ["narrow waist"],
+            ["average"],
+            ["long legs"],
+            ["heavyset"],
+            ["small"],
+            ["pear shaped"],
+            ["broad shoulders"],
+            ["skinny"],
+        ]  # SMPLX body
         # labels = [
-        #     ["fat"],
-        #     ["narrow waist"],
-        #     ["hourglass"],
-        #     ["tall"],
-        #     ["pear shaped"],
-        # ]  # SMPLX body
-        # labels = [
-        #     ["happy"],
-        #     ["angry"],
-        #     ["opened mouth"],
+        #     ["sad"],
+        #     ["bored"],
+        #     ["disgusted"],
         #     ["raise eyebrows"],
+        #     ["angry"],
+        #     ["smile"],
+        #     ["happy"],
+        #     ["worried"],
+        #     ["afraid"],
+        #     ["open mouth"],
         # ]  # FLAME expression
         # labels = [
         #     ["fat"],
@@ -1024,7 +1036,7 @@ class ModelsFactory:
 
         params = {}
 
-        if self.model_type == "smplx":
+        if self.model_type == "smplx" or self.model_type == "smpl":
             params["body_pose"] = self.utils.get_default_parameters(body_pose=True)
             params["betas"] = self.utils.get_default_parameters(num_coeffs=num_coeffs)
             expression = None

@@ -1,0 +1,34 @@
+out_path: /home/nadav2/dev/data/CLIP2Shape/outs/performance_evaluation/smplx_female
+model_path: /home/nadav2/dev/repos/Thesis/end2end_pipeline/smplx_female_end2end.ckpt
+min_value: 15.0
+max_value: 30.0
+effect_threshold: 0.5
+color_map: YlOrRd
+
+optimize_feature: betas
+model_type: smplx
+
+renderer_kwargs:
+    img_size: [1024, 1024]
+    tex_path:
+    texture_optimization: True
+
+    # SMPLX cam params
+    dist: 2.4
+    elev: 8.6
+    azim: 2.1
+
+    # # FLAME shape cam params
+    # dist: 0.8
+    # elev: 0.0
+    # azim: 0.0
+
+    # # FLAME expression cam params
+    # dist: 0.5
+    # elev: 0.0
+    # azim: 0.0
+
+    # SMAL cam params
+    # dist: 3.8
+    # elev: 20.0
+    # azim: 0.0

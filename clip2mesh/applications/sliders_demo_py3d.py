@@ -17,11 +17,11 @@ class SlidersApp:
         self.img_label: str = None
         self.device: str = cfg.device
         self.texture: str = cfg.texture
-        # self.num_coeffs: int = cfg.num_coef
-
+        if "num_coeffs" in cfg:
+            self.num_coeffs: int = cfg.num_coeffs
         self.on_parameters: bool = cfg.on_parameters
 
-        assert cfg.model_type in ["smplx", "flame", "smal"], "Model type should be smplx, flame or smal"
+        assert cfg.model_type in ["smplx", "flame", "smal", "smpl"], "Model type should be smplx, smpl, flame or smal"
         self.model_type = cfg.model_type
 
         self.outpath = None
@@ -40,6 +40,10 @@ class SlidersApp:
         self.gender = cfg.gender
         self.with_face = cfg.with_face
         self.model_kwargs = self.models_factory.get_default_params(cfg.with_face)
+        if self.model_type == "smpl":
+            self.model_kwargs["get_smpl"] = True
+        if hasattr(self, "num_coeffs"):
+            self.model_kwargs["num_coeffs"] = self.num_coeffs
         self.verts, self.faces, self.vt, self.ft = self.models_factory.get_model(**self.model_kwargs)
         self.renderer_kwargs = {"py3d": True}
         self.renderer_kwargs.update(cfg.renderer_kwargs)
@@ -160,12 +164,10 @@ class SlidersApp:
             # print(self.input_for_model)  # for debug
             with torch.no_grad():
                 out = self.model(self.input_for_model.to(self.device))
-                if self.model_type == "smplx":
+                if self.model_type == "smplx" or self.model_type == "smpl":
                     betas = out.cpu()
-                    expression = torch.zeros(1, 10)
-                    body_pose = torch.eye(3).expand(1, 21, 3, 3)
                     self.verts, self.faces, self.vt, self.ft = self.utils.get_smplx_model(
-                        betas=betas, body_pose=body_pose, expression=expression, gender=self.gender
+                        betas=betas, gender=self.gender
                     )
                 elif self.model_type == "flame":
                     if self.with_face:

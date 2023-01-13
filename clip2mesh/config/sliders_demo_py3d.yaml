@@ -6,12 +6,12 @@ demo_kwargs:
   # General cfg
   out_dir: ${data_path}/outs/objs  # for caputring obj
   # out_dir: ${data_path}/outs/images_from_demo  # for caputring png
-  gender: female
+  gender: male
   device: cuda
 
   # # FLAME - expression
   # texture: #${repo_path}/Flame/flame2020/mesh.png
-  # model_path: ${repo_path}/pre_production/super_data_flame_epxression.ckpt
+  # model_path: ${repo_path}/pre_production/flame_exp_e2e_pipeline.ckpt
   # model_type: flame
   # with_face: True
   # on_parameters: False
@@ -23,10 +23,17 @@ demo_kwargs:
   # with_face: False
   # on_parameters: False
 
-  # # SMPLX
+  # SMPLX
+  texture: #${repo_path}/SMPLX/textures/smplx_texture_m_alb.png
+  model_path: ${repo_path}/end2end_pipeline/smplx_male_e2e_pipeline.ckpt
+  model_type: smplx
+  with_face: False
+  on_parameters: False
+
+  # # SMPL
   # texture: #${repo_path}/SMPLX/textures/smplx_texture_m_alb.png
-  # model_path: ${repo_path}/pre_production/smplx_female_uniform.ckpt
-  # model_type: smplx
+  # model_path: ${repo_path}/pre_production/smpl_multiview.ckpt
+  # model_type: smpl
   # with_face: False
   # on_parameters: False
 
@@ -37,13 +44,13 @@ demo_kwargs:
   # with_face: False
   # on_parameters: False
 
-  # GENERIC
-  with_face: False
-  model_type: smplx
-  texture: #${repo_path}/Flame/flame2020/mesh.png
-  model_path: # keep empty
-  on_parameters: True
-  num_coeffs: 50
+  # # GENERIC
+  # with_face: False
+  # model_type: smplx
+  # texture: #${repo_path}/Flame/flame2020/mesh.png
+  # model_path: # keep empty
+  # on_parameters: True
+  # num_coeffs: 50
 
   renderer_kwargs:
     img_size: [512, 512]
