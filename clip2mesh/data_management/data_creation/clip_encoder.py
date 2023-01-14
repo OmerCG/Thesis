@@ -2,37 +2,39 @@ import clip
 import json
 import torch
 import argparse
-from tqdm import tqdm
 from PIL import Image
+from tqdm import tqdm
+from typing import List
 from pathlib import Path
 from clip2mesh.utils import Utils
 
 
-def main(args):
+def generate_clip_scores(device: str, side: bool, imgs_dir: str, labels: List[List[str]] = None):
 
     utils = Utils()
-    model, preprocess = clip.load("ViT-B/32", device=args.device)
+    model, preprocess = clip.load("ViT-B/32", device=device)
 
-    labels = utils.get_labels()
-    if args.side:
-        files_generator = sorted(list(Path(args.imgs_dir).rglob("*front.png")), key=lambda x: int(x.stem.split("_")[0]))
+    if labels is None:
+        labels = utils.get_labels()
+    if side:
+        files_generator = sorted(list(Path(imgs_dir).rglob("*front.png")), key=lambda x: int(x.stem.split("_")[0]))
     else:
-        files_generator = sorted(list(Path(args.imgs_dir).rglob("*.png")), key=lambda x: int(x.stem.split("_")[0]))
+        files_generator = sorted(list(Path(imgs_dir).rglob("*.png")), key=lambda x: int(x.stem.split("_")[0]))
     dir_length = len(files_generator)
-    encoded_labels = {label[0]: clip.tokenize(label).to(args.device) for label in labels}
+    encoded_labels = {label[0]: clip.tokenize(label).to(device) for label in labels}
 
     for file in tqdm(files_generator, desc="generating clip scores", total=dir_length):
 
         json_path = file.parent / f"{file.stem.split('_')[0]}_labels.json"
         json_data = {}
 
-        encoded_frontal_image = preprocess(Image.open(file.as_posix())).unsqueeze(0).to(args.device)
-        if args.side:
+        encoded_frontal_image = preprocess(Image.open(file.as_posix())).unsqueeze(0).to(device)
+        if side:
             try:
                 encoded_side_image = (
                     preprocess(Image.open((file.parent / file.name.replace("front", "side")).as_posix()))
                     .unsqueeze(0)
-                    .to(args.device)
+                    .to(device)
                 )
             except FileNotFoundError:
                 print(f"Side image not found for {file.name}")
@@ -43,7 +45,7 @@ def main(args):
             # get the mean value of the front and side images for each label
             for label, encoded_label in encoded_labels.items():
                 front_score = model(encoded_frontal_image, encoded_label)[0].cpu().numpy()
-                if args.side:
+                if side:
                     side_score = model(encoded_side_image, encoded_label)[0].cpu().numpy()
                     json_data[label] = ((front_score + side_score) / 2).tolist()
                 else:
@@ -61,6 +63,10 @@ def parse_args():
     return parser.parse_args()
 
 
+def main(imgs_dir: str, device: str, side: bool):
+    generate_clip_scores(device, side, imgs_dir)
+
+
 if __name__ == "__main__":
-    args = parse_args()
-    main(args)
+    kwargs = parse_args()
+    main(**kwargs)

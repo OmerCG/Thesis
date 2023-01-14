@@ -86,6 +86,7 @@ class EvaluatePerformance:
 
     def evaluate(self):
         effected_vertices = None
+        shared_vertices = []
         for label_idx, descriptor in tqdm(enumerate(self.labels), total=len(self.labels), desc="Evaluating"):
 
             temp_input = self.default_input.clone()
@@ -132,11 +133,19 @@ class EvaluatePerformance:
                 effected_vertices = effective_indices
             else:
                 effected_vertices = np.union1d(effected_vertices, effective_indices)
+
+            shared_vertices.append(effective_indices)
             cv2.imwrite((self.out_path / f"{descriptor[0]}.png").as_posix(), collage)
 
         iou = len(effected_vertices) / len(self.total_possible_idxs)
-        self.logger.info(f"IOU: {iou}")
-        json_data = {"iou": iou, "labels": self.labels, "effect_threshold": self.effect_threshold}
+        overlap = 1 - (effected_vertices.shape[0] / np.concatenate(shared_vertices).shape[0])
+        self.logger.info(f"IOU: {iou} | Overlap: {overlap}")
+        json_data = {
+            "iou": iou,
+            "labels": self.labels,
+            "effect_threshold": self.effect_threshold,
+            "overlap": overlap,
+        }
         with open(self.out_path / "descriptors.json", "w") as f:
             json.dump(json_data, f)
 

@@ -47,86 +47,153 @@ class ChoosingDescriptors:
         return len(unique_descriptors)
 
     def initial_filter(
-        self, df_path: str, descriptors_groups_json: str, max_descriptors_per_cluster: int = 6
+        self,
+        df_path: str,
+        descriptors_groups_json: str,
+        max_descriptors_per_cluster: int = 6,
+        min_descriptors_overall: int = 1,
     ) -> Dict[int, Dict[str, float]]:
+
+        # initializations
         df = pd.read_csv(df_path)
         descriptors_groups = json.load(open(descriptors_groups_json, "r"))
-        if self.verbose:
-            self.logger.info(f"Total number of descriptors to choose from: {self.get_number_of_unique_descriptors(df)}")
-            self.logger.info(f"Total number of clusters: {len(descriptors_groups)}")
+        total_descriptors = self.get_number_of_unique_descriptors(df)
         finalists_descriptors = {}
+        all_possible_descriptors = {}
+
+        # create a dictionary of all possible descriptors and their iou in case this function will return a lower number of descriptors than the minimum
         for iou_group, descriptors in descriptors_groups.items():
+            all_possible_descriptors[iou_group] = {}
+            for descriptor in descriptors:
+                descriptor_iou = df[(df["descriptor_1"] == descriptor) | (df["descriptor_2"] == descriptor)][
+                    "iou"
+                ].mean()
+                all_possible_descriptors[iou_group][descriptor] = descriptor_iou
+
+        # check if there are enough descriptors
+        if total_descriptors < min_descriptors_overall:
+            if self.verbose:
+                self.logger.info(f"Total number of descriptors is smaller than {min_descriptors_overall}")
+            return None, all_possible_descriptors
+
+        # print some info
+        if self.verbose:
+            self.logger.info(f"Total number of descriptors to choose from: {total_descriptors}")
+            self.logger.info(f"Total number of clusters: {len(descriptors_groups)}")
+
+        # iterate over clusters
+        for iou_group, descriptors in descriptors_groups.items():
+
+            # check if there are enough descriptors in the cluster
+            # if not, return the single descriptor
             if len(descriptors) == 1:
                 descriptor_iou = df[
                     (df["descriptor_1"] == second_descriptor) | (df["descriptor_2"] == second_descriptor)
                 ]["iou"].mean()
                 finalists_descriptors[iou_group] = {descriptors[0]: descriptor_iou}
+
+            # if there are enough descriptors in the cluster
             else:
+
+                # filter the dataframe to only include the descriptors in the cluster
                 group_df = df[df["descriptor_1"].isin(descriptors) & df["descriptor_2"].isin(descriptors)]
                 group_df = group_df.sort_values("iou", ascending=False)
                 group_df["group"] = group_df["iou"].apply(lambda x: 1 if x > 0.7 else 0)
                 final_candidates = {}
+
+                # iterate over the groups
                 for group_idx in group_df["group"].unique():
+
                     chosed_descriptors = {}
+
+                    # iterate over the rows in the group
                     for _, row in group_df[group_df["group"] == group_idx].iterrows():
+
                         if self.verbose:
                             print(f"*" * 50)
                         if self.verbose:
                             self.logger.info(f"choosing between: {row['descriptor_1']} | {row['descriptor_2']}")
+
+                        # define the descriptors
                         first_descriptor = row["descriptor_1"]
                         second_descriptor = row["descriptor_2"]
 
+                        # choose one of the descriptors
                         chosen_descriptor, chosen_descriptor_iou = self.choose_between_2_descriptors(
                             group_df, first_descriptor, second_descriptor
                         )
+
+                        # if the chosen descriptor is not in the chosed_descriptors dict, add it
                         if chosen_descriptor not in chosed_descriptors.keys():
+
+                            # if the dict is empty, add the descriptor
                             if chosed_descriptors == {}:
                                 if self.verbose:
                                     self.logger.info(f"first descriptor chosen -> {chosen_descriptor}")
                                 chosed_descriptors[chosen_descriptor] = chosen_descriptor_iou
+
+                            # if the dict is not empty, check if the chosen descriptor is better than the others
                             else:
+
                                 if self.verbose:
                                     self.logger.info(f"iterating over chosed descriptors -> {chosed_descriptors}")
+
+                                # iterate over the chosed descriptors
                                 add_descriptor = False
                                 for descriptor in chosed_descriptors.keys():
+
                                     if self.verbose:
                                         self.logger.info(f"choosing between: {descriptor} | {chosen_descriptor}")
+
+                                    # choose one of the descriptors
                                     sub_chosen_descriptor, _ = self.choose_between_2_descriptors(
                                         group_df, descriptor, chosen_descriptor
                                     )
+
+                                    # if the chosen descriptor is not the same as the current one, it means that the current descriptor is worse, hence break
                                     if sub_chosen_descriptor != chosen_descriptor:
                                         if self.verbose:
                                             self.logger.info(
                                                 f"{chosen_descriptor} has higher iou than {descriptor}, hence {descriptor} is chosen"
                                             )
                                         break
+
+                                    # if the chosen descriptor is not the same as the current one, it means that the current descriptor is better, hence add the chosen descriptor
                                     else:
                                         add_descriptor = True
+
+                                # if the chosen descriptor is better than all the others, add it
                                 if add_descriptor:
+
                                     if self.verbose:
                                         self.logger.info(
                                             f"{chosen_descriptor} has lower iou than all chosed descriptors, hence {chosen_descriptor} is chosen"
                                         )
+
                                     chosed_descriptors[chosen_descriptor] = chosen_descriptor_iou
 
                         if self.verbose:
                             self.logger.info(chosed_descriptors)
 
-                    # sorted_chosed_descriptors = sorted(chosed_descriptors, key=chosed_descriptors.get, reverse=False)
+                    # add the chosen descriptors to the final candidates
                     for descriptor, iou in chosed_descriptors.items():
                         if descriptor not in final_candidates.keys():
                             final_candidates[descriptor] = iou
 
                 if self.verbose:
                     print(f"*" * 50)
+
+                # sort the final candidates by iou
                 possible_options = df["descriptor_1"].unique().tolist()
                 possible_options = possible_options + [
                     item for item in df["descriptor_2"].unique() if item not in possible_options
                 ]
+
                 if self.verbose:
                     self.logger.info(f"possible_options: {possible_options} | total {len(possible_options)}")
                 if self.verbose:
                     self.logger.info(f"final candidates: {final_candidates} | total {len(final_candidates)}")
+
                 sorted_descriptors_by_iou_ascending = sorted(final_candidates, key=final_candidates.get, reverse=False)[
                     :max_descriptors_per_cluster
                 ]
@@ -135,7 +202,7 @@ class ChoosingDescriptors:
                     for descriptor_name in sorted_descriptors_by_iou_ascending
                 }
 
-        return finalists_descriptors
+        return finalists_descriptors, all_possible_descriptors
 
     def reduce_descriptor(self, dict_of_desctiptors: Dict[str, Dict[str, float]]) -> Dict[str, Dict[str, float]]:
         flattened_dict = self.flatten_dict_of_dicts(dict_of_desctiptors)
@@ -171,13 +238,32 @@ class ChoosingDescriptors:
         self,
         df_path: str,
         descriptors_groups_json: str,
+        min_descriptors_overall: int = 6,
         max_descriptors_per_cluster: int = 6,
         max_descriptors_overall: int = 12,
     ):
-        initial_filter = self.initial_filter(df_path, descriptors_groups_json, max_descriptors_per_cluster)
-        num_of_descriptors = 0
-        for descriptors in initial_filter.values():
-            num_of_descriptors += len(descriptors)
+        # get the initial filtered descriptors
+        initial_filter, all_possible_descriptors = self.initial_filter(
+            df_path, descriptors_groups_json, max_descriptors_per_cluster, min_descriptors_overall
+        )
+
+        # get the number of descriptors chosen
+        if initial_filter is not None:
+            num_of_descriptors = 0
+            for descriptors in initial_filter.values():
+                num_of_descriptors += len(descriptors)
+        else:
+            num_of_descriptors = 0
+
+        # if the number of descriptors chosen is less than the minimum, choose the best k descriptors
+        if num_of_descriptors < min_descriptors_overall:
+            if self.verbose:
+                self.logger.info(f"Too few descriptors, choosing the best {min_descriptors_overall} descriptors")
+            all_possible_descriptors = self.flatten_dict_of_dicts(all_possible_descriptors)
+            return sorted(all_possible_descriptors, key=all_possible_descriptors.get, reverse=False)[
+                :min_descriptors_overall
+            ], len(all_possible_descriptors.keys())
+
         if self.verbose:
             print()
             total_number_of_descriptors = self.get_number_of_unique_descriptors(df_path)
@@ -185,6 +271,8 @@ class ChoosingDescriptors:
             self.logger.info(
                 f"After filtering, there are {num_of_descriptors} descriptors left out of {total_number_of_descriptors} descriptors"
             )
+
+        # if the number of descriptors chosen is more than the maximum, start reducing the number of descriptors
         if num_of_descriptors > max_descriptors_overall:
             if self.verbose:
                 self.logger.info(f"Too many descriptors, choosing only {max_descriptors_overall} descriptors")
@@ -192,14 +280,14 @@ class ChoosingDescriptors:
                 initial_filter = self.reduce_descriptor(initial_filter)
                 num_of_descriptors -= 1
 
-        return initial_filter
-
-
-df_path = "/home/nadav2/dev/data/CLIP2Shape/outs/vertices_heatmap/optimizations/compared_to_inv/smplx_female_multiview_diff_coord/vertex_heatmaps/ious.csv"
-descriptors_groups_json = "/home/nadav2/dev/data/CLIP2Shape/outs/clustering_images/words_jsons/smplx_female.json"
+        return self.flatten_dict_of_dicts(initial_filter), num_of_descriptors
 
 
 if __name__ == "__main__":
+    df_path = "/home/nadav2/dev/data/CLIP2Shape/outs/vertices_heatmap/optimizations/compared_to_inv/smplx_female_multiview_diff_coord/vertex_heatmaps/ious.csv"
+    descriptors_groups_json = "/home/nadav2/dev/data/CLIP2Shape/outs/clustering_images/words_jsons/smplx_female.json"
     choosing_descriptors = ChoosingDescriptors(verbose=True)
-    finalists_descriptors = choosing_descriptors.choose(df_path, descriptors_groups_json, max_descriptors_overall=12)
-    print(finalists_descriptors)
+    finalists_descriptors, num_of_descriptors = choosing_descriptors.choose(
+        df_path, descriptors_groups_json, max_descriptors_overall=5
+    )
+    print(finalists_descriptors, num_of_descriptors)

@@ -6,7 +6,7 @@ demo_kwargs:
   # General cfg
   out_dir: ${data_path}/outs/objs  # for caputring obj
   # out_dir: ${data_path}/outs/images_from_demo  # for caputring png
-  gender: male
+  gender: female
   device: cuda
 
   # # FLAME - expression
@@ -25,7 +25,7 @@ demo_kwargs:
 
   # SMPLX
   texture: #${repo_path}/SMPLX/textures/smplx_texture_m_alb.png
-  model_path: ${repo_path}/end2end_pipeline/smplx_male_e2e_pipeline.ckpt
+  model_path: ${repo_path}/end2end_pipeline/smplx_female_end2end.ckpt
   model_type: smplx
   with_face: False
   on_parameters: False

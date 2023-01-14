@@ -46,3 +46,8 @@ class CLIP2MESHDataset(Dataset):
 
     def labels_dict_to_tensor(self, dict: Dict[str, List[List[float]]]) -> torch.Tensor:
         return torch.tensor(list(dict.values()))[..., 0, 0]
+
+    def get_labels(self):
+        with open(self.files[0], "r") as f:
+            clip_scores = json.load(f)
+        return [[label] for label in clip_scores.keys()]

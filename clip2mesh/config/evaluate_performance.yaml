@@ -1,5 +1,5 @@
-out_path: /home/nadav2/dev/data/CLIP2Shape/outs/performance_evaluation/smplx_female
-model_path: /home/nadav2/dev/repos/Thesis/end2end_pipeline/smplx_female_end2end.ckpt
+out_path: /home/nadav2/dev/data/CLIP2Shape/outs/performance_evaluation/smplx_male
+model_path: /home/nadav2/dev/repos/Thesis/pre_production/smplx_male_end2end_25_desc.ckpt
 min_value: 15.0
 max_value: 30.0
 effect_threshold: 0.5

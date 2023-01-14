@@ -12,8 +12,7 @@ from clip2mesh.utils import C2M_pl, CreateModelMeta
 from clip2mesh.data_management.dataset import CLIP2MESHDataset
 
 
-@hydra.main(config_path="../config", config_name="train")
-def main(config: DictConfig) -> None:
+def train(config: DictConfig):
 
     seed_everything(config.seed)
 
@@ -43,12 +42,17 @@ def main(config: DictConfig) -> None:
     log.info(f"instantiating model")
     trainer = Trainer(logger=logger, callbacks=callbacks, **config.trainer)
 
-    model = C2M_pl(**config.model_conf)
+    model = C2M_pl(**config.model_conf, labels=dataset.get_labels())
 
     log.info(f"training model")
     trainer.fit(model, train_dataloader, val_dataloader)
 
     log.info(f"finished training")
+
+
+@hydra.main(config_path="../config", config_name="train")
+def main(config: DictConfig) -> None:
+    train(config)
 
 
 if __name__ == "__main__":

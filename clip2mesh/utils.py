@@ -958,6 +958,7 @@ class C2M_pl(pl.LightningModule):
         out_features: int = 10,
         hidden_size: Union[int, List[int]] = 300,
         num_hiddens: int = 0,
+        labels: List[List[str]] = None,
     ):
         super().__init__()
         if isinstance(hidden_size, int):
@@ -969,6 +970,7 @@ class C2M_pl(pl.LightningModule):
         self.lr = lr
         self.utils = Utils()
         self.out_features = out_features
+        self.labels = labels
 
     def forward(self, x):
         return self.model(x)
@@ -1009,8 +1011,9 @@ class CreateModelMeta(Callback):
         os.rename(ckpt_path, ckpt_new_path)
         shutil.copy(ckpt_new_path, f"{self.utils.production_dir}/{ckpt_new_name}")
         pl_module.hparams.hidden_size = list(pl_module.hparams.hidden_size)
-        metadata = {"labels": self.utils.get_labels()}
-        metadata.update(dict(pl_module.hparams))
+        metadata = dict(pl_module.hparams)
+        if pl_module.hparams.labels is None:
+            metadata = {"labels": self.utils.get_labels()}
         with open(
             f"{self.utils.production_dir}/{ckpt_new_path.split('/')[-1].replace('.ckpt', '_metadata.json')}", "w"
         ) as f:
