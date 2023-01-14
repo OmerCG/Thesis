@@ -3,12 +3,12 @@ from clip2mesh.data_management.data_observation.choosing_descriptors import Choo
 
 
 if __name__ == "__main__":
-    df_path = "/home/nadav2/dev/data/CLIP2Shape/outs/vertices_heatmap/optimizations/compared_to_inv/smplx_male_multiview_diff_coord/vertex_heatmaps/ious.csv"
-    descriptors_groups_json = "/home/nadav2/dev/data/CLIP2Shape/outs/clustering_images/words_jsons/smplx_male.json"
-    imgs_dir = "/home/nadav2/dev/data/CLIP2Shape/images/smplx_py3d_male"
+    df_path = "/home/nadav2/dev/data/CLIP2Shape/outs/vertices_heatmap/optimizations/compared_to_inv/flame_shape_multiview_l2/vertex_heatmaps/ious.csv"
+    descriptors_groups_json = "/home/nadav2/dev/data/CLIP2Shape/outs/clustering_images/words_jsons/flame_shape.json"
+    imgs_dir = "/home/nadav2/dev/data/CLIP2Shape/images/flame_shape_py3d"
     choosing_descriptors = ChoosingDescriptors(verbose=True)
     finalists_descriptors, num_of_descriptors = choosing_descriptors.choose(
-        df_path, descriptors_groups_json, max_descriptors_overall=25, min_descriptors_overall=25
+        df_path, descriptors_groups_json, max_descriptors_overall=12, min_descriptors_overall=12
     )
     print(finalists_descriptors)
 

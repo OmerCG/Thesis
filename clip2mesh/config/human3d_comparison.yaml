@@ -14,8 +14,8 @@ comparison_kwargs:
     pixie: ${predictions_dir}/pixie_predictions
   
   smplx_models_paths:
-    smplx_male: /home/nadav2/dev/repos/Thesis/production/smplx_male.ckpt
-    smplx_female: /home/nadav2/dev/repos/Thesis/production/smplx_female.ckpt
+    smplx_male: /home/nadav2/dev/repos/Thesis/end2end_pipeline/smplx_male_e2e_pipeline.ckpt
+    smplx_female: /home/nadav2/dev/repos/Thesis/end2end_pipeline/smplx_female_end2end.ckpt
 
   labels_weights:
     male:

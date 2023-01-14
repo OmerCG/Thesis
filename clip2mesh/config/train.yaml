@@ -7,7 +7,7 @@ models_dir: /home/nadav2/dev/repos/CLIP2Shape/models
 seed: 42
 
 tensorboard_logger:
-  name: smplx_male_end2end_25_desc # IMPORTANT
+  name: flame_shape_e2e_12_desc # IMPORTANT
   save_dir: /home/nadav2/dev/data/CLIP2Shape/runs
   log_graph: True
 
@@ -38,13 +38,13 @@ trainer:
   log_every_n_steps: 3
 
 dataset:
-  data_dir: /home/nadav2/dev/data/CLIP2Shape/images/smplx_py3d_male
+  data_dir: /home/nadav2/dev/data/CLIP2Shape/images/flame_shape_py3d
   optimize_features:
-    - betas
+    - shape_params
   out_features: ${model_conf.out_features}
 
 model_conf:
-  num_stats: 25
+  num_stats: 12
   hidden_size: [800, 500]
   out_features: 10
   num_hiddens: 1

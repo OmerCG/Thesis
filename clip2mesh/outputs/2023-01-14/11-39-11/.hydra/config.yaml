@@ -1,0 +1,19 @@
+output_path: /home/nadav2/dev/data/CLIP2Shape/images/flame_exp_e2e
+gender: neutral
+img_tag: null
+model_type: flame
+with_face: true
+num_of_imgs: 5000
+num_coeffs: 50
+sides: false
+texture: /home/nadav2/dev/repos/CLIP2Shape/Flame/flame2020/mesh.png
+renderer:
+  name: pytorch3d
+  kwargs:
+    img_size:
+    - 512
+    - 512
+    tex_path: ${texture}
+    dist: 0.5
+    elev: 0.0
+    azim: 0.0

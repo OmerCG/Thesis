@@ -1,0 +1,17 @@
+out_path: /home/nadav2/dev/data/CLIP2Shape/outs/performance_evaluation/flame_shape
+model_path: /home/nadav2/dev/repos/Thesis/production/flame_shape_e2e_output.ckpt
+min_value: 15.0
+max_value: 30.0
+effect_threshold: 0.5
+color_map: YlOrRd
+optimize_feature: shape_params
+model_type: flame
+renderer_kwargs:
+  img_size:
+  - 1024
+  - 1024
+  tex_path: null
+  texture_optimization: true
+  dist: 0.8
+  elev: 0.0
+  azim: 0.0

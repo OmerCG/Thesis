@@ -717,31 +717,31 @@ class Utils:
     @staticmethod
     def get_labels() -> List[List[str]]:
         # labels = [["big cat"], ["cow"], ["donkey"], ["hippo"], ["dog"]]  # SMAL animals
-        labels = [
-            ["hourglass"],
-            ["lean"],
-            ["thin"],
-            ["narrow waist"],
-            ["average"],
-            ["long legs"],
-            ["heavyset"],
-            ["small"],
-            ["pear shaped"],
-            ["broad shoulders"],
-            ["skinny"],
-        ]  # SMPLX body
         # labels = [
-        #     ["sad"],
-        #     ["bored"],
-        #     ["disgusted"],
-        #     ["raise eyebrows"],
-        #     ["angry"],
-        #     ["smile"],
-        #     ["happy"],
-        #     ["worried"],
-        #     ["afraid"],
-        #     ["open mouth"],
-        # ]  # FLAME expression
+        #     ["hourglass"],
+        #     ["lean"],
+        #     ["thin"],
+        #     ["narrow waist"],
+        #     ["average"],
+        #     ["long legs"],
+        #     ["heavyset"],
+        #     ["small"],
+        #     ["pear shaped"],
+        #     ["broad shoulders"],
+        #     ["skinny"],
+        # ]  # SMPLX body
+        labels = [
+            ["sad"],
+            # ["bored"],
+            ["disgusted"],
+            ["raise eyebrows"],
+            ["angry"],
+            # ["smile"],
+            ["happy"],
+            # ["worried"],
+            ["afraid"],
+            ["open mouth"],
+        ]  # FLAME expression
         # labels = [
         #     ["fat"],
         #     ["big eyes"],
@@ -1029,6 +1029,8 @@ class ModelsFactory:
         if self.model_type == "smplx" or self.model_type == "smpl":
             return self.utils.get_smplx_model(**kwargs)
         elif self.model_type == "flame":
+            if "num_coeffs" in kwargs:
+                kwargs.pop("num_coeffs")
             return self.utils.get_flame_model(**kwargs)
         else:
             if "gender" in kwargs:
@@ -1082,9 +1084,7 @@ class ModelsFactory:
         elif self.model_type == "flame":
             if with_face:
                 params["expression_params"] = self.utils.get_random_expression_flame(num_coeffs)
-                params["shape_params"] = self.utils.get_default_face_shape(num_coeffs)
             else:
-                params["expression_params"] = self.utils.get_default_face_expression(num_coeffs)
                 params["shape_params"] = self.utils.get_random_shape(num_coeffs)
 
         else:

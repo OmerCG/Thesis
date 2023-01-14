@@ -1,13 +1,13 @@
-output_path: /home/nadav2/dev/data/CLIP2Shape/images/smpl_male_multiview # Path to save the images
-gender: male
+output_path: /home/nadav2/dev/data/CLIP2Shape/images/flame_exp_e2e # Path to save the images
+gender: neutral
 img_tag:
-model_type: smpl
-with_face: False
-num_of_imgs: 30000
-num_coeffs: 10
-sides: True
-# texture: #/home/nadav2/dev/repos/CLIP2Shape/Flame/flame2020/mesh.png  # FLAME texture
-texture: #/home/nadav2/dev/repos/CLIP2Shape/SMPLX/textures/smplx_texture_m_alb.png  # SMPLX texture
+model_type: flame
+with_face: True
+num_of_imgs: 5000
+num_coeffs: 50
+sides: False
+texture: /home/nadav2/dev/repos/CLIP2Shape/Flame/flame2020/mesh.png  # FLAME texture
+# texture: #/home/nadav2/dev/repos/CLIP2Shape/SMPLX/textures/smplx_texture_m_alb.png  # SMPLX texture
 # texture:  # SMAL texture (keep empty for random texture)
 
 renderer:
@@ -23,20 +23,20 @@ renderer:
     # elev: 15.0
     # azim: 0.0
 
-    # SMPL cam params
-    dist: 2.5
-    elev: 10.0
-    azim: 0.0
+    # # SMPL cam params
+    # dist: 2.5
+    # elev: 10.0
+    # azim: 0.0
 
     # # FLAME shape cam params
     # dist: 0.8
     # elev: 0.0
     # azim: 0.0
 
-    # # # FLAME expression cam params
-    # dist: 0.5
-    # elev: 0.0
-    # azim: 0.0
+    # # FLAME expression cam params
+    dist: 0.5
+    elev: 0.0
+    azim: 0.0
 
     # # SMAL cam params
     # dist: 5.8

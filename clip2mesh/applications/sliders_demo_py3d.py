@@ -51,9 +51,9 @@ class SlidersApp:
         img = self.renderer.render_mesh(verts=self.verts, faces=self.faces[None], vt=self.vt, ft=self.ft)
         self.img = self.adjust_rendered_img(img)
 
-        self.default_dist = cfg.renderer_kwargs["dist"]
-        self.default_azim = cfg.renderer_kwargs["azim"]
-        self.default_elev = cfg.renderer_kwargs["elev"]
+        self.dist = cfg.renderer_kwargs["dist"]
+        self.azim = cfg.renderer_kwargs["azim"]
+        self.elev = cfg.renderer_kwargs["elev"]
 
         self.production_scales = []
         self.camera_scales = {}
@@ -180,7 +180,13 @@ class SlidersApp:
                 else:
                     self.verts, self.faces, self.vt, self.ft = self.utils.get_smal_model(beta=out.cpu())
 
-            img = self.renderer.render_mesh(verts=self.verts, faces=self.faces[None], vt=self.vt, ft=self.ft)
+            img = self.renderer.render_mesh(
+                verts=self.verts,
+                faces=self.faces[None],
+                vt=self.vt,
+                ft=self.ft,
+                rotate_mesh={"degrees": self.azim, "axis": "y"},
+            )
             img = self.adjust_rendered_img(img)
             self.img = img
             img = ImageTk.PhotoImage(image=img)
@@ -230,6 +236,7 @@ class SlidersApp:
         if isinstance(value, str):
             value = float(value)
         rotate_mesh_kwargs = {"degrees": value, "axis": "y"}
+        self.azim = value
         img = self.renderer.render_mesh(
             verts=self.verts, faces=self.faces[None], vt=self.vt, ft=self.ft, rotate_mesh=rotate_mesh_kwargs
         )
@@ -323,17 +330,24 @@ class SlidersApp:
                 label.set(20)
 
     def reset_cam_params(self):
-        self.renderer_kwargs.update({"azim": self.default_azim, "elev": self.default_elev, "dist": self.default_dist})
+        self.renderer_kwargs.update({"azim": self.azim, "elev": self.elev, "dist": self.elev})
+        self.azim = 0
         self.renderer = self.models_factory.get_renderer(**self.renderer_kwargs)
-        img = self.renderer.render_mesh(verts=self.verts, faces=self.faces[None], vt=self.vt, ft=self.ft)
+        img = self.renderer.render_mesh(
+            verts=self.verts,
+            faces=self.faces[None],
+            vt=self.vt,
+            ft=self.ft,
+            rotate_mesh={"degrees": self.azim, "axis": "y"},
+        )
         img = self.adjust_rendered_img(img)
         self.img = img
         img = ImageTk.PhotoImage(image=img)
         self.img_label.configure(image=img)
         self.img_label.image = img
-        self.camera_scales["azim"].set(self.default_azim)
-        self.camera_scales["elev"].set(self.default_elev)
-        self.camera_scales["dist"].set(self.default_dist)
+        self.camera_scales["azim"].set(self.azim)
+        self.camera_scales["elev"].set(self.elev)
+        self.camera_scales["dist"].set(self.elev)
 
     def _zeros_to_concat(self):
         if self.model_type == "smplx":
@@ -478,7 +492,7 @@ class SlidersApp:
             command=lambda x: self.update_camera_zoom(x),
             **zoom_scale_kwarg,
         )
-        zoom_in_scale.set(self.default_dist)
+        zoom_in_scale.set(self.elev)
         zoom_in_scale.pack(pady=(50, 0))
         self.camera_scales["dist"] = zoom_in_scale
 
@@ -489,7 +503,7 @@ class SlidersApp:
             command=lambda x: self.update_camera_azim(x),
             **azim_scale_kwarg,
         )
-        azim_scale.set(self.default_azim)
+        azim_scale.set(self.azim)
         azim_scale.pack()
         self.camera_scales["azim"] = azim_scale
 
@@ -500,7 +514,7 @@ class SlidersApp:
             command=lambda x: self.update_camera_elev(x),
             **elev_scale_kwarg,
         )
-        elev_scale.set(self.default_elev)
+        elev_scale.set(self.elev)
         elev_scale.pack()
         self.camera_scales["elev"] = elev_scale
         # ------------------------------------------------------------

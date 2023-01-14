@@ -69,4 +69,4 @@ def main(imgs_dir: str, device: str, side: bool):
 
 if __name__ == "__main__":
     kwargs = parse_args()
-    main(**kwargs)
+    main(**vars(kwargs))

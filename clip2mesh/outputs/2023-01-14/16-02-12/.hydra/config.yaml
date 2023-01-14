@@ -1,0 +1,19 @@
+repo_path: /home/nadav2/dev/repos/Thesis
+data_path: /home/nadav2/dev/data/CLIP2Shape
+demo_kwargs:
+  out_dir: ${data_path}/outs/objs
+  gender: neutral
+  device: cuda
+  texture: ${repo_path}/Flame/flame2020/mesh.png
+  model_path: ${repo_path}/pre_production/flame_exp_e2e_ouput.ckpt
+  model_type: flame
+  with_face: true
+  on_parameters: false
+  renderer_kwargs:
+    img_size:
+    - 512
+    - 512
+    tex_path: ${demo_kwargs.texture}
+    dist: 0.5
+    elev: 0.0
+    azim: 0.0

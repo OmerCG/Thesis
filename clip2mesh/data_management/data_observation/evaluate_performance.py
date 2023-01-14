@@ -47,7 +47,11 @@ class EvaluatePerformance:
 
     def _get_total_possible_idxs(self):
         self.verts, self.faces, self.vt, self.ft = self.models_factory.get_model()
-        self.total_possible_idxs = torch.range(0, self.verts.shape[0])
+        if self.model_type in ["smpl", "smplx"]:
+            total_possible_verts = self.verts.shape[0]
+        elif self.model_type == "flame":
+            total_possible_verts = self.verts.shape[1]
+        self.total_possible_idxs = torch.range(0, total_possible_verts)
 
     def get_collage_shape(self):
         num_rows, num_cols = self.utils.get_plot_shape(len(self.view_angles))[0]
