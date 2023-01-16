@@ -71,8 +71,14 @@ class ZjuMocapComparison(ComparisonUtils):
         }, raw_img
 
     def __call__(self):
+        max_num_imgs = 20
         for subject_id in self.raw_imgs_dir.iterdir():
+            if subject_id.name == "377":
+                continue
             for camera_id in subject_id.iterdir():
+                images_counter = 0
+                if camera_id.name == "smpl_params.npy":
+                    continue
                 for raw_img_path in camera_id.iterdir():
                     if raw_img_path.suffix != ".jpg":
                         continue
@@ -86,13 +92,15 @@ class ZjuMocapComparison(ComparisonUtils):
 
                     body_shapes, raw_img = self.get_body_shape(raw_img_path, gender)
 
-                    l2_losses: Dict[str, torch.Tensor] = self.calc_distances(body_shapes)
+                    l2_losses: Dict[str, torch.Tensor] = self.calc_l2_distances(body_shapes)
 
                     smplx_args: Dict[
                         str, Tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray]
                     ] = self.get_smplx_kwargs(body_shapes, gender)
 
                     meshes: Dict[str, Meshes] = self.get_meshes_from_shapes(smplx_args)
+
+                    chamfer_distances: Dict[str, torch.Tensor] = self.calc_chamfer_distance(meshes)
 
                     frames_dir = output_path / "frames"
                     frames_dir.mkdir(exist_ok=True)
@@ -117,13 +125,18 @@ class ZjuMocapComparison(ComparisonUtils):
                     single_img_results = pd.DataFrame.from_dict(
                         {
                             "image_name": [f"{subject_id.name}_{camera_id.name}_{raw_img_path.stem}"],
-                            "loss": "l2",
-                            **l2_losses,
+                            "loss": "chamfer distance",
+                            **chamfer_distances,
                         }
                     )
                     self.results_df = pd.concat([self.results_df, single_img_results])
 
-                self.results_df.to_csv(self.output_path / "results.csv", index=False)
+                    self.results_df.to_csv(
+                        self.output_path / subject_id.name / camera_id.name / "results.csv", index=False
+                    )
+                    images_counter += 1
+                    if images_counter >= max_num_imgs:
+                        break
 
 
 @hydra.main(config_path="../config", config_name="zjumocap_comparison")

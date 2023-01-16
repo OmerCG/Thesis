@@ -123,7 +123,7 @@ class ClusterImages:
         encoded_images = []
         images = []
         preprocessed_images = []
-        images_generator = list(Path(images_dir).rglob("*.png"))
+        images_generator = [file for file in Path(images_dir).rglob("*.png") if "side" not in file.stem]
 
         for image in tqdm(images_generator, total=len(images_generator), desc="Encoding images"):
             images.append(np.array(Image.open(image)))

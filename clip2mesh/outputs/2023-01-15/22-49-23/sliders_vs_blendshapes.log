@@ -1,0 +1,28 @@
+[2023-01-15 22:49:27,262][__main__][INFO] - Starting optimization for smplx betas
+[2023-01-15 22:49:27,262][__main__][INFO] - labels: [['long legs'], ['round apple'], ['curvy'], ['narrow waist'], ['stocky']]
+[2023-01-15 22:49:27,272][__main__][INFO] - Optimizing 1509.png
+[2023-01-15 22:49:27,272][__main__][INFO] - Writing video to /home/nadav2/dev/data/CLIP2Shape/outs/sliders_vs_blendshapes/smplx_male/5_descriptors/1509.mp4
+[2023-01-15 22:53:15,697][__main__][INFO] - Finished optimizing 1509.png
+[2023-01-15 22:53:15,701][__main__][INFO] - GT tensor([[ 0.3212, -1.0265, -0.6499, -0.0000,  1.8556, -0.0000,  0.5744,  3.6072,
+          1.3437, -1.4523]], device='cuda:0')
+[2023-01-15 22:53:15,703][__main__][INFO] - Pred tensor([[ 0.1722, -0.9392, -0.0068,  0.6709,  0.4329, -0.6284, -0.1026,  0.4251,
+         -0.0561,  0.0252]], device='cuda:0', grad_fn=<AddmmBackward>)
+[2023-01-15 22:53:15,705][__main__][INFO] - acctual sliders values tensor([24.2656, 20.2656, 21.7188, 25.3594, 20.9531, 26.1875, 22.7500, 22.8594,
+        22.7344, 24.8750, 24.2188, 24.1719, 26.3594, 26.0781, 22.4062, 24.2500,
+        24.1250, 26.2812, 23.0312, 21.2031, 24.1094, 25.1875, 22.6094, 22.7500,
+        24.5469])
+[2023-01-15 22:53:15,705][__main__][INFO] - Geometric distance: [0.0043882932513952255]
+[2023-01-15 22:53:15,705][__main__][INFO] - Optimizing 3973.png
+[2023-01-15 22:53:15,705][__main__][INFO] - Writing video to /home/nadav2/dev/data/CLIP2Shape/outs/sliders_vs_blendshapes/smplx_male/5_descriptors/3973.mp4
+[2023-01-15 22:57:00,221][__main__][INFO] - Finished optimizing 3973.png
+[2023-01-15 22:57:00,223][__main__][INFO] - GT tensor([[-4.6025,  2.5409, -0.2164, -1.4541,  0.0000, -0.0000,  0.0000, -0.7460,
+         -0.0000, -0.0000]], device='cuda:0')
+[2023-01-15 22:57:00,225][__main__][INFO] - Pred tensor([[-0.9514,  1.6305,  0.9580, -1.1842, -0.5186, -0.3270, -0.3895, -0.3191,
+          0.3273, -0.4495]], device='cuda:0', grad_fn=<AddmmBackward>)
+[2023-01-15 22:57:00,225][__main__][INFO] - acctual sliders values tensor([24.3594, 20.9219, 23.9375, 24.6875, 21.7031, 25.1562, 21.7344, 24.3281,
+        22.8125, 26.4375, 25.3594, 27.2344, 25.0312, 25.2344, 21.5469, 23.8906,
+        24.4375, 26.1875, 22.9531, 21.3438, 24.5469, 24.9531, 21.1406, 22.6406,
+        23.8594])
+[2023-01-15 22:57:00,226][__main__][INFO] - Geometric distance: [0.0043882932513952255, 0.004747152328491211]
+[2023-01-15 22:57:00,226][__main__][INFO] - Optimizing 543.png
+[2023-01-15 22:57:00,226][__main__][INFO] - Writing video to /home/nadav2/dev/data/CLIP2Shape/outs/sliders_vs_blendshapes/smplx_male/5_descriptors/543.mp4

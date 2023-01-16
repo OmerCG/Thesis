@@ -1,0 +1,17 @@
+[2023-01-15 22:39:53,343][__main__][INFO] - Starting optimization for smplx betas
+[2023-01-15 22:39:53,344][__main__][INFO] - labels: [['long legs'], ['round apple'], ['curvy'], ['narrow waist'], ['stocky']]
+[2023-01-15 22:39:53,361][__main__][INFO] - Optimizing 1509.png
+[2023-01-15 22:39:53,361][__main__][INFO] - Writing video to /home/nadav2/dev/data/CLIP2Shape/outs/sliders_vs_blendshapes/smplx_male/5_descriptors/1509.mp4
+[2023-01-15 22:42:23,953][__main__][INFO] - Finished optimizing 1509.png
+[2023-01-15 22:42:23,953][__main__][INFO] - Final loss: 1.8039101362228394
+[2023-01-15 22:42:23,955][__main__][INFO] - GT tensor([[ 0.3212, -1.0265, -0.6499, -0.0000,  1.8556, -0.0000,  0.5744,  3.6072,
+          1.3437, -1.4523]], device='cuda:0')
+[2023-01-15 22:42:23,956][__main__][INFO] - Pred tensor([[ 0.1722, -0.9392, -0.0068,  0.6709,  0.4329, -0.6284, -0.1026,  0.4251,
+         -0.0561,  0.0252]], device='cuda:0', grad_fn=<AddmmBackward>)
+[2023-01-15 22:42:23,958][__main__][INFO] - acctual sliders values tensor([24.2656, 20.2656, 21.7188, 25.3594, 20.9531, 26.1875, 22.7500, 22.8594,
+        22.7344, 24.8750, 24.2188, 24.1719, 26.3594, 26.0781, 22.4062, 24.2500,
+        24.1250, 26.2812, 23.0312, 21.2031, 24.1094, 25.1875, 22.6094, 22.7500,
+        24.5469])
+[2023-01-15 22:42:23,958][__main__][INFO] - Total acumulated loss: 1.8039101362228394
+[2023-01-15 22:42:23,958][__main__][INFO] - Optimizing 3973.png
+[2023-01-15 22:42:23,958][__main__][INFO] - Writing video to /home/nadav2/dev/data/CLIP2Shape/outs/sliders_vs_blendshapes/smplx_male/5_descriptors/3973.mp4

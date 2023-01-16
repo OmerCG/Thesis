@@ -6,6 +6,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 from pathlib import Path
 from pytorch3d.structures import Meshes
+from pytorch3d.loss import chamfer_distance
 from typing import Dict, Tuple, Literal, List
 from clip2mesh.utils import Image2ShapeUtils, Utils
 
@@ -72,7 +73,7 @@ class ComparisonUtils(Image2ShapeUtils):
             video_struct = (video_struct[1], video_struct[0])
         return video_struct
 
-    def calc_distances(self, body_shapes: Dict[str, torch.Tensor]) -> Dict[str, float]:
+    def calc_l2_distances(self, body_shapes: Dict[str, torch.Tensor]) -> Dict[str, float]:
         """Calculate the distance between the gt and the other methods"""
         losses = {}
         for k, v in body_shapes.items():
@@ -81,13 +82,23 @@ class ComparisonUtils(Image2ShapeUtils):
             losses[k] = torch.linalg.norm(body_shapes["gt"] - v, dim=1).item()
         return losses
 
+    def calc_chamfer_distance(self, meshes: Dict[str, Meshes]) -> Dict[str, float]:
+        """Calculate the chamfer distance between the gt and the other methods"""
+        losses = {}
+        for method, mesh in meshes.items():
+            if method == "gt":
+                continue
+            losses[method] = chamfer_distance(meshes["gt"].verts_packed()[None], mesh.verts_packed()[None])[0].item()
+        return losses
+
     def get_smplx_kwargs(
         self, body_shapes: Dict[str, torch.Tensor], gender: Literal["male", "female", "neutral"]
     ) -> Dict[str, Tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray]]:
         """Get the smplx kwargs for the different methods -> (vertices, faces, vt, ft)"""
         smplx_kwargs = {}
         for method, body_shape in body_shapes.items():
-            smplx_kwargs[method] = self._get_smplx_attributes(body_shape, gender)
+            get_smpl = True if method in ["spin", "gt"] else False
+            smplx_kwargs[method] = self._get_smplx_attributes(body_shape, gender, get_smpl=get_smpl)
         return smplx_kwargs
 
     def get_meshes_from_shapes(

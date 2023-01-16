@@ -372,7 +372,7 @@ class Pytorch3dRenderer:
 
     @staticmethod
     def get_default_blend_params():
-        blend_params = BlendParams(sigma=1e-6, gamma=1e-6, background_color=(255.0, 255.0, 255.0))
+        blend_params = BlendParams(sigma=1e-6, gamma=1e-6, background_color=(0.0, 0.0, 0.0))
         return blend_params
 
     @staticmethod
@@ -520,7 +520,12 @@ class Utils:
 
     def _get_smplx_layer(self, gender: str, num_coeffs: int, get_smpl: bool):
         if get_smpl:
-            smplx_path = "/home/nadav2/dev/repos/Thesis/SMPL/SMPL_NEUTRAL.pkl"
+            if gender == "male":
+                smplx_path = "/home/nadav2/dev/repos/Thesis/SMPL/smpl_male.pkl"
+            elif gender == "female":
+                smplx_path = "/home/nadav2/dev/repos/Thesis/SMPL/smpl_female.pkl"
+            else:
+                smplx_path = "/home/nadav2/dev/repos/Thesis/SMPL/SMPL_NEUTRAL.pkl"
         else:
             if gender == "neutral":
                 smplx_path = "/home/nadav2/dev/repos/Thesis/SMPLX/SMPLX_NEUTRAL_2020.npz"
@@ -579,7 +584,9 @@ class Utils:
 
         return verts, self.smplx_faces, self.vt_smplx, self.ft_smplx
 
-    def _get_vt_ft(self, model_type: Literal["smplx", "flame", "smpl"]) -> Tuple[np.ndarray, np.ndarray]:
+    def _get_vt_ft(
+        self, model_type: Literal["smplx", "flame", "smpl"], gender: str = None
+    ) -> Tuple[np.ndarray, np.ndarray]:
         if model_type == "smplx":
             self.vt_smplx = np.load("/home/nadav2/dev/repos/CLIP2Shape/SMPLX/textures/smplx_vt.npy")
             self.ft_smplx = np.load("/home/nadav2/dev/repos/CLIP2Shape/SMPLX/textures/smplx_ft.npy")
@@ -730,18 +737,18 @@ class Utils:
         #     ["broad shoulders"],
         #     ["skinny"],
         # ]  # SMPLX body
-        labels = [
-            ["sad"],
-            # ["bored"],
-            ["disgusted"],
-            ["raise eyebrows"],
-            ["angry"],
-            # ["smile"],
-            ["happy"],
-            # ["worried"],
-            ["afraid"],
-            ["open mouth"],
-        ]  # FLAME expression
+        # labels = [
+        #     ["sad"],
+        #     # ["bored"],
+        #     ["disgusted"],
+        #     ["raise eyebrows"],
+        #     ["angry"],
+        #     # ["smile"],
+        #     ["happy"],
+        #     # ["worried"],
+        #     ["afraid"],
+        #     ["open mouth"],
+        # ]  # FLAME expression
         # labels = [
         #     ["fat"],
         #     ["big eyes"],
@@ -754,34 +761,34 @@ class Utils:
         #     ["long head"],
         #     ["small head"],
         # ]  # FLAME shape
-        # labels = [
-        #     "fat",
-        #     "thin",
-        #     "muscular",
-        #     "short",
-        #     "long legs",
-        #     "narrow waist",
-        #     "skinny",
-        #     "tall",
-        #     "rectangular",
-        #     "pear shaped",
-        #     "average",
-        #     "big",
-        #     "curvy",
-        #     "lean",
-        #     "masculine",
-        #     "proportioned",
-        #     "stocky",
-        #     "sexy",
-        #     "sturdy",
-        #     "broad shoulders",
-        #     "fit",
-        #     "round apple",
-        #     "built",
-        #     "heavyset",
-        #     "petite",
-        #     "small",
-        # ]
+        labels = [
+            "fat",
+            # "thin",
+            "muscular",
+            # "short",
+            "long legs",
+            "narrow waist",
+            # "skinny",
+            # "tall",
+            # "rectangular",
+            "pear shaped",
+            # "average",
+            # "big",
+            "curvy",
+            # "lean",
+            # "masculine",
+            # "proportioned",
+            # "stocky",
+            # "sexy",
+            "sturdy",
+            # "broad shoulders",
+            # "fit",
+            # "round apple",
+            # "built",
+            # "heavyset",
+            # "petite",
+            # "small",
+        ]
         if not isinstance(labels[0], list):
             labels = [[label] for label in labels]
         return labels
@@ -878,7 +885,7 @@ class Utils:
                 layers_counter += 1
         return converted_dict
 
-    def get_model_to_eval(self, model_path: str) -> nn.Module:
+    def get_model_to_eval(self, model_path: str) -> Tuple[nn.Module, List[List[str]]]:
         model_meta_path = model_path.replace(".ckpt", "_metadata.json")
         with open(model_meta_path, "r") as f:
             model_meta = json.load(f)
@@ -1222,14 +1229,14 @@ class Image2ShapeUtils:
         return [item for sublist in list_of_lists for item in sublist]
 
     def _get_smplx_attributes(
-        self, pred_vec: torch.Tensor, gender: Literal["male", "female", "neutral"]
+        self, pred_vec: torch.Tensor, gender: Literal["male", "female", "neutral"], get_smpl: bool = False
     ) -> Tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray]:
         betas = pred_vec.cpu()
         if hasattr(self, "body_pose"):
             body_pose = self.body_pose
         else:
             body_pose = None
-        smplx_out = self.utils.get_smplx_model(betas=betas, gender=gender, body_pose=body_pose)
+        smplx_out = self.utils.get_smplx_model(betas=betas, gender=gender, body_pose=body_pose, get_smpl=get_smpl)
         return smplx_out
 
     def _get_flame_attributes(
@@ -1246,9 +1253,9 @@ class Image2ShapeUtils:
         return smal_out
 
     def get_render_mesh_kwargs(
-        self, pred_vec: torch.Tensor, gender: Literal["male", "female", "neutral"]
+        self, pred_vec: torch.Tensor, gender: Literal["male", "female", "neutral"], get_smpl: bool = False
     ) -> Dict[str, np.ndarray]:
-        out = self._get_smplx_attributes(pred_vec=pred_vec, gender=gender)
+        out = self._get_smplx_attributes(pred_vec=pred_vec, gender=gender, get_smpl=get_smpl)
 
         kwargs = {"verts": out[0], "faces": out[1], "vt": out[2], "ft": out[3]}
 
@@ -1295,9 +1302,9 @@ class Image2ShapeUtils:
             for key, value in attributes.items():
                 kwargs[key] = {"verts": value[0], "faces": value[1], "vt": value[2], "ft": value[3]}
                 if to_tensor:
-                    kwargs[key] = {k: torch.from_numpy(v)[None] for k, v in kwargs[key].items()}
+                    kwargs[key] = {k: torch.tensor(v)[None] for k, v in kwargs[key].items()}
         else:
             kwargs = {"verts": attributes[0], "faces": attributes[1], "vt": attributes[2], "ft": attributes[3]}
             if to_tensor:
-                kwargs = {k: torch.from_numpy(v)[None] for k, v in kwargs.items()}
+                kwargs = {k: torch.tensor(v)[None] for k, v in kwargs.items()}
         return kwargs

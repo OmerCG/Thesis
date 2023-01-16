@@ -6,7 +6,7 @@ demo_kwargs:
   # General cfg
   out_dir: ${data_path}/outs/objs  # for caputring obj
   # out_dir: ${data_path}/outs/images_from_demo  # for caputring png
-  gender: neutral
+  gender: male
   device: cuda
 
   # # FLAME - expression
@@ -16,26 +16,26 @@ demo_kwargs:
   # with_face: True
   # on_parameters: False
 
-  # FLAME - shape
-  texture: #${repo_path}/Flame/flame2020/mesh.png
-  model_path: ${repo_path}/pre_production/flame_shape_e2e_12_desc.ckpt
-  model_type: flame
-  with_face: False
-  on_parameters: False
+  # # FLAME - shape
+  # texture: #${repo_path}/Flame/flame2020/mesh.png
+  # model_path: ${repo_path}/pre_production/flame_shape_e2e_12_desc.ckpt
+  # model_type: flame
+  # with_face: False
+  # on_parameters: False
 
   # # SMPLX
   # texture: #${repo_path}/SMPLX/textures/smplx_texture_m_alb.png
-  # model_path: ${repo_path}/pre_production/smplx_male_end2end_25_desc.ckpt
+  # model_path: ${repo_path}/production/smplx_male.ckpt
   # model_type: smplx
   # with_face: False
   # on_parameters: False
 
-  # # SMPL
-  # texture: #${repo_path}/SMPLX/textures/smplx_texture_m_alb.png
-  # model_path: ${repo_path}/pre_production/smpl_multiview.ckpt
-  # model_type: smpl
-  # with_face: False
-  # on_parameters: False
+  # SMPL
+  texture: #${repo_path}/SMPLX/textures/smplx_texture_m_alb.png
+  model_path: ${repo_path}/pre_production/smpl_male_multiview.ckpt
+  model_type: smpl
+  with_face: False
+  on_parameters: False
 
   # # SMAL
   # texture:  # there is no texture for smal yet
@@ -56,10 +56,10 @@ demo_kwargs:
     img_size: [512, 512]
     tex_path: ${demo_kwargs.texture}
 
-    # FLAME cam params
-    dist: 0.5
-    elev: 0.0
-    azim: 0.0
+    # # FLAME cam params
+    # dist: 0.5
+    # elev: 0.0
+    # azim: 0.0
 
     # # SMPLX cam params
     # dist: 2.4
@@ -70,3 +70,8 @@ demo_kwargs:
     # dist: 4.0
     # elev: 20.0
     # azim: 2.1
+
+    # SMPL cam params
+    dist: 2.5
+    elev: 10.0
+    azim: 0.0

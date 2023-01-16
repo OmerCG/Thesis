@@ -131,6 +131,7 @@ class VertexHeatmap:
     def create_ious_csv(self, path):
         df = self.df
         df["effective_vertices"] = df["effective_vertices"].apply(lambda x: np.array(x))
+        df["vertex_coverage"] = df["effective_vertices"].apply(lambda x: x.shape[0])
         combs = list(combinations(df["descriptor"].values, 2))
         ious_df = pd.DataFrame()
         for comb in combs:
@@ -140,10 +141,12 @@ class VertexHeatmap:
                 np.intersect1d(comb_df["effective_vertices"].values[0], comb_df["effective_vertices"].values[1])
             ) / len(np.union1d(comb_df["effective_vertices"].values[0], comb_df["effective_vertices"].values[1]))
             ious_df = pd.concat([ious_df, pd.DataFrame((comb[0], comb[1], iou)).T])
+
         columns = ("descriptor_1", "descriptor_2", "iou")
         ious_df.columns = columns
         ious_df = ious_df.sort_values("iou", ascending=False)
         ious_df.to_csv(path, index=False)
+        df.to_csv(path.as_posix().replace("ious.csv", "summary.csv"), index=False)
 
     def get_verts_faces_by_model_type(self, verts, faces):
         if self.model_type in ["smpl", "smplx"]:

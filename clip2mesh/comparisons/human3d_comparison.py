@@ -115,7 +115,7 @@ class Human3DComparison(ComparisonUtils):
                                 continue
                             predictions_history[method].append(body_shape)
 
-                        l2_losses: Dict[str, torch.Tensor] = self.calc_distances(body_shapes)
+                        l2_losses: Dict[str, torch.Tensor] = self.calc_l2_distances(body_shapes)
 
                         smplx_args: Dict[
                             str, Tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray]

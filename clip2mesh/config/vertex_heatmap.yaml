@@ -1,12 +1,12 @@
-descriptors_dir: /home/nadav2/dev/data/CLIP2Shape/outs/vertices_heatmap/optimizations/compared_to_inv/flame_exp_multiview_new_l2
+descriptors_dir: /home/nadav2/dev/data/CLIP2Shape/outs/vertices_heatmap/optimizations/test_arik_algorithm/smplx_male
 corr_threshold: 0.7
-model_type: flame
-gender: neutral
+model_type: smplx
+gender: male
 iou_threshold: 0.3
-optimize_feature: expression_params
+optimize_feature: betas
 color_map: YlOrRd
 effect_threshold: 0.8
-method: L2
+method: diff_coords
 compare_to_default_mesh: False
 
 
@@ -15,20 +15,20 @@ renderer_kwargs:
     tex_path:
     texture_optimization: True
 
-    # # SMPLX cam params
-    # dist: 2.4
-    # elev: 8.6
-    # azim: 2.1
+    # SMPLX cam params
+    dist: 2.4
+    elev: 8.6
+    azim: 2.1
 
     # # FLAME shape cam params
     # dist: 0.8
     # elev: 0.0
     # azim: 0.0
 
-    # FLAME expression cam params
-    dist: 0.5
-    elev: 0.0
-    azim: 0.0
+    # # FLAME expression cam params
+    # dist: 0.5
+    # elev: 0.0
+    # azim: 0.0
 
     # SMAL cam params
     # dist: 3.8

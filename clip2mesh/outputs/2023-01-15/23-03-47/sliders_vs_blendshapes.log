@@ -1,0 +1,92 @@
+[2023-01-15 23:03:50,834][__main__][INFO] - Starting optimization for smplx betas
+[2023-01-15 23:03:50,834][__main__][INFO] - labels: [['long legs'], ['round apple'], ['curvy'], ['narrow waist'], ['stocky']]
+[2023-01-15 23:03:50,844][__main__][INFO] - Optimizing 1509.png
+[2023-01-15 23:03:50,844][__main__][INFO] - Writing video to /home/nadav2/dev/data/CLIP2Shape/outs/sliders_vs_blendshapes/smplx_male/5_descriptors/1509.mp4
+[2023-01-15 23:07:35,105][__main__][INFO] - Finished optimizing 1509.png
+[2023-01-15 23:07:35,105][__main__][INFO] - Pred sliders values {'long legs': -0.6295632, 'round apple': -3.9877763, 'curvy': -2.0761073, 'narrow waist': 2.4809992, 'stocky': -2.7067244}
+[2023-01-15 23:07:35,106][__main__][INFO] - acctual sliders values tensor([24.2656, 20.2656, 21.7188, 25.3594, 20.9531, 26.1875, 22.7500, 22.8594,
+        22.7344, 24.8750, 24.2188, 24.1719, 26.3594, 26.0781, 22.4062, 24.2500,
+        24.1250, 26.2812, 23.0312, 21.2031, 24.1094, 25.1875, 22.6094, 22.7500,
+        24.5469])
+[2023-01-15 23:07:35,106][__main__][INFO] - Geometric distance: [0.0043882932513952255]
+[2023-01-15 23:07:35,106][__main__][INFO] - Optimizing 3973.png
+[2023-01-15 23:07:35,106][__main__][INFO] - Writing video to /home/nadav2/dev/data/CLIP2Shape/outs/sliders_vs_blendshapes/smplx_male/5_descriptors/3973.mp4
+[2023-01-15 23:11:21,416][__main__][INFO] - Finished optimizing 3973.png
+[2023-01-15 23:11:21,416][__main__][INFO] - Pred sliders values {'long legs': 3.321467, 'round apple': 2.314828, 'curvy': 4.293176, 'narrow waist': -2.7914617, 'stocky': 5.0391364}
+[2023-01-15 23:11:21,416][__main__][INFO] - acctual sliders values tensor([24.3594, 20.9219, 23.9375, 24.6875, 21.7031, 25.1562, 21.7344, 24.3281,
+        22.8125, 26.4375, 25.3594, 27.2344, 25.0312, 25.2344, 21.5469, 23.8906,
+        24.4375, 26.1875, 22.9531, 21.3438, 24.5469, 24.9531, 21.1406, 22.6406,
+        23.8594])
+[2023-01-15 23:11:21,416][__main__][INFO] - Geometric distance: [0.0043882932513952255, 0.004747152328491211]
+[2023-01-15 23:11:21,417][__main__][INFO] - Optimizing 543.png
+[2023-01-15 23:11:21,417][__main__][INFO] - Writing video to /home/nadav2/dev/data/CLIP2Shape/outs/sliders_vs_blendshapes/smplx_male/5_descriptors/543.mp4
+[2023-01-15 23:15:03,333][__main__][INFO] - Finished optimizing 543.png
+[2023-01-15 23:15:03,334][__main__][INFO] - Pred sliders values {'long legs': 10.507749, 'round apple': -3.1908593, 'curvy': 8.57788, 'narrow waist': -3.2925208, 'stocky': 11.736807}
+[2023-01-15 23:15:03,334][__main__][INFO] - acctual sliders values tensor([24.0000, 20.0156, 21.8594, 24.3125, 20.5000, 24.5625, 21.7031, 24.1562,
+        23.1250, 25.2812, 24.2656, 24.9375, 24.5781, 25.1562, 22.0312, 24.7344,
+        24.5469, 25.9219, 23.4844, 21.0000, 24.6562, 25.4531, 21.8125, 23.0625,
+        23.9062])
+[2023-01-15 23:15:03,334][__main__][INFO] - Geometric distance: [0.0043882932513952255, 0.004747152328491211, 0.014209059998393059]
+[2023-01-15 23:15:03,334][__main__][INFO] - Optimizing 1895.png
+[2023-01-15 23:15:03,334][__main__][INFO] - Writing video to /home/nadav2/dev/data/CLIP2Shape/outs/sliders_vs_blendshapes/smplx_male/5_descriptors/1895.mp4
+[2023-01-15 23:18:46,237][__main__][INFO] - Finished optimizing 1895.png
+[2023-01-15 23:18:46,237][__main__][INFO] - Pred sliders values {'long legs': 6.9287634, 'round apple': -6.090421, 'curvy': 5.072266, 'narrow waist': -0.19247362, 'stocky': 6.909862}
+[2023-01-15 23:18:46,238][__main__][INFO] - acctual sliders values tensor([23.6875, 19.7656, 21.3281, 25.0000, 20.1562, 25.1562, 22.3281, 23.0781,
+        22.9062, 24.6250, 23.8125, 23.9844, 25.5156, 25.6406, 22.0156, 24.1875,
+        24.2188, 26.1562, 23.2969, 20.7656, 24.2188, 25.1719, 21.5000, 23.2031,
+        24.0000])
+[2023-01-15 23:18:46,238][__main__][INFO] - Geometric distance: [0.0043882932513952255, 0.004747152328491211, 0.014209059998393059, 0.010269657708704472]
+[2023-01-15 23:18:46,238][__main__][INFO] - Optimizing 2183.png
+[2023-01-15 23:18:46,238][__main__][INFO] - Writing video to /home/nadav2/dev/data/CLIP2Shape/outs/sliders_vs_blendshapes/smplx_male/5_descriptors/2183.mp4
+[2023-01-15 23:21:51,691][__main__][INFO] - Finished optimizing 2183.png
+[2023-01-15 23:21:51,692][__main__][INFO] - Pred sliders values {'long legs': 1.2058531, 'round apple': -2.380209, 'curvy': 5.908114, 'narrow waist': -2.5966008, 'stocky': 5.4125814}
+[2023-01-15 23:21:51,693][__main__][INFO] - acctual sliders values tensor([24.5938, 20.8281, 23.2656, 24.5469, 21.6719, 25.4219, 21.5156, 24.2656,
+        22.9219, 26.3438, 25.3594, 26.6250, 24.8281, 25.0156, 22.1562, 23.9375,
+        24.5312, 26.2656, 23.2500, 21.3594, 24.9531, 25.5469, 21.7500, 22.6875,
+        24.0625])
+[2023-01-15 23:21:51,693][__main__][INFO] - Geometric distance: [0.0043882932513952255, 0.004747152328491211, 0.014209059998393059, 0.010269657708704472, 0.011830929666757584]
+[2023-01-15 23:21:51,693][__main__][INFO] - Optimizing 1767.png
+[2023-01-15 23:21:51,693][__main__][INFO] - Writing video to /home/nadav2/dev/data/CLIP2Shape/outs/sliders_vs_blendshapes/smplx_male/5_descriptors/1767.mp4
+[2023-01-15 23:24:21,439][__main__][INFO] - Finished optimizing 1767.png
+[2023-01-15 23:24:21,439][__main__][INFO] - Pred sliders values {'long legs': 1.9499043, 'round apple': -1.9672393, 'curvy': 2.2912407, 'narrow waist': -2.4408078, 'stocky': 1.0157088}
+[2023-01-15 23:24:21,440][__main__][INFO] - acctual sliders values tensor([24.5000, 20.5312, 21.7500, 25.3125, 20.5469, 25.4375, 23.5469, 23.0312,
+        23.2969, 25.3750, 24.1250, 24.6562, 26.3750, 26.5469, 22.9062, 24.3125,
+        25.0000, 26.8594, 23.7656, 21.5156, 24.6875, 25.0469, 22.7344, 23.2656,
+        24.5312])
+[2023-01-15 23:24:21,440][__main__][INFO] - Geometric distance: [0.0043882932513952255, 0.004747152328491211, 0.014209059998393059, 0.010269657708704472, 0.011830929666757584, 0.007106058765202761]
+[2023-01-15 23:24:21,440][__main__][INFO] - Optimizing 3756.png
+[2023-01-15 23:24:21,440][__main__][INFO] - Writing video to /home/nadav2/dev/data/CLIP2Shape/outs/sliders_vs_blendshapes/smplx_male/5_descriptors/3756.mp4
+[2023-01-15 23:26:52,646][__main__][INFO] - Finished optimizing 3756.png
+[2023-01-15 23:26:52,646][__main__][INFO] - Pred sliders values {'long legs': -2.551647, 'round apple': 7.196533, 'curvy': 2.9981136, 'narrow waist': 5.3317747, 'stocky': -2.2438464}
+[2023-01-15 23:26:52,647][__main__][INFO] - acctual sliders values tensor([24.8281, 22.9531, 25.1094, 23.9219, 23.2969, 25.9375, 21.4219, 23.8750,
+        23.5781, 27.7812, 25.9688, 29.0469, 25.0312, 25.2031, 22.3906, 23.3281,
+        25.3438, 25.6875, 23.5000, 21.7656, 24.4375, 23.4531, 23.1562, 23.6875,
+        24.0625])
+[2023-01-15 23:26:52,647][__main__][INFO] - Geometric distance: [0.0043882932513952255, 0.004747152328491211, 0.014209059998393059, 0.010269657708704472, 0.011830929666757584, 0.007106058765202761, 0.03452065587043762]
+[2023-01-15 23:26:52,647][__main__][INFO] - Optimizing 1734.png
+[2023-01-15 23:26:52,647][__main__][INFO] - Writing video to /home/nadav2/dev/data/CLIP2Shape/outs/sliders_vs_blendshapes/smplx_male/5_descriptors/1734.mp4
+[2023-01-15 23:29:28,029][__main__][INFO] - Finished optimizing 1734.png
+[2023-01-15 23:29:28,029][__main__][INFO] - Pred sliders values {'long legs': 1.9820235, 'round apple': 2.184813, 'curvy': -2.529634, 'narrow waist': 1.8580004, 'stocky': 0.9618162}
+[2023-01-15 23:29:28,030][__main__][INFO] - acctual sliders values tensor([24.2500, 20.3906, 21.5469, 25.6562, 20.3750, 25.6094, 23.3125, 22.8281,
+        23.2344, 25.0938, 23.9531, 24.3750, 26.4688, 26.3281, 22.2812, 24.6719,
+        24.7500, 26.9062, 23.6406, 21.1562, 24.2188, 25.3906, 22.2031, 23.1406,
+        24.3906])
+[2023-01-15 23:29:28,030][__main__][INFO] - Geometric distance: [0.0043882932513952255, 0.004747152328491211, 0.014209059998393059, 0.010269657708704472, 0.011830929666757584, 0.007106058765202761, 0.03452065587043762, 0.01442804653197527]
+[2023-01-15 23:29:28,030][__main__][INFO] - Optimizing 3327.png
+[2023-01-15 23:29:28,030][__main__][INFO] - Writing video to /home/nadav2/dev/data/CLIP2Shape/outs/sliders_vs_blendshapes/smplx_male/5_descriptors/3327.mp4
+[2023-01-15 23:32:06,343][__main__][INFO] - Finished optimizing 3327.png
+[2023-01-15 23:32:06,344][__main__][INFO] - Pred sliders values {'long legs': 1.3634012, 'round apple': 0.54460555, 'curvy': -0.756621, 'narrow waist': 1.300087, 'stocky': -0.9489601}
+[2023-01-15 23:32:06,344][__main__][INFO] - acctual sliders values tensor([24.3750, 20.1875, 21.4375, 25.4062, 20.3594, 25.7344, 22.9688, 22.9219,
+        23.1719, 25.1094, 24.0781, 24.2500, 26.1562, 26.0625, 22.7031, 24.3750,
+        24.5938, 26.4531, 23.6406, 21.1406, 24.2812, 25.3906, 22.2969, 23.0938,
+        24.3438])
+[2023-01-15 23:32:06,344][__main__][INFO] - Geometric distance: [0.0043882932513952255, 0.004747152328491211, 0.014209059998393059, 0.010269657708704472, 0.011830929666757584, 0.007106058765202761, 0.03452065587043762, 0.01442804653197527, 0.010444246232509613]
+[2023-01-15 23:32:06,344][__main__][INFO] - Optimizing 1790.png
+[2023-01-15 23:32:06,344][__main__][INFO] - Writing video to /home/nadav2/dev/data/CLIP2Shape/outs/sliders_vs_blendshapes/smplx_male/5_descriptors/1790.mp4
+[2023-01-15 23:34:44,390][__main__][INFO] - Finished optimizing 1790.png
+[2023-01-15 23:34:44,390][__main__][INFO] - Pred sliders values {'long legs': 4.2147827, 'round apple': -2.0464442, 'curvy': -0.44487044, 'narrow waist': -1.8772935, 'stocky': 4.0507903}
+[2023-01-15 23:34:44,390][__main__][INFO] - acctual sliders values tensor([23.6562, 19.7344, 21.1875, 25.1562, 20.2188, 25.0938, 22.7344, 23.1094,
+        23.1250, 24.6875, 23.7500, 23.9062, 25.7188, 25.7969, 21.9688, 24.6094,
+        24.1094, 26.6094, 23.3906, 20.7812, 24.1562, 25.6719, 21.2656, 23.0000,
+        23.8594])
+[2023-01-15 23:34:44,390][__main__][INFO] - Geometric distance: [0.0043882932513952255, 0.004747152328491211, 0.014209059998393059, 0.010269657708704472, 0.011830929666757584, 0.007106058765202761, 0.03452065587043762, 0.01442804653197527, 0.010444246232509613, 0.009885560721158981]

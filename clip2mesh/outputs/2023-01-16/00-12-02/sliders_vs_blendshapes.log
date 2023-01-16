@@ -1,0 +1,92 @@
+[2023-01-16 00:12:05,504][__main__][INFO] - Starting optimization for smplx betas
+[2023-01-16 00:12:05,504][__main__][INFO] - labels: [['rectangular'], ['round apple'], ['pear shaped'], ['proportioned'], ['curvy'], ['narrow waist'], ['long legs'], ['stocky'], ['sturdy'], ['big'], ['heavyset'], ['fat'], ['thin'], ['skinny'], ['short']]
+[2023-01-16 00:12:05,517][__main__][INFO] - Optimizing 1509.png
+[2023-01-16 00:12:05,517][__main__][INFO] - Writing video to /home/nadav2/dev/data/CLIP2Shape/outs/sliders_vs_blendshapes/smplx_male/15_descriptors/1509.mp4
+[2023-01-16 00:14:29,457][__main__][INFO] - Finished optimizing 1509.png
+[2023-01-16 00:14:29,457][__main__][INFO] - Pred sliders values {'rectangular': -4.111175, 'round apple': 1.9923804, 'pear shaped': -1.5195235, 'proportioned': 3.939783, 'curvy': 5.223945, 'narrow waist': 4.6869297, 'long legs': -0.055901773, 'stocky': -2.48185, 'sturdy': -2.0482552, 'big': -3.3741856, 'heavyset': -1.1363038, 'fat': -4.9888787, 'thin': 4.382798, 'skinny': -0.43132925, 'short': 4.3605475}
+[2023-01-16 00:14:29,457][__main__][INFO] - acctual sliders values tensor([24.2656, 20.2656, 21.7188, 25.3594, 20.9531, 26.1875, 22.7500, 22.8594,
+        22.7344, 24.8750, 24.2188, 24.1719, 26.3594, 26.0781, 22.4062, 24.2500,
+        24.1250, 26.2812, 23.0312, 21.2031, 24.1094, 25.1875, 22.6094, 22.7500,
+        24.5469])
+[2023-01-16 00:14:29,458][__main__][INFO] - Geometric distance: [0.005281091667711735]
+[2023-01-16 00:14:29,458][__main__][INFO] - Optimizing 3973.png
+[2023-01-16 00:14:29,458][__main__][INFO] - Writing video to /home/nadav2/dev/data/CLIP2Shape/outs/sliders_vs_blendshapes/smplx_male/15_descriptors/3973.mp4
+[2023-01-16 00:16:55,671][__main__][INFO] - Finished optimizing 3973.png
+[2023-01-16 00:16:55,671][__main__][INFO] - Pred sliders values {'rectangular': -4.045234, 'round apple': 2.2886653, 'pear shaped': 1.3947682, 'proportioned': 2.2405396, 'curvy': 9.130521, 'narrow waist': 0.054979283, 'long legs': 7.0200014, 'stocky': 5.648303, 'sturdy': -8.782207, 'big': 0.9527284, 'heavyset': -4.920106, 'fat': 0.3891468, 'thin': -1.0261426, 'skinny': -7.6210966, 'short': -2.8342505}
+[2023-01-16 00:16:55,671][__main__][INFO] - acctual sliders values tensor([24.3594, 20.9219, 23.9375, 24.6875, 21.7031, 25.1562, 21.7344, 24.3281,
+        22.8125, 26.4375, 25.3594, 27.2344, 25.0312, 25.2344, 21.5469, 23.8906,
+        24.4375, 26.1875, 22.9531, 21.3438, 24.5469, 24.9531, 21.1406, 22.6406,
+        23.8594])
+[2023-01-16 00:16:55,672][__main__][INFO] - Geometric distance: [0.005281091667711735, 0.004479144234210253]
+[2023-01-16 00:16:55,672][__main__][INFO] - Optimizing 543.png
+[2023-01-16 00:16:55,672][__main__][INFO] - Writing video to /home/nadav2/dev/data/CLIP2Shape/outs/sliders_vs_blendshapes/smplx_male/15_descriptors/543.mp4
+[2023-01-16 00:19:18,879][__main__][INFO] - Finished optimizing 543.png
+[2023-01-16 00:19:18,879][__main__][INFO] - Pred sliders values {'rectangular': 1.270345, 'round apple': -4.266814, 'pear shaped': 3.7111382, 'proportioned': 7.8106585, 'curvy': 17.837511, 'narrow waist': -0.30126944, 'long legs': 11.380922, 'stocky': 10.578239, 'sturdy': -14.878626, 'big': -1.8948476, 'heavyset': 3.1894479, 'fat': -1.3586475, 'thin': 0.46317014, 'skinny': -7.475234, 'short': -2.546163}
+[2023-01-16 00:19:18,880][__main__][INFO] - acctual sliders values tensor([24.0000, 20.0156, 21.8594, 24.3125, 20.5000, 24.5625, 21.7031, 24.1562,
+        23.1250, 25.2812, 24.2656, 24.9375, 24.5781, 25.1562, 22.0312, 24.7344,
+        24.5469, 25.9219, 23.4844, 21.0000, 24.6562, 25.4531, 21.8125, 23.0625,
+        23.9062])
+[2023-01-16 00:19:18,880][__main__][INFO] - Geometric distance: [0.005281091667711735, 0.004479144234210253, 0.012689181603491306]
+[2023-01-16 00:19:18,880][__main__][INFO] - Optimizing 1895.png
+[2023-01-16 00:19:18,880][__main__][INFO] - Writing video to /home/nadav2/dev/data/CLIP2Shape/outs/sliders_vs_blendshapes/smplx_male/15_descriptors/1895.mp4
+[2023-01-16 00:21:42,859][__main__][INFO] - Finished optimizing 1895.png
+[2023-01-16 00:21:42,859][__main__][INFO] - Pred sliders values {'rectangular': 5.8978333, 'round apple': -4.4574676, 'pear shaped': 0.33485755, 'proportioned': 10.667231, 'curvy': 14.862549, 'narrow waist': 4.424521, 'long legs': 6.474939, 'stocky': 9.051905, 'sturdy': -13.579754, 'big': 2.601322, 'heavyset': 4.4174657, 'fat': -4.520514, 'thin': 4.744467, 'skinny': -4.3648148, 'short': 0.77267486}
+[2023-01-16 00:21:42,860][__main__][INFO] - acctual sliders values tensor([23.6875, 19.7656, 21.3281, 25.0000, 20.1562, 25.1562, 22.3281, 23.0781,
+        22.9062, 24.6250, 23.8125, 23.9844, 25.5156, 25.6406, 22.0156, 24.1875,
+        24.2188, 26.1562, 23.2969, 20.7656, 24.2188, 25.1719, 21.5000, 23.2031,
+        24.0000])
+[2023-01-16 00:21:42,860][__main__][INFO] - Geometric distance: [0.005281091667711735, 0.004479144234210253, 0.012689181603491306, 0.005299370735883713]
+[2023-01-16 00:21:42,860][__main__][INFO] - Optimizing 2183.png
+[2023-01-16 00:21:42,860][__main__][INFO] - Writing video to /home/nadav2/dev/data/CLIP2Shape/outs/sliders_vs_blendshapes/smplx_male/15_descriptors/2183.mp4
+[2023-01-16 00:24:06,848][__main__][INFO] - Finished optimizing 2183.png
+[2023-01-16 00:24:06,848][__main__][INFO] - Pred sliders values {'rectangular': 8.527323, 'round apple': -1.1124322, 'pear shaped': 2.4194696, 'proportioned': 8.326001, 'curvy': 15.134598, 'narrow waist': 4.74974, 'long legs': 7.5855613, 'stocky': 9.52233, 'sturdy': -15.291481, 'big': 7.112175, 'heavyset': 3.2777135, 'fat': -2.2043896, 'thin': 2.6373575, 'skinny': -8.355903, 'short': 0.87989724}
+[2023-01-16 00:24:06,849][__main__][INFO] - acctual sliders values tensor([24.5938, 20.8281, 23.2656, 24.5469, 21.6719, 25.4219, 21.5156, 24.2656,
+        22.9219, 26.3438, 25.3594, 26.6250, 24.8281, 25.0156, 22.1562, 23.9375,
+        24.5312, 26.2656, 23.2500, 21.3594, 24.9531, 25.5469, 21.7500, 22.6875,
+        24.0625])
+[2023-01-16 00:24:06,849][__main__][INFO] - Geometric distance: [0.005281091667711735, 0.004479144234210253, 0.012689181603491306, 0.005299370735883713, 0.004434141330420971]
+[2023-01-16 00:24:06,849][__main__][INFO] - Optimizing 1767.png
+[2023-01-16 00:24:06,849][__main__][INFO] - Writing video to /home/nadav2/dev/data/CLIP2Shape/outs/sliders_vs_blendshapes/smplx_male/15_descriptors/1767.mp4
+[2023-01-16 00:26:30,574][__main__][INFO] - Finished optimizing 1767.png
+[2023-01-16 00:26:30,574][__main__][INFO] - Pred sliders values {'rectangular': 4.3430815, 'round apple': 0.9931421, 'pear shaped': 1.2002623, 'proportioned': 9.346961, 'curvy': 12.279149, 'narrow waist': 5.2384553, 'long legs': 9.015528, 'stocky': 5.254615, 'sturdy': -10.977507, 'big': 6.666515, 'heavyset': -1.4439768, 'fat': -5.89596, 'thin': 8.683117, 'skinny': -6.518193, 'short': 4.7064524}
+[2023-01-16 00:26:30,575][__main__][INFO] - acctual sliders values tensor([24.5000, 20.5312, 21.7500, 25.3125, 20.5469, 25.4375, 23.5469, 23.0312,
+        23.2969, 25.3750, 24.1250, 24.6562, 26.3750, 26.5469, 22.9062, 24.3125,
+        25.0000, 26.8594, 23.7656, 21.5156, 24.6875, 25.0469, 22.7344, 23.2656,
+        24.5312])
+[2023-01-16 00:26:30,575][__main__][INFO] - Geometric distance: [0.005281091667711735, 0.004479144234210253, 0.012689181603491306, 0.005299370735883713, 0.004434141330420971, 0.008425695821642876]
+[2023-01-16 00:26:30,575][__main__][INFO] - Optimizing 3756.png
+[2023-01-16 00:26:30,575][__main__][INFO] - Writing video to /home/nadav2/dev/data/CLIP2Shape/outs/sliders_vs_blendshapes/smplx_male/15_descriptors/3756.mp4
+[2023-01-16 00:28:54,778][__main__][INFO] - Finished optimizing 3756.png
+[2023-01-16 00:28:54,778][__main__][INFO] - Pred sliders values {'rectangular': 13.650788, 'round apple': 7.9456687, 'pear shaped': 11.598371, 'proportioned': -0.27177677, 'curvy': 13.507215, 'narrow waist': 6.1364813, 'long legs': 1.7126286, 'stocky': 5.6646166, 'sturdy': -11.445546, 'big': 14.099064, 'heavyset': 0.7495183, 'fat': 0.5396749, 'thin': 7.359794, 'skinny': -5.1687245, 'short': 2.159373}
+[2023-01-16 00:28:54,779][__main__][INFO] - acctual sliders values tensor([24.8281, 22.9531, 25.1094, 23.9219, 23.2969, 25.9375, 21.4219, 23.8750,
+        23.5781, 27.7812, 25.9688, 29.0469, 25.0312, 25.2031, 22.3906, 23.3281,
+        25.3438, 25.6875, 23.5000, 21.7656, 24.4375, 23.4531, 23.1562, 23.6875,
+        24.0625])
+[2023-01-16 00:28:54,779][__main__][INFO] - Geometric distance: [0.005281091667711735, 0.004479144234210253, 0.012689181603491306, 0.005299370735883713, 0.004434141330420971, 0.008425695821642876, 0.031823039054870605]
+[2023-01-16 00:28:54,779][__main__][INFO] - Optimizing 1734.png
+[2023-01-16 00:28:54,779][__main__][INFO] - Writing video to /home/nadav2/dev/data/CLIP2Shape/outs/sliders_vs_blendshapes/smplx_male/15_descriptors/1734.mp4
+[2023-01-16 00:31:19,150][__main__][INFO] - Finished optimizing 1734.png
+[2023-01-16 00:31:19,150][__main__][INFO] - Pred sliders values {'rectangular': 13.428002, 'round apple': 1.6350147, 'pear shaped': 6.6638503, 'proportioned': 3.0169804, 'curvy': 7.4495654, 'narrow waist': 13.388904, 'long legs': 3.2570252, 'stocky': -0.44850406, 'sturdy': -9.102988, 'big': 6.2500353, 'heavyset': -0.40027517, 'fat': -3.8356512, 'thin': 6.033376, 'skinny': 0.90754, 'short': -1.9066547}
+[2023-01-16 00:31:19,151][__main__][INFO] - acctual sliders values tensor([24.2500, 20.3906, 21.5469, 25.6562, 20.3750, 25.6094, 23.3125, 22.8281,
+        23.2344, 25.0938, 23.9531, 24.3750, 26.4688, 26.3281, 22.2812, 24.6719,
+        24.7500, 26.9062, 23.6406, 21.1562, 24.2188, 25.3906, 22.2031, 23.1406,
+        24.3906])
+[2023-01-16 00:31:19,151][__main__][INFO] - Geometric distance: [0.005281091667711735, 0.004479144234210253, 0.012689181603491306, 0.005299370735883713, 0.004434141330420971, 0.008425695821642876, 0.031823039054870605, 0.019443029537796974]
+[2023-01-16 00:31:19,151][__main__][INFO] - Optimizing 3327.png
+[2023-01-16 00:31:19,151][__main__][INFO] - Writing video to /home/nadav2/dev/data/CLIP2Shape/outs/sliders_vs_blendshapes/smplx_male/15_descriptors/3327.mp4
+[2023-01-16 00:33:43,217][__main__][INFO] - Finished optimizing 3327.png
+[2023-01-16 00:33:43,217][__main__][INFO] - Pred sliders values {'rectangular': 11.499201, 'round apple': -0.61238295, 'pear shaped': 5.7192245, 'proportioned': 4.29216, 'curvy': 4.9114876, 'narrow waist': 15.437377, 'long legs': 0.5360534, 'stocky': -1.4145209, 'sturdy': -9.44086, 'big': 4.604326, 'heavyset': -0.99769413, 'fat': -5.451641, 'thin': 5.2780175, 'skinny': 1.258648, 'short': -3.5532122}
+[2023-01-16 00:33:43,217][__main__][INFO] - acctual sliders values tensor([24.3750, 20.1875, 21.4375, 25.4062, 20.3594, 25.7344, 22.9688, 22.9219,
+        23.1719, 25.1094, 24.0781, 24.2500, 26.1562, 26.0625, 22.7031, 24.3750,
+        24.5938, 26.4531, 23.6406, 21.1406, 24.2812, 25.3906, 22.2969, 23.0938,
+        24.3438])
+[2023-01-16 00:33:43,217][__main__][INFO] - Geometric distance: [0.005281091667711735, 0.004479144234210253, 0.012689181603491306, 0.005299370735883713, 0.004434141330420971, 0.008425695821642876, 0.031823039054870605, 0.019443029537796974, 0.0095183365046978]
+[2023-01-16 00:33:43,218][__main__][INFO] - Optimizing 1790.png
+[2023-01-16 00:33:43,218][__main__][INFO] - Writing video to /home/nadav2/dev/data/CLIP2Shape/outs/sliders_vs_blendshapes/smplx_male/15_descriptors/1790.mp4
+[2023-01-16 00:36:07,923][__main__][INFO] - Finished optimizing 1790.png
+[2023-01-16 00:36:07,923][__main__][INFO] - Pred sliders values {'rectangular': 8.793813, 'round apple': -3.2509716, 'pear shaped': 4.173451, 'proportioned': 2.8520527, 'curvy': 4.1075525, 'narrow waist': 13.236033, 'long legs': -0.9479592, 'stocky': 2.5856762, 'sturdy': -6.3896885, 'big': 3.2384415, 'heavyset': -2.9109278, 'fat': -5.2613482, 'thin': 4.6536307, 'skinny': 7.0370436, 'short': -11.710842}
+[2023-01-16 00:36:07,924][__main__][INFO] - acctual sliders values tensor([23.6562, 19.7344, 21.1875, 25.1562, 20.2188, 25.0938, 22.7344, 23.1094,
+        23.1250, 24.6875, 23.7500, 23.9062, 25.7188, 25.7969, 21.9688, 24.6094,
+        24.1094, 26.6094, 23.3906, 20.7812, 24.1562, 25.6719, 21.2656, 23.0000,
+        23.8594])
+[2023-01-16 00:36:07,924][__main__][INFO] - Geometric distance: [0.005281091667711735, 0.004479144234210253, 0.012689181603491306, 0.005299370735883713, 0.004434141330420971, 0.008425695821642876, 0.031823039054870605, 0.019443029537796974, 0.0095183365046978, 0.01128937304019928]

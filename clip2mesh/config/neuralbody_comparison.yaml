@@ -1,11 +1,11 @@
-data_dir: /home/nadav2/dev/data/CLIP2Shape/outs/images_to_shape/NeuralBody_DATA/data
-predictions_dir: /home/nadav2/dev/data/CLIP2Shape/outs/images_to_shape/NeuralBody_DATA/predicitons
-output_dir: /home/nadav2/dev/data/CLIP2Shape/outs/images_to_shape/NeuralBody_DATA/comparison_males
-gt_dir: /home/nadav2/dev/data/CLIP2Shape/GT_data/people_snapshot_public
+data_dir: /home/nadav2/dev/data/CLIP2Shape/outs/images_to_shape/NeuralBody_DATA/new/data
+predictions_dir: /home/nadav2/dev/data/CLIP2Shape/outs/images_to_shape/NeuralBody_DATA/new/predictions
+output_dir: /home/nadav2/dev/data/CLIP2Shape/outs/images_to_shape/NeuralBody_DATA/new/comparison
+gt_dir: /home/nadav2/dev/data/CLIP2Shape/outs/images_to_shape/NeuralBody_DATA/new/data
 
 comparison_kwargs:
   
-  raw_imgs_dir: ${data_dir}/sampled_images_males
+  raw_imgs_dir: ${data_dir}
   gt_dir: ${gt_dir}
   output_path: ${output_dir}
   

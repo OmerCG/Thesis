@@ -1,0 +1,19 @@
+bs_dir: /home/nadav2/dev/data/CLIP2Shape/images/smplx_py3d_male/
+model_path: /home/nadav2/dev/repos/Thesis/end2end_pipeline/smplx_male_end2end_5_desc.ckpt
+output_dir: /home/nadav2/dev/data/CLIP2Shape/outs/sliders_vs_blendshapes/smplx_male/5_descriptors
+gender: male
+num_coeffs: 10
+optimizing_feature: betas
+model_type: smplx
+display: true
+write_videos: true
+total_steps: 500
+lr: 0.01
+renderer_kwargs:
+  img_size:
+  - 1024
+  - 1024
+  dist: 2.4
+  elev: 8.6
+  azim: 2.1
+  tex_path: /home/nadav2/dev/repos/Thesis/SMPLX/textures/smplx_texture_m_alb.png

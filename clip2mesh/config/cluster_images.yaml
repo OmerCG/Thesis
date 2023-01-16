@@ -1,21 +1,21 @@
-images_dir: /home/nadav2/dev/data/CLIP2Shape/images/flame_shape_py3d
+images_dir: /home/nadav2/dev/data/CLIP2Shape/images/smpl_male_multiview
 out_path: /home/nadav2/dev/data/CLIP2Shape/outs/clustering_images/words_jsons
 
 
-descriptors:  # FLAME - shape
-  - "fat"
-  - "thin"
-  - "long neck"
-  - "big forhead"
-  - "big eyes"
-  - "nose sticking-out"
-  - "big mouth"
-  - "ears sticking-out"
-  - "big eyebrows"
-  - "thin lips"
-  - "small chin"
-  - "long head"
-  - "chubby cheeks"
+# descriptors:  # FLAME - shape
+#   - "fat"
+#   - "thin"
+#   - "long neck"
+#   - "big forhead"
+#   - "big eyes"
+#   - "nose sticking-out"
+#   - "big mouth"
+#   - "ears sticking-out"
+#   - "big eyebrows"
+#   - "thin lips"
+#   - "small chin"
+#   - "long head"
+#   - "chubby cheeks"
 
 # descriptors:  # FLAME - expression
 #   - "happy"
@@ -65,3 +65,31 @@ descriptors:  # FLAME - shape
 #   - "heavyset"
 #   - "petite"
 #   - "small"
+
+descriptors:  # SMPLX - male
+  - "fat"
+  - "thin"
+  - "muscular"
+  - "short"
+  - "long legs"
+  - "narrow waist"
+  - "skinny"
+  - "tall"
+  - "rectangular"
+  - "pear shaped"
+  - "average"
+  - "big"
+  - "curvy"
+  - "lean"
+  - "masculine"
+  - "proportioned"
+  - "stocky"
+  - "sexy"
+  - "sturdy"
+  - "broad shoulders"
+  - "fit"
+  - "round apple"
+  - "built"
+  - "heavyset"
+  - "petite"
+  - "small"

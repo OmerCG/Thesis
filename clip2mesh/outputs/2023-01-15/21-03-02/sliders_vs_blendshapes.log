@@ -1,0 +1,15 @@
+[2023-01-15 21:03:05,115][__main__][INFO] - Optimizing 1509.png
+[2023-01-15 21:03:05,115][__main__][INFO] - Writing video to /home/nadav2/dev/data/CLIP2Shape/outs/sliders_vs_blendshapes/smplx_male/1509.mp4
+[2023-01-15 21:05:23,112][__main__][INFO] - Finished optimizing 1509.png
+[2023-01-15 21:05:23,112][__main__][INFO] - Final loss: 1.231345772743225
+[2023-01-15 21:05:23,113][__main__][INFO] - GT tensor([[ 0.3212, -1.0265, -0.6499, -0.0000,  1.8556, -0.0000,  0.5744,  3.6072,
+          1.3437, -1.4523]], device='cuda:0')
+[2023-01-15 21:05:23,114][__main__][INFO] - Pred tensor([[-0.0560, -0.9529, -0.5335, -0.5968,  0.2703, -0.2421,  0.3141,  1.0115,
+          0.1307, -0.4789]], device='cuda:0', grad_fn=<AddmmBackward>)
+[2023-01-15 21:05:23,114][__main__][INFO] - acctual sliders values tensor([24.2656, 20.2656, 21.7188, 25.3594, 20.9531, 26.1875, 22.7500, 22.8594,
+        22.7344, 24.8750, 24.2188, 24.1719, 26.3594, 26.0781, 22.4062, 24.2500,
+        24.1250, 26.2812, 23.0312, 21.2031, 24.1094, 25.1875, 22.6094, 22.7500,
+        24.5469])
+[2023-01-15 21:05:23,114][__main__][INFO] - Total acumulated loss: 1.231345772743225
+[2023-01-15 21:05:23,115][__main__][INFO] - Optimizing 3973.png
+[2023-01-15 21:05:23,115][__main__][INFO] - Writing video to /home/nadav2/dev/data/CLIP2Shape/outs/sliders_vs_blendshapes/smplx_male/3973.mp4

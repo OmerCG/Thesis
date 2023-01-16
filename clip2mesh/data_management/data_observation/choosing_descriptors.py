@@ -62,13 +62,13 @@ class ChoosingDescriptors:
         all_possible_descriptors = {}
 
         # create a dictionary of all possible descriptors and their iou in case this function will return a lower number of descriptors than the minimum
-        for iou_group, descriptors in descriptors_groups.items():
-            all_possible_descriptors[iou_group] = {}
+        for cluster, descriptors in descriptors_groups.items():
+            all_possible_descriptors[cluster] = {}
             for descriptor in descriptors:
                 descriptor_iou = df[(df["descriptor_1"] == descriptor) | (df["descriptor_2"] == descriptor)][
                     "iou"
                 ].mean()
-                all_possible_descriptors[iou_group][descriptor] = descriptor_iou
+                all_possible_descriptors[cluster][descriptor] = descriptor_iou
 
         # check if there are enough descriptors
         if total_descriptors < min_descriptors_overall:
@@ -82,7 +82,7 @@ class ChoosingDescriptors:
             self.logger.info(f"Total number of clusters: {len(descriptors_groups)}")
 
         # iterate over clusters
-        for iou_group, descriptors in descriptors_groups.items():
+        for cluster, descriptors in descriptors_groups.items():
 
             # check if there are enough descriptors in the cluster
             # if not, return the single descriptor
@@ -90,7 +90,7 @@ class ChoosingDescriptors:
                 descriptor_iou = df[
                     (df["descriptor_1"] == second_descriptor) | (df["descriptor_2"] == second_descriptor)
                 ]["iou"].mean()
-                finalists_descriptors[iou_group] = {descriptors[0]: descriptor_iou}
+                finalists_descriptors[cluster] = {descriptors[0]: descriptor_iou}
 
             # if there are enough descriptors in the cluster
             else:
@@ -98,87 +98,87 @@ class ChoosingDescriptors:
                 # filter the dataframe to only include the descriptors in the cluster
                 group_df = df[df["descriptor_1"].isin(descriptors) & df["descriptor_2"].isin(descriptors)]
                 group_df = group_df.sort_values("iou", ascending=False)
-                group_df["group"] = group_df["iou"].apply(lambda x: 1 if x > 0.7 else 0)
                 final_candidates = {}
 
                 # iterate over the groups
-                for group_idx in group_df["group"].unique():
+                # for group_idx in group_df["group"].unique():
 
-                    chosed_descriptors = {}
+                chosed_descriptors = {}
 
-                    # iterate over the rows in the group
-                    for _, row in group_df[group_df["group"] == group_idx].iterrows():
+                # iterate over the rows in the group
+                # for _, row in group_df[group_df["group"] == group_idx].iterrows():
+                for _, row in group_df.iterrows():
 
-                        if self.verbose:
-                            print(f"*" * 50)
-                        if self.verbose:
-                            self.logger.info(f"choosing between: {row['descriptor_1']} | {row['descriptor_2']}")
+                    if self.verbose:
+                        print(f"*" * 50)
+                    if self.verbose:
+                        self.logger.info(f"choosing between: {row['descriptor_1']} | {row['descriptor_2']}")
 
-                        # define the descriptors
-                        first_descriptor = row["descriptor_1"]
-                        second_descriptor = row["descriptor_2"]
+                    # define the descriptors
+                    first_descriptor = row["descriptor_1"]
+                    second_descriptor = row["descriptor_2"]
 
-                        # choose one of the descriptors
-                        chosen_descriptor, chosen_descriptor_iou = self.choose_between_2_descriptors(
-                            group_df, first_descriptor, second_descriptor
-                        )
+                    # choose one of the descriptors
+                    chosen_descriptor, chosen_descriptor_iou = self.choose_between_2_descriptors(
+                        group_df, first_descriptor, second_descriptor
+                    )
 
-                        # if the chosen descriptor is not in the chosed_descriptors dict, add it
-                        if chosen_descriptor not in chosed_descriptors.keys():
+                    # if the chosen descriptor is not in the chosed_descriptors dict, add it
+                    if chosen_descriptor not in chosed_descriptors.keys():
 
-                            # if the dict is empty, add the descriptor
-                            if chosed_descriptors == {}:
+                        # if the dict is empty, add the descriptor
+                        if chosed_descriptors == {}:
+                            if self.verbose:
+                                self.logger.info(f"first descriptor chosen -> {chosen_descriptor}")
+                            chosed_descriptors[chosen_descriptor] = chosen_descriptor_iou
+
+                        # if the dict is not empty, check if the chosen descriptor is better than the others
+                        else:
+
+                            if self.verbose:
+                                self.logger.info(f"iterating over chosed descriptors -> {chosed_descriptors}")
+
+                            # iterate over the chosed descriptors
+                            add_descriptor = False
+                            for descriptor in chosed_descriptors.keys():
+
                                 if self.verbose:
-                                    self.logger.info(f"first descriptor chosen -> {chosen_descriptor}")
-                                chosed_descriptors[chosen_descriptor] = chosen_descriptor_iou
+                                    self.logger.info(f"choosing between: {descriptor} | {chosen_descriptor}")
 
-                            # if the dict is not empty, check if the chosen descriptor is better than the others
-                            else:
+                                # choose one of the descriptors
+                                sub_chosen_descriptor, _ = self.choose_between_2_descriptors(
+                                    group_df, descriptor, chosen_descriptor
+                                )
 
-                                if self.verbose:
-                                    self.logger.info(f"iterating over chosed descriptors -> {chosed_descriptors}")
-
-                                # iterate over the chosed descriptors
-                                add_descriptor = False
-                                for descriptor in chosed_descriptors.keys():
-
-                                    if self.verbose:
-                                        self.logger.info(f"choosing between: {descriptor} | {chosen_descriptor}")
-
-                                    # choose one of the descriptors
-                                    sub_chosen_descriptor, _ = self.choose_between_2_descriptors(
-                                        group_df, descriptor, chosen_descriptor
-                                    )
-
-                                    # if the chosen descriptor is not the same as the current one, it means that the current descriptor is worse, hence break
-                                    if sub_chosen_descriptor != chosen_descriptor:
-                                        if self.verbose:
-                                            self.logger.info(
-                                                f"{chosen_descriptor} has higher iou than {descriptor}, hence {descriptor} is chosen"
-                                            )
-                                        break
-
-                                    # if the chosen descriptor is not the same as the current one, it means that the current descriptor is better, hence add the chosen descriptor
-                                    else:
-                                        add_descriptor = True
-
-                                # if the chosen descriptor is better than all the others, add it
-                                if add_descriptor:
-
+                                # if the chosen descriptor is not the same as the current one, it means that the current descriptor is worse, hence break
+                                if sub_chosen_descriptor != chosen_descriptor:
                                     if self.verbose:
                                         self.logger.info(
-                                            f"{chosen_descriptor} has lower iou than all chosed descriptors, hence {chosen_descriptor} is chosen"
+                                            f"{chosen_descriptor} has higher iou than {descriptor}, hence {descriptor} is chosen"
                                         )
+                                    break
 
-                                    chosed_descriptors[chosen_descriptor] = chosen_descriptor_iou
+                                # if the chosen descriptor is not the same as the current one, it means that the current descriptor is better, hence add the chosen descriptor
+                                else:
+                                    add_descriptor = True
 
-                        if self.verbose:
-                            self.logger.info(chosed_descriptors)
+                            # if the chosen descriptor is better than all the others, add it
+                            if add_descriptor:
 
-                    # add the chosen descriptors to the final candidates
-                    for descriptor, iou in chosed_descriptors.items():
-                        if descriptor not in final_candidates.keys():
-                            final_candidates[descriptor] = iou
+                                if self.verbose:
+                                    self.logger.info(
+                                        f"{chosen_descriptor} has lower iou than all chosed descriptors, hence {chosen_descriptor} is chosen"
+                                    )
+
+                                chosed_descriptors[chosen_descriptor] = chosen_descriptor_iou
+
+                    if self.verbose:
+                        self.logger.info(chosed_descriptors)
+
+                # add the chosen descriptors to the final candidates
+                for descriptor, iou in chosed_descriptors.items():
+                    if descriptor not in final_candidates.keys():
+                        final_candidates[descriptor] = iou
 
                 if self.verbose:
                     print(f"*" * 50)
@@ -197,7 +197,7 @@ class ChoosingDescriptors:
                 sorted_descriptors_by_iou_ascending = sorted(final_candidates, key=final_candidates.get, reverse=False)[
                     :max_descriptors_per_cluster
                 ]
-                finalists_descriptors[iou_group] = {
+                finalists_descriptors[cluster] = {
                     descriptor_name: final_candidates[descriptor_name]
                     for descriptor_name in sorted_descriptors_by_iou_ascending
                 }
@@ -284,10 +284,10 @@ class ChoosingDescriptors:
 
 
 if __name__ == "__main__":
-    df_path = "/home/nadav2/dev/data/CLIP2Shape/outs/vertices_heatmap/optimizations/compared_to_inv/smplx_female_multiview_diff_coord/vertex_heatmaps/ious.csv"
-    descriptors_groups_json = "/home/nadav2/dev/data/CLIP2Shape/outs/clustering_images/words_jsons/smplx_female.json"
+    df_path = "/home/nadav2/dev/data/CLIP2Shape/outs/vertices_heatmap/optimizations/compared_to_inv/smplx_male_multiview_diff_coord/vertex_heatmaps/ious.csv"
+    descriptors_groups_json = "/home/nadav2/dev/data/CLIP2Shape/outs/clustering_images/words_jsons/smplx_male.json"
     choosing_descriptors = ChoosingDescriptors(verbose=True)
     finalists_descriptors, num_of_descriptors = choosing_descriptors.choose(
-        df_path, descriptors_groups_json, max_descriptors_overall=5
+        df_path, descriptors_groups_json, max_descriptors_overall=5, min_descriptors_overall=5
     )
     print(finalists_descriptors, num_of_descriptors)
