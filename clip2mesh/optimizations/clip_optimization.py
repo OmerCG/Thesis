@@ -9,7 +9,11 @@ from tqdm import tqdm
 from pathlib import Path
 from omegaconf import DictConfig
 from typing import Tuple, Literal, List
+from torchvision.transforms import Resize
+from pytorch_lightning import seed_everything
 from clip2mesh.utils import ModelsFactory, Pytorch3dRenderer, Utils
+
+seed_everything(42)
 
 
 class Model(nn.Module):
@@ -48,7 +52,6 @@ class Optimization:
         output_dir: str = "./",
         fps: int = 10,
         gender: Literal["male", "female", "neutral"] = "neutral",
-        img_out_size: Tuple[int, int] = (512, 512),
         display: bool = False,
         num_coeffs: int = 10,
     ):
@@ -69,16 +72,16 @@ class Optimization:
         self.fps = fps
         self.display = display
         self.num_coeffs = num_coeffs
-        self.img_out_size = img_out_size
-        self.view_angles = range(0, 360, 45)
+        self.img_out_size = renderer_kwargs["img_size"]
+        self.resize = Resize((224, 224))
+        self.view_angles = range(0, 360, 90)
         self.num_rows, self.num_cols = self.get_collage_shape()
 
         self._load_logger()
 
     def record_video(self, fps, output_dir, text) -> cv2.VideoWriter:
-        collage_size = (self.img_out_size[0] * self.num_cols, self.img_out_size[1] * self.num_rows)
         video_recorder = cv2.VideoWriter(
-            f"{output_dir}/{text.replace(' ', '_')}.mp4", cv2.VideoWriter_fourcc(*"mp4v"), fps, collage_size
+            f"{output_dir}/{text.replace(' ', '_')}.mp4", cv2.VideoWriter_fourcc(*"mp4v"), fps, tuple(self.img_out_size)
         )
         return video_recorder
 
@@ -100,9 +103,10 @@ class Optimization:
     def loss(
         self, parameters, loss_fn: CLIPLoss, text: torch.Tensor, angle: float = 0
     ) -> Tuple[torch.Tensor, torch.Tensor]:
-        clip_renderer_image = self.render_image(parameters, angle=angle)
-        loss = loss_fn(clip_renderer_image[..., :3].permute(0, 3, 1, 2), text)
-        return loss, clip_renderer_image
+        rendered_img = self.render_image(parameters, angle=angle)
+        clip_rendered_image = self.resize(rendered_img[..., :3].permute(0, 3, 1, 2))
+        loss = loss_fn(clip_rendered_image, text)
+        return loss, rendered_img
 
     def get_collage_shape(self):
         num_rows, num_cols = self.utils.get_plot_shape(len(self.view_angles))[0]
@@ -113,7 +117,7 @@ class Optimization:
     def get_collage(self, images_list: List[np.ndarray]) -> np.ndarray:
         imgs_collage = [
             cv2.cvtColor(
-                cv2.resize(rend_img.detach().cpu().numpy()[0], self.img_out_size),
+                rend_img.detach().cpu().numpy()[0],
                 cv2.COLOR_RGB2BGR,
             )
             for rend_img in images_list
@@ -129,6 +133,8 @@ class Optimization:
 
     def optimize(self):
 
+        torch.seed()
+
         for word_desciptor in self.text:
 
             self.logger.info(f"Optimizing for {word_desciptor}...")
@@ -141,9 +147,9 @@ class Optimization:
 
                 file_name = f"{word_desciptor}_{phase}.npy" if phase == "inverse" else f"{word_desciptor}.npy"
                 out_file_path = output_dir / file_name
-                # if out_file_path.exists():
-                # self.logger.info(f"File {out_file_path} already exists. Skipping...")
-                # continue
+                if out_file_path.exists():
+                    self.logger.info(f"File {out_file_path} already exists. Skipping...")
+                    continue
 
                 self.logger.info(f"Phase: {phase}")
                 if phase == "inverse":
@@ -169,8 +175,9 @@ class Optimization:
                     optimizer.step()
                     pbar.set_description(f"Loss: {loss.item():.4f}")
                     collage = self.get_collage(rend_imgs)
+                    collage = cv2.resize(collage.copy(), (896, 896))
                     if self.display:
-                        cv2.imshow("image", cv2.resize(collage.copy(), (1024, 512)))
+                        cv2.imshow("image", collage)
                         cv2.waitKey(1)
                     img_for_vid = np.clip((collage * 255), 0, 255).astype(np.uint8)
                     video_recorder.write(img_for_vid)

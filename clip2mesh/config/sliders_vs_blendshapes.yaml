@@ -1,3 +1,6 @@
+defaults:
+    - renderer_kwargs: smplx
+
 bs_dir: /home/nadav2/dev/data/CLIP2Shape/images/smplx_py3d_male/
 model_path: /home/nadav2/dev/repos/Thesis/pre_production/smplx_male_end2end_15_desc.ckpt
 output_dir: /home/nadav2/dev/data/CLIP2Shape/outs/sliders_vs_blendshapes/smplx_male/15_descriptors
@@ -13,19 +16,4 @@ lr: 0.01
 
 renderer_kwargs:
     img_size: [1024, 1024]
-
-    # # FLAME cam params
-    # dist: 0.5
-    # elev: 0.0
-    # azim: 0.0
-
-    # SMPLX cam params
-    dist: 2.4
-    elev: 8.6
-    azim: 2.1
     tex_path: /home/nadav2/dev/repos/Thesis/SMPLX/textures/smplx_texture_m_alb.png
-
-    # # SMAL cam params
-    # dist: 4.0
-    # elev: 20.0
-    # azim: 2.1

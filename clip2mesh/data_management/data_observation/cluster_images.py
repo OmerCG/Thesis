@@ -3,6 +3,7 @@ import json
 import torch
 import umap
 import hydra
+import logging
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -17,8 +18,11 @@ from typing import Union, Tuple, List, Dict
 
 class ClusterImages:
     def __init__(self):
+        self.max_images = 5000
         self.device = "cuda" if torch.cuda.is_available() else "cpu"
         self.model, self.preprocess = clip.load("ViT-B/32", device=self.device)
+
+        self._get_logger()
 
     def get_best_k(self, images_embedding: np.ndarray, kmax: int = 10) -> int:
         wss_scores = self.calculate_WSS(images_embedding, kmax)
@@ -83,6 +87,10 @@ class ClusterImages:
             sse.append(curr_sse)
         return sse
 
+    def _get_logger(self):
+        logging.basicConfig(level=logging.INFO, format="%(asctime)s: - %(message)s")
+        self.logger = logging.getLogger(__name__)
+
     @staticmethod
     def write_words_clusters_to_json(possible_words: Dict[int, List[str]], json_path: Union[str, Path]):
         json_data = {str(i): possible_words[i] for i in possible_words.keys()}
@@ -121,33 +129,35 @@ class ClusterImages:
     def get_encoded_images(self, images_dir: Union[Path, str]) -> Tuple[List[np.array], List[np.array], List[np.array]]:
 
         encoded_images = []
-        images = []
         preprocessed_images = []
         images_generator = [file for file in Path(images_dir).rglob("*.png") if "side" not in file.stem]
 
-        for image in tqdm(images_generator, total=len(images_generator), desc="Encoding images"):
-            images.append(np.array(Image.open(image)))
+        for idx, image in enumerate(tqdm(images_generator, total=len(images_generator), desc="Encoding images")):
             image = self.preprocess(Image.open(image)).unsqueeze(0).to(self.device)
             preprocessed_images.append(image)
             with torch.no_grad():
-                image_features = self.model.encode_image(image).cpu().numpy()
+                image_features = self.model.encode_image(image).half().cpu().numpy()
             encoded_images.append(image_features)
+            if idx == self.max_images:
+                self.logger.warning(f"Reached max images: {self.max_images} - stopping encoding")
+                break
 
         encoded_images = np.concatenate(encoded_images, axis=0)
-        return encoded_images, images, preprocessed_images
+        return encoded_images, preprocessed_images
 
     def cluster_images(self, images_dir: Union[Path, str], descriptors: List[str], out_path: Union[str, Path]) -> None:
         if isinstance(images_dir, Path):
             images_dir = images_dir.as_posix()
         if isinstance(out_path, str):
             out_path = Path(out_path)
-        encoded_images, _, preprocessed_images = self.get_encoded_images(images_dir=images_dir)
+        encoded_images, preprocessed_images = self.get_encoded_images(images_dir=images_dir)
         images_embedding = umap.UMAP(n_neighbors=300, min_dist=0.0, metric="euclidean").fit_transform(encoded_images)
         best_k = self.get_best_k(images_embedding)
         kmeans_labels = self.cluster_images_w_umap(encoded_images, n_clusters=best_k)
         # delete unnecessary variables to free GPU memory
         del encoded_images
         del images_embedding
+        torch.cuda.empty_cache()
         possible_words = self.calc_top_descriptors(descriptors, preprocessed_images, kmeans_labels)
         self.write_words_clusters_to_json(possible_words, out_path / "words_clusters.json")
 

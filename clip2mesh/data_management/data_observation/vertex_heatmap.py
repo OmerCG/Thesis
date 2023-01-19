@@ -63,6 +63,8 @@ class VertexHeatmap:
 
     def _load_def_mesh(self):
         verts, faces, vt, ft = self.models_factory.get_model()
+        if self.model_type == "smplx":
+            verts += self.utils.smplx_offset_numpy
         self.def_verts = torch.tensor(verts).to(self.device)
         if self.def_verts.dim() == 2:
             self.def_verts = self.def_verts.unsqueeze(0)
@@ -118,6 +120,8 @@ class VertexHeatmap:
     def get_model(self, shape_vec):
         model_kwargs = {self.optimize_feature: shape_vec, "gender": self.gender}
         verts, faces, _, _ = self.models_factory.get_model(**model_kwargs)
+        if self.model_type == "smplx":
+            verts += self.utils.smplx_offset_numpy
         return verts, faces
 
     def get_verts_diff_coords(self, verts: np.ndarray, mesh: trimesh.Trimesh) -> List[torch.Tensor]:

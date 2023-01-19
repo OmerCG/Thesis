@@ -734,59 +734,6 @@ class Utils:
     @staticmethod
     def get_labels() -> List[List[str]]:
         # labels = [["big cat"], ["cow"], ["donkey"], ["hippo"], ["dog"]]  # SMAL animals
-        # labels = [
-        #     ["hourglass"],
-        #     ["lean"],
-        #     ["thin"],
-        #     ["narrow waist"],
-        #     ["average"],
-        #     ["long legs"],
-        #     ["heavyset"],
-        #     ["small"],
-        #     ["pear shaped"],
-        #     ["broad shoulders"],
-        #     ["skinny"],
-        # ]  # SMPLX body
-        # labels = [
-        #     ["calm"],
-        #     ["relaxed"],
-        #     ["open eyes"],
-        #     ["bored"],
-        #     ["happy"],
-        #     ["tired"],
-        #     ["excited"],
-        #     ["sleepy"],
-        #     ["scared"],
-        #     ["worried"],
-        #     ["raised eyebrows"],
-        #     ["pensive"],
-        #     ["surprised"],
-        #     ["confused"],
-        #     ["fearful"],
-        #     ["serious"],
-        #     ["neutral"],
-        #     ["angry"],
-        #     ["sad"],
-        #     ["open mouth"],
-        #     ["smiling"],
-        #     ["nervous"],
-        #     ["disgusted"],
-        # ]  # FLAME expression
-        # labels = [
-        #     ["fat"],
-        #     ["thin"],
-        #     ["thin lips"],
-        #     ["big eyes"],
-        #     ["long neck"],
-        #     ["chubby cheeks"],
-        #     ["big eyebrows"],
-        #     ["big nose"],
-        #     ["big mouth"],
-        #     ["ears sticking-out"],
-        #     ["big forehead"],
-        #     ["small chin"],
-        #     ["long head"],
-        # ]  # FLAME shape
         labels = [
             "big",
             "fat",
@@ -843,9 +790,6 @@ class Utils:
     @staticmethod
     def syntonyms_antonyms():
         return {"open": "close", "raise": "drop", "narrow": "wide", "long": "short", "big": "small", "fat": "thin"}
-
-    def get_num_stats(self) -> int:
-        return len(self.get_labels())
 
     @staticmethod
     def get_random_betas_smplx(num_coeffs: int = 10, smpl: bool = False) -> torch.tensor:

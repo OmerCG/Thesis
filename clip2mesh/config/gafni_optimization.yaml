@@ -6,6 +6,8 @@ optimize_features: betas
 gender: male
 img_out_size: [1024, 1024]
 display: True
+lr: 0.4
+total_steps: 100
 text:
   - fat
   # - tall
