@@ -1,0 +1,41 @@
+renderer_kwargs:
+  dist: 5.0
+  elev: 10.0
+  azim: 0.0
+  tex_path: /home/nadav2/dev/repos/CLIP2Shape/SMPLX/textures/smplx_texture_m_alb.png
+model_type: smplx
+gender: male
+device: cuda
+text:
+- a tall person
+- long legs
+- fat
+- thin
+- muscular
+- short
+- narrow waist
+- skinny
+- rectangular
+- pear shaped
+- average
+- big
+- curvy
+- lean
+- masculine
+- proportioned
+- stocky
+- sexy
+- sturdy
+- broad shoulders
+- fit
+- round apple
+- built
+- heavyset
+- petite
+- small
+total_steps: 1000
+num_coeffs: 10
+optimize_features: betas
+output_dir: /home/nadav2/dev/data/CLIP2Shape/outs/vertices_heatmap/optimizations/compared_to_inv/smplx_multiview_diff_coords
+lr: 0.01
+display: true

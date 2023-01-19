@@ -35,6 +35,7 @@ class Image2Shape(Image2ShapeUtils):
         self.display: bool = args.display_images
         self.num_img: int = 0  # num of collages saved
         self.collage: bool = args.collage
+        self.optimize_feature: Literal["betas", "beta", "shape_params", "expression_params"] = args.optimize_feature
 
         if self.collage:
             self.images_collage_list = []
@@ -42,8 +43,10 @@ class Image2Shape(Image2ShapeUtils):
             self._load_body_pose(args.body_pose_path)
 
         self._load_renderer(args.renderer_kwargs)
-        self._load_smplx_models(**args.smplx_models_paths)
-        self._load_weights(args.labels_weights)
+        if self.model_type == "smplx":
+            self._load_smplx_models(**args.smplx_models_paths)
+        else:
+            self._load_flame_smal_models(args.model_path)
         self._load_clip_model()
         self._encode_labels()
         self._load_images_generator()
@@ -52,8 +55,8 @@ class Image2Shape(Image2ShapeUtils):
             self._load_comparison_data(args.comparison_data_path)
 
     def image_to_shape(self):
-        if len(self.images_generator) < self.max_images_in_collage:
-            self.max_images_in_collage = len(self.images_generator) - 1
+        # if len(self.images_generator) < self.max_images_in_collage:
+        #     self.max_images_in_collage = len(self.images_generator) - 1
         random.shuffle(self.images_generator)
 
         if not self.display:
@@ -72,64 +75,79 @@ class Image2Shape(Image2ShapeUtils):
                 if self.comparison_mode:
                     shape_vector_pred = self.comparison_data[idx][None]
                 else:
-                    clip_scores = self.clip_model(encoded_image, self.encoded_labels[gender])[0]
-                    clip_scores = self.normalize_scores(clip_scores, gender=gender)
-                    shape_vector_pred = self.model[gender](clip_scores)
+                    if isinstance(self.encoded_labels, dict):
+                        encoded_labels = self.encoded_labels[gender]
+                    else:
+                        encoded_labels = self.encoded_labels
+
+                    clip_scores = self.clip_model(encoded_image, encoded_labels)[0].float()
+                    if isinstance(self.model, dict):
+                        model = self.model[gender]
+                    else:
+                        model = self.model
+                    shape_vector_pred = model(clip_scores)
 
             render_mesh_kwargs = self.get_render_mesh_kwargs(shape_vector_pred, gender=gender)
 
-            rendered_img = self.renderer.render_mesh(**render_mesh_kwargs)
-            rendered_img = self.adjust_rendered_img(rendered_img)
+            images = []
+            for angle in np.arange(0, 360, 45):
+                render_mesh_kwargs.update({"rotate_mesh": {"degrees": angle, "axis": "y"}})
+                rendered_img = self.renderer.render_mesh(**render_mesh_kwargs)
+                rendered_img = self.adjust_rendered_img(rendered_img)
+                images.append(rendered_img)
 
+            h_images = np.vstack([np.hstack(images[:4]), np.hstack(images[4:])])
             input_image = cv2.imread(image_path.as_posix())
             input_image = cv2.cvtColor(input_image, cv2.COLOR_BGR2RGB)
-            input_image = cv2.resize(input_image, rendered_img.shape[:2][::-1])
+            input_image = cv2.resize(input_image, h_images.shape[:2][::-1])
+            collage = np.hstack([input_image, h_images])
+            cv2.imwrite("/home/nadav2/dev/data/CLIP2Shape/outs/images_to_shape/smal/predictions/test.png", collage)
 
-            if self.with_orig_image:
-                concatenated_img = np.concatenate((input_image, np.array(rendered_img)), axis=1)
-            else:
-                concatenated_img = np.array(rendered_img)
-            concatenated_img = cv2.cvtColor(concatenated_img, cv2.COLOR_BGR2RGB)
+            # if self.with_orig_image:
+            #     concatenated_img = np.concatenate((input_image, np.array(rendered_img)), axis=1)
+            # else:
+            #     concatenated_img = np.array(rendered_img)
+            # concatenated_img = cv2.cvtColor(concatenated_img, cv2.COLOR_BGR2RGB)
 
-            if self.verbose:
-                for i, label in enumerate(self.labels):
-                    cv2.putText(
-                        concatenated_img,
-                        f"{label}: {clip_scores[0][i].item():.2f}",
-                        (370, 30 + i * 30),
-                        cv2.FONT_HERSHEY_SIMPLEX,
-                        1,
-                        (0, 255, 0),
-                        2,
-                    )
+            # if self.verbose:
+            #     for i, label in enumerate(self.labels):
+            #         cv2.putText(
+            #             concatenated_img,
+            #             f"{label}: {clip_scores[0][i].item():.2f}",
+            #             (370, 30 + i * 30),
+            #             cv2.FONT_HERSHEY_SIMPLEX,
+            #             1,
+            #             (0, 255, 0),
+            #             2,
+            #         )
 
-            if self.display:
-                cv2.imshow("input", concatenated_img)
-                key = cv2.waitKey(0)
-                if key == ord("q"):
-                    break
+            # if self.display:
+            #     cv2.imshow("input", concatenated_img)
+            #     key = cv2.waitKey(0)
+            #     if key == ord("q"):
+            #         break
 
-            if hasattr(self, "images_out_path"):
-                if self.collage:
-                    if len(self.images_collage_list) == self.max_images_in_collage:
-                        self._save_images_collage(self.images_collage_list)
-                        self.images_collage_list = []
-                    else:
-                        self.images_collage_list.append(concatenated_img)
-                else:
-                    if self.save_orig_name:
-                        img_name = image_path.name
-                    else:
-                        self.num_img += 1
-                        img_name = f"{self.num_img}_{gender}.png"
-                    self.images_out_path = self.images_out_path.parent / img_name
-                    cv2.imwrite(self.images_out_path.as_posix(), concatenated_img)
-                    if self.save_obj:
-                        save_obj(
-                            self.images_out_path.as_posix().replace(f".{self.suffix}", ".obj"),
-                            verts=torch.tensor(render_mesh_kwargs["verts"]),
-                            faces=torch.tensor(render_mesh_kwargs["faces"]),
-                        )
+            # if hasattr(self, "images_out_path"):
+            #     if self.collage:
+            #         if len(self.images_collage_list) == self.max_images_in_collage:
+            #             self._save_images_collage(self.images_collage_list)
+            #             self.images_collage_list = []
+            #         else:
+            #             self.images_collage_list.append(concatenated_img)
+            #     else:
+            #         if self.save_orig_name:
+            #             img_name = image_path.name
+            #         else:
+            #             self.num_img += 1
+            #             img_name = f"{self.num_img}_{gender}.png"
+            #         self.images_out_path = self.images_out_path.parent / img_name
+            #         cv2.imwrite(self.images_out_path.as_posix(), concatenated_img)
+            #         if self.save_obj:
+            #             save_obj(
+            #                 self.images_out_path.as_posix().replace(f".{self.suffix}", ".obj"),
+            #                 verts=torch.tensor(render_mesh_kwargs["verts"]),
+            #                 faces=torch.tensor(render_mesh_kwargs["faces"]),
+            #             )
 
     def video_to_shape(self):
         for folder in self.data_dir.iterdir():
@@ -224,11 +242,11 @@ class Image2Shape(Image2ShapeUtils):
                 if self.create_vid:
                     self.create_video_from_dir(images_output_path, concatenated_img.shape[:2][::-1])
 
-        def __call__(self):
-            if self.mode == "image":
-                self.image_to_shape()
-            elif self.mode == "video":
-                self.video_to_shape()
+    def __call__(self):
+        if self.mode == "image":
+            self.image_to_shape()
+        elif self.mode == "video":
+            self.video_to_shape()
 
 
 @hydra.main(config_path="../config", config_name="image_to_shape")

@@ -1,0 +1,936 @@
+[2023-01-17 23:17:02,958][__main__][INFO] - parameters: Parameter containing:
+tensor([[ 0.0010,  0.0010, -0.0010,  0.0010,  0.0010,  0.0010,  0.0010,  0.0010,
+         -0.0010,  0.0010]], requires_grad=True)
+[2023-01-17 23:17:02,959][__main__][INFO] - scores: tensor([[24.5156, 25.5312, 23.8594, 23.3594, 24.5000]], device='cuda:0',
+       dtype=torch.float16, grad_fn=<MmBackward>)
+[2023-01-17 23:17:03,162][__main__][INFO] - parameters: Parameter containing:
+tensor([[ 0.0013,  0.0016, -0.0019,  0.0020,  0.0019,  0.0020,  0.0005,  0.0015,
+         -0.0018,  0.0007]], requires_grad=True)
+[2023-01-17 23:17:03,163][__main__][INFO] - scores: tensor([[24.4844, 25.5156, 23.8281, 23.3281, 24.4688]], device='cuda:0',
+       dtype=torch.float16, grad_fn=<MmBackward>)
+[2023-01-17 23:17:03,321][__main__][INFO] - parameters: Parameter containing:
+tensor([[ 0.0008,  0.0016, -0.0028,  0.0029,  0.0027,  0.0030, -0.0002,  0.0016,
+         -0.0027,  0.0002]], requires_grad=True)
+[2023-01-17 23:17:03,322][__main__][INFO] - scores: tensor([[24.4688, 25.5156, 23.8281, 23.3281, 24.4688]], device='cuda:0',
+       dtype=torch.float16, grad_fn=<MmBackward>)
+[2023-01-17 23:17:03,479][__main__][INFO] - parameters: Parameter containing:
+tensor([[ 0.0008,  0.0013, -0.0036,  0.0037,  0.0033,  0.0040, -0.0010,  0.0018,
+         -0.0036,  0.0003]], requires_grad=True)
+[2023-01-17 23:17:03,479][__main__][INFO] - scores: tensor([[24.4688, 25.5156, 23.8281, 23.3281, 24.4531]], device='cuda:0',
+       dtype=torch.float16, grad_fn=<MmBackward>)
+[2023-01-17 23:17:03,631][__main__][INFO] - parameters: Parameter containing:
+tensor([[ 5.0438e-04,  9.0129e-04, -4.3791e-03,  4.4464e-03,  3.8758e-03,
+          4.9069e-03, -1.7887e-03,  1.7317e-03, -4.5324e-03, -8.2366e-05]],
+       requires_grad=True)
+[2023-01-17 23:17:03,632][__main__][INFO] - scores: tensor([[24.4688, 25.5156, 23.8281, 23.3281, 24.4688]], device='cuda:0',
+       dtype=torch.float16, grad_fn=<MmBackward>)
+[2023-01-17 23:17:03,793][__main__][INFO] - parameters: Parameter containing:
+tensor([[ 0.0004,  0.0005, -0.0052,  0.0053,  0.0044,  0.0059, -0.0027,  0.0016,
+         -0.0055, -0.0006]], requires_grad=True)
+[2023-01-17 23:17:03,794][__main__][INFO] - scores: tensor([[24.4531, 25.5000, 23.8125, 23.3281, 24.4375]], device='cuda:0',
+       dtype=torch.float16, grad_fn=<MmBackward>)
+[2023-01-17 23:17:03,960][__main__][INFO] - parameters: Parameter containing:
+tensor([[ 0.0002,  0.0003, -0.0059,  0.0062,  0.0051,  0.0068, -0.0035,  0.0013,
+         -0.0064, -0.0013]], requires_grad=True)
+[2023-01-17 23:17:03,961][__main__][INFO] - scores: tensor([[24.4688, 25.5156, 23.8125, 23.3281, 24.4531]], device='cuda:0',
+       dtype=torch.float16, grad_fn=<MmBackward>)
+[2023-01-17 23:17:04,162][__main__][INFO] - parameters: Parameter containing:
+tensor([[ 0.0004,  0.0004, -0.0068,  0.0069,  0.0058,  0.0076, -0.0042,  0.0013,
+         -0.0074, -0.0018]], requires_grad=True)
+[2023-01-17 23:17:04,163][__main__][INFO] - scores: tensor([[24.4688, 25.5156, 23.8281, 23.3281, 24.4531]], device='cuda:0',
+       dtype=torch.float16, grad_fn=<MmBackward>)
+[2023-01-17 23:17:04,338][__main__][INFO] - parameters: Parameter containing:
+tensor([[ 0.0006,  0.0007, -0.0075,  0.0076,  0.0066,  0.0084, -0.0048,  0.0011,
+         -0.0082, -0.0024]], requires_grad=True)
+[2023-01-17 23:17:04,339][__main__][INFO] - scores: tensor([[24.4688, 25.5312, 23.8281, 23.3281, 24.4688]], device='cuda:0',
+       dtype=torch.float16, grad_fn=<MmBackward>)
+[2023-01-17 23:17:04,502][__main__][INFO] - parameters: Parameter containing:
+tensor([[ 0.0009,  0.0012, -0.0082,  0.0082,  0.0073,  0.0089, -0.0052,  0.0012,
+         -0.0090, -0.0030]], requires_grad=True)
+[2023-01-17 23:17:04,503][__main__][INFO] - scores: tensor([[24.4688, 25.5312, 23.8281, 23.3281, 24.4531]], device='cuda:0',
+       dtype=torch.float16, grad_fn=<MmBackward>)
+[2023-01-17 23:17:04,735][__main__][INFO] - parameters: Parameter containing:
+tensor([[ 0.0011,  0.0017, -0.0089,  0.0090,  0.0081,  0.0095, -0.0055,  0.0012,
+         -0.0096, -0.0036]], requires_grad=True)
+[2023-01-17 23:17:04,736][__main__][INFO] - scores: tensor([[24.4688, 25.5312, 23.8438, 23.3438, 24.4688]], device='cuda:0',
+       dtype=torch.float16, grad_fn=<MmBackward>)
+[2023-01-17 23:17:04,905][__main__][INFO] - parameters: Parameter containing:
+tensor([[ 0.0014,  0.0022, -0.0097,  0.0097,  0.0088,  0.0102, -0.0058,  0.0015,
+         -0.0103, -0.0043]], requires_grad=True)
+[2023-01-17 23:17:04,906][__main__][INFO] - scores: tensor([[24.4688, 25.5312, 23.8438, 23.3281, 24.4531]], device='cuda:0',
+       dtype=torch.float16, grad_fn=<MmBackward>)
+[2023-01-17 23:17:05,054][__main__][INFO] - parameters: Parameter containing:
+tensor([[ 0.0017,  0.0026, -0.0105,  0.0105,  0.0094,  0.0108, -0.0061,  0.0018,
+         -0.0109, -0.0049]], requires_grad=True)
+[2023-01-17 23:17:05,055][__main__][INFO] - scores: tensor([[24.4688, 25.5312, 23.8281, 23.3281, 24.4688]], device='cuda:0',
+       dtype=torch.float16, grad_fn=<MmBackward>)
+[2023-01-17 23:17:05,268][__main__][INFO] - parameters: Parameter containing:
+tensor([[ 0.0019,  0.0029, -0.0112,  0.0114,  0.0098,  0.0115, -0.0064,  0.0022,
+         -0.0116, -0.0055]], requires_grad=True)
+[2023-01-17 23:17:05,268][__main__][INFO] - scores: tensor([[24.4844, 25.5312, 23.8438, 23.3438, 24.4844]], device='cuda:0',
+       dtype=torch.float16, grad_fn=<MmBackward>)
+[2023-01-17 23:17:05,417][__main__][INFO] - parameters: Parameter containing:
+tensor([[ 0.0020,  0.0030, -0.0120,  0.0122,  0.0098,  0.0122, -0.0069,  0.0026,
+         -0.0123, -0.0061]], requires_grad=True)
+[2023-01-17 23:17:05,418][__main__][INFO] - scores: tensor([[24.4688, 25.5312, 23.8281, 23.3281, 24.4688]], device='cuda:0',
+       dtype=torch.float16, grad_fn=<MmBackward>)
+[2023-01-17 23:17:05,583][__main__][INFO] - parameters: Parameter containing:
+tensor([[ 0.0022,  0.0030, -0.0127,  0.0131,  0.0097,  0.0128, -0.0075,  0.0031,
+         -0.0130, -0.0067]], requires_grad=True)
+[2023-01-17 23:17:05,584][__main__][INFO] - scores: tensor([[24.4688, 25.5312, 23.8438, 23.3438, 24.4688]], device='cuda:0',
+       dtype=torch.float16, grad_fn=<MmBackward>)
+[2023-01-17 23:17:05,743][__main__][INFO] - parameters: Parameter containing:
+tensor([[ 0.0025,  0.0028, -0.0133,  0.0140,  0.0093,  0.0135, -0.0082,  0.0037,
+         -0.0138, -0.0073]], requires_grad=True)
+[2023-01-17 23:17:05,744][__main__][INFO] - scores: tensor([[24.4688, 25.5312, 23.8438, 23.3438, 24.4688]], device='cuda:0',
+       dtype=torch.float16, grad_fn=<MmBackward>)
+[2023-01-17 23:17:05,919][__main__][INFO] - parameters: Parameter containing:
+tensor([[ 0.0027,  0.0026, -0.0139,  0.0149,  0.0088,  0.0140, -0.0089,  0.0043,
+         -0.0146, -0.0080]], requires_grad=True)
+[2023-01-17 23:17:05,920][__main__][INFO] - scores: tensor([[24.4688, 25.5312, 23.8438, 23.3281, 24.4688]], device='cuda:0',
+       dtype=torch.float16, grad_fn=<MmBackward>)
+[2023-01-17 23:17:06,109][__main__][INFO] - parameters: Parameter containing:
+tensor([[ 0.0029,  0.0024, -0.0143,  0.0158,  0.0082,  0.0144, -0.0095,  0.0049,
+         -0.0153, -0.0087]], requires_grad=True)
+[2023-01-17 23:17:06,110][__main__][INFO] - scores: tensor([[24.4844, 25.5312, 23.8438, 23.3281, 24.4688]], device='cuda:0',
+       dtype=torch.float16, grad_fn=<MmBackward>)
+[2023-01-17 23:17:06,274][__main__][INFO] - parameters: Parameter containing:
+tensor([[ 0.0030,  0.0022, -0.0146,  0.0167,  0.0077,  0.0147, -0.0100,  0.0054,
+         -0.0159, -0.0094]], requires_grad=True)
+[2023-01-17 23:17:06,275][__main__][INFO] - scores: tensor([[24.4531, 25.5156, 23.8125, 23.3125, 24.4531]], device='cuda:0',
+       dtype=torch.float16, grad_fn=<MmBackward>)
+[2023-01-17 23:17:06,455][__main__][INFO] - parameters: Parameter containing:
+tensor([[ 0.0031,  0.0020, -0.0149,  0.0176,  0.0070,  0.0149, -0.0106,  0.0059,
+         -0.0165, -0.0101]], requires_grad=True)
+[2023-01-17 23:17:06,456][__main__][INFO] - scores: tensor([[24.4531, 25.5000, 23.8125, 23.3281, 24.4531]], device='cuda:0',
+       dtype=torch.float16, grad_fn=<MmBackward>)
+[2023-01-17 23:17:06,618][__main__][INFO] - parameters: Parameter containing:
+tensor([[ 0.0033,  0.0018, -0.0151,  0.0184,  0.0064,  0.0150, -0.0110,  0.0065,
+         -0.0171, -0.0107]], requires_grad=True)
+[2023-01-17 23:17:06,619][__main__][INFO] - scores: tensor([[24.4531, 25.5000, 23.8125, 23.3281, 24.4531]], device='cuda:0',
+       dtype=torch.float16, grad_fn=<MmBackward>)
+[2023-01-17 23:17:06,754][__main__][INFO] - parameters: Parameter containing:
+tensor([[ 0.0034,  0.0018, -0.0152,  0.0190,  0.0058,  0.0150, -0.0113,  0.0071,
+         -0.0176, -0.0110]], requires_grad=True)
+[2023-01-17 23:17:06,755][__main__][INFO] - scores: tensor([[24.4531, 25.5156, 23.8125, 23.3281, 24.4688]], device='cuda:0',
+       dtype=torch.float16, grad_fn=<MmBackward>)
+[2023-01-17 23:17:06,924][__main__][INFO] - parameters: Parameter containing:
+tensor([[ 0.0037,  0.0018, -0.0152,  0.0193,  0.0051,  0.0147, -0.0114,  0.0079,
+         -0.0180, -0.0110]], requires_grad=True)
+[2023-01-17 23:17:06,926][__main__][INFO] - scores: tensor([[24.4531, 25.5156, 23.8125, 23.3281, 24.4531]], device='cuda:0',
+       dtype=torch.float16, grad_fn=<MmBackward>)
+[2023-01-17 23:17:07,114][__main__][INFO] - parameters: Parameter containing:
+tensor([[ 0.0042,  0.0022, -0.0155,  0.0192,  0.0049,  0.0143, -0.0113,  0.0086,
+         -0.0181, -0.0110]], requires_grad=True)
+[2023-01-17 23:17:07,116][__main__][INFO] - scores: tensor([[24.4531, 25.5156, 23.8125, 23.3281, 24.4688]], device='cuda:0',
+       dtype=torch.float16, grad_fn=<MmBackward>)
+[2023-01-17 23:17:07,270][__main__][INFO] - parameters: Parameter containing:
+tensor([[ 0.0048,  0.0025, -0.0157,  0.0189,  0.0046,  0.0137, -0.0110,  0.0093,
+         -0.0182, -0.0110]], requires_grad=True)
+[2023-01-17 23:17:07,271][__main__][INFO] - scores: tensor([[24.4531, 25.5000, 23.8125, 23.3281, 24.4531]], device='cuda:0',
+       dtype=torch.float16, grad_fn=<MmBackward>)
+[2023-01-17 23:17:07,434][__main__][INFO] - parameters: Parameter containing:
+tensor([[ 0.0055,  0.0029, -0.0160,  0.0186,  0.0043,  0.0131, -0.0107,  0.0101,
+         -0.0182, -0.0109]], requires_grad=True)
+[2023-01-17 23:17:07,435][__main__][INFO] - scores: tensor([[24.4375, 25.5000, 23.8125, 23.3125, 24.4531]], device='cuda:0',
+       dtype=torch.float16, grad_fn=<MmBackward>)
+[2023-01-17 23:17:07,614][__main__][INFO] - parameters: Parameter containing:
+tensor([[ 0.0062,  0.0031, -0.0164,  0.0183,  0.0039,  0.0126, -0.0105,  0.0109,
+         -0.0181, -0.0107]], requires_grad=True)
+[2023-01-17 23:17:07,615][__main__][INFO] - scores: tensor([[24.4688, 25.5000, 23.8281, 23.3281, 24.4688]], device='cuda:0',
+       dtype=torch.float16, grad_fn=<MmBackward>)
+[2023-01-17 23:17:07,774][__main__][INFO] - parameters: Parameter containing:
+tensor([[ 0.0069,  0.0033, -0.0168,  0.0180,  0.0035,  0.0121, -0.0104,  0.0117,
+         -0.0181, -0.0106]], requires_grad=True)
+[2023-01-17 23:17:07,775][__main__][INFO] - scores: tensor([[24.4688, 25.5156, 23.8281, 23.3281, 24.4688]], device='cuda:0',
+       dtype=torch.float16, grad_fn=<MmBackward>)
+[2023-01-17 23:17:07,933][__main__][INFO] - parameters: Parameter containing:
+tensor([[ 0.0077,  0.0035, -0.0173,  0.0178,  0.0029,  0.0117, -0.0103,  0.0126,
+         -0.0182, -0.0106]], requires_grad=True)
+[2023-01-17 23:17:07,935][__main__][INFO] - scores: tensor([[24.4688, 25.5156, 23.8281, 23.3438, 24.4688]], device='cuda:0',
+       dtype=torch.float16, grad_fn=<MmBackward>)
+[2023-01-17 23:17:08,102][__main__][INFO] - parameters: Parameter containing:
+tensor([[ 0.0084,  0.0036, -0.0176,  0.0177,  0.0024,  0.0113, -0.0101,  0.0134,
+         -0.0181, -0.0106]], requires_grad=True)
+[2023-01-17 23:17:08,103][__main__][INFO] - scores: tensor([[24.4688, 25.5000, 23.8281, 23.3125, 24.4531]], device='cuda:0',
+       dtype=torch.float16, grad_fn=<MmBackward>)
+[2023-01-17 23:17:08,260][__main__][INFO] - parameters: Parameter containing:
+tensor([[ 0.0088,  0.0038, -0.0179,  0.0178,  0.0019,  0.0110, -0.0099,  0.0142,
+         -0.0180, -0.0106]], requires_grad=True)
+[2023-01-17 23:17:08,261][__main__][INFO] - scores: tensor([[24.4531, 25.4844, 23.8125, 23.2969, 24.4375]], device='cuda:0',
+       dtype=torch.float16, grad_fn=<MmBackward>)
+[2023-01-17 23:17:08,426][__main__][INFO] - parameters: Parameter containing:
+tensor([[ 0.0091,  0.0039, -0.0180,  0.0180,  0.0014,  0.0108, -0.0096,  0.0150,
+         -0.0178, -0.0107]], requires_grad=True)
+[2023-01-17 23:17:08,427][__main__][INFO] - scores: tensor([[24.4688, 25.5000, 23.8125, 23.3125, 24.4531]], device='cuda:0',
+       dtype=torch.float16, grad_fn=<MmBackward>)
+[2023-01-17 23:17:08,600][__main__][INFO] - parameters: Parameter containing:
+tensor([[ 0.0091,  0.0039, -0.0180,  0.0183,  0.0010,  0.0108, -0.0093,  0.0157,
+         -0.0176, -0.0108]], requires_grad=True)
+[2023-01-17 23:17:08,602][__main__][INFO] - scores: tensor([[24.4688, 25.5000, 23.8281, 23.3125, 24.4531]], device='cuda:0',
+       dtype=torch.float16, grad_fn=<MmBackward>)
+[2023-01-17 23:17:08,755][__main__][INFO] - parameters: Parameter containing:
+tensor([[ 0.0090,  0.0040, -0.0179,  0.0188,  0.0007,  0.0109, -0.0088,  0.0164,
+         -0.0173, -0.0110]], requires_grad=True)
+[2023-01-17 23:17:08,756][__main__][INFO] - scores: tensor([[24.4688, 25.5000, 23.8281, 23.3125, 24.4531]], device='cuda:0',
+       dtype=torch.float16, grad_fn=<MmBackward>)
+[2023-01-17 23:17:08,918][__main__][INFO] - parameters: Parameter containing:
+tensor([[ 0.0087,  0.0039, -0.0178,  0.0194,  0.0003,  0.0110, -0.0084,  0.0170,
+         -0.0170, -0.0112]], requires_grad=True)
+[2023-01-17 23:17:08,919][__main__][INFO] - scores: tensor([[24.4531, 25.5000, 23.8125, 23.3125, 24.4375]], device='cuda:0',
+       dtype=torch.float16, grad_fn=<MmBackward>)
+[2023-01-17 23:17:09,077][__main__][INFO] - parameters: Parameter containing:
+tensor([[ 0.0085,  0.0038, -0.0176,  0.0200, -0.0002,  0.0111, -0.0079,  0.0175,
+         -0.0166, -0.0114]], requires_grad=True)
+[2023-01-17 23:17:09,079][__main__][INFO] - scores: tensor([[24.4688, 25.5000, 23.8281, 23.3125, 24.4531]], device='cuda:0',
+       dtype=torch.float16, grad_fn=<MmBackward>)
+[2023-01-17 23:17:09,241][__main__][INFO] - parameters: Parameter containing:
+tensor([[ 0.0082,  0.0039, -0.0175,  0.0205, -0.0004,  0.0112, -0.0074,  0.0179,
+         -0.0162, -0.0116]], requires_grad=True)
+[2023-01-17 23:17:09,242][__main__][INFO] - scores: tensor([[24.4688, 25.5000, 23.8281, 23.3125, 24.4531]], device='cuda:0',
+       dtype=torch.float16, grad_fn=<MmBackward>)
+[2023-01-17 23:17:09,415][__main__][INFO] - parameters: Parameter containing:
+tensor([[ 0.0080,  0.0041, -0.0174,  0.0209, -0.0005,  0.0110, -0.0067,  0.0182,
+         -0.0156, -0.0118]], requires_grad=True)
+[2023-01-17 23:17:09,416][__main__][INFO] - scores: tensor([[24.4688, 25.5156, 23.8281, 23.3281, 24.4688]], device='cuda:0',
+       dtype=torch.float16, grad_fn=<MmBackward>)
+[2023-01-17 23:17:09,586][__main__][INFO] - parameters: Parameter containing:
+tensor([[ 0.0078,  0.0044, -0.0173,  0.0210, -0.0005,  0.0108, -0.0061,  0.0184,
+         -0.0150, -0.0119]], requires_grad=True)
+[2023-01-17 23:17:09,587][__main__][INFO] - scores: tensor([[24.4688, 25.5156, 23.8438, 23.3281, 24.4688]], device='cuda:0',
+       dtype=torch.float16, grad_fn=<MmBackward>)
+[2023-01-17 23:17:09,759][__main__][INFO] - parameters: Parameter containing:
+tensor([[ 0.0076,  0.0046, -0.0174,  0.0211, -0.0004,  0.0105, -0.0055,  0.0186,
+         -0.0144, -0.0119]], requires_grad=True)
+[2023-01-17 23:17:09,760][__main__][INFO] - scores: tensor([[24.4688, 25.5156, 23.8281, 23.3281, 24.4688]], device='cuda:0',
+       dtype=torch.float16, grad_fn=<MmBackward>)
+[2023-01-17 23:17:09,916][__main__][INFO] - parameters: Parameter containing:
+tensor([[ 0.0074,  0.0049, -0.0175,  0.0212, -0.0004,  0.0102, -0.0049,  0.0188,
+         -0.0138, -0.0122]], requires_grad=True)
+[2023-01-17 23:17:09,917][__main__][INFO] - scores: tensor([[24.4844, 25.5156, 23.8438, 23.3438, 24.4844]], device='cuda:0',
+       dtype=torch.float16, grad_fn=<MmBackward>)
+[2023-01-17 23:17:10,114][__main__][INFO] - parameters: Parameter containing:
+tensor([[ 0.0073,  0.0050, -0.0175,  0.0215, -0.0005,  0.0100, -0.0045,  0.0189,
+         -0.0133, -0.0125]], requires_grad=True)
+[2023-01-17 23:17:10,115][__main__][INFO] - scores: tensor([[24.4688, 25.5156, 23.8281, 23.3281, 24.4688]], device='cuda:0',
+       dtype=torch.float16, grad_fn=<MmBackward>)
+[2023-01-17 23:17:10,291][__main__][INFO] - parameters: Parameter containing:
+tensor([[ 0.0070,  0.0050, -0.0173,  0.0218, -0.0007,  0.0100, -0.0041,  0.0191,
+         -0.0128, -0.0127]], requires_grad=True)
+[2023-01-17 23:17:10,292][__main__][INFO] - scores: tensor([[24.4688, 25.5156, 23.8281, 23.3438, 24.4688]], device='cuda:0',
+       dtype=torch.float16, grad_fn=<MmBackward>)
+[2023-01-17 23:17:10,458][__main__][INFO] - parameters: Parameter containing:
+tensor([[ 0.0066,  0.0049, -0.0172,  0.0222, -0.0010,  0.0099, -0.0038,  0.0192,
+         -0.0122, -0.0129]], requires_grad=True)
+[2023-01-17 23:17:10,459][__main__][INFO] - scores: tensor([[24.4688, 25.5156, 23.8281, 23.3281, 24.4688]], device='cuda:0',
+       dtype=torch.float16, grad_fn=<MmBackward>)
+[2023-01-17 23:17:10,639][__main__][INFO] - parameters: Parameter containing:
+tensor([[ 0.0065,  0.0049, -0.0172,  0.0224, -0.0011,  0.0097, -0.0036,  0.0192,
+         -0.0117, -0.0134]], requires_grad=True)
+[2023-01-17 23:17:10,640][__main__][INFO] - scores: tensor([[24.4688, 25.5156, 23.8281, 23.3281, 24.4688]], device='cuda:0',
+       dtype=torch.float16, grad_fn=<MmBackward>)
+[2023-01-17 23:17:10,806][__main__][INFO] - parameters: Parameter containing:
+tensor([[ 0.0064,  0.0049, -0.0173,  0.0226, -0.0012,  0.0096, -0.0035,  0.0192,
+         -0.0112, -0.0141]], requires_grad=True)
+[2023-01-17 23:17:10,807][__main__][INFO] - scores: tensor([[24.4688, 25.5156, 23.8438, 23.3281, 24.4688]], device='cuda:0',
+       dtype=torch.float16, grad_fn=<MmBackward>)
+[2023-01-17 23:17:10,987][__main__][INFO] - parameters: Parameter containing:
+tensor([[ 0.0063,  0.0049, -0.0175,  0.0227, -0.0013,  0.0094, -0.0035,  0.0191,
+         -0.0107, -0.0147]], requires_grad=True)
+[2023-01-17 23:17:10,988][__main__][INFO] - scores: tensor([[24.4688, 25.5156, 23.8281, 23.3281, 24.4688]], device='cuda:0',
+       dtype=torch.float16, grad_fn=<MmBackward>)
+[2023-01-17 23:17:11,156][__main__][INFO] - parameters: Parameter containing:
+tensor([[ 0.0061,  0.0048, -0.0177,  0.0228, -0.0012,  0.0093, -0.0035,  0.0189,
+         -0.0103, -0.0154]], requires_grad=True)
+[2023-01-17 23:17:11,158][__main__][INFO] - scores: tensor([[24.4688, 25.5156, 23.8281, 23.3281, 24.4688]], device='cuda:0',
+       dtype=torch.float16, grad_fn=<MmBackward>)
+[2023-01-17 23:17:11,330][__main__][INFO] - parameters: Parameter containing:
+tensor([[ 0.0061,  0.0048, -0.0180,  0.0228, -0.0011,  0.0091, -0.0037,  0.0187,
+         -0.0099, -0.0162]], requires_grad=True)
+[2023-01-17 23:17:11,331][__main__][INFO] - scores: tensor([[24.4688, 25.5156, 23.8281, 23.3281, 24.4688]], device='cuda:0',
+       dtype=torch.float16, grad_fn=<MmBackward>)
+[2023-01-17 23:17:11,491][__main__][INFO] - parameters: Parameter containing:
+tensor([[ 0.0062,  0.0048, -0.0182,  0.0227, -0.0012,  0.0088, -0.0039,  0.0186,
+         -0.0095, -0.0170]], requires_grad=True)
+[2023-01-17 23:17:11,492][__main__][INFO] - scores: tensor([[24.4688, 25.5156, 23.8281, 23.3438, 24.4688]], device='cuda:0',
+       dtype=torch.float16, grad_fn=<MmBackward>)
+[2023-01-17 23:17:11,657][__main__][INFO] - parameters: Parameter containing:
+tensor([[ 0.0062,  0.0047, -0.0183,  0.0227, -0.0013,  0.0086, -0.0041,  0.0185,
+         -0.0091, -0.0176]], requires_grad=True)
+[2023-01-17 23:17:11,659][__main__][INFO] - scores: tensor([[24.4688, 25.5156, 23.8281, 23.3281, 24.4688]], device='cuda:0',
+       dtype=torch.float16, grad_fn=<MmBackward>)
+[2023-01-17 23:17:11,816][__main__][INFO] - parameters: Parameter containing:
+tensor([[ 0.0060,  0.0046, -0.0183,  0.0226, -0.0014,  0.0084, -0.0044,  0.0184,
+         -0.0088, -0.0180]], requires_grad=True)
+[2023-01-17 23:17:11,817][__main__][INFO] - scores: tensor([[24.4688, 25.5156, 23.8281, 23.3281, 24.4688]], device='cuda:0',
+       dtype=torch.float16, grad_fn=<MmBackward>)
+[2023-01-17 23:17:11,964][__main__][INFO] - parameters: Parameter containing:
+tensor([[ 0.0058,  0.0044, -0.0183,  0.0225, -0.0015,  0.0082, -0.0048,  0.0184,
+         -0.0085, -0.0182]], requires_grad=True)
+[2023-01-17 23:17:11,965][__main__][INFO] - scores: tensor([[24.4688, 25.5312, 23.8438, 23.3438, 24.4844]], device='cuda:0',
+       dtype=torch.float16, grad_fn=<MmBackward>)
+[2023-01-17 23:17:12,139][__main__][INFO] - parameters: Parameter containing:
+tensor([[ 0.0057,  0.0043, -0.0182,  0.0223, -0.0016,  0.0079, -0.0051,  0.0185,
+         -0.0082, -0.0185]], requires_grad=True)
+[2023-01-17 23:17:12,141][__main__][INFO] - scores: tensor([[24.4688, 25.5312, 23.8438, 23.3438, 24.4844]], device='cuda:0',
+       dtype=torch.float16, grad_fn=<MmBackward>)
+[2023-01-17 23:17:12,310][__main__][INFO] - parameters: Parameter containing:
+tensor([[ 0.0059,  0.0043, -0.0183,  0.0222, -0.0017,  0.0076, -0.0053,  0.0187,
+         -0.0078, -0.0190]], requires_grad=True)
+[2023-01-17 23:17:12,311][__main__][INFO] - scores: tensor([[24.4688, 25.5312, 23.8438, 23.3438, 24.4844]], device='cuda:0',
+       dtype=torch.float16, grad_fn=<MmBackward>)
+[2023-01-17 23:17:12,473][__main__][INFO] - parameters: Parameter containing:
+tensor([[ 0.0061,  0.0044, -0.0186,  0.0221, -0.0019,  0.0073, -0.0055,  0.0190,
+         -0.0074, -0.0196]], requires_grad=True)
+[2023-01-17 23:17:12,474][__main__][INFO] - scores: tensor([[24.4688, 25.5156, 23.8281, 23.3438, 24.4688]], device='cuda:0',
+       dtype=torch.float16, grad_fn=<MmBackward>)
+[2023-01-17 23:17:12,644][__main__][INFO] - parameters: Parameter containing:
+tensor([[ 0.0063,  0.0044, -0.0187,  0.0222, -0.0022,  0.0072, -0.0058,  0.0194,
+         -0.0071, -0.0201]], requires_grad=True)
+[2023-01-17 23:17:12,645][__main__][INFO] - scores: tensor([[24.4688, 25.5312, 23.8438, 23.3438, 24.4844]], device='cuda:0',
+       dtype=torch.float16, grad_fn=<MmBackward>)
+[2023-01-17 23:17:12,810][__main__][INFO] - parameters: Parameter containing:
+tensor([[ 0.0065,  0.0043, -0.0189,  0.0222, -0.0024,  0.0071, -0.0060,  0.0198,
+         -0.0067, -0.0206]], requires_grad=True)
+[2023-01-17 23:17:12,811][__main__][INFO] - scores: tensor([[24.4688, 25.5156, 23.8281, 23.3438, 24.4688]], device='cuda:0',
+       dtype=torch.float16, grad_fn=<MmBackward>)
+[2023-01-17 23:17:12,970][__main__][INFO] - parameters: Parameter containing:
+tensor([[ 0.0066,  0.0043, -0.0191,  0.0223, -0.0026,  0.0070, -0.0062,  0.0202,
+         -0.0064, -0.0210]], requires_grad=True)
+[2023-01-17 23:17:12,971][__main__][INFO] - scores: tensor([[24.4688, 25.5156, 23.8281, 23.3438, 24.4531]], device='cuda:0',
+       dtype=torch.float16, grad_fn=<MmBackward>)
+[2023-01-17 23:17:13,158][__main__][INFO] - parameters: Parameter containing:
+tensor([[ 0.0067,  0.0042, -0.0193,  0.0223, -0.0027,  0.0070, -0.0064,  0.0207,
+         -0.0061, -0.0213]], requires_grad=True)
+[2023-01-17 23:17:13,159][__main__][INFO] - scores: tensor([[24.4688, 25.5156, 23.8281, 23.3438, 24.4688]], device='cuda:0',
+       dtype=torch.float16, grad_fn=<MmBackward>)
+[2023-01-17 23:17:13,337][__main__][INFO] - parameters: Parameter containing:
+tensor([[ 0.0067,  0.0042, -0.0196,  0.0224, -0.0028,  0.0070, -0.0066,  0.0212,
+         -0.0058, -0.0216]], requires_grad=True)
+[2023-01-17 23:17:13,338][__main__][INFO] - scores: tensor([[24.4688, 25.5156, 23.8281, 23.3438, 24.4688]], device='cuda:0',
+       dtype=torch.float16, grad_fn=<MmBackward>)
+[2023-01-17 23:17:13,519][__main__][INFO] - parameters: Parameter containing:
+tensor([[ 0.0068,  0.0042, -0.0200,  0.0224, -0.0028,  0.0071, -0.0067,  0.0218,
+         -0.0055, -0.0218]], requires_grad=True)
+[2023-01-17 23:17:13,520][__main__][INFO] - scores: tensor([[24.4688, 25.5000, 23.8281, 23.3281, 24.4531]], device='cuda:0',
+       dtype=torch.float16, grad_fn=<MmBackward>)
+[2023-01-17 23:17:13,690][__main__][INFO] - parameters: Parameter containing:
+tensor([[ 0.0067,  0.0042, -0.0203,  0.0224, -0.0027,  0.0071, -0.0068,  0.0223,
+         -0.0052, -0.0220]], requires_grad=True)
+[2023-01-17 23:17:13,691][__main__][INFO] - scores: tensor([[24.4844, 25.5156, 23.8281, 23.3281, 24.4531]], device='cuda:0',
+       dtype=torch.float16, grad_fn=<MmBackward>)
+[2023-01-17 23:17:13,843][__main__][INFO] - parameters: Parameter containing:
+tensor([[ 0.0067,  0.0042, -0.0204,  0.0225, -0.0028,  0.0072, -0.0068,  0.0228,
+         -0.0048, -0.0222]], requires_grad=True)
+[2023-01-17 23:17:13,844][__main__][INFO] - scores: tensor([[24.4688, 25.5000, 23.8281, 23.3281, 24.4531]], device='cuda:0',
+       dtype=torch.float16, grad_fn=<MmBackward>)
+[2023-01-17 23:17:13,993][__main__][INFO] - parameters: Parameter containing:
+tensor([[ 0.0066,  0.0042, -0.0204,  0.0228, -0.0030,  0.0072, -0.0068,  0.0234,
+         -0.0044, -0.0223]], requires_grad=True)
+[2023-01-17 23:17:13,994][__main__][INFO] - scores: tensor([[24.4688, 25.5000, 23.8281, 23.3281, 24.4531]], device='cuda:0',
+       dtype=torch.float16, grad_fn=<MmBackward>)
+[2023-01-17 23:17:14,196][__main__][INFO] - parameters: Parameter containing:
+tensor([[ 0.0065,  0.0043, -0.0204,  0.0229, -0.0031,  0.0072, -0.0068,  0.0239,
+         -0.0039, -0.0225]], requires_grad=True)
+[2023-01-17 23:17:14,197][__main__][INFO] - scores: tensor([[24.4688, 25.5000, 23.8281, 23.3281, 24.4531]], device='cuda:0',
+       dtype=torch.float16, grad_fn=<MmBackward>)
+[2023-01-17 23:17:14,366][__main__][INFO] - parameters: Parameter containing:
+tensor([[ 0.0065,  0.0045, -0.0204,  0.0228, -0.0031,  0.0071, -0.0068,  0.0242,
+         -0.0034, -0.0227]], requires_grad=True)
+[2023-01-17 23:17:14,367][__main__][INFO] - scores: tensor([[24.4688, 25.5000, 23.8281, 23.3281, 24.4531]], device='cuda:0',
+       dtype=torch.float16, grad_fn=<MmBackward>)
+[2023-01-17 23:17:14,530][__main__][INFO] - parameters: Parameter containing:
+tensor([[ 0.0064,  0.0046, -0.0204,  0.0229, -0.0032,  0.0070, -0.0068,  0.0246,
+         -0.0029, -0.0229]], requires_grad=True)
+[2023-01-17 23:17:14,531][__main__][INFO] - scores: tensor([[24.4688, 25.5000, 23.8281, 23.3281, 24.4531]], device='cuda:0',
+       dtype=torch.float16, grad_fn=<MmBackward>)
+[2023-01-17 23:17:14,726][__main__][INFO] - parameters: Parameter containing:
+tensor([[ 0.0063,  0.0047, -0.0203,  0.0230, -0.0033,  0.0070, -0.0069,  0.0249,
+         -0.0025, -0.0231]], requires_grad=True)
+[2023-01-17 23:17:14,727][__main__][INFO] - scores: tensor([[24.4688, 25.5000, 23.8281, 23.3281, 24.4531]], device='cuda:0',
+       dtype=torch.float16, grad_fn=<MmBackward>)
+[2023-01-17 23:17:14,878][__main__][INFO] - parameters: Parameter containing:
+tensor([[ 0.0062,  0.0048, -0.0202,  0.0231, -0.0034,  0.0069, -0.0069,  0.0252,
+         -0.0020, -0.0233]], requires_grad=True)
+[2023-01-17 23:17:14,879][__main__][INFO] - scores: tensor([[24.4844, 25.5000, 23.8281, 23.3281, 24.4531]], device='cuda:0',
+       dtype=torch.float16, grad_fn=<MmBackward>)
+[2023-01-17 23:17:15,048][__main__][INFO] - parameters: Parameter containing:
+tensor([[ 0.0061,  0.0049, -0.0203,  0.0230, -0.0033,  0.0068, -0.0070,  0.0254,
+         -0.0016, -0.0236]], requires_grad=True)
+[2023-01-17 23:17:15,050][__main__][INFO] - scores: tensor([[24.4688, 25.5000, 23.8281, 23.3281, 24.4531]], device='cuda:0',
+       dtype=torch.float16, grad_fn=<MmBackward>)
+[2023-01-17 23:17:15,207][__main__][INFO] - parameters: Parameter containing:
+tensor([[ 0.0060,  0.0050, -0.0203,  0.0230, -0.0033,  0.0068, -0.0072,  0.0257,
+         -0.0012, -0.0238]], requires_grad=True)
+[2023-01-17 23:17:15,208][__main__][INFO] - scores: tensor([[24.4688, 25.5000, 23.8281, 23.3281, 24.4531]], device='cuda:0',
+       dtype=torch.float16, grad_fn=<MmBackward>)
+[2023-01-17 23:17:15,372][__main__][INFO] - parameters: Parameter containing:
+tensor([[ 0.0060,  0.0049, -0.0203,  0.0230, -0.0035,  0.0069, -0.0076,  0.0261,
+         -0.0009, -0.0240]], requires_grad=True)
+[2023-01-17 23:17:15,373][__main__][INFO] - scores: tensor([[24.4844, 25.5156, 23.8281, 23.3281, 24.4531]], device='cuda:0',
+       dtype=torch.float16, grad_fn=<MmBackward>)
+[2023-01-17 23:17:15,549][__main__][INFO] - parameters: Parameter containing:
+tensor([[ 0.0060,  0.0049, -0.0204,  0.0230, -0.0035,  0.0068, -0.0079,  0.0263,
+         -0.0007, -0.0242]], requires_grad=True)
+[2023-01-17 23:17:15,550][__main__][INFO] - scores: tensor([[24.4688, 25.5000, 23.8281, 23.3125, 24.4531]], device='cuda:0',
+       dtype=torch.float16, grad_fn=<MmBackward>)
+[2023-01-17 23:17:15,721][__main__][INFO] - parameters: Parameter containing:
+tensor([[ 0.0059,  0.0049, -0.0205,  0.0229, -0.0035,  0.0068, -0.0082,  0.0265,
+         -0.0004, -0.0244]], requires_grad=True)
+[2023-01-17 23:17:15,722][__main__][INFO] - scores: tensor([[24.4688, 25.5000, 23.8281, 23.3281, 24.4531]], device='cuda:0',
+       dtype=torch.float16, grad_fn=<MmBackward>)
+[2023-01-17 23:17:15,896][__main__][INFO] - parameters: Parameter containing:
+tensor([[ 0.0059,  0.0048, -0.0205,  0.0229, -0.0036,  0.0069, -0.0086,  0.0267,
+         -0.0002, -0.0247]], requires_grad=True)
+[2023-01-17 23:17:15,897][__main__][INFO] - scores: tensor([[24.4844, 25.5156, 23.8281, 23.3281, 24.4531]], device='cuda:0',
+       dtype=torch.float16, grad_fn=<MmBackward>)
+[2023-01-17 23:17:16,074][__main__][INFO] - parameters: Parameter containing:
+tensor([[ 0.0058,  0.0046, -0.0206,  0.0230, -0.0037,  0.0071, -0.0090,  0.0269,
+         -0.0001, -0.0250]], requires_grad=True)
+[2023-01-17 23:17:16,076][__main__][INFO] - scores: tensor([[24.4688, 25.5000, 23.8281, 23.3281, 24.4531]], device='cuda:0',
+       dtype=torch.float16, grad_fn=<MmBackward>)
+[2023-01-17 23:17:16,267][__main__][INFO] - parameters: Parameter containing:
+tensor([[ 5.6837e-03,  4.5335e-03, -2.0676e-02,  2.2981e-02, -3.7166e-03,
+          7.1570e-03, -9.3892e-03,  2.7028e-02, -5.2963e-06, -2.5287e-02]],
+       requires_grad=True)
+[2023-01-17 23:17:16,268][__main__][INFO] - scores: tensor([[24.4844, 25.5000, 23.8281, 23.3281, 24.4531]], device='cuda:0',
+       dtype=torch.float16, grad_fn=<MmBackward>)
+[2023-01-17 23:17:16,438][__main__][INFO] - parameters: Parameter containing:
+tensor([[ 0.0056,  0.0046, -0.0208,  0.0228, -0.0036,  0.0071, -0.0096,  0.0269,
+          0.0002, -0.0257]], requires_grad=True)
+[2023-01-17 23:17:16,439][__main__][INFO] - scores: tensor([[24.4688, 25.5156, 23.8281, 23.3281, 24.4531]], device='cuda:0',
+       dtype=torch.float16, grad_fn=<MmBackward>)
+[2023-01-17 23:17:16,647][__main__][INFO] - parameters: Parameter containing:
+tensor([[ 0.0056,  0.0047, -0.0209,  0.0228, -0.0035,  0.0070, -0.0099,  0.0268,
+          0.0004, -0.0261]], requires_grad=True)
+[2023-01-17 23:17:16,648][__main__][INFO] - scores: tensor([[24.4688, 25.5000, 23.8281, 23.3281, 24.4375]], device='cuda:0',
+       dtype=torch.float16, grad_fn=<MmBackward>)
+[2023-01-17 23:17:16,828][__main__][INFO] - parameters: Parameter containing:
+tensor([[ 0.0055,  0.0047, -0.0208,  0.0228, -0.0036,  0.0071, -0.0103,  0.0268,
+          0.0005, -0.0265]], requires_grad=True)
+[2023-01-17 23:17:16,829][__main__][INFO] - scores: tensor([[24.4688, 25.5000, 23.8281, 23.3281, 24.4531]], device='cuda:0',
+       dtype=torch.float16, grad_fn=<MmBackward>)
+[2023-01-17 23:17:16,996][__main__][INFO] - parameters: Parameter containing:
+tensor([[ 0.0054,  0.0046, -0.0207,  0.0229, -0.0038,  0.0071, -0.0106,  0.0268,
+          0.0005, -0.0268]], requires_grad=True)
+[2023-01-17 23:17:16,997][__main__][INFO] - scores: tensor([[24.4688, 25.5000, 23.8281, 23.3281, 24.4531]], device='cuda:0',
+       dtype=torch.float16, grad_fn=<MmBackward>)
+[2023-01-17 23:17:17,152][__main__][INFO] - parameters: Parameter containing:
+tensor([[ 0.0054,  0.0046, -0.0207,  0.0229, -0.0038,  0.0071, -0.0109,  0.0267,
+          0.0006, -0.0272]], requires_grad=True)
+[2023-01-17 23:17:17,153][__main__][INFO] - scores: tensor([[24.4688, 25.5000, 23.8281, 23.3281, 24.4531]], device='cuda:0',
+       dtype=torch.float16, grad_fn=<MmBackward>)
+[2023-01-17 23:17:17,321][__main__][INFO] - parameters: Parameter containing:
+tensor([[ 0.0053,  0.0047, -0.0208,  0.0228, -0.0036,  0.0070, -0.0111,  0.0265,
+          0.0007, -0.0277]], requires_grad=True)
+[2023-01-17 23:17:17,322][__main__][INFO] - scores: tensor([[24.4688, 25.5000, 23.8281, 23.3281, 24.4531]], device='cuda:0',
+       dtype=torch.float16, grad_fn=<MmBackward>)
+[2023-01-17 23:17:17,492][__main__][INFO] - parameters: Parameter containing:
+tensor([[ 0.0053,  0.0048, -0.0207,  0.0228, -0.0037,  0.0070, -0.0114,  0.0264,
+          0.0008, -0.0280]], requires_grad=True)
+[2023-01-17 23:17:17,493][__main__][INFO] - scores: tensor([[24.4688, 25.5000, 23.8281, 23.3281, 24.4531]], device='cuda:0',
+       dtype=torch.float16, grad_fn=<MmBackward>)
+[2023-01-17 23:17:17,653][__main__][INFO] - parameters: Parameter containing:
+tensor([[ 0.0052,  0.0047, -0.0206,  0.0229, -0.0039,  0.0070, -0.0116,  0.0263,
+          0.0008, -0.0284]], requires_grad=True)
+[2023-01-17 23:17:17,654][__main__][INFO] - scores: tensor([[24.4688, 25.5000, 23.8281, 23.3281, 24.4531]], device='cuda:0',
+       dtype=torch.float16, grad_fn=<MmBackward>)
+[2023-01-17 23:17:17,837][__main__][INFO] - parameters: Parameter containing:
+tensor([[ 0.0051,  0.0048, -0.0205,  0.0228, -0.0039,  0.0070, -0.0119,  0.0262,
+          0.0009, -0.0287]], requires_grad=True)
+[2023-01-17 23:17:17,838][__main__][INFO] - scores: tensor([[24.4688, 25.5000, 23.8281, 23.3281, 24.4531]], device='cuda:0',
+       dtype=torch.float16, grad_fn=<MmBackward>)
+[2023-01-17 23:17:18,016][__main__][INFO] - parameters: Parameter containing:
+tensor([[ 0.0051,  0.0049, -0.0206,  0.0227, -0.0038,  0.0069, -0.0120,  0.0261,
+          0.0010, -0.0291]], requires_grad=True)
+[2023-01-17 23:17:18,017][__main__][INFO] - scores: tensor([[24.4688, 25.5000, 23.8281, 23.3125, 24.4375]], device='cuda:0',
+       dtype=torch.float16, grad_fn=<MmBackward>)
+[2023-01-17 23:17:18,202][__main__][INFO] - parameters: Parameter containing:
+tensor([[ 0.0050,  0.0049, -0.0207,  0.0227, -0.0038,  0.0069, -0.0123,  0.0260,
+          0.0010, -0.0294]], requires_grad=True)
+[2023-01-17 23:17:18,203][__main__][INFO] - scores: tensor([[24.4688, 25.5000, 23.8281, 23.3281, 24.4531]], device='cuda:0',
+       dtype=torch.float16, grad_fn=<MmBackward>)
+[2023-01-17 23:17:18,360][__main__][INFO] - parameters: Parameter containing:
+tensor([[ 0.0050,  0.0048, -0.0206,  0.0228, -0.0040,  0.0070, -0.0125,  0.0261,
+          0.0010, -0.0296]], requires_grad=True)
+[2023-01-17 23:17:18,361][__main__][INFO] - scores: tensor([[24.4844, 25.5156, 23.8281, 23.3281, 24.4531]], device='cuda:0',
+       dtype=torch.float16, grad_fn=<MmBackward>)
+[2023-01-17 23:17:18,510][__main__][INFO] - parameters: Parameter containing:
+tensor([[ 0.0050,  0.0049, -0.0206,  0.0228, -0.0041,  0.0070, -0.0127,  0.0261,
+          0.0010, -0.0298]], requires_grad=True)
+[2023-01-17 23:17:18,511][__main__][INFO] - scores: tensor([[24.4844, 25.5156, 23.8281, 23.3281, 24.4531]], device='cuda:0',
+       dtype=torch.float16, grad_fn=<MmBackward>)
+[2023-01-17 23:17:18,680][__main__][INFO] - parameters: Parameter containing:
+tensor([[ 0.0050,  0.0050, -0.0208,  0.0227, -0.0040,  0.0069, -0.0128,  0.0261,
+          0.0010, -0.0301]], requires_grad=True)
+[2023-01-17 23:17:18,681][__main__][INFO] - scores: tensor([[24.4844, 25.5000, 23.8281, 23.3281, 24.4531]], device='cuda:0',
+       dtype=torch.float16, grad_fn=<MmBackward>)
+[2023-01-17 23:17:18,849][__main__][INFO] - parameters: Parameter containing:
+tensor([[ 0.0050,  0.0050, -0.0208,  0.0227, -0.0041,  0.0070, -0.0130,  0.0261,
+          0.0009, -0.0303]], requires_grad=True)
+[2023-01-17 23:17:18,850][__main__][INFO] - scores: tensor([[24.4844, 25.5156, 23.8281, 23.3281, 24.4531]], device='cuda:0',
+       dtype=torch.float16, grad_fn=<MmBackward>)
+[2023-01-17 23:17:19,015][__main__][INFO] - parameters: Parameter containing:
+tensor([[ 0.0049,  0.0049, -0.0207,  0.0229, -0.0043,  0.0071, -0.0132,  0.0263,
+          0.0008, -0.0304]], requires_grad=True)
+[2023-01-17 23:17:19,016][__main__][INFO] - scores: tensor([[24.4688, 25.5000, 23.8281, 23.3281, 24.4375]], device='cuda:0',
+       dtype=torch.float16, grad_fn=<MmBackward>)
+[2023-01-17 23:17:19,200][__main__][INFO] - parameters: Parameter containing:
+tensor([[ 0.0049,  0.0049, -0.0207,  0.0230, -0.0044,  0.0072, -0.0133,  0.0264,
+          0.0007, -0.0305]], requires_grad=True)
+[2023-01-17 23:17:19,201][__main__][INFO] - scores: tensor([[24.4688, 25.5000, 23.8281, 23.3281, 24.4531]], device='cuda:0',
+       dtype=torch.float16, grad_fn=<MmBackward>)
+[2023-01-17 23:17:19,370][__main__][INFO] - parameters: Parameter containing:
+tensor([[ 0.0049,  0.0051, -0.0208,  0.0229, -0.0043,  0.0072, -0.0133,  0.0266,
+          0.0007, -0.0306]], requires_grad=True)
+[2023-01-17 23:17:19,372][__main__][INFO] - scores: tensor([[24.4844, 25.5000, 23.8281, 23.3281, 24.4531]], device='cuda:0',
+       dtype=torch.float16, grad_fn=<MmBackward>)
+[2023-01-17 23:17:19,554][__main__][INFO] - parameters: Parameter containing:
+tensor([[ 0.0050,  0.0053, -0.0209,  0.0228, -0.0042,  0.0072, -0.0133,  0.0267,
+          0.0006, -0.0307]], requires_grad=True)
+[2023-01-17 23:17:19,555][__main__][INFO] - scores: tensor([[24.4688, 25.5000, 23.8281, 23.3281, 24.4531]], device='cuda:0',
+       dtype=torch.float16, grad_fn=<MmBackward>)
+[2023-01-17 23:17:19,722][__main__][INFO] - parameters: Parameter containing:
+tensor([[ 0.0050,  0.0053, -0.0208,  0.0230, -0.0044,  0.0074, -0.0134,  0.0270,
+          0.0005, -0.0308]], requires_grad=True)
+[2023-01-17 23:17:19,723][__main__][INFO] - scores: tensor([[24.4844, 25.5156, 23.8281, 23.3281, 24.4688]], device='cuda:0',
+       dtype=torch.float16, grad_fn=<MmBackward>)
+[2023-01-17 23:17:19,883][__main__][INFO] - parameters: Parameter containing:
+tensor([[ 0.0050,  0.0053, -0.0208,  0.0231, -0.0046,  0.0075, -0.0136,  0.0273,
+          0.0003, -0.0308]], requires_grad=True)
+[2023-01-17 23:17:19,884][__main__][INFO] - scores: tensor([[24.4688, 25.5000, 23.8281, 23.3281, 24.4531]], device='cuda:0',
+       dtype=torch.float16, grad_fn=<MmBackward>)
+[2023-01-17 23:17:20,070][__main__][INFO] - parameters: Parameter containing:
+tensor([[ 0.0051,  0.0054, -0.0208,  0.0231, -0.0046,  0.0076, -0.0136,  0.0275,
+          0.0002, -0.0309]], requires_grad=True)
+[2023-01-17 23:17:20,071][__main__][INFO] - scores: tensor([[24.4688, 25.5000, 23.8281, 23.3125, 24.4375]], device='cuda:0',
+       dtype=torch.float16, grad_fn=<MmBackward>)
+[2023-01-17 23:17:20,232][__main__][INFO] - parameters: Parameter containing:
+tensor([[ 0.0051,  0.0056, -0.0210,  0.0230, -0.0045,  0.0076, -0.0137,  0.0275,
+          0.0002, -0.0310]], requires_grad=True)
+[2023-01-17 23:17:20,233][__main__][INFO] - scores: tensor([[24.4688, 25.5156, 23.8281, 23.3281, 24.4531]], device='cuda:0',
+       dtype=torch.float16, grad_fn=<MmBackward>)
+[2023-01-17 23:17:20,399][__main__][INFO] - parameters: Parameter containing:
+tensor([[ 0.0051,  0.0056, -0.0211,  0.0231, -0.0046,  0.0077, -0.0138,  0.0276,
+          0.0001, -0.0311]], requires_grad=True)
+[2023-01-17 23:17:20,400][__main__][INFO] - scores: tensor([[24.4688, 25.5156, 23.8281, 23.3281, 24.4531]], device='cuda:0',
+       dtype=torch.float16, grad_fn=<MmBackward>)
+[2023-01-17 23:17:20,573][__main__][INFO] - parameters: Parameter containing:
+tensor([[ 4.9572e-03,  5.5672e-03, -2.1031e-02,  2.3251e-02, -4.6555e-03,
+          7.9346e-03, -1.3908e-02,  2.7606e-02,  2.6512e-05, -3.1252e-02]],
+       requires_grad=True)
+[2023-01-17 23:17:20,574][__main__][INFO] - scores: tensor([[24.4688, 25.5000, 23.8281, 23.3281, 24.4531]], device='cuda:0',
+       dtype=torch.float16, grad_fn=<MmBackward>)
+[2023-01-17 23:17:20,753][__main__][INFO] - parameters: Parameter containing:
+tensor([[ 4.8495e-03,  5.6036e-03, -2.1075e-02,  2.3271e-02, -4.6171e-03,
+          8.0383e-03, -1.3941e-02,  2.7561e-02,  3.2407e-05, -3.1384e-02]],
+       requires_grad=True)
+[2023-01-17 23:17:20,754][__main__][INFO] - scores: tensor([[24.4688, 25.5000, 23.8281, 23.3281, 24.4531]], device='cuda:0',
+       dtype=torch.float16, grad_fn=<MmBackward>)
+[2023-01-17 23:17:20,910][__main__][INFO] - parameters: Parameter containing:
+tensor([[ 4.7345e-03,  5.6041e-03, -2.1061e-02,  2.3314e-02, -4.6409e-03,
+          8.1515e-03, -1.3961e-02,  2.7517e-02,  7.9753e-05, -3.1454e-02]],
+       requires_grad=True)
+[2023-01-17 23:17:20,911][__main__][INFO] - scores: tensor([[24.4688, 25.5000, 23.8281, 23.3281, 24.4531]], device='cuda:0',
+       dtype=torch.float16, grad_fn=<MmBackward>)
+[2023-01-17 23:17:21,088][__main__][INFO] - parameters: Parameter containing:
+tensor([[ 0.0047,  0.0057, -0.0211,  0.0232, -0.0046,  0.0081, -0.0140,  0.0274,
+          0.0002, -0.0315]], requires_grad=True)
+[2023-01-17 23:17:21,090][__main__][INFO] - scores: tensor([[24.4688, 25.5156, 23.8281, 23.3281, 24.4531]], device='cuda:0',
+       dtype=torch.float16, grad_fn=<MmBackward>)
+[2023-01-17 23:17:21,254][__main__][INFO] - parameters: Parameter containing:
+tensor([[ 0.0047,  0.0057, -0.0210,  0.0231, -0.0047,  0.0081, -0.0141,  0.0274,
+          0.0002, -0.0316]], requires_grad=True)
+[2023-01-17 23:17:21,255][__main__][INFO] - scores: tensor([[24.4688, 25.5000, 23.8281, 23.3281, 24.4531]], device='cuda:0',
+       dtype=torch.float16, grad_fn=<MmBackward>)
+[2023-01-17 23:17:21,421][__main__][INFO] - parameters: Parameter containing:
+tensor([[ 0.0047,  0.0056, -0.0209,  0.0232, -0.0049,  0.0082, -0.0143,  0.0274,
+          0.0002, -0.0317]], requires_grad=True)
+[2023-01-17 23:17:21,422][__main__][INFO] - scores: tensor([[24.4688, 25.5000, 23.8281, 23.3281, 24.4531]], device='cuda:0',
+       dtype=torch.float16, grad_fn=<MmBackward>)
+[2023-01-17 23:17:21,602][__main__][INFO] - parameters: Parameter containing:
+tensor([[ 0.0047,  0.0056, -0.0209,  0.0231, -0.0049,  0.0082, -0.0144,  0.0274,
+          0.0002, -0.0317]], requires_grad=True)
+[2023-01-17 23:17:21,603][__main__][INFO] - scores: tensor([[24.4688, 25.5000, 23.8281, 23.3281, 24.4531]], device='cuda:0',
+       dtype=torch.float16, grad_fn=<MmBackward>)
+[2023-01-17 23:17:21,770][__main__][INFO] - parameters: Parameter containing:
+tensor([[ 0.0047,  0.0057, -0.0210,  0.0229, -0.0048,  0.0081, -0.0145,  0.0273,
+          0.0003, -0.0318]], requires_grad=True)
+[2023-01-17 23:17:21,771][__main__][INFO] - scores: tensor([[24.4688, 25.5000, 23.8281, 23.3281, 24.4531]], device='cuda:0',
+       dtype=torch.float16, grad_fn=<MmBackward>)
+[2023-01-17 23:17:21,948][__main__][INFO] - parameters: Parameter containing:
+tensor([[ 0.0047,  0.0057, -0.0210,  0.0228, -0.0049,  0.0082, -0.0146,  0.0273,
+          0.0003, -0.0318]], requires_grad=True)
+[2023-01-17 23:17:21,949][__main__][INFO] - scores: tensor([[24.4844, 25.5156, 23.8281, 23.3281, 24.4531]], device='cuda:0',
+       dtype=torch.float16, grad_fn=<MmBackward>)
+[2023-01-17 23:17:22,120][__main__][INFO] - parameters: Parameter containing:
+tensor([[ 0.0047,  0.0055, -0.0210,  0.0229, -0.0052,  0.0082, -0.0148,  0.0273,
+          0.0002, -0.0318]], requires_grad=True)
+[2023-01-17 23:17:22,121][__main__][INFO] - scores: tensor([[24.4688, 25.5000, 23.8281, 23.3281, 24.4375]], device='cuda:0',
+       dtype=torch.float16, grad_fn=<MmBackward>)
+[2023-01-17 23:17:22,323][__main__][INFO] - parameters: Parameter containing:
+tensor([[ 0.0046,  0.0055, -0.0210,  0.0229, -0.0052,  0.0083, -0.0149,  0.0272,
+          0.0003, -0.0318]], requires_grad=True)
+[2023-01-17 23:17:22,324][__main__][INFO] - scores: tensor([[24.4688, 25.5000, 23.8281, 23.3281, 24.4531]], device='cuda:0',
+       dtype=torch.float16, grad_fn=<MmBackward>)
+[2023-01-17 23:17:22,496][__main__][INFO] - parameters: Parameter containing:
+tensor([[ 0.0046,  0.0056, -0.0211,  0.0227, -0.0051,  0.0082, -0.0148,  0.0271,
+          0.0005, -0.0318]], requires_grad=True)
+[2023-01-17 23:17:22,497][__main__][INFO] - scores: tensor([[24.4688, 25.5000, 23.8281, 23.3281, 24.4531]], device='cuda:0',
+       dtype=torch.float16, grad_fn=<MmBackward>)
+[2023-01-17 23:17:22,679][__main__][INFO] - parameters: Parameter containing:
+tensor([[ 0.0045,  0.0056, -0.0211,  0.0227, -0.0052,  0.0082, -0.0148,  0.0271,
+          0.0007, -0.0317]], requires_grad=True)
+[2023-01-17 23:17:22,680][__main__][INFO] - scores: tensor([[24.4688, 25.5000, 23.8281, 23.3281, 24.4531]], device='cuda:0',
+       dtype=torch.float16, grad_fn=<MmBackward>)
+[2023-01-17 23:17:22,865][__main__][INFO] - parameters: Parameter containing:
+tensor([[ 0.0044,  0.0055, -0.0210,  0.0228, -0.0054,  0.0083, -0.0148,  0.0272,
+          0.0007, -0.0317]], requires_grad=True)
+[2023-01-17 23:17:22,866][__main__][INFO] - scores: tensor([[24.4688, 25.5000, 23.8281, 23.3281, 24.4531]], device='cuda:0',
+       dtype=torch.float16, grad_fn=<MmBackward>)
+[2023-01-17 23:17:23,068][__main__][INFO] - parameters: Parameter containing:
+tensor([[ 0.0044,  0.0055, -0.0210,  0.0228, -0.0055,  0.0084, -0.0148,  0.0272,
+          0.0009, -0.0316]], requires_grad=True)
+[2023-01-17 23:17:23,069][__main__][INFO] - scores: tensor([[24.4688, 25.5000, 23.8281, 23.3281, 24.4375]], device='cuda:0',
+       dtype=torch.float16, grad_fn=<MmBackward>)
+[2023-01-17 23:17:23,244][__main__][INFO] - parameters: Parameter containing:
+tensor([[ 0.0043,  0.0056, -0.0211,  0.0227, -0.0054,  0.0083, -0.0146,  0.0271,
+          0.0011, -0.0316]], requires_grad=True)
+[2023-01-17 23:17:23,245][__main__][INFO] - scores: tensor([[24.4688, 25.5000, 23.8281, 23.3281, 24.4531]], device='cuda:0',
+       dtype=torch.float16, grad_fn=<MmBackward>)
+[2023-01-17 23:17:23,394][__main__][INFO] - parameters: Parameter containing:
+tensor([[ 0.0043,  0.0056, -0.0211,  0.0226, -0.0054,  0.0084, -0.0146,  0.0270,
+          0.0012, -0.0316]], requires_grad=True)
+[2023-01-17 23:17:23,396][__main__][INFO] - scores: tensor([[24.4688, 25.5156, 23.8281, 23.3281, 24.4531]], device='cuda:0',
+       dtype=torch.float16, grad_fn=<MmBackward>)
+[2023-01-17 23:17:23,607][__main__][INFO] - parameters: Parameter containing:
+tensor([[ 0.0043,  0.0056, -0.0211,  0.0226, -0.0056,  0.0084, -0.0147,  0.0272,
+          0.0011, -0.0315]], requires_grad=True)
+[2023-01-17 23:17:23,608][__main__][INFO] - scores: tensor([[24.4688, 25.5156, 23.8281, 23.3281, 24.4531]], device='cuda:0',
+       dtype=torch.float16, grad_fn=<MmBackward>)
+[2023-01-17 23:17:23,786][__main__][INFO] - parameters: Parameter containing:
+tensor([[ 0.0043,  0.0055, -0.0211,  0.0226, -0.0057,  0.0085, -0.0148,  0.0272,
+          0.0011, -0.0315]], requires_grad=True)
+[2023-01-17 23:17:23,787][__main__][INFO] - scores: tensor([[24.4844, 25.5000, 23.8281, 23.3281, 24.4531]], device='cuda:0',
+       dtype=torch.float16, grad_fn=<MmBackward>)
+[2023-01-17 23:17:23,963][__main__][INFO] - parameters: Parameter containing:
+tensor([[ 0.0043,  0.0055, -0.0212,  0.0225, -0.0057,  0.0085, -0.0148,  0.0271,
+          0.0010, -0.0315]], requires_grad=True)
+[2023-01-17 23:17:23,964][__main__][INFO] - scores: tensor([[24.4688, 25.5000, 23.8281, 23.3281, 24.4375]], device='cuda:0',
+       dtype=torch.float16, grad_fn=<MmBackward>)
+[2023-01-17 23:17:24,150][__main__][INFO] - parameters: Parameter containing:
+tensor([[ 0.0043,  0.0055, -0.0213,  0.0225, -0.0058,  0.0086, -0.0149,  0.0271,
+          0.0009, -0.0316]], requires_grad=True)
+[2023-01-17 23:17:24,151][__main__][INFO] - scores: tensor([[24.4688, 25.5000, 23.8281, 23.3281, 24.4531]], device='cuda:0',
+       dtype=torch.float16, grad_fn=<MmBackward>)
+[2023-01-17 23:17:24,315][__main__][INFO] - parameters: Parameter containing:
+tensor([[ 0.0042,  0.0056, -0.0213,  0.0225, -0.0057,  0.0087, -0.0149,  0.0270,
+          0.0009, -0.0318]], requires_grad=True)
+[2023-01-17 23:17:24,316][__main__][INFO] - scores: tensor([[24.4688, 25.5156, 23.8281, 23.3281, 24.4531]], device='cuda:0',
+       dtype=torch.float16, grad_fn=<MmBackward>)
+[2023-01-17 23:17:24,483][__main__][INFO] - parameters: Parameter containing:
+tensor([[ 0.0041,  0.0055, -0.0212,  0.0226, -0.0058,  0.0089, -0.0149,  0.0269,
+          0.0008, -0.0319]], requires_grad=True)
+[2023-01-17 23:17:24,484][__main__][INFO] - scores: tensor([[24.4688, 25.5000, 23.8281, 23.3281, 24.4531]], device='cuda:0',
+       dtype=torch.float16, grad_fn=<MmBackward>)
+[2023-01-17 23:17:24,660][__main__][INFO] - parameters: Parameter containing:
+tensor([[ 0.0040,  0.0057, -0.0211,  0.0226, -0.0058,  0.0089, -0.0148,  0.0268,
+          0.0009, -0.0320]], requires_grad=True)
+[2023-01-17 23:17:24,660][__main__][INFO] - scores: tensor([[24.4688, 25.5000, 23.8125, 23.3125, 24.4375]], device='cuda:0',
+       dtype=torch.float16, grad_fn=<MmBackward>)
+[2023-01-17 23:17:24,811][__main__][INFO] - parameters: Parameter containing:
+tensor([[ 0.0039,  0.0058, -0.0212,  0.0225, -0.0057,  0.0089, -0.0146,  0.0267,
+          0.0009, -0.0321]], requires_grad=True)
+[2023-01-17 23:17:24,812][__main__][INFO] - scores: tensor([[24.4688, 25.5000, 23.8281, 23.3125, 24.4375]], device='cuda:0',
+       dtype=torch.float16, grad_fn=<MmBackward>)
+[2023-01-17 23:17:24,994][__main__][INFO] - parameters: Parameter containing:
+tensor([[ 0.0039,  0.0059, -0.0211,  0.0225, -0.0057,  0.0089, -0.0146,  0.0268,
+          0.0009, -0.0322]], requires_grad=True)
+[2023-01-17 23:17:24,995][__main__][INFO] - scores: tensor([[24.4688, 25.5000, 23.8281, 23.3281, 24.4531]], device='cuda:0',
+       dtype=torch.float16, grad_fn=<MmBackward>)
+[2023-01-17 23:17:25,167][__main__][INFO] - parameters: Parameter containing:
+tensor([[ 0.0038,  0.0058, -0.0209,  0.0226, -0.0059,  0.0090, -0.0146,  0.0269,
+          0.0008, -0.0322]], requires_grad=True)
+[2023-01-17 23:17:25,169][__main__][INFO] - scores: tensor([[24.4688, 25.5000, 23.8281, 23.3281, 24.4531]], device='cuda:0',
+       dtype=torch.float16, grad_fn=<MmBackward>)
+[2023-01-17 23:17:25,359][__main__][INFO] - parameters: Parameter containing:
+tensor([[ 0.0038,  0.0058, -0.0208,  0.0226, -0.0061,  0.0090, -0.0147,  0.0269,
+          0.0007, -0.0323]], requires_grad=True)
+[2023-01-17 23:17:25,360][__main__][INFO] - scores: tensor([[24.4688, 25.5000, 23.8281, 23.3281, 24.4375]], device='cuda:0',
+       dtype=torch.float16, grad_fn=<MmBackward>)
+[2023-01-17 23:17:25,538][__main__][INFO] - parameters: Parameter containing:
+tensor([[ 0.0038,  0.0059, -0.0208,  0.0226, -0.0061,  0.0091, -0.0147,  0.0269,
+          0.0006, -0.0325]], requires_grad=True)
+[2023-01-17 23:17:25,539][__main__][INFO] - scores: tensor([[24.4688, 25.5000, 23.8281, 23.3281, 24.4531]], device='cuda:0',
+       dtype=torch.float16, grad_fn=<MmBackward>)
+[2023-01-17 23:17:25,718][__main__][INFO] - parameters: Parameter containing:
+tensor([[ 0.0037,  0.0060, -0.0209,  0.0225, -0.0059,  0.0091, -0.0147,  0.0268,
+          0.0005, -0.0327]], requires_grad=True)
+[2023-01-17 23:17:25,720][__main__][INFO] - scores: tensor([[24.4688, 25.5000, 23.8281, 23.3281, 24.4531]], device='cuda:0',
+       dtype=torch.float16, grad_fn=<MmBackward>)
+[2023-01-17 23:17:25,917][__main__][INFO] - parameters: Parameter containing:
+tensor([[ 0.0036,  0.0060, -0.0210,  0.0224, -0.0059,  0.0092, -0.0148,  0.0268,
+          0.0004, -0.0329]], requires_grad=True)
+[2023-01-17 23:17:25,919][__main__][INFO] - scores: tensor([[24.4688, 25.5000, 23.8281, 23.3281, 24.4531]], device='cuda:0',
+       dtype=torch.float16, grad_fn=<MmBackward>)
+[2023-01-17 23:17:26,080][__main__][INFO] - parameters: Parameter containing:
+tensor([[ 0.0036,  0.0059, -0.0209,  0.0225, -0.0061,  0.0094, -0.0149,  0.0268,
+          0.0003, -0.0330]], requires_grad=True)
+[2023-01-17 23:17:26,081][__main__][INFO] - scores: tensor([[24.4688, 25.5000, 23.8281, 23.3125, 24.4375]], device='cuda:0',
+       dtype=torch.float16, grad_fn=<MmBackward>)
+[2023-01-17 23:17:26,259][__main__][INFO] - parameters: Parameter containing:
+tensor([[ 0.0036,  0.0059, -0.0209,  0.0225, -0.0061,  0.0095, -0.0150,  0.0269,
+          0.0002, -0.0332]], requires_grad=True)
+[2023-01-17 23:17:26,260][__main__][INFO] - scores: tensor([[24.4688, 25.5000, 23.8281, 23.3281, 24.4531]], device='cuda:0',
+       dtype=torch.float16, grad_fn=<MmBackward>)
+[2023-01-17 23:17:26,470][__main__][INFO] - parameters: Parameter containing:
+tensor([[ 0.0035,  0.0060, -0.0210,  0.0223, -0.0060,  0.0095, -0.0150,  0.0269,
+          0.0002, -0.0333]], requires_grad=True)
+[2023-01-17 23:17:26,471][__main__][INFO] - scores: tensor([[24.4688, 25.5000, 23.8281, 23.3281, 24.4531]], device='cuda:0',
+       dtype=torch.float16, grad_fn=<MmBackward>)
+[2023-01-17 23:17:26,640][__main__][INFO] - parameters: Parameter containing:
+tensor([[ 0.0035,  0.0060, -0.0210,  0.0223, -0.0061,  0.0096, -0.0152,  0.0269,
+          0.0001, -0.0334]], requires_grad=True)
+[2023-01-17 23:17:26,641][__main__][INFO] - scores: tensor([[24.4688, 25.5000, 23.8281, 23.3281, 24.4531]], device='cuda:0',
+       dtype=torch.float16, grad_fn=<MmBackward>)
+[2023-01-17 23:17:26,810][__main__][INFO] - parameters: Parameter containing:
+tensor([[ 3.5537e-03,  5.8901e-03, -2.0889e-02,  2.2410e-02, -6.3002e-03,
+          9.7214e-03, -1.5321e-02,  2.7158e-02,  5.8187e-05, -3.3374e-02]],
+       requires_grad=True)
+[2023-01-17 23:17:26,811][__main__][INFO] - scores: tensor([[24.4688, 25.5000, 23.8281, 23.3281, 24.4531]], device='cuda:0',
+       dtype=torch.float16, grad_fn=<MmBackward>)
+[2023-01-17 23:17:26,987][__main__][INFO] - parameters: Parameter containing:
+tensor([[ 0.0036,  0.0059, -0.0209,  0.0223, -0.0064,  0.0097, -0.0153,  0.0273,
+          0.0001, -0.0334]], requires_grad=True)
+[2023-01-17 23:17:26,988][__main__][INFO] - scores: tensor([[24.4688, 25.5000, 23.8281, 23.3281, 24.4531]], device='cuda:0',
+       dtype=torch.float16, grad_fn=<MmBackward>)
+[2023-01-17 23:17:27,136][__main__][INFO] - parameters: Parameter containing:
+tensor([[ 0.0035,  0.0061, -0.0209,  0.0222, -0.0063,  0.0097, -0.0152,  0.0273,
+          0.0003, -0.0334]], requires_grad=True)
+[2023-01-17 23:17:27,136][__main__][INFO] - scores: tensor([[24.4688, 25.5000, 23.8281, 23.3281, 24.4531]], device='cuda:0',
+       dtype=torch.float16, grad_fn=<MmBackward>)
+[2023-01-17 23:17:27,297][__main__][INFO] - parameters: Parameter containing:
+tensor([[ 0.0035,  0.0061, -0.0209,  0.0221, -0.0063,  0.0097, -0.0152,  0.0273,
+          0.0004, -0.0334]], requires_grad=True)
+[2023-01-17 23:17:27,298][__main__][INFO] - scores: tensor([[24.4688, 25.5000, 23.8281, 23.3281, 24.4531]], device='cuda:0',
+       dtype=torch.float16, grad_fn=<MmBackward>)
+[2023-01-17 23:17:27,460][__main__][INFO] - parameters: Parameter containing:
+tensor([[ 0.0034,  0.0061, -0.0208,  0.0221, -0.0064,  0.0099, -0.0153,  0.0274,
+          0.0004, -0.0334]], requires_grad=True)
+[2023-01-17 23:17:27,461][__main__][INFO] - scores: tensor([[24.4688, 25.5000, 23.8281, 23.3281, 24.4531]], device='cuda:0',
+       dtype=torch.float16, grad_fn=<MmBackward>)
+[2023-01-17 23:17:27,620][__main__][INFO] - parameters: Parameter containing:
+tensor([[ 0.0033,  0.0061, -0.0208,  0.0221, -0.0064,  0.0100, -0.0153,  0.0274,
+          0.0004, -0.0335]], requires_grad=True)
+[2023-01-17 23:17:27,621][__main__][INFO] - scores: tensor([[24.4844, 25.5000, 23.8281, 23.3281, 24.4531]], device='cuda:0',
+       dtype=torch.float16, grad_fn=<MmBackward>)
+[2023-01-17 23:17:27,803][__main__][INFO] - parameters: Parameter containing:
+tensor([[ 0.0032,  0.0061, -0.0209,  0.0221, -0.0063,  0.0101, -0.0154,  0.0273,
+          0.0004, -0.0337]], requires_grad=True)
+[2023-01-17 23:17:27,805][__main__][INFO] - scores: tensor([[24.4688, 25.5000, 23.8281, 23.3281, 24.4531]], device='cuda:0',
+       dtype=torch.float16, grad_fn=<MmBackward>)
+[2023-01-17 23:17:27,964][__main__][INFO] - parameters: Parameter containing:
+tensor([[ 0.0030,  0.0060, -0.0209,  0.0221, -0.0064,  0.0103, -0.0155,  0.0273,
+          0.0004, -0.0339]], requires_grad=True)
+[2023-01-17 23:17:27,965][__main__][INFO] - scores: tensor([[24.4688, 25.5000, 23.8281, 23.3281, 24.4531]], device='cuda:0',
+       dtype=torch.float16, grad_fn=<MmBackward>)
+[2023-01-17 23:17:28,121][__main__][INFO] - parameters: Parameter containing:
+tensor([[ 0.0030,  0.0061, -0.0209,  0.0221, -0.0064,  0.0103, -0.0155,  0.0272,
+          0.0004, -0.0341]], requires_grad=True)
+[2023-01-17 23:17:28,122][__main__][INFO] - scores: tensor([[24.4688, 25.5156, 23.8281, 23.3438, 24.4688]], device='cuda:0',
+       dtype=torch.float16, grad_fn=<MmBackward>)
+[2023-01-17 23:17:28,277][__main__][INFO] - parameters: Parameter containing:
+tensor([[ 0.0029,  0.0062, -0.0208,  0.0221, -0.0065,  0.0104, -0.0156,  0.0271,
+          0.0005, -0.0343]], requires_grad=True)
+[2023-01-17 23:17:28,278][__main__][INFO] - scores: tensor([[24.4844, 25.5156, 23.8438, 23.3438, 24.4688]], device='cuda:0',
+       dtype=torch.float16, grad_fn=<MmBackward>)
+[2023-01-17 23:17:28,453][__main__][INFO] - parameters: Parameter containing:
+tensor([[ 0.0029,  0.0062, -0.0207,  0.0221, -0.0066,  0.0104, -0.0157,  0.0271,
+          0.0005, -0.0345]], requires_grad=True)
+[2023-01-17 23:17:28,453][__main__][INFO] - scores: tensor([[24.4844, 25.5156, 23.8438, 23.3438, 24.4688]], device='cuda:0',
+       dtype=torch.float16, grad_fn=<MmBackward>)
+[2023-01-17 23:17:28,623][__main__][INFO] - parameters: Parameter containing:
+tensor([[ 0.0029,  0.0063, -0.0208,  0.0220, -0.0066,  0.0104, -0.0159,  0.0269,
+          0.0004, -0.0347]], requires_grad=True)
+[2023-01-17 23:17:28,624][__main__][INFO] - scores: tensor([[24.4688, 25.5156, 23.8281, 23.3438, 24.4531]], device='cuda:0',
+       dtype=torch.float16, grad_fn=<MmBackward>)
+[2023-01-17 23:17:28,825][__main__][INFO] - parameters: Parameter containing:
+tensor([[ 0.0029,  0.0062, -0.0207,  0.0220, -0.0067,  0.0104, -0.0161,  0.0269,
+          0.0003, -0.0349]], requires_grad=True)
+[2023-01-17 23:17:28,826][__main__][INFO] - scores: tensor([[24.4844, 25.5312, 23.8438, 23.3438, 24.4688]], device='cuda:0',
+       dtype=torch.float16, grad_fn=<MmBackward>)
+[2023-01-17 23:17:28,999][__main__][INFO] - parameters: Parameter containing:
+tensor([[ 0.0029,  0.0063, -0.0208,  0.0220, -0.0068,  0.0105, -0.0162,  0.0268,
+          0.0003, -0.0351]], requires_grad=True)
+[2023-01-17 23:17:29,000][__main__][INFO] - scores: tensor([[24.4844, 25.5156, 23.8438, 23.3438, 24.4688]], device='cuda:0',
+       dtype=torch.float16, grad_fn=<MmBackward>)
+[2023-01-17 23:17:29,160][__main__][INFO] - parameters: Parameter containing:
+tensor([[ 0.0028,  0.0064, -0.0208,  0.0218, -0.0067,  0.0104, -0.0162,  0.0267,
+          0.0004, -0.0352]], requires_grad=True)
+[2023-01-17 23:17:29,161][__main__][INFO] - scores: tensor([[24.4688, 25.5156, 23.8281, 23.3438, 24.4688]], device='cuda:0',
+       dtype=torch.float16, grad_fn=<MmBackward>)
+[2023-01-17 23:17:29,342][__main__][INFO] - parameters: Parameter containing:
+tensor([[ 0.0028,  0.0064, -0.0208,  0.0219, -0.0068,  0.0105, -0.0163,  0.0268,
+          0.0003, -0.0353]], requires_grad=True)
+[2023-01-17 23:17:29,343][__main__][INFO] - scores: tensor([[24.4688, 25.5000, 23.8281, 23.3281, 24.4531]], device='cuda:0',
+       dtype=torch.float16, grad_fn=<MmBackward>)
+[2023-01-17 23:17:29,529][__main__][INFO] - parameters: Parameter containing:
+tensor([[ 0.0028,  0.0062, -0.0207,  0.0220, -0.0071,  0.0107, -0.0166,  0.0270,
+          0.0001, -0.0353]], requires_grad=True)
+[2023-01-17 23:17:29,530][__main__][INFO] - scores: tensor([[24.4688, 25.5156, 23.8281, 23.3438, 24.4688]], device='cuda:0',
+       dtype=torch.float16, grad_fn=<MmBackward>)
+[2023-01-17 23:17:29,685][__main__][INFO] - parameters: Parameter containing:
+tensor([[ 0.0028,  0.0062, -0.0206,  0.0220, -0.0072,  0.0108, -0.0166,  0.0271,
+          0.0002, -0.0353]], requires_grad=True)
+[2023-01-17 23:17:29,686][__main__][INFO] - scores: tensor([[24.4844, 25.5156, 23.8281, 23.3438, 24.4688]], device='cuda:0',
+       dtype=torch.float16, grad_fn=<MmBackward>)
+[2023-01-17 23:17:29,842][__main__][INFO] - parameters: Parameter containing:
+tensor([[ 0.0027,  0.0063, -0.0206,  0.0219, -0.0072,  0.0109, -0.0165,  0.0271,
+          0.0003, -0.0352]], requires_grad=True)
+[2023-01-17 23:17:29,843][__main__][INFO] - scores: tensor([[24.4844, 25.5156, 23.8281, 23.3438, 24.4688]], device='cuda:0',
+       dtype=torch.float16, grad_fn=<MmBackward>)
+[2023-01-17 23:17:30,003][__main__][INFO] - parameters: Parameter containing:
+tensor([[ 0.0026,  0.0065, -0.0207,  0.0217, -0.0070,  0.0108, -0.0163,  0.0270,
+          0.0005, -0.0352]], requires_grad=True)
+[2023-01-17 23:17:30,004][__main__][INFO] - scores: tensor([[24.4844, 25.5312, 23.8438, 23.3438, 24.4688]], device='cuda:0',
+       dtype=torch.float16, grad_fn=<MmBackward>)
+[2023-01-17 23:17:30,175][__main__][INFO] - parameters: Parameter containing:
+tensor([[ 0.0025,  0.0065, -0.0207,  0.0217, -0.0071,  0.0109, -0.0163,  0.0271,
+          0.0006, -0.0351]], requires_grad=True)
+[2023-01-17 23:17:30,175][__main__][INFO] - scores: tensor([[24.4844, 25.5156, 23.8281, 23.3438, 24.4688]], device='cuda:0',
+       dtype=torch.float16, grad_fn=<MmBackward>)
+[2023-01-17 23:17:30,332][__main__][INFO] - parameters: Parameter containing:
+tensor([[ 0.0025,  0.0064, -0.0206,  0.0217, -0.0073,  0.0111, -0.0164,  0.0273,
+          0.0005, -0.0350]], requires_grad=True)
+[2023-01-17 23:17:30,333][__main__][INFO] - scores: tensor([[24.4844, 25.5312, 23.8438, 23.3438, 24.4688]], device='cuda:0',
+       dtype=torch.float16, grad_fn=<MmBackward>)
+[2023-01-17 23:17:30,499][__main__][INFO] - parameters: Parameter containing:
+tensor([[ 0.0025,  0.0063, -0.0206,  0.0217, -0.0074,  0.0112, -0.0166,  0.0275,
+          0.0004, -0.0349]], requires_grad=True)
+[2023-01-17 23:17:30,501][__main__][INFO] - scores: tensor([[24.4688, 25.5156, 23.8438, 23.3438, 24.4688]], device='cuda:0',
+       dtype=torch.float16, grad_fn=<MmBackward>)
+[2023-01-17 23:17:30,687][__main__][INFO] - parameters: Parameter containing:
+tensor([[ 0.0024,  0.0063, -0.0207,  0.0216, -0.0074,  0.0113, -0.0167,  0.0275,
+          0.0004, -0.0349]], requires_grad=True)
+[2023-01-17 23:17:30,688][__main__][INFO] - scores: tensor([[24.4844, 25.5156, 23.8281, 23.3438, 24.4688]], device='cuda:0',
+       dtype=torch.float16, grad_fn=<MmBackward>)
+[2023-01-17 23:17:30,906][__main__][INFO] - parameters: Parameter containing:
+tensor([[ 0.0023,  0.0064, -0.0208,  0.0215, -0.0073,  0.0113, -0.0165,  0.0273,
+          0.0005, -0.0349]], requires_grad=True)
+[2023-01-17 23:17:30,907][__main__][INFO] - scores: tensor([[24.4844, 25.5156, 23.8281, 23.3438, 24.4688]], device='cuda:0',
+       dtype=torch.float16, grad_fn=<MmBackward>)
+[2023-01-17 23:17:31,107][__main__][INFO] - parameters: Parameter containing:
+tensor([[ 0.0022,  0.0064, -0.0208,  0.0214, -0.0073,  0.0114, -0.0165,  0.0273,
+          0.0005, -0.0348]], requires_grad=True)
+[2023-01-17 23:17:31,108][__main__][INFO] - scores: tensor([[24.4688, 25.5156, 23.8281, 23.3438, 24.4688]], device='cuda:0',
+       dtype=torch.float16, grad_fn=<MmBackward>)
+[2023-01-17 23:17:31,285][__main__][INFO] - parameters: Parameter containing:
+tensor([[ 0.0021,  0.0063, -0.0207,  0.0215, -0.0075,  0.0115, -0.0167,  0.0274,
+          0.0004, -0.0348]], requires_grad=True)
+[2023-01-17 23:17:31,286][__main__][INFO] - scores: tensor([[24.4844, 25.5156, 23.8281, 23.3438, 24.4688]], device='cuda:0',
+       dtype=torch.float16, grad_fn=<MmBackward>)
+[2023-01-17 23:17:31,473][__main__][INFO] - parameters: Parameter containing:
+tensor([[ 0.0021,  0.0064, -0.0206,  0.0214, -0.0076,  0.0115, -0.0166,  0.0273,
+          0.0005, -0.0348]], requires_grad=True)
+[2023-01-17 23:17:31,474][__main__][INFO] - scores: tensor([[24.4688, 25.5156, 23.8281, 23.3438, 24.4688]], device='cuda:0',
+       dtype=torch.float16, grad_fn=<MmBackward>)
+[2023-01-17 23:17:31,667][__main__][INFO] - parameters: Parameter containing:
+tensor([[ 0.0020,  0.0065, -0.0206,  0.0213, -0.0076,  0.0113, -0.0164,  0.0271,
+          0.0007, -0.0349]], requires_grad=True)
+[2023-01-17 23:17:31,667][__main__][INFO] - scores: tensor([[24.4688, 25.5156, 23.8281, 23.3438, 24.4688]], device='cuda:0',
+       dtype=torch.float16, grad_fn=<MmBackward>)
+[2023-01-17 23:17:31,853][__main__][INFO] - parameters: Parameter containing:
+tensor([[ 0.0020,  0.0065, -0.0205,  0.0214, -0.0077,  0.0113, -0.0165,  0.0270,
+          0.0007, -0.0350]], requires_grad=True)
+[2023-01-17 23:17:31,853][__main__][INFO] - scores: tensor([[24.4688, 25.5156, 23.8281, 23.3438, 24.4688]], device='cuda:0',
+       dtype=torch.float16, grad_fn=<MmBackward>)
+[2023-01-17 23:17:32,040][__main__][INFO] - parameters: Parameter containing:
+tensor([[ 0.0019,  0.0065, -0.0206,  0.0213, -0.0077,  0.0113, -0.0165,  0.0269,
+          0.0006, -0.0350]], requires_grad=True)
+[2023-01-17 23:17:32,041][__main__][INFO] - scores: tensor([[24.4844, 25.5156, 23.8281, 23.3438, 24.4688]], device='cuda:0',
+       dtype=torch.float16, grad_fn=<MmBackward>)
+[2023-01-17 23:17:32,241][__main__][INFO] - parameters: Parameter containing:
+tensor([[ 0.0019,  0.0065, -0.0207,  0.0212, -0.0077,  0.0113, -0.0167,  0.0267,
+          0.0005, -0.0351]], requires_grad=True)
+[2023-01-17 23:17:32,243][__main__][INFO] - scores: tensor([[24.4844, 25.5312, 23.8438, 23.3438, 24.4688]], device='cuda:0',
+       dtype=torch.float16, grad_fn=<MmBackward>)
+[2023-01-17 23:17:32,429][__main__][INFO] - parameters: Parameter containing:
+tensor([[ 0.0019,  0.0064, -0.0208,  0.0212, -0.0079,  0.0114, -0.0169,  0.0267,
+          0.0003, -0.0351]], requires_grad=True)
+[2023-01-17 23:17:32,431][__main__][INFO] - scores: tensor([[24.4688, 25.5156, 23.8438, 23.3438, 24.4688]], device='cuda:0',
+       dtype=torch.float16, grad_fn=<MmBackward>)
+[2023-01-17 23:17:32,612][__main__][INFO] - parameters: Parameter containing:
+tensor([[ 0.0019,  0.0063, -0.0209,  0.0212, -0.0080,  0.0115, -0.0170,  0.0266,
+          0.0002, -0.0352]], requires_grad=True)
+[2023-01-17 23:17:32,613][__main__][INFO] - scores: tensor([[24.4844, 25.5156, 23.8438, 23.3438, 24.4688]], device='cuda:0',
+       dtype=torch.float16, grad_fn=<MmBackward>)
+[2023-01-17 23:17:32,791][__main__][INFO] - parameters: Parameter containing:
+tensor([[ 0.0018,  0.0063, -0.0210,  0.0211, -0.0080,  0.0114, -0.0170,  0.0265,
+          0.0002, -0.0353]], requires_grad=True)
+[2023-01-17 23:17:32,792][__main__][INFO] - scores: tensor([[24.4688, 25.5156, 23.8281, 23.3438, 24.4688]], device='cuda:0',
+       dtype=torch.float16, grad_fn=<MmBackward>)
+[2023-01-17 23:17:32,972][__main__][INFO] - parameters: Parameter containing:
+tensor([[ 0.0017,  0.0065, -0.0211,  0.0210, -0.0079,  0.0113, -0.0168,  0.0264,
+          0.0003, -0.0353]], requires_grad=True)
+[2023-01-17 23:17:32,973][__main__][INFO] - scores: tensor([[24.4688, 25.5000, 23.8281, 23.3281, 24.4531]], device='cuda:0',
+       dtype=torch.float16, grad_fn=<MmBackward>)
+[2023-01-17 23:17:33,146][__main__][INFO] - parameters: Parameter containing:
+tensor([[ 0.0017,  0.0065, -0.0211,  0.0210, -0.0081,  0.0112, -0.0168,  0.0264,
+          0.0004, -0.0353]], requires_grad=True)
+[2023-01-17 23:17:33,147][__main__][INFO] - scores: tensor([[24.4844, 25.5156, 23.8281, 23.3281, 24.4531]], device='cuda:0',
+       dtype=torch.float16, grad_fn=<MmBackward>)
+[2023-01-17 23:17:33,310][__main__][INFO] - parameters: Parameter containing:
+tensor([[ 0.0016,  0.0064, -0.0210,  0.0212, -0.0083,  0.0113, -0.0168,  0.0266,
+          0.0003, -0.0353]], requires_grad=True)
+[2023-01-17 23:17:33,311][__main__][INFO] - scores: tensor([[24.4688, 25.5000, 23.8281, 23.3125, 24.4375]], device='cuda:0',
+       dtype=torch.float16, grad_fn=<MmBackward>)
+[2023-01-17 23:17:33,483][__main__][INFO] - parameters: Parameter containing:
+tensor([[ 0.0015,  0.0064, -0.0209,  0.0212, -0.0085,  0.0113, -0.0167,  0.0267,
+          0.0004, -0.0352]], requires_grad=True)
+[2023-01-17 23:17:33,484][__main__][INFO] - scores: tensor([[24.4688, 25.5156, 23.8281, 23.3438, 24.4688]], device='cuda:0',
+       dtype=torch.float16, grad_fn=<MmBackward>)
+[2023-01-17 23:17:33,690][__main__][INFO] - parameters: Parameter containing:
+tensor([[ 0.0014,  0.0065, -0.0209,  0.0212, -0.0085,  0.0112, -0.0164,  0.0266,
+          0.0005, -0.0352]], requires_grad=True)
+[2023-01-17 23:17:33,692][__main__][INFO] - scores: tensor([[24.4844, 25.5156, 23.8438, 23.3438, 24.4688]], device='cuda:0',
+       dtype=torch.float16, grad_fn=<MmBackward>)
+[2023-01-17 23:17:33,874][__main__][INFO] - parameters: Parameter containing:
+tensor([[ 0.0013,  0.0067, -0.0210,  0.0211, -0.0085,  0.0112, -0.0162,  0.0266,
+          0.0007, -0.0352]], requires_grad=True)
+[2023-01-17 23:17:33,876][__main__][INFO] - scores: tensor([[24.4844, 25.5156, 23.8281, 23.3438, 24.4688]], device='cuda:0',
+       dtype=torch.float16, grad_fn=<MmBackward>)
+[2023-01-17 23:17:34,058][__main__][INFO] - parameters: Parameter containing:
+tensor([[ 0.0012,  0.0066, -0.0211,  0.0212, -0.0086,  0.0112, -0.0162,  0.0266,
+          0.0006, -0.0352]], requires_grad=True)
+[2023-01-17 23:17:34,059][__main__][INFO] - scores: tensor([[24.4844, 25.5156, 23.8281, 23.3438, 24.4688]], device='cuda:0',
+       dtype=torch.float16, grad_fn=<MmBackward>)
+[2023-01-17 23:17:34,249][__main__][INFO] - parameters: Parameter containing:
+tensor([[ 0.0012,  0.0065, -0.0210,  0.0214, -0.0088,  0.0114, -0.0163,  0.0269,
+          0.0005, -0.0351]], requires_grad=True)
+[2023-01-17 23:17:34,250][__main__][INFO] - scores: tensor([[24.4688, 25.5156, 23.8281, 23.3438, 24.4688]], device='cuda:0',
+       dtype=torch.float16, grad_fn=<MmBackward>)
+[2023-01-17 23:17:34,430][__main__][INFO] - parameters: Parameter containing:
+tensor([[ 0.0012,  0.0064, -0.0211,  0.0214, -0.0089,  0.0115, -0.0163,  0.0271,
+          0.0004, -0.0349]], requires_grad=True)
+[2023-01-17 23:17:34,431][__main__][INFO] - scores: tensor([[24.4844, 25.5156, 23.8438, 23.3438, 24.4688]], device='cuda:0',
+       dtype=torch.float16, grad_fn=<MmBackward>)
+[2023-01-17 23:17:34,609][__main__][INFO] - parameters: Parameter containing:
+tensor([[ 0.0013,  0.0065, -0.0211,  0.0212, -0.0090,  0.0114, -0.0164,  0.0272,
+          0.0004, -0.0348]], requires_grad=True)
+[2023-01-17 23:17:34,610][__main__][INFO] - scores: tensor([[24.4844, 25.5156, 23.8281, 23.3438, 24.4688]], device='cuda:0',
+       dtype=torch.float16, grad_fn=<MmBackward>)
+[2023-01-17 23:17:34,814][__main__][INFO] - parameters: Parameter containing:
+tensor([[ 0.0013,  0.0066, -0.0213,  0.0210, -0.0090,  0.0113, -0.0163,  0.0271,
+          0.0005, -0.0348]], requires_grad=True)
+[2023-01-17 23:17:34,815][__main__][INFO] - scores: tensor([[24.4688, 25.5156, 23.8281, 23.3438, 24.4688]], device='cuda:0',
+       dtype=torch.float16, grad_fn=<MmBackward>)
+[2023-01-17 23:17:34,996][__main__][INFO] - parameters: Parameter containing:
+tensor([[ 0.0014,  0.0067, -0.0213,  0.0209, -0.0090,  0.0112, -0.0164,  0.0272,
+          0.0005, -0.0348]], requires_grad=True)
+[2023-01-17 23:17:34,997][__main__][INFO] - scores: tensor([[24.4688, 25.5000, 23.8281, 23.3281, 24.4531]], device='cuda:0',
+       dtype=torch.float16, grad_fn=<MmBackward>)
+[2023-01-17 23:17:35,171][__main__][INFO] - parameters: Parameter containing:
+tensor([[ 0.0014,  0.0066, -0.0212,  0.0209, -0.0092,  0.0112, -0.0164,  0.0273,
+          0.0005, -0.0347]], requires_grad=True)
+[2023-01-17 23:17:35,173][__main__][INFO] - scores: tensor([[24.4688, 25.5000, 23.8281, 23.3281, 24.4531]], device='cuda:0',
+       dtype=torch.float16, grad_fn=<MmBackward>)

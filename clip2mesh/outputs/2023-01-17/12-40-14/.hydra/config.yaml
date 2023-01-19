@@ -1,0 +1,6 @@
+working_dir: /home/nadav2/dev/data/CLIP2Shape/outs/vertices_heatmap/optimizations/test_arik_algorithm/smplx_male
+images_dir: /home/nadav2/dev/data/CLIP2Shape/images/smplx_py3d_male
+descriptors_clusters_json: /home/nadav2/dev/data/CLIP2Shape/outs/clustering_images/words_jsons/smplx_male.json
+mode: and
+max_num_of_descriptors: 20
+min_num_of_descriptors: 3

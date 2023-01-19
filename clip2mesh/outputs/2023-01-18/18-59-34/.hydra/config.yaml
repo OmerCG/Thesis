@@ -1,0 +1,20 @@
+repo_path: /home/nadav2/dev/repos/Thesis
+data_path: /home/nadav2/dev/data/CLIP2Shape
+demo_kwargs:
+  out_dir: ${data_path}/outs/images_from_demo
+  gender: male
+  device: cuda
+  with_face: false
+  model_type: smpl
+  texture: null
+  model_path: null
+  on_parameters: true
+  num_coeffs: 10
+  renderer_kwargs:
+    img_size:
+    - 1024
+    - 1024
+    tex_path: ${demo_kwargs.texture}
+    dist: 6.5
+    elev: 0.0
+    azim: 0.0

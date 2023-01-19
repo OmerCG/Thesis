@@ -1,0 +1,19 @@
+renderer_kwargs:
+  dist: 4.2
+  elev: 10.0
+  azim: 0.0
+  img_size:
+  - 512
+  - 512
+  tex_path: ${texture}
+output_path: /home/nadav2/dev/data/CLIP2Shape/images/smplx_male_multiview
+gender: male
+img_tag: null
+model_type: smplx
+with_face: true
+num_of_imgs: 10
+num_coeffs: 10
+sides: true
+texture: null
+renderer:
+  name: pytorch3d

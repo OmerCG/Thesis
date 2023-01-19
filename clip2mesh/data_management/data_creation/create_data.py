@@ -30,19 +30,10 @@ class DataCreator:
 
     def _get_renderer_kwargs(self, cfg):
         if cfg.renderer.name == "open3d":
-            # renderer_kwargs = {
-            #     "verts": verts,
-            #     "faces": faces,
-            #     "vt": vt,
-            #     "ft": ft,
-            #     "paint_vertex_colors": True if cfg.model_type == "smal" else False,
-            # }
-            # renderer_kwargs.update(cfg.renderer.kwargs)
-            # renderer = models_factory.get_renderer(**renderer_kwargs)
             raise NotImplementedError  # TODO: implement open3d renderer
         else:
             renderer_kwargs = {"py3d": True}
-            renderer_kwargs.update(cfg.renderer.kwargs)
+            renderer_kwargs.update(cfg.renderer_kwargs)
 
         return renderer_kwargs
 
@@ -76,6 +67,8 @@ class DataCreator:
             verts, faces, vt, ft = self.models_factory.get_model(
                 **model_kwargs, gender=self.gender, num_coeffs=self.num_coeffs
             )
+            if self.model_type == "smplx":
+                verts += self.utils.smplx_offset_numpy
 
             # render mesh and save image
             if self.renderer_type == "open3d":

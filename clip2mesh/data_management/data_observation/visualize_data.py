@@ -20,6 +20,10 @@ def main(args):
         suffix = f"{str(args.from_img_idx)}_front.png" if args.sides else f"{str(args.from_img_idx)}.png"
         idx = files_generator.index(Path(args.working_dir) / suffix)
         files_generator = files_generator[idx:]
+    if args.to_img_idx is not None:
+        suffix = f"{str(args.to_img_idx)}_front.png" if args.sides else f"{str(args.to_img_idx)}.png"
+        idx = files_generator.index(Path(args.working_dir) / suffix)
+        files_generator = files_generator[: idx + 1]
 
     logger.info("starting to iterate over images")
     for file_idx, file in enumerate(files_generator):
@@ -87,6 +91,7 @@ def parse_args():
         default="/home/nadav2/dev/data/CLIP2Shape/images/saved_by_me",
     )
     parser.add_argument("--from_img_idx", type=int, default=None)
+    parser.add_argument("--to_img_idx", type=int, default=None)
     parser.add_argument("-s", "--sides", action="store_true", default=False)
     return parser.parse_args()
 

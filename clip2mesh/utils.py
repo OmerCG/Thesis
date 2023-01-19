@@ -309,9 +309,11 @@ class Pytorch3dRenderer:
         img_size: Tuple[int, int] = (224, 224),
         tex_path: str = None,
         texture_optimization: bool = False,
+        background_color: Tuple[float, float, float] = (255.0, 255.0, 255.0),
     ):
 
         self.device = device
+        self.background_color = background_color
         self.texture_optimization = texture_optimization
         self.tex_map = cv2.cvtColor(cv2.imread(tex_path), cv2.COLOR_BGR2RGB) if tex_path is not None else None
         self.height, self.width = img_size
@@ -370,9 +372,8 @@ class Pytorch3dRenderer:
         materials = Materials(device=device)  # , shininess=12)
         return materials
 
-    @staticmethod
-    def get_default_blend_params():
-        blend_params = BlendParams(sigma=1e-6, gamma=1e-6, background_color=(0.0, 0.0, 0.0))
+    def get_default_blend_params(self):
+        blend_params = BlendParams(sigma=1e-6, gamma=1e-6, background_color=self.background_color)
         return blend_params
 
     @staticmethod
@@ -446,6 +447,7 @@ class Pytorch3dRenderer:
             image = image.cpu().numpy().squeeze()
             image = np.clip(image, 0, 1)
             image = (image * 255).astype(np.uint8)
+        image = cv2.resize(image, (512, 512))
         cv2.imwrite(path, cv2.cvtColor(image, cv2.COLOR_RGB2BGR))
 
 
@@ -520,6 +522,7 @@ class Utils:
 
     def _get_smplx_layer(self, gender: str, num_coeffs: int, get_smpl: bool):
         if get_smpl:
+            gender = "male"
             if gender == "male":
                 smplx_path = "/home/nadav2/dev/repos/Thesis/SMPL/smpl_male.pkl"
             elif gender == "female":
@@ -543,6 +546,14 @@ class Utils:
     def _get_flame_layer(self, gender: Literal["male", "female", "neutral"]) -> FLAME:
         cfg = self.get_flame_model_kwargs(gender)
         self.flame_layer = FLAME(cfg).cuda()
+
+    @property
+    def smplx_offset_tensor(self):
+        return torch.tensor([0.6, 0.7, 0.0], device=self.device)
+
+    @property
+    def smplx_offset_numpy(self):
+        return np.array([0.6, 0.7, 0.0])
 
     def get_smplx_model(
         self,
@@ -577,8 +588,7 @@ class Utils:
         else:
             verts = self.smplx_layer(**smplx_model.params).vertices
             verts = verts.detach().cpu().numpy()
-        verts = (verts.squeeze() - verts.min()) / (verts.max() - verts.min())
-        verts = self.translate_mesh_smplx(verts)
+        verts = self.translate_mesh_smplx(verts.squeeze())
         if not hasattr(self, "vt_smplx") and not hasattr(self, "ft_smpl"):
             self._get_vt_ft("smplx")
 
@@ -738,56 +748,77 @@ class Utils:
         #     ["skinny"],
         # ]  # SMPLX body
         # labels = [
-        #     ["sad"],
-        #     # ["bored"],
-        #     ["disgusted"],
-        #     ["raise eyebrows"],
-        #     ["angry"],
-        #     # ["smile"],
+        #     ["calm"],
+        #     ["relaxed"],
+        #     ["open eyes"],
+        #     ["bored"],
         #     ["happy"],
-        #     # ["worried"],
-        #     ["afraid"],
+        #     ["tired"],
+        #     ["excited"],
+        #     ["sleepy"],
+        #     ["scared"],
+        #     ["worried"],
+        #     ["raised eyebrows"],
+        #     ["pensive"],
+        #     ["surprised"],
+        #     ["confused"],
+        #     ["fearful"],
+        #     ["serious"],
+        #     ["neutral"],
+        #     ["angry"],
+        #     ["sad"],
         #     ["open mouth"],
+        #     ["smiling"],
+        #     ["nervous"],
+        #     ["disgusted"],
         # ]  # FLAME expression
         # labels = [
         #     ["fat"],
+        #     ["thin"],
+        #     ["thin lips"],
         #     ["big eyes"],
         #     ["long neck"],
         #     ["chubby cheeks"],
-        #     ["nose sticking-out"],
+        #     ["big eyebrows"],
+        #     ["big nose"],
+        #     ["big mouth"],
         #     ["ears sticking-out"],
         #     ["big forehead"],
         #     ["small chin"],
         #     ["long head"],
-        #     ["small head"],
         # ]  # FLAME shape
         labels = [
+            "big",
             "fat",
-            # "thin",
-            "muscular",
-            # "short",
-            "long legs",
-            "narrow waist",
-            # "skinny",
-            # "tall",
-            # "rectangular",
-            "pear shaped",
-            # "average",
-            # "big",
+            "broad shoulders",
+            "built",
             "curvy",
-            # "lean",
-            # "masculine",
-            # "proportioned",
-            # "stocky",
-            # "sexy",
+            "feminine",
+            "fit",
+            "heavyset",
+            "lean",
+            "long legs",
+            "tall",
+            "long torso",
+            "long",
+            "masculine",
+            "muscular",
+            "pear shaped",
+            "petite",
+            "proportioned",
+            "rectangular",
+            "round apple",
+            "short legs",
+            "short torso",
+            "short",
+            "skinny",
+            "small",
+            "stocky",
             "sturdy",
-            # "broad shoulders",
-            # "fit",
-            # "round apple",
-            # "built",
-            # "heavyset",
-            # "petite",
-            # "small",
+            "tall",
+            "attractive",
+            "sexy",
+            "hourglass",
         ]
         if not isinstance(labels[0], list):
             labels = [[label] for label in labels]
@@ -821,7 +852,9 @@ class Utils:
         """SMPLX body shape"""
         if smpl:
             return torch.randn(1, num_coeffs)
-        return torch.randn(1, num_coeffs) * torch.randint(-2, 2, (1, num_coeffs)).float()
+        random_offset = torch.randint(-2, 2, (1, num_coeffs)).float()
+        random_offset[:, 0] = 4.0
+        return torch.randn(1, num_coeffs) * random_offset
 
     @staticmethod
     def get_random_betas_smal(num_coeffs: int = 10) -> torch.tensor:
@@ -1191,14 +1224,9 @@ class Image2ShapeUtils:
         self.model: Dict[str, nn.Module] = {"male": smplx_male, "female": smplx_female}
         self.labels: Dict[str, List[str]] = {"male": labels_male, "female": labels_female}
 
-    def _load_weights(self, labels_weights: Dict[str, float]):
-        self.labels_weights = {}
-        for gender, weights in labels_weights.items():
-            self.labels_weights[gender] = (
-                torch.tensor(weights).to(self.device)
-                if weights is not None
-                else torch.ones(len(self.labels[gender])).to(self.device)
-            )
+    def _load_flame_smal_models(self, model_path: str):
+        self.model, labels = self.utils.get_model_to_eval(model_path)
+        self.labels = self._flatten_list_of_lists(labels)
 
     def _from_h5_to_img(
         self, h5_file_path: Union[str, Path], gender: Literal["male", "female", "neutral"], renderer: Pytorch3dRenderer
@@ -1220,9 +1248,12 @@ class Image2ShapeUtils:
         self.clip_model, self.clip_preprocess = clip.load("ViT-B/32", device=self.device)
 
     def _encode_labels(self):
-        self.encoded_labels: Dict[str, torch.Tensor] = {
-            gender: clip.tokenize(self.labels[gender]).to(self.device) for gender in self.labels.keys()
-        }
+        if isinstance(self.labels, dict):
+            self.encoded_labels: Dict[str, torch.Tensor] = {
+                gender: clip.tokenize(self.labels[gender]).to(self.device) for gender in self.labels.keys()
+            }
+        else:
+            self.encoded_labels: torch.Tensor = clip.tokenize(self.labels).to(self.device)
 
     @staticmethod
     def _flatten_list_of_lists(list_of_lists: List[List[str]]) -> List[str]:
@@ -1255,15 +1286,16 @@ class Image2ShapeUtils:
     def get_render_mesh_kwargs(
         self, pred_vec: torch.Tensor, gender: Literal["male", "female", "neutral"], get_smpl: bool = False
     ) -> Dict[str, np.ndarray]:
-        out = self._get_smplx_attributes(pred_vec=pred_vec, gender=gender, get_smpl=get_smpl)
+        if self.model_type == "smplx" or self.model_type == "smpl":
+            out = self._get_smplx_attributes(pred_vec=pred_vec, gender=gender, get_smpl=get_smpl)
+        elif self.model_type == "flame":
+            out = self._get_flame_attributes(pred_vec=pred_vec)
+        elif self.model_type == "smal":
+            out = self._get_smal_attributes(pred_vec=pred_vec)
 
         kwargs = {"verts": out[0], "faces": out[1], "vt": out[2], "ft": out[3]}
 
         return kwargs
-
-    def normalize_scores(self, scores: torch.Tensor, gender: Literal["male", "female", "neutral"]) -> torch.Tensor:
-        normalized_score = scores * self.labels_weights[gender]
-        return normalized_score.float()
 
     @staticmethod
     def adjust_rendered_img(img: torch.Tensor) -> np.ndarray:

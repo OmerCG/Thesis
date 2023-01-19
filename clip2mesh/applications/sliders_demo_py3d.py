@@ -1,3 +1,4 @@
+import cv2
 import json
 import torch
 import tkinter
@@ -45,6 +46,8 @@ class SlidersApp:
         if hasattr(self, "num_coeffs"):
             self.model_kwargs["num_coeffs"] = self.num_coeffs
         self.verts, self.faces, self.vt, self.ft = self.models_factory.get_model(**self.model_kwargs)
+        if self.model_type == "smplx":
+            self.verts += self.utils.smplx_offset_numpy  # center the model with offsets
         self.renderer_kwargs = {"py3d": True}
         self.renderer_kwargs.update(cfg.renderer_kwargs)
         self.renderer = self.models_factory.get_renderer(**self.renderer_kwargs)
@@ -52,8 +55,8 @@ class SlidersApp:
         self.img = self.adjust_rendered_img(img)
 
         self.dist = cfg.renderer_kwargs["dist"]
-        self.azim = cfg.renderer_kwargs["azim"]
-        self.elev = cfg.renderer_kwargs["elev"]
+        self.azim = 0.0
+        self.elev = 0.0
 
         self.production_scales = []
         self.camera_scales = {}
@@ -68,7 +71,7 @@ class SlidersApp:
 
     def initialize_params(self):
         if self.on_parameters:
-            if self.model_type == "smplx":
+            if self.model_type == "smplx" or self.model_type == "smpl":
                 self.betas = self.model_kwargs["betas"]
                 self.expression = self.model_kwargs["expression"]
                 self.params.append(self.betas)
@@ -91,10 +94,12 @@ class SlidersApp:
             if isinstance(value, str):
                 value = float(value)
             self.betas[0, idx] = value
-
+            get_smpl = True if self.model_type == "smpl" else False
             self.verts, self.faces, self.vt, self.ft = self.utils.get_smplx_model(
-                betas=self.betas, expression=self.expression, gender=self.gender
+                betas=self.betas, expression=self.expression, gender=self.gender, get_smpl=get_smpl
             )
+            if self.model_type == "smplx":
+                self.verts += self.utils.smplx_offset_numpy
             img = self.renderer.render_mesh(verts=self.verts, faces=self.faces[None], vt=self.vt, ft=self.ft)
             img = self.adjust_rendered_img(img)
             self.img = img
@@ -146,7 +151,6 @@ class SlidersApp:
             self.beta[0, idx] = value
 
             self.verts, self.faces, self.vt, self.ft = self.utils.get_smal_model(beta=self.beta)
-
             img = self.renderer.render_mesh(verts=self.verts, faces=self.faces[None], vt=self.vt, ft=self.ft)
             img = self.adjust_rendered_img(img)
             self.img = img
@@ -169,6 +173,7 @@ class SlidersApp:
                     self.verts, self.faces, self.vt, self.ft = self.utils.get_smplx_model(
                         betas=betas, gender=self.gender
                     )
+                    self.verts += self.utils.smplx_offset_numpy
                 elif self.model_type == "flame":
                     if self.with_face:
                         self.verts, self.faces, self.vt, self.ft = self.utils.get_flame_model(
@@ -197,6 +202,7 @@ class SlidersApp:
 
     def adjust_rendered_img(self, img: torch.Tensor):
         img = np.clip(img.cpu().numpy()[0, ..., :3] * 255, 0, 255).astype(np.uint8)
+        img = cv2.resize(img, (512, 512))
         return Image.fromarray(img)
 
     def add_texture(self):
@@ -405,7 +411,7 @@ class SlidersApp:
         # ------------------- Parameters Scale Bars ------------------
         if self.on_parameters:
 
-            if self.model_type == "smplx":
+            if self.model_type == "smplx" or self.model_type == "smpl":
                 scale_kwargs = self.get_parameters_scale_kwargs()
                 if self.with_face:
                     for expression in range(self.expression.shape[1]):
@@ -492,7 +498,7 @@ class SlidersApp:
             command=lambda x: self.update_camera_zoom(x),
             **zoom_scale_kwarg,
         )
-        zoom_in_scale.set(self.elev)
+        zoom_in_scale.set(self.dist)
         zoom_in_scale.pack(pady=(50, 0))
         self.camera_scales["dist"] = zoom_in_scale
 
@@ -704,7 +710,7 @@ class SlidersApp:
 
 @hydra.main(config_path="../config", config_name="sliders_demo_py3d")
 def main(cfg):
-    app = SlidersApp(cfg.demo_kwargs)
+    app = SlidersApp(cfg)
     app.create_application()
 
 

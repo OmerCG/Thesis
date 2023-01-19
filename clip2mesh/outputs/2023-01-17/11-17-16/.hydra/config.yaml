@@ -1,0 +1,14 @@
+images_dir: /home/nadav2/dev/data/CLIP2Shape/images/flame_shape_py3d_angles
+out_path: /home/nadav2/dev/data/CLIP2Shape/outs/clustering_images/words_jsons
+descriptors:
+- fat
+- thin
+- long neck
+- big forhead
+- nose sticking-out
+- big mouth
+- ears sticking-out
+- big eyebrows
+- small chin
+- long head
+- chubby cheeks

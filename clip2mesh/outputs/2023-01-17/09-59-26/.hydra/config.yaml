@@ -1,0 +1,4 @@
+working_dir: /home/nadav2/dev/data/CLIP2Shape/outs/vertices_heatmap/optimizations/test_arik_algorithm/smplx_female
+images_dir: /home/nadav2/dev/data/CLIP2Shape/images/smplx_py3d_female
+descriptors_clusters_json: /home/nadav2/dev/data/CLIP2Shape/outs/clustering_images/words_jsons/smplx_female.json
+mode: and

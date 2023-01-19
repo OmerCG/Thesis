@@ -1,0 +1,17 @@
+[2023-01-17 08:44:44,992][choosing_descriptors][INFO] - There are total of 26 descriptors
+[2023-01-17 08:44:52,360][choosing_descriptors][INFO] - Working on cluster 0
+[2023-01-17 08:44:52,361][choosing_descriptors][INFO] - 0 most covering descriptor - curvy
+[2023-01-17 08:44:52,361][choosing_descriptors][INFO] - Adding curvy to chosen descriptors
+[2023-01-17 08:44:52,362][choosing_descriptors][INFO] - 1 most covering descriptor - proportioned
+[2023-01-17 08:44:52,364][choosing_descriptors][INFO] - Adding proportioned to chosen descriptors
+[2023-01-17 08:44:52,364][choosing_descriptors][INFO] - 2 most covering descriptor - round apple
+[2023-01-17 08:44:52,365][choosing_descriptors][INFO] - Adding round apple to chosen descriptors
+[2023-01-17 08:44:52,365][choosing_descriptors][INFO] - 3 most covering descriptor - short
+[2023-01-17 08:44:52,368][choosing_descriptors][INFO] - Adding short to chosen descriptors
+[2023-01-17 08:44:52,368][choosing_descriptors][INFO] - 4 most covering descriptor - lean
+[2023-01-17 08:44:52,372][choosing_descriptors][INFO] - lean is correlated with short with corr 0.538651472181547
+[2023-01-17 08:44:52,372][choosing_descriptors][INFO] - 5 most covering descriptor - fit
+[2023-01-17 08:44:52,375][choosing_descriptors][INFO] - fit is correlated with short with corr 0.6822440836746547
+[2023-01-17 08:44:52,376][choosing_descriptors][INFO] - 6 most covering descriptor - petite
+[2023-01-17 08:44:52,379][choosing_descriptors][INFO] - petite is correlated with round apple with corr 0.5190485462235869
+[2023-01-17 08:44:52,379][choosing_descriptors][INFO] - 7 most covering descriptor - masculine

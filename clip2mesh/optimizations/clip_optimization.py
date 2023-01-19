@@ -13,7 +13,7 @@ from clip2mesh.utils import ModelsFactory, Pytorch3dRenderer, Utils
 
 
 class Model(nn.Module):
-    def __init__(self, params_size: Tuple[int, int] = (1, 9)):
+    def __init__(self, params_size: Tuple[int, int] = (1, 10)):
         super().__init__()
         self.weights = nn.Parameter(torch.zeros(params_size))
 
@@ -29,9 +29,9 @@ class CLIPLoss(nn.Module):
 
     def forward(self, image, text):
         if self.inverse:
-            similarity = self.model(image, text)[0] / 100
+            similarity = self.model(image, text)[0]
         else:
-            similarity = 1 - self.model(image, text)[0] / 100
+            similarity = -self.model(image, text)[0]
         return similarity
 
 
@@ -41,15 +41,12 @@ class Optimization:
         model_type: str,
         optimize_features: str,
         text: List[str],
+        renderer_kwargs: DictConfig,
         device: str = "cuda" if torch.cuda.is_available() else "cpu",
-        texture: str = None,
         total_steps: int = 1000,
         lr: float = 0.001,
         output_dir: str = "./",
         fps: int = 10,
-        azim: float = 0.0,
-        elev: float = 0.0,
-        dist: float = 0.5,
         gender: Literal["male", "female", "neutral"] = "neutral",
         img_out_size: Tuple[int, int] = (512, 512),
         display: bool = False,
@@ -61,13 +58,12 @@ class Optimization:
         self.gender = gender
         self.model_type = model_type
         self.optimize_features = optimize_features
-        self.texture = texture
         self.models_factory = ModelsFactory(model_type)
         self.clip_model, self.image_encoder = clip.load("ViT-B/32", device=device)
         self.model = Model()
         self.lr = lr
         self.utils = Utils()
-        self.clip_renderer = Pytorch3dRenderer(tex_path=texture, azim=azim, elev=elev, dist=dist)
+        self.clip_renderer = Pytorch3dRenderer(**renderer_kwargs)
         self.text = text
         self.output_dir = Path(output_dir)
         self.fps = fps
@@ -91,9 +87,10 @@ class Optimization:
         self.logger = logging.getLogger(__name__)
 
     def render_image(self, parameters: torch.Tensor, angle: float) -> torch.Tensor:
-        parameters = torch.cat([torch.tensor([[0.0]], device="cuda"), parameters], 1)  # REMOVE THIS LINE!!!!
         model_kwargs = {self.optimize_features: parameters, "device": self.device, "num_coeffs": self.num_coeffs}
         verts, faces, vt, ft = self.models_factory.get_model(gender=self.gender, **model_kwargs)
+        if self.model_type == "smplx":
+            verts += self.utils.smplx_offset_tensor.to(verts.device)
         rotate_meah_kwargs = {"degrees": float(angle), "axis": "y"}
         image_for_clip = self.clip_renderer.render_mesh(
             verts=verts, faces=faces[None], vt=vt, ft=ft, rotate_mesh=rotate_meah_kwargs
@@ -144,9 +141,9 @@ class Optimization:
 
                 file_name = f"{word_desciptor}_{phase}.npy" if phase == "inverse" else f"{word_desciptor}.npy"
                 out_file_path = output_dir / file_name
-                if out_file_path.exists():
-                    self.logger.info(f"File {out_file_path} already exists. Skipping...")
-                    continue
+                # if out_file_path.exists():
+                # self.logger.info(f"File {out_file_path} already exists. Skipping...")
+                # continue
 
                 self.logger.info(f"Phase: {phase}")
                 if phase == "inverse":
@@ -154,7 +151,7 @@ class Optimization:
                 else:
                     loss_fn = CLIPLoss(inverse=False)
                 video_recorder = self.record_video(self.fps, output_dir, f"{word_desciptor}_{phase}")
-                model = Model(params_size=(1, self.num_coeffs - 1)).to(self.device)
+                model = Model().to(self.device)
                 optimizer = torch.optim.Adam(model.parameters(), lr=self.lr)
                 pbar = tqdm(range(self.total_steps))
                 for _ in pbar:
@@ -186,7 +183,7 @@ class Optimization:
 
 @hydra.main(config_path="../config", config_name="clip_optimization")
 def main(cfg: DictConfig):
-    optimization = Optimization(**cfg.optimization_cfg)
+    optimization = Optimization(**cfg)
     optimization.optimize()
 
 

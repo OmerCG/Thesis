@@ -1,0 +1,29 @@
+[2023-01-17 11:34:10,245][choosing_descriptors][INFO] - There are total of 12 descriptors
+[2023-01-17 11:34:11,989][choosing_descriptors][INFO] - Working on cluster 0
+[2023-01-17 11:34:11,990][choosing_descriptors][INFO] - 0 most covering descriptor - long head
+[2023-01-17 11:34:11,990][choosing_descriptors][INFO] - Adding long head to chosen descriptors
+[2023-01-17 11:34:11,991][choosing_descriptors][INFO] - 1 most covering descriptor - big forhead
+[2023-01-17 11:34:11,992][choosing_descriptors][INFO] - big forhead has high IoU with long head with iou 0.7788595271210014, skipping
+[2023-01-17 11:34:11,993][choosing_descriptors][INFO] - 2 most covering descriptor - thin
+[2023-01-17 11:34:11,994][choosing_descriptors][INFO] - thin has high IoU with long head with iou 0.8655953250547845, skipping
+[2023-01-17 11:34:11,994][choosing_descriptors][INFO] - 3 most covering descriptor - small chin
+[2023-01-17 11:34:11,995][choosing_descriptors][INFO] - small chin has high IoU with long head with iou 0.7385352498288843, skipping
+[2023-01-17 11:34:11,996][choosing_descriptors][INFO] - 4 most covering descriptor - chubby cheeks
+[2023-01-17 11:34:11,997][choosing_descriptors][INFO] - Adding chubby cheeks to chosen descriptors
+[2023-01-17 11:34:11,997][choosing_descriptors][INFO] - 5 most covering descriptor - big mouth
+[2023-01-17 11:34:11,999][choosing_descriptors][INFO] - Adding big mouth to chosen descriptors
+[2023-01-17 11:34:11,999][choosing_descriptors][INFO] - 6 most covering descriptor - fat
+[2023-01-17 11:34:12,002][choosing_descriptors][INFO] - Adding fat to chosen descriptors
+[2023-01-17 11:34:12,003][choosing_descriptors][INFO] - 7 most covering descriptor - big eyebrows
+[2023-01-17 11:34:12,006][choosing_descriptors][INFO] - big eyebrows is correlated with fat with corr 0.6128707266807774
+[2023-01-17 11:34:12,006][choosing_descriptors][INFO] - currently chosen descriptors: {'long head': {'iou': 0.4990665788237387, 'vertex_coverage': 1289}, 'chubby cheeks': {'iou': 0.40900044507532307, 'vertex_coverage': 763}, 'big mouth': {'iou': 0.23328582946983875, 'vertex_coverage': 746}, 'fat': {'iou': 0.15674149731892323, 'vertex_coverage': 249}}
+[2023-01-17 11:34:12,006][choosing_descriptors][INFO] - Finished cluster 0
+[2023-01-17 11:34:12,007][choosing_descriptors][INFO] - Working on cluster 1
+[2023-01-17 11:34:12,007][choosing_descriptors][INFO] - 0 most covering descriptor - ears sticking-out
+[2023-01-17 11:34:12,007][choosing_descriptors][INFO] - Adding ears sticking-out to chosen descriptors
+[2023-01-17 11:34:12,008][choosing_descriptors][INFO] - 1 most covering descriptor - long neck
+[2023-01-17 11:34:12,009][choosing_descriptors][INFO] - Adding long neck to chosen descriptors
+[2023-01-17 11:34:12,009][choosing_descriptors][INFO] - currently chosen descriptors: {'ears sticking-out': {'iou': 0.4736872068869902, 'vertex_coverage': 1233}, 'long neck': {'iou': 0.4746512574215234, 'vertex_coverage': 1088}}
+[2023-01-17 11:34:12,009][choosing_descriptors][INFO] - Finished cluster 1
+[2023-01-17 11:34:12,009][choosing_descriptors][INFO] - There are 6 chosen descriptors
+[2023-01-17 11:34:12,010][choosing_descriptors][INFO] - chosen descriptors: [['long head', 'chubby cheeks', 'big mouth', 'fat'], ['ears sticking-out', 'long neck']]

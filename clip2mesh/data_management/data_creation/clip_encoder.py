@@ -58,13 +58,17 @@ def generate_clip_scores(device: str, side: bool, imgs_dir: str, labels: List[Li
 def parse_args():
     parser = argparse.ArgumentParser()
     parser.add_argument("imgs_dir", type=str)
+    parser.add_argument("--labels", type=str, nargs="+", default=None)
     parser.add_argument("--device", type=str, default="cuda" if torch.cuda.is_available() else "cpu")
     parser.add_argument("-s", "--side", action="store_true", default=False)
     return parser.parse_args()
 
 
-def main(imgs_dir: str, device: str, side: bool):
-    generate_clip_scores(device, side, imgs_dir)
+def main(imgs_dir: str, device: str, side: bool, labels: List[str] = None):
+    if labels is not None:
+        labels = [[label] for label in labels]
+    print(labels)
+    generate_clip_scores(device, side, imgs_dir, labels=labels)
 
 
 if __name__ == "__main__":

@@ -1,0 +1,53 @@
+[2023-01-17 12:15:39,234][choosing_descriptors][INFO] - There are total of 22 descriptors
+[2023-01-17 12:15:46,112][choosing_descriptors][INFO] - Working on cluster 0
+[2023-01-17 12:15:46,112][choosing_descriptors][INFO] - 0 most covering descriptor - open eyes
+[2023-01-17 12:15:46,112][choosing_descriptors][INFO] - Adding open eyes to chosen descriptors
+[2023-01-17 12:15:46,113][choosing_descriptors][INFO] - 1 most covering descriptor - nervous
+[2023-01-17 12:15:46,115][choosing_descriptors][INFO] - nervous is correlated with open eyes with corr 0.8415570593728592
+[2023-01-17 12:15:46,115][choosing_descriptors][INFO] - 2 most covering descriptor - worried
+[2023-01-17 12:15:46,116][choosing_descriptors][INFO] - worried is correlated with open eyes with corr 0.8984641874954523
+[2023-01-17 12:15:46,116][choosing_descriptors][INFO] - 3 most covering descriptor - fearful
+[2023-01-17 12:15:46,118][choosing_descriptors][INFO] - fearful is correlated with open eyes with corr 0.9453027563064422
+[2023-01-17 12:15:46,118][choosing_descriptors][INFO] - 4 most covering descriptor - calm
+[2023-01-17 12:15:46,119][choosing_descriptors][INFO] - Adding calm to chosen descriptors
+[2023-01-17 12:15:46,120][choosing_descriptors][INFO] - 5 most covering descriptor - smiling
+[2023-01-17 12:15:46,122][choosing_descriptors][INFO] - smiling has high IoU with calm with iou 0.7752161383285303, skipping
+[2023-01-17 12:15:46,122][choosing_descriptors][INFO] - 6 most covering descriptor - confused
+[2023-01-17 12:15:46,125][choosing_descriptors][INFO] - confused is correlated with open eyes with corr 0.9147560380084646
+[2023-01-17 12:15:46,125][choosing_descriptors][INFO] - 7 most covering descriptor - sleepy
+[2023-01-17 12:15:46,127][choosing_descriptors][INFO] - sleepy is correlated with open eyes with corr 0.8296013555772092
+[2023-01-17 12:15:46,127][choosing_descriptors][INFO] - 8 most covering descriptor - tired
+[2023-01-17 12:15:46,130][choosing_descriptors][INFO] - tired is correlated with open eyes with corr 0.7465150844996992
+[2023-01-17 12:15:46,130][choosing_descriptors][INFO] - 9 most covering descriptor - happy
+[2023-01-17 12:15:46,132][choosing_descriptors][INFO] - happy is correlated with open eyes with corr 0.7031294451766877
+[2023-01-17 12:15:46,132][choosing_descriptors][INFO] - 10 most covering descriptor - open mouth
+[2023-01-17 12:15:46,135][choosing_descriptors][INFO] - open mouth is correlated with open eyes with corr 0.8381053338845235
+[2023-01-17 12:15:46,135][choosing_descriptors][INFO] - 11 most covering descriptor - pensive
+[2023-01-17 12:15:46,137][choosing_descriptors][INFO] - pensive is correlated with calm with corr 0.8305856834817659
+[2023-01-17 12:15:46,137][choosing_descriptors][INFO] - 12 most covering descriptor - bored
+[2023-01-17 12:15:46,139][choosing_descriptors][INFO] - bored is correlated with open eyes with corr 0.8458748761914974
+[2023-01-17 12:15:46,140][choosing_descriptors][INFO] - 13 most covering descriptor - disgusted
+[2023-01-17 12:15:46,142][choosing_descriptors][INFO] - disgusted is correlated with open eyes with corr 0.9432588606977581
+[2023-01-17 12:15:46,142][choosing_descriptors][INFO] - 14 most covering descriptor - relaxed
+[2023-01-17 12:15:46,144][choosing_descriptors][INFO] - relaxed is correlated with calm with corr 0.9414148846427368
+[2023-01-17 12:15:46,145][choosing_descriptors][INFO] - 15 most covering descriptor - excited
+[2023-01-17 12:15:46,147][choosing_descriptors][INFO] - excited is correlated with open eyes with corr 0.8242366993987646
+[2023-01-17 12:15:46,147][choosing_descriptors][INFO] - currently chosen descriptors: {'open eyes': {'iou': 0.18894816597430078, 'vertex_coverage': 393}, 'calm': {'iou': 0.32857367700167944, 'vertex_coverage': 308}}
+[2023-01-17 12:15:46,147][choosing_descriptors][INFO] - Finished cluster 0
+[2023-01-17 12:15:46,147][choosing_descriptors][INFO] - Working on cluster 1
+[2023-01-17 12:15:46,148][choosing_descriptors][INFO] - 0 most covering descriptor - raised eyebrows
+[2023-01-17 12:15:46,148][choosing_descriptors][INFO] - Adding raised eyebrows to chosen descriptors
+[2023-01-17 12:15:46,148][choosing_descriptors][INFO] - 1 most covering descriptor - angry
+[2023-01-17 12:15:46,150][choosing_descriptors][INFO] - angry is correlated with raised eyebrows with corr 0.7084364084702964
+[2023-01-17 12:15:46,150][choosing_descriptors][INFO] - 2 most covering descriptor - sad
+[2023-01-17 12:15:46,151][choosing_descriptors][INFO] - Adding sad to chosen descriptors
+[2023-01-17 12:15:46,152][choosing_descriptors][INFO] - 3 most covering descriptor - surprised
+[2023-01-17 12:15:46,154][choosing_descriptors][INFO] - surprised is correlated with raised eyebrows with corr 0.552245365082738
+[2023-01-17 12:15:46,154][choosing_descriptors][INFO] - 4 most covering descriptor - scared
+[2023-01-17 12:15:46,157][choosing_descriptors][INFO] - Adding scared to chosen descriptors
+[2023-01-17 12:15:46,157][choosing_descriptors][INFO] - 5 most covering descriptor - serious
+[2023-01-17 12:15:46,160][choosing_descriptors][INFO] - Adding serious to chosen descriptors
+[2023-01-17 12:15:46,160][choosing_descriptors][INFO] - currently chosen descriptors: {'raised eyebrows': {'iou': 0.172770918216555, 'vertex_coverage': 251}, 'sad': {'iou': 0.278994201127354, 'vertex_coverage': 178}, 'scared': {'iou': 0.22934368131313462, 'vertex_coverage': 125}, 'serious': {'iou': 0.124688954726057, 'vertex_coverage': 89}}
+[2023-01-17 12:15:46,161][choosing_descriptors][INFO] - Finished cluster 1
+[2023-01-17 12:15:46,161][choosing_descriptors][INFO] - There are 6 chosen descriptors
+[2023-01-17 12:15:46,161][choosing_descriptors][INFO] - chosen descriptors: [['open eyes', 'calm'], ['raised eyebrows', 'sad', 'scared', 'serious']]

@@ -1,0 +1,13 @@
+[2023-01-17 11:38:41,370][choosing_descriptors][INFO] - There are total of 23 descriptors
+[2023-01-17 11:38:50,486][choosing_descriptors][INFO] - Working on cluster 0
+[2023-01-17 11:38:50,486][choosing_descriptors][INFO] - 0 most covering descriptor - open eyes
+[2023-01-17 11:38:50,486][choosing_descriptors][INFO] - Adding open eyes to chosen descriptors
+[2023-01-17 11:38:50,487][choosing_descriptors][INFO] - 1 most covering descriptor - nervous
+[2023-01-17 11:38:50,488][choosing_descriptors][INFO] - nervous is correlated with open eyes with corr 0.8415570593728592
+[2023-01-17 11:38:50,488][choosing_descriptors][INFO] - 2 most covering descriptor - worried
+[2023-01-17 11:38:50,490][choosing_descriptors][INFO] - Adding worried to chosen descriptors
+[2023-01-17 11:38:50,490][choosing_descriptors][INFO] - 3 most covering descriptor - fearful
+[2023-01-17 11:38:50,492][choosing_descriptors][INFO] - Adding fearful to chosen descriptors
+[2023-01-17 11:38:50,492][choosing_descriptors][INFO] - 4 most covering descriptor - calm
+[2023-01-17 11:38:50,494][choosing_descriptors][INFO] - calm is correlated with open eyes with corr 0.707440693926851
+[2023-01-17 11:38:50,494][choosing_descriptors][INFO] - 5 most covering descriptor - smiling

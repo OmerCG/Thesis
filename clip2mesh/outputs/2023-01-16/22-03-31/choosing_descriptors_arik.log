@@ -1,0 +1,62 @@
+[2023-01-16 22:03:36,636][choosing_descriptors][INFO] - Working on cluster 0
+[2023-01-16 22:03:36,637][choosing_descriptors][INFO] - 0 most covering descriptor
+[2023-01-16 22:03:36,637][choosing_descriptors][INFO] - Adding curvy to chosen descriptors
+[2023-01-16 22:03:36,639][choosing_descriptors][INFO] - 1 most covering descriptor
+[2023-01-16 22:03:36,641][choosing_descriptors][INFO] - proportioned is correlated with curvy with iou 0.9045801526717556, skipping
+[2023-01-16 22:03:36,641][choosing_descriptors][INFO] - 2 most covering descriptor
+[2023-01-16 22:03:36,643][choosing_descriptors][INFO] - round apple is correlated with curvy with iou 0.7662835249042146, skipping
+[2023-01-16 22:03:36,643][choosing_descriptors][INFO] - 3 most covering descriptor
+[2023-01-16 22:03:36,645][choosing_descriptors][INFO] - Adding short to chosen descriptors
+[2023-01-16 22:03:36,645][choosing_descriptors][INFO] - 4 most covering descriptor
+[2023-01-16 22:03:36,648][choosing_descriptors][INFO] - lean is correlated with short with iou 0.7412587412587412, skipping
+[2023-01-16 22:03:36,649][choosing_descriptors][INFO] - 5 most covering descriptor
+[2023-01-16 22:03:36,652][choosing_descriptors][INFO] - fit is correlated with short with iou 0.7291666666666666, skipping
+[2023-01-16 22:03:36,652][choosing_descriptors][INFO] - 6 most covering descriptor
+[2023-01-16 22:03:36,655][choosing_descriptors][INFO] - petite is correlated with short with iou 0.7571428571428571, skipping
+[2023-01-16 22:03:36,656][choosing_descriptors][INFO] - 7 most covering descriptor
+[2023-01-16 22:03:36,659][choosing_descriptors][INFO] - masculine is correlated with short with iou 0.7132867132867133, skipping
+[2023-01-16 22:03:36,659][choosing_descriptors][INFO] - 8 most covering descriptor
+[2023-01-16 22:03:36,661][choosing_descriptors][INFO] - Adding long legs to chosen descriptors
+[2023-01-16 22:03:36,661][choosing_descriptors][INFO] - 9 most covering descriptor
+[2023-01-16 22:03:36,664][choosing_descriptors][INFO] - Adding sexy to chosen descriptors
+[2023-01-16 22:03:36,664][choosing_descriptors][INFO] - 10 most covering descriptor
+[2023-01-16 22:03:36,668][choosing_descriptors][INFO] - built is correlated with chosen descriptors, skipping
+[2023-01-16 22:03:36,668][choosing_descriptors][INFO] - 11 most covering descriptor
+[2023-01-16 22:03:36,672][choosing_descriptors][INFO] - Adding muscular to chosen descriptors
+[2023-01-16 22:03:36,673][choosing_descriptors][INFO] - 12 most covering descriptor
+[2023-01-16 22:03:36,677][choosing_descriptors][INFO] - sturdy is correlated with chosen descriptors, skipping
+[2023-01-16 22:03:36,677][choosing_descriptors][INFO] - currently chosen descriptors: {'curvy': {'iou': 0.13659089100058114, 'vertex_coverage': 258}, 'short': {'iou': 0.4152997871853899, 'vertex_coverage': 127}, 'long legs': {'iou': 0.14645519271619983, 'vertex_coverage': 103}, 'sexy': {'iou': 0.4482343356320469, 'vertex_coverage': 96}, 'muscular': {'iou': 0.42206339248840197, 'vertex_coverage': 64}}
+[2023-01-16 22:03:36,677][choosing_descriptors][INFO] - Finished cluster 0
+[2023-01-16 22:03:36,677][choosing_descriptors][INFO] - Working on cluster 1
+[2023-01-16 22:03:36,678][choosing_descriptors][INFO] - 0 most covering descriptor
+[2023-01-16 22:03:36,678][choosing_descriptors][INFO] - Adding broad shoulders to chosen descriptors
+[2023-01-16 22:03:36,679][choosing_descriptors][INFO] - 1 most covering descriptor
+[2023-01-16 22:03:36,681][choosing_descriptors][INFO] - thin is correlated with broad shoulders with iou 0.824, skipping
+[2023-01-16 22:03:36,681][choosing_descriptors][INFO] - 2 most covering descriptor
+[2023-01-16 22:03:36,682][choosing_descriptors][INFO] - average is correlated with broad shoulders with iou 0.7578125, skipping
+[2023-01-16 22:03:36,682][choosing_descriptors][INFO] - 3 most covering descriptor
+[2023-01-16 22:03:36,684][choosing_descriptors][INFO] - skinny is correlated with broad shoulders with iou 0.8, skipping
+[2023-01-16 22:03:36,684][choosing_descriptors][INFO] - 4 most covering descriptor
+[2023-01-16 22:03:36,687][choosing_descriptors][INFO] - Adding narrow waist to chosen descriptors
+[2023-01-16 22:03:36,687][choosing_descriptors][INFO] - 5 most covering descriptor
+[2023-01-16 22:03:36,689][choosing_descriptors][INFO] - Adding tall to chosen descriptors
+[2023-01-16 22:03:36,689][choosing_descriptors][INFO] - 6 most covering descriptor
+[2023-01-16 22:03:36,692][choosing_descriptors][INFO] - Adding fat to chosen descriptors
+[2023-01-16 22:03:36,692][choosing_descriptors][INFO] - 7 most covering descriptor
+[2023-01-16 22:03:36,696][choosing_descriptors][INFO] - big is correlated with fat with iou 0.8913043478260869, skipping
+[2023-01-16 22:03:36,696][choosing_descriptors][INFO] - currently chosen descriptors: {'broad shoulders': {'iou': 0.4738041780574101, 'vertex_coverage': 123}, 'narrow waist': {'iou': 0.14499363393308, 'vertex_coverage': 79}, 'tall': {'iou': 0.4405816794018499, 'vertex_coverage': 73}, 'fat': {'iou': 0.34396378328106864, 'vertex_coverage': 46}}
+[2023-01-16 22:03:36,696][choosing_descriptors][INFO] - Finished cluster 1
+[2023-01-16 22:03:36,696][choosing_descriptors][INFO] - Working on cluster 2
+[2023-01-16 22:03:36,697][choosing_descriptors][INFO] - 0 most covering descriptor
+[2023-01-16 22:03:36,697][choosing_descriptors][INFO] - Adding rectangular to chosen descriptors
+[2023-01-16 22:03:36,698][choosing_descriptors][INFO] - 1 most covering descriptor
+[2023-01-16 22:03:36,699][choosing_descriptors][INFO] - Adding pear shaped to chosen descriptors
+[2023-01-16 22:03:36,699][choosing_descriptors][INFO] - 2 most covering descriptor
+[2023-01-16 22:03:36,703][choosing_descriptors][INFO] - small is correlated with chosen descriptors, skipping
+[2023-01-16 22:03:36,703][choosing_descriptors][INFO] - 3 most covering descriptor
+[2023-01-16 22:03:36,705][choosing_descriptors][INFO] - Adding stocky to chosen descriptors
+[2023-01-16 22:03:36,705][choosing_descriptors][INFO] - 4 most covering descriptor
+[2023-01-16 22:03:36,708][choosing_descriptors][INFO] - Adding heavyset to chosen descriptors
+[2023-01-16 22:03:36,708][choosing_descriptors][INFO] - currently chosen descriptors: {'rectangular': {'iou': 0.11561907297428485, 'vertex_coverage': 372}, 'pear shaped': {'iou': 0.13113449396006188, 'vertex_coverage': 250}, 'stocky': {'iou': 0.2609472485194284, 'vertex_coverage': 67}, 'heavyset': {'iou': 0.32595648913470543, 'vertex_coverage': 43}}
+[2023-01-16 22:03:36,708][choosing_descriptors][INFO] - Finished cluster 2
+[2023-01-16 22:03:36,708][choosing_descriptors][INFO] - chosen descriptors: {'0': {'curvy': {'iou': 0.13659089100058114, 'vertex_coverage': 258}, 'short': {'iou': 0.4152997871853899, 'vertex_coverage': 127}, 'long legs': {'iou': 0.14645519271619983, 'vertex_coverage': 103}, 'sexy': {'iou': 0.4482343356320469, 'vertex_coverage': 96}, 'muscular': {'iou': 0.42206339248840197, 'vertex_coverage': 64}}, '1': {'broad shoulders': {'iou': 0.4738041780574101, 'vertex_coverage': 123}, 'narrow waist': {'iou': 0.14499363393308, 'vertex_coverage': 79}, 'tall': {'iou': 0.4405816794018499, 'vertex_coverage': 73}, 'fat': {'iou': 0.34396378328106864, 'vertex_coverage': 46}}, '2': {'rectangular': {'iou': 0.11561907297428485, 'vertex_coverage': 372}, 'pear shaped': {'iou': 0.13113449396006188, 'vertex_coverage': 250}, 'stocky': {'iou': 0.2609472485194284, 'vertex_coverage': 67}, 'heavyset': {'iou': 0.32595648913470543, 'vertex_coverage': 43}}}

@@ -6,12 +6,15 @@ from torch.utils.data import Dataset
 
 
 class CLIP2MESHDataset(Dataset):
-    def __init__(self, data_dir: str, optimize_features: List[str], out_features: int = 10):
+    def __init__(self, data_dir: str, optimize_feature: str, labels_to_get: List[str], out_features: int = 10):
 
         self.data_dir = data_dir
         self.out_features = out_features
-        self.optimize_features = optimize_features
-        self.files = [file for file in Path(data_dir).rglob("*_labels.json")]
+        self.optimize_feature = optimize_feature
+        self.labels_to_get = labels_to_get
+        self.files = sorted(
+            [file for file in Path(data_dir).rglob("*_labels.json")], key=lambda x: int(x.stem.split("_")[0])
+        )
         self.files.sort()
 
     def __len__(self):
@@ -35,19 +38,18 @@ class CLIP2MESHDataset(Dataset):
 
     def params_dict_to_tensor(self, dict: Dict[str, List[float]]) -> torch.Tensor:
         parameters_tensor = torch.tensor([])
-        for feature in self.optimize_features:
-            if feature not in dict:
-                raise ValueError(f"Feature {feature} not in dict {dict}")
-            feature_data = dict[feature][0]
-            if feature_data.__len__() > self.out_features:
-                feature_data = feature_data[: self.out_features]
-            parameters_tensor = torch.cat((parameters_tensor, torch.tensor(feature_data)[None]))
+        if self.optimize_feature not in dict:
+            raise ValueError(f"Feature {self.optimize_feature} not in dict {dict}")
+        feature_data = dict[self.optimize_feature][0]
+        if feature_data.__len__() > self.out_features:
+            feature_data = feature_data[: self.out_features]
+        parameters_tensor = torch.cat((parameters_tensor, torch.tensor(feature_data)[None]))
         return parameters_tensor
 
     def labels_dict_to_tensor(self, dict: Dict[str, List[List[float]]]) -> torch.Tensor:
-        return torch.tensor(list(dict.values()))[..., 0, 0]
+        return torch.tensor([dict[descriptor] for descriptor in self.labels_to_get])[..., 0, 0]
 
     def get_labels(self):
         with open(self.files[0], "r") as f:
             clip_scores = json.load(f)
-        return [[label] for label in clip_scores.keys()]
+        return [[label] for label in self.labels_to_get]

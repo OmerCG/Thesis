@@ -1,7 +1,7 @@
 import json
 import logging
 import pandas as pd
-from typing import Tuple, Dict, Union
+from typing import Tuple, Dict, Union, List
 
 
 class ChoosingDescriptors:
@@ -229,10 +229,23 @@ class ChoosingDescriptors:
         return dict_of_desctiptors
 
     @staticmethod
-    def find_cluster_of_descriptor(descriptor: str, dict_of_desctiptors: Dict[str, Dict[str, float]]) -> int:
+    def find_cluster_of_descriptor(
+        descriptor: str, dict_of_desctiptors: Dict[str, Union[Dict[str, float], List[str]]]
+    ) -> int:
         for cluster, descriptors_dict in dict_of_desctiptors.items():
-            if descriptor in descriptors_dict.keys():
-                return cluster
+            if isinstance(descriptors_dict, dict):
+                if descriptor in descriptors_dict.keys():
+                    return cluster
+            else:
+                if descriptor in descriptors_dict:
+                    return cluster
+
+    @staticmethod
+    def get_num_of_chosen_descriptors(dict_of_desctiptors: Dict[str, Dict[str, float]]) -> int:
+        num_of_descriptors = 0
+        for descriptors in dict_of_desctiptors.values():
+            num_of_descriptors += len(descriptors)
+        return num_of_descriptors
 
     def choose(
         self,
@@ -248,12 +261,7 @@ class ChoosingDescriptors:
         )
 
         # get the number of descriptors chosen
-        if initial_filter is not None:
-            num_of_descriptors = 0
-            for descriptors in initial_filter.values():
-                num_of_descriptors += len(descriptors)
-        else:
-            num_of_descriptors = 0
+        num_of_descriptors = self.get_num_of_chosen_descriptors(initial_filter)
 
         # if the number of descriptors chosen is less than the minimum, choose the best k descriptors
         if num_of_descriptors < min_descriptors_overall:

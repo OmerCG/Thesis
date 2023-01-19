@@ -1,0 +1,4 @@
+working_dir: /home/nadav2/dev/data/CLIP2Shape/outs/vertices_heatmap/optimizations/test_arik_algorithm/flame_expression
+images_dir: /home/nadav2/dev/data/CLIP2Shape/images/flame_exp_e2e
+descriptors_clusters_json: /home/nadav2/dev/data/CLIP2Shape/outs/clustering_images/words_jsons/flame_expression.json
+mode: and

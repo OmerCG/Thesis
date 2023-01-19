@@ -209,6 +209,8 @@ class VertexHeatmap:
                 vertex_colors = vertex_colors.unsqueeze(0)
 
             rend_imgs = []
+            angles_dir = descriptor / "angles"
+            angles_dir.mkdir(exist_ok=True)
             for angle in self.view_angles:
                 rend_img = self.renderer.render_mesh(
                     self.def_verts,
@@ -220,6 +222,7 @@ class VertexHeatmap:
                 )
                 rend_img = self.adjust_rendered_img(rend_img)
                 rend_img = cv2.cvtColor(rend_img, cv2.COLOR_RGB2BGR)
+                cv2.imwrite(str(angles_dir / f"{angle}.png"), cv2.resize(rend_img, (512, 512)))
                 rend_imgs.append(rend_img)
             collage = self.get_collage(rend_imgs)
             collage = cv2.cvtColor(collage, cv2.COLOR_RGB2BGR)

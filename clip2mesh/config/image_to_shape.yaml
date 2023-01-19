@@ -1,5 +1,5 @@
-images_dir: /home/nadav2/dev/data/CLIP2Shape/outs/images_to_shape/NeuralBody_DATA/raw_images_dataset
-images_out_path: /home/nadav2/dev/data/CLIP2Shape/outs/images_to_shape/NeuralBody_DATA/our_predictions
+data_dir: /home/nadav2/dev/data/CLIP2Shape/outs/images_to_shape/smal/data
+output_path: /home/nadav2/dev/data/CLIP2Shape/outs/images_to_shape/smal/predictions
 body_pose_path:
 verbose: False
 display_images: False
@@ -9,9 +9,12 @@ save_orig_name: True
 comparison_mode: False
 comparison_data_path: #/home/nadav2/dev/repos/shapy/datasets/ssp_3d/labels/shapes.npy
 save_obj: True
-suffix: png
-model_type: smplx
+suffix: jpg
+model_type: smal
 with_face: False
+mode: image
+max_images_in_collage: 20
+optimize_feature: beta
 
 # # FLAME - EXPRESSION
 # with_face: True
@@ -19,7 +22,6 @@ with_face: False
 # model_path: /home/nadav2/dev/repos/CLIP2Shape/production/flame_expression.ckpt
 # texture: #/home/nadav2/dev/repos/CLIP2Shape/Flame/flame2020/mesh.png
 # sliders_max_value: 30
-# labels_weights: [0.5, 0.6, 0.8, 0.6]
 
 # # FLAME - SHAPE
 # with_face: False
@@ -27,30 +29,25 @@ with_face: False
 # model_path: /home/nadav2/dev/repos/CLIP2Shape/production/flame_shape.ckpt
 # texture: #/home/nadav2/dev/repos/CLIP2Shape/Flame/flame2020/mesh.png
 # sliders_max_value: 30
-# labels_weights: # [0.5, 0.6, 0.8, 0.6]
 
-smplx_models_paths:
-  smplx_male: /home/nadav2/dev/repos/Thesis/production/smplx_male.ckpt
-  smplx_female: /home/nadav2/dev/repos/Thesis/production/smplx_female.ckpt
 
-labels_weights:
-  male: [0.9, 0.8, 0.9, 1.0, 0.8]
-  female:
+# smplx_models_paths:
+#   smplx_male: /home/nadav2/dev/repos/Thesis/production/smplx_male.ckpt
+#   smplx_female: /home/nadav2/dev/repos/Thesis/production/smplx_female.ckpt
 
-# # SMAL
-# with_face: False
-# model_type: smal
-# model_path: /home/nadav2/dev/repos/CLIP2Shape/production/smal.ckpt
-# texture:  # SMAL texture (keep empty for random texture)
+
+# SMAL
+model_path: /home/nadav2/dev/repos/CLIP2Shape/production/smal.ckpt
+texture:  # SMAL texture (keep empty for random texture)
 
 renderer_kwargs:
     img_size: [450, 300]
     tex_path:
 
-    # SMPLX cam params
-    dist: 2.4
-    elev: 8.6
-    azim: 2.1
+    # # SMPLX cam params
+    # dist: 2.4
+    # elev: 8.6
+    # azim: 2.1
 
     # FLAME shape cam params
     # dist: 0.8
@@ -63,6 +60,6 @@ renderer_kwargs:
     # azim: 0.0
 
     # SMAL cam params
-    # dist: 3.8
-    # elev: 20.0
-    # azim: 0.0
+    dist: 6.0
+    elev: 20.0
+    azim: 15.0

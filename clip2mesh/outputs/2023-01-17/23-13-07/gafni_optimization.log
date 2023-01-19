@@ -1,0 +1,15 @@
+[2023-01-17 23:13:14,221][__main__][INFO] - parameters: Parameter containing:
+tensor([[ 0.0010,  0.0010, -0.0010,  0.0010,  0.0010,  0.0010,  0.0010,  0.0010,
+         -0.0010,  0.0010]], requires_grad=True)
+[2023-01-17 23:13:14,222][__main__][INFO] - scores: tensor([[24.5156, 25.5312, 23.8594, 23.3594, 24.5000]], device='cuda:0',
+       dtype=torch.float16, grad_fn=<MmBackward>)
+[2023-01-17 23:13:14,426][__main__][INFO] - parameters: Parameter containing:
+tensor([[ 0.0013,  0.0016, -0.0019,  0.0020,  0.0019,  0.0020,  0.0006,  0.0015,
+         -0.0018,  0.0007]], requires_grad=True)
+[2023-01-17 23:13:14,427][__main__][INFO] - scores: tensor([[24.4844, 25.5156, 23.8281, 23.3281, 24.4688]], device='cuda:0',
+       dtype=torch.float16, grad_fn=<MmBackward>)
+[2023-01-17 23:13:14,594][__main__][INFO] - parameters: Parameter containing:
+tensor([[ 0.0008,  0.0016, -0.0028,  0.0029,  0.0027,  0.0030, -0.0002,  0.0016,
+         -0.0027,  0.0002]], requires_grad=True)
+[2023-01-17 23:13:14,595][__main__][INFO] - scores: tensor([[24.4844, 25.5156, 23.8281, 23.3281, 24.4688]], device='cuda:0',
+       dtype=torch.float16, grad_fn=<MmBackward>)

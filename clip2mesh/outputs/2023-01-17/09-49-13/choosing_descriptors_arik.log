@@ -1,0 +1,55 @@
+[2023-01-17 09:49:13,197][choosing_descriptors][INFO] - There are total of 20 descriptors
+[2023-01-17 09:49:18,392][choosing_descriptors][INFO] - Working on cluster 0
+[2023-01-17 09:49:18,392][choosing_descriptors][INFO] - 0 most covering descriptor - lean
+[2023-01-17 09:49:18,392][choosing_descriptors][INFO] - Adding lean to chosen descriptors
+[2023-01-17 09:49:18,394][choosing_descriptors][INFO] - 1 most covering descriptor - hourglass
+[2023-01-17 09:49:18,396][choosing_descriptors][INFO] - Adding hourglass to chosen descriptors
+[2023-01-17 09:49:18,397][choosing_descriptors][INFO] - 2 most covering descriptor - narrow waist
+[2023-01-17 09:49:18,411][choosing_descriptors][INFO] - narrow waist is correlated with hourglass with corr 0.6563883950548877
+[2023-01-17 09:49:18,411][choosing_descriptors][INFO] - 3 most covering descriptor - average
+[2023-01-17 09:49:18,414][choosing_descriptors][INFO] - average is correlated with lean with corr 0.5779925860877673
+[2023-01-17 09:49:18,414][choosing_descriptors][INFO] - 4 most covering descriptor - tall
+[2023-01-17 09:49:18,425][choosing_descriptors][INFO] - Adding tall to chosen descriptors
+[2023-01-17 09:49:18,425][choosing_descriptors][INFO] - 5 most covering descriptor - curvy
+[2023-01-17 09:49:18,430][choosing_descriptors][INFO] - curvy is correlated with hourglass with corr 0.7824531010167888
+[2023-01-17 09:49:18,430][choosing_descriptors][INFO] - 6 most covering descriptor - sexy
+[2023-01-17 09:49:18,434][choosing_descriptors][INFO] - sexy is correlated with hourglass with corr 0.5122502578209785
+[2023-01-17 09:49:18,434][choosing_descriptors][INFO] - 7 most covering descriptor - short
+[2023-01-17 09:49:18,438][choosing_descriptors][INFO] - short is correlated with hourglass with corr 0.7445406884733143
+[2023-01-17 09:49:18,438][choosing_descriptors][INFO] - 8 most covering descriptor - proportioned
+[2023-01-17 09:49:18,443][choosing_descriptors][INFO] - Adding proportioned to chosen descriptors
+[2023-01-17 09:49:18,443][choosing_descriptors][INFO] - 9 most covering descriptor - fat
+[2023-01-17 09:49:18,449][choosing_descriptors][INFO] - fat is correlated with hourglass with corr 0.6940254176020372
+[2023-01-17 09:49:18,449][choosing_descriptors][INFO] - 10 most covering descriptor - long legs
+[2023-01-17 09:49:18,455][choosing_descriptors][INFO] - long legs is correlated with lean with corr 0.56079900315564
+[2023-01-17 09:49:18,455][choosing_descriptors][INFO] - 11 most covering descriptor - petite
+[2023-01-17 09:49:18,460][choosing_descriptors][INFO] - petite is correlated with hourglass with corr 0.6013753643068889
+[2023-01-17 09:49:18,460][choosing_descriptors][INFO] - 12 most covering descriptor - fit
+[2023-01-17 09:49:18,465][choosing_descriptors][INFO] - fit is correlated with lean with corr 0.6588653049970782
+[2023-01-17 09:49:18,465][choosing_descriptors][INFO] - 13 most covering descriptor - thin
+[2023-01-17 09:49:18,469][choosing_descriptors][INFO] - Adding thin to chosen descriptors
+[2023-01-17 09:49:18,469][choosing_descriptors][INFO] - currently chosen descriptors: {'lean': {'iou': 0.06952509301645998, 'vertex_coverage': 1605}, 'hourglass': {'iou': 0.032190126699381094, 'vertex_coverage': 962}, 'tall': {'iou': 0.21507218413599732, 'vertex_coverage': 310}, 'proportioned': {'iou': 0.24077267570500474, 'vertex_coverage': 218}, 'thin': {'iou': 0.0711973103128709, 'vertex_coverage': 56}}
+[2023-01-17 09:49:18,469][choosing_descriptors][INFO] - Finished cluster 0
+[2023-01-17 09:49:18,469][choosing_descriptors][INFO] - Working on cluster 1
+[2023-01-17 09:49:18,470][choosing_descriptors][INFO] - 0 most covering descriptor - big
+[2023-01-17 09:49:18,470][choosing_descriptors][INFO] - Adding big to chosen descriptors
+[2023-01-17 09:49:18,471][choosing_descriptors][INFO] - 1 most covering descriptor - pear shaped
+[2023-01-17 09:49:18,472][choosing_descriptors][INFO] - pear shaped is correlated with big with corr 0.9048511504559787
+[2023-01-17 09:49:18,473][choosing_descriptors][INFO] - 2 most covering descriptor - heavyset
+[2023-01-17 09:49:18,475][choosing_descriptors][INFO] - heavyset is correlated with big with corr 0.9646608128675649
+[2023-01-17 09:49:18,475][choosing_descriptors][INFO] - 3 most covering descriptor - small
+[2023-01-17 09:49:18,477][choosing_descriptors][INFO] - small is correlated with big with corr 0.7279589697491753
+[2023-01-17 09:49:18,477][choosing_descriptors][INFO] - currently chosen descriptors: {'big': {'iou': 0.06406818961773061, 'vertex_coverage': 2165}}
+[2023-01-17 09:49:18,477][choosing_descriptors][INFO] - Finished cluster 1
+[2023-01-17 09:49:18,477][choosing_descriptors][INFO] - Working on cluster 2
+[2023-01-17 09:49:18,478][choosing_descriptors][INFO] - 0 most covering descriptor - skinny
+[2023-01-17 09:49:18,478][choosing_descriptors][INFO] - Adding skinny to chosen descriptors
+[2023-01-17 09:49:18,479][choosing_descriptors][INFO] - currently chosen descriptors: {'skinny': {'iou': 0.1373735057890809, 'vertex_coverage': 106}}
+[2023-01-17 09:49:18,479][choosing_descriptors][INFO] - Finished cluster 2
+[2023-01-17 09:49:18,479][choosing_descriptors][INFO] - Working on cluster 3
+[2023-01-17 09:49:18,480][choosing_descriptors][INFO] - 0 most covering descriptor - broad shoulders
+[2023-01-17 09:49:18,480][choosing_descriptors][INFO] - Adding broad shoulders to chosen descriptors
+[2023-01-17 09:49:18,481][choosing_descriptors][INFO] - currently chosen descriptors: {'broad shoulders': {'iou': 0.184343046767369, 'vertex_coverage': 205}}
+[2023-01-17 09:49:18,481][choosing_descriptors][INFO] - Finished cluster 3
+[2023-01-17 09:49:18,481][choosing_descriptors][INFO] - There are 8 chosen descriptors
+[2023-01-17 09:49:18,481][choosing_descriptors][INFO] - chosen descriptors: [['lean', 'hourglass', 'tall', 'proportioned', 'thin'], ['big'], ['broad shoulders'], ['skinny']]
