@@ -12,18 +12,25 @@ from clip2mesh.utils import Image2ShapeUtils, Utils
 
 
 class ComparisonUtils(Image2ShapeUtils):
-    def __init__(self, args):
+    def __init__(
+        self,
+        raw_imgs_dir: str,
+        comparison_dirs: Dict[str, str],
+        gt_dir: str,
+        output_path: str,
+        renderer_kwargs: Dict[str, Dict[str, float]],
+        smplx_models_paths: Dict[str, str],
+    ):
         super().__init__()
-        self.raw_imgs_dir: Path = Path(args.raw_imgs_dir)
-        self.comparison_dirs: Dict[str, str] = args.comparison_dirs
-        self.gt_dir: Path = Path(args.gt_dir)
-        self.output_path: Path = Path(args.output_path)
+        self.raw_imgs_dir: Path = Path(raw_imgs_dir)
+        self.comparison_dirs: Dict[str, str] = comparison_dirs
+        self.gt_dir: Path = Path(gt_dir)
+        self.output_path: Path = Path(output_path)
         self.utils: Utils = Utils(comparison_mode=True)
         self.device: str = "cuda" if torch.cuda.is_available() else "cpu"
 
-        self._load_renderer(args.renderer_kwargs)
-        self._load_smplx_models(**args.smplx_models_paths)
-        self._load_weights(args.labels_weights)
+        self._load_renderer(renderer_kwargs)
+        self._load_smplx_models(**smplx_models_paths)
         self._load_clip_model()
         self._encode_labels()
         self._perpare_comparisons_dir()

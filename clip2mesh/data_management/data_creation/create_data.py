@@ -1,39 +1,54 @@
 import hydra
 from tqdm import tqdm
 from pathlib import Path
+from omegaconf import DictConfig
 from typing import Dict, Any, Union, Literal
 from clip2mesh.utils import Utils, ModelsFactory, Pytorch3dRenderer, Open3dRenderer
 
 
 class DataCreator:
-    def __init__(self, cfg):
+    def __init__(
+        self,
+        output_path: str,
+        model_type: Literal["smpl", "smal", "smplx", "flame"],
+        gender: Literal["male", "female", "neutral"],
+        multiview: bool = False,
+        img_tag: str = None,
+        with_face: bool = False,
+        num_coeffs: int = 10,
+        get_tall_data: bool = False,
+        num_of_imgs: int = 1000,
+        renderer_type: Literal["pytorch3d", "open3d"] = "pytorch3d",
+        renderer_kwargs: DictConfig = None,
+    ):
         # parameters from config
-        self.sides: bool = cfg.sides
-        self.img_tag: str = cfg.img_tag
-        self.with_face: bool = cfg.with_face
-        self.num_coeffs: int = cfg.num_coeffs
-        self.num_of_imgs: int = cfg.num_of_imgs
-        self.output_path: Path = Path(cfg.output_path)
-        self.model_type: Literal["smpl", "smal", "smplx", "flame"] = cfg.model_type
-        self.gender: Literal["male", "female", "neutral"] = cfg.gender
-        self.renderer_type: Literal["pytorch3d", "open3d"] = cfg.renderer.name
+        self.multiview = multiview
+        self.img_tag = img_tag
+        self.with_face = with_face
+        self.num_coeffs = num_coeffs
+        self.get_tall_data = get_tall_data
+        self.num_of_imgs = num_of_imgs
+        self.output_path: Path = Path(output_path)
+        self.model_type = model_type
+        self.gender = gender
+        self.renderer_type: Literal["pytorch3d", "open3d"] = renderer_type
         self.get_smpl = True if self.model_type == "smpl" else False
 
         # utils
         self.utils: Utils = Utils()
         self.models_factory: ModelsFactory = ModelsFactory(self.model_type)
-        renderer_kwargs: Dict[str, Any] = self._get_renderer_kwargs(cfg)
+        renderer_kwargs: Dict[str, Any] = self._get_renderer_kwargs(renderer_kwargs)
         self._load_renderer(renderer_kwargs)
 
     def _load_renderer(self, kwargs):
         self.renderer: Union[Pytorch3dRenderer, Open3dRenderer] = self.models_factory.get_renderer(**kwargs)
 
-    def _get_renderer_kwargs(self, cfg):
-        if cfg.renderer.name == "open3d":
+    def _get_renderer_kwargs(self, renderer_kwargs: DictConfig):
+        if self.renderer_type == "open3d":
             raise NotImplementedError  # TODO: implement open3d renderer
         else:
             renderer_kwargs = {"py3d": True}
-            renderer_kwargs.update(cfg.renderer_kwargs)
+            renderer_kwargs.update(renderer_kwargs)
 
         return renderer_kwargs
 
@@ -58,7 +73,9 @@ class DataCreator:
             img_name = self.img_tag if self.img_tag is not None else str(img_id)
 
             # get random 3DMM parameters
-            model_kwargs = self.models_factory.get_random_params(with_face=self.with_face, num_coeffs=self.num_coeffs)
+            model_kwargs = self.models_factory.get_random_params(
+                with_face=self.with_face, num_coeffs=self.num_coeffs, tall_data=self.get_tall_data
+            )
 
             if self.get_smpl:
                 model_kwargs["get_smpl"] = True
@@ -67,7 +84,7 @@ class DataCreator:
             verts, faces, vt, ft = self.models_factory.get_model(
                 **model_kwargs, gender=self.gender, num_coeffs=self.num_coeffs
             )
-            if self.model_type == "smplx":
+            if self.model_type in ["smplx", "smpl"]:
                 verts += self.utils.smplx_offset_numpy
 
             # render mesh and save image
@@ -76,7 +93,7 @@ class DataCreator:
                 self.renderer.visualizer.capture_screen_image(f"{self.output_path}/{img_name}.png")
                 self.renderer.visualizer.destroy_window()
             else:
-                if self.sides:
+                if self.multiview:
                     for azim in [0.0, 90.0]:
                         img_suffix = "front" if azim == 0.0 else "side"
                         img = self.renderer.render_mesh(
@@ -92,7 +109,7 @@ class DataCreator:
 
 @hydra.main(config_path="../../config", config_name="create_data")
 def main(cfg):
-    data_creator = DataCreator(cfg)
+    data_creator = DataCreator(**cfg)
     data_creator()
 
 

@@ -22,7 +22,7 @@ device: cuda
 
 # SMPLX
 texture: #/home/nadav2/dev/repos/Thesis/SMPLX/textures/smplx_texture_m_alb.png
-model_path: /home/nadav2/dev/repos/Thesis/pre_production/smplx_male_after_bug_fix.ckpt
+model_path: /home/nadav2/dev/repos/Thesis/pre_production/smplx_male_arik_choosing_algo.ckpt
 model_type: smplx
 with_face: False
 on_parameters: False

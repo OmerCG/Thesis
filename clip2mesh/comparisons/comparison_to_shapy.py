@@ -15,19 +15,25 @@ from clip2mesh.utils import Utils, Pytorch3dRenderer
 
 
 class CompareToShapy:
-    def __init__(self, args):
-        self.shapy_dir = Path(args.shapy_dir)
-        self.output_path = Path(args.output_path)
+    def __init__(
+        self,
+        shapy_dir: str,
+        output_path: str,
+        display: bool,
+        smplx_models_paths: Dict[str, str],
+        renderer_kwargs: Dict[str, Dict[str, float]],
+    ):
+        self.shapy_dir = Path(shapy_dir)
+        self.output_path = Path(output_path)
         self.utils = Utils(comparison_mode=True)
-        self.display = args.display
+        self.display = display
         self.device = "cuda" if torch.cuda.is_available() else "cpu"
         self.clip_model, self.clip_preprocess = clip.load("ViT-B/32", device=self.device)
 
         self._load_gender_dict()
-        self._load_smplx_models(**args.smplx_models_paths)
+        self._load_smplx_models(**smplx_models_paths)
         self._encode_labels()
-        self._load_renderer(args.renderer_kwargs)
-        self._load_weights(args.labels_weights)
+        self._load_renderer(renderer_kwargs)
 
     def _load_weights(self, labels_weights: Dict[str, float]):
         self.labels_weights = {}
@@ -242,7 +248,7 @@ class CompareToShapy:
 
 @hydra.main(config_path="../config", config_name="compare_to_shapy")
 def main(cfg: DictConfig):
-    compare = CompareToShapy(cfg)
+    compare = CompareToShapy(**cfg)
     compare()
 
 

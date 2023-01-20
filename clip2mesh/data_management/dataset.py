@@ -50,6 +50,4 @@ class CLIP2MESHDataset(Dataset):
         return torch.tensor([dict[descriptor] for descriptor in self.labels_to_get])[..., 0, 0]
 
     def get_labels(self):
-        with open(self.files[0], "r") as f:
-            clip_scores = json.load(f)
         return [[label] for label in self.labels_to_get]

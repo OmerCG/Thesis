@@ -7,40 +7,52 @@ import numpy as np
 from pathlib import Path
 from PIL import ImageTk, Image
 from pytorch3d.io import save_obj
-from typing import Dict, Any
+from omegaconf import DictConfig
+from typing import Dict, Any, Literal
 from clip2mesh.utils import Utils, ModelsFactory
 
 
 class SlidersApp:
-    def __init__(self, cfg):
+    def __init__(
+        self,
+        device: str = torch.device("cuda:0" if torch.cuda.is_available() else "cpu"),
+        texture: str = None,
+        num_coeffs: int = 10,
+        on_parameters: bool = False,
+        model_type: Literal["smplx", "flame", "smpl", "smal"] = None,
+        out_dir: str = None,
+        gender: Literal["male", "female", "neutral"] = "neutral",
+        with_face: bool = False,
+        renderer_kwargs: DictConfig = None,
+        model_path: str = None,
+    ):
 
-        self.root: str = None
-        self.img_label: str = None
-        self.device: str = cfg.device
-        self.texture: str = cfg.texture
-        if "num_coeffs" in cfg:
-            self.num_coeffs: int = cfg.num_coeffs
-        self.on_parameters: bool = cfg.on_parameters
+        self.root = None
+        self.img_label = None
+        self.device = device
+        self.texture = texture
+        self.num_coeffs = num_coeffs
+        self.on_parameters: bool = on_parameters
 
-        assert cfg.model_type in ["smplx", "flame", "smal", "smpl"], "Model type should be smplx, smpl, flame or smal"
-        self.model_type = cfg.model_type
+        assert model_type in ["smplx", "flame", "smal", "smpl"], "Model type should be smplx, smpl, flame or smal"
+        self.model_type = model_type
 
         self.outpath = None
-        if cfg.out_dir is not None:
-            if not Path(cfg.out_dir).exists():
-                Path(cfg.out_dir).mkdir(parents=True)
+        if out_dir is not None:
+            if not Path(out_dir).exists():
+                Path(out_dir).mkdir(parents=True)
             try:
-                img_id = int(sorted(list(Path(cfg.out_dir).glob("*.png")), key=lambda x: int(x.stem))[-1].stem) + 1
+                img_id = int(sorted(list(Path(out_dir).glob("*.png")), key=lambda x: int(x.stem))[-1].stem) + 1
             except IndexError:
                 img_id = 0
-            self.outpath = Path(cfg.out_dir) / f"{img_id}.png"
+            self.outpath = Path(out_dir) / f"{img_id}.png"
 
         self.params = []
         self.utils = Utils()
         self.models_factory = ModelsFactory(self.model_type)
-        self.gender = cfg.gender
-        self.with_face = cfg.with_face
-        self.model_kwargs = self.models_factory.get_default_params(cfg.with_face)
+        self.gender = gender
+        self.with_face = with_face
+        self.model_kwargs = self.models_factory.get_default_params(with_face)
         if self.model_type == "smpl":
             self.model_kwargs["get_smpl"] = True
         if hasattr(self, "num_coeffs"):
@@ -49,12 +61,12 @@ class SlidersApp:
         if self.model_type == "smplx":
             self.verts += self.utils.smplx_offset_numpy  # center the model with offsets
         self.renderer_kwargs = {"py3d": True}
-        self.renderer_kwargs.update(cfg.renderer_kwargs)
+        self.renderer_kwargs.update(renderer_kwargs)
         self.renderer = self.models_factory.get_renderer(**self.renderer_kwargs)
         img = self.renderer.render_mesh(verts=self.verts, faces=self.faces[None], vt=self.vt, ft=self.ft)
         self.img = self.adjust_rendered_img(img)
 
-        self.dist = cfg.renderer_kwargs["dist"]
+        self.dist = renderer_kwargs["dist"]
         self.azim = 0.0
         self.elev = 0.0
 
@@ -62,10 +74,10 @@ class SlidersApp:
         self.camera_scales = {}
         self.initialize_params()
 
-        self.ignore_random_jaw = True if cfg.model_type == "flame" and cfg.with_face else False
+        self.ignore_random_jaw = True if model_type == "flame" and with_face else False
 
-        if cfg.model_path is not None:
-            self.model, labels = self.utils.get_model_to_eval(cfg.model_path)
+        if model_path is not None:
+            self.model, labels = self.utils.get_model_to_eval(model_path)
             self.mean_values = {label[0]: 20 for label in labels}
             self.input_for_model = torch.tensor(list(self.mean_values.values()), dtype=torch.float32)[None]
 
@@ -710,7 +722,7 @@ class SlidersApp:
 
 @hydra.main(config_path="../config", config_name="sliders_demo_py3d")
 def main(cfg):
-    app = SlidersApp(cfg)
+    app = SlidersApp(**cfg)
     app.create_application()
 
 

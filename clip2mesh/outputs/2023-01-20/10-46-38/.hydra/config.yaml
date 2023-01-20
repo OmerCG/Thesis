@@ -1,0 +1,35 @@
+descriptors:
+- big
+- fat
+- broad shoulders
+- built
+- curvy
+- feminine
+- fit
+- heavyset
+- lean
+- long legs
+- tall
+- long torso
+- long
+- masculine
+- muscular
+- pear shaped
+- petite
+- proportioned
+- rectangular
+- round apple
+- short legs
+- short torso
+- short
+- skinny
+- small
+- stocky
+- sturdy
+- tall
+- attractive
+- sexy
+- hourglass
+device: cuda
+multiview: true
+imgs_dir: /home/nadav2/dev/data/CLIP2Shape/images/smpl_male_multiview

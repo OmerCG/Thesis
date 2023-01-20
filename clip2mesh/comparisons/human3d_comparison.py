@@ -14,8 +14,8 @@ from clip2mesh.comparisons.comparison_utils import ComparisonUtils
 
 
 class Human3DComparison(ComparisonUtils):
-    def __init__(self, args):
-        super().__init__(args)
+    def __init__(self, cfg: DictConfig):
+        super().__init__(**cfg)
         self._load_gt_jsons()
 
     def get_gt_data(self, json_id: str, frame_idx: int) -> torch.Tensor:

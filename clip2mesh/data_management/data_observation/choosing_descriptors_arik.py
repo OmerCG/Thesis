@@ -2,6 +2,7 @@ import math
 import json
 import hydra
 import logging
+import numpy as np
 import pandas as pd
 from tqdm import tqdm
 from pathlib import Path
@@ -13,18 +14,28 @@ from clip2mesh.data_management.data_observation.choosing_descriptors import Choo
 
 
 class ChoosingDescriptorsArik(ChoosingDescriptors):
-    def __init__(self, args):
+    def __init__(
+        self,
+        mode: Literal["and", "or"],
+        working_dir: str,
+        images_dir: str,
+        max_num_of_descriptors: int,
+        min_num_of_descriptors: int,
+        descriptors_clusters_json: str,
+        corr_threshold: float = 0.5,
+        iou_threshold: float = 0.7,
+    ):
         super().__init__()
         self.utils = Utils()
-        self.corr_threshold = 0.5
-        self.iou_threshold = 0.7
-        self.mode: Literal["an", "or"] = args.mode
-        self.working_dir: Path = Path(args.working_dir)
-        self.images_dir: Path = Path(args.images_dir)
-        self.max_num_of_descriptors: int = args.max_num_of_descriptors
-        self.min_num_of_descriptors: int = args.min_num_of_descriptors
-        self.descriptors_clusters_json: Path = Path(args.descriptors_clusters_json)
-        self.clusters = self.get_clusters()
+        self.corr_threshold = corr_threshold
+        self.iou_threshold = iou_threshold
+        self.mode: Literal["an", "or"] = mode
+        self.working_dir: Path = Path(working_dir)
+        self.images_dir: Path = Path(images_dir)
+        self.max_num_of_descriptors = max_num_of_descriptors
+        self.min_num_of_descriptors = min_num_of_descriptors
+        if descriptors_clusters_json is not None:
+            self.clusters = self.get_clusters(Path(descriptors_clusters_json))
         self._get_logger()
 
     def _get_logger(self):
@@ -99,11 +110,15 @@ class ChoosingDescriptorsArik(ChoosingDescriptors):
         ious_df = pd.read_csv(self.working_dir / "vertex_heatmaps" / "ious.csv")
 
         # get the clusters
-        clusters = self.get_clusters()
-        chosen_descriptors = {cluster_id: {} for cluster_id in clusters}
-
-        # add column of cluster to summary df
-        summary_df["cluster"] = summary_df["descriptor"].apply(lambda x: self.find_cluster_of_descriptor(x, clusters))
+        if hasattr(self, "clusters"):
+            chosen_descriptors = {cluster_id: {} for cluster_id in self.clusters}
+            # add column of cluster to summary df
+            summary_df["cluster"] = summary_df["descriptor"].apply(
+                lambda x: self.find_cluster_of_descriptor(x, self.clusters)
+            )
+        else:
+            chosen_descriptors = {0: {}}
+            summary_df["cluster"] = np.zeros(len(summary_df))
 
         # start iterating over the clusters
         for cluster, cluster_df in summary_df.groupby("cluster"):
@@ -296,7 +311,7 @@ class ChoosingDescriptorsArik(ChoosingDescriptors):
 
 @hydra.main(config_path="../../config", config_name="choose_algorithm_arik")
 def main(cfg: DictConfig) -> None:
-    choosing_descriptors = ChoosingDescriptorsArik(cfg)
+    choosing_descriptors = ChoosingDescriptorsArik(**cfg)
     choosing_descriptors.choose()
 
 

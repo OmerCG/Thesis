@@ -1,6 +1,6 @@
 defaults:
-  - descriptors: smplx_female
+  - descriptors: smpl_male
 
 device: cuda
 multiview: True
-imgs_dir: /home/nadav2/dev/data/CLIP2Shape/images/smplx_female_multiview # IMPORTANT: This is the path to the images directory
+imgs_dir: /home/nadav2/dev/data/CLIP2Shape/images/smpl_male_multiview

@@ -7,7 +7,7 @@ models_dir: /home/nadav2/dev/repos/CLIP2Shape/models
 seed: 42
 
 tensorboard_logger:
-  name: smplx_male_after_bug_fix # IMPORTANT
+  name: smplx_male_body_talk_descriptors # IMPORTANT
   save_dir: /home/nadav2/dev/data/CLIP2Shape/runs
   log_graph: True
 
@@ -25,7 +25,7 @@ callbacks:
     auto_insert_metric_name: False
 
 dataloader:
-  batch_size: 1000
+  batch_size: 2500
   num_workers: 1
   shuffle: True
   drop_last: False
@@ -37,19 +37,43 @@ trainer:
   log_every_n_steps: 3
 
 dataset:
-  data_dir: /home/nadav2/dev/data/CLIP2Shape/images/smplx_male_multiview_3k
+  data_dir: /home/nadav2/dev/data/CLIP2Shape/images/smplx_male_multiview
   optimize_feature: betas  # IMPORTANT
   out_features: ${model_conf.out_features}
   labels_to_get:
+    - big
     - fat
-    - muscular
+    - broad shoulders
+    - built
     - curvy
-    - pear shaped
-    - short
+    - feminine
+    - fit
+    - heavyset
+    - lean
     - long legs
+    - tall
+    - long torso
+    - long
+    - masculine
+    - muscular
+    - pear shaped
+    - petite
+    - proportioned
+    - rectangular
+    - round apple
+    - short legs
+    - short torso
+    - short
+    - skinny
+    - small
+    - stocky
+    - sturdy
+    - attractive
+    - sexy
+    - hourglass
 
 model_conf:
-  num_stats: 6  # IMPORTANT
-  hidden_size: [800, 500]
+  num_stats: 30  # IMPORTANT
+  hidden_size: [1000]
   out_features: 10
-  num_hiddens: 1
+  num_hiddens: 0

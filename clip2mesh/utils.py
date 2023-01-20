@@ -771,33 +771,12 @@ class Utils:
             labels = [[label] for label in labels]
         return labels
 
-    def get_antonyms_of_labels(self, labels: List[List[str]]):
-        syn_ant_dict = self.syntonyms_antonyms()
-        for sublist in labels:
-            splitted_sublist = sublist[0].split(" ")
-            if len(splitted_sublist) > 1:
-                for word in splitted_sublist:
-                    if word in syn_ant_dict.keys():
-                        antonyms = syn_ant_dict[word]
-                        replace_idx = splitted_sublist.index(word)
-                        new_word_list = splitted_sublist.copy()
-                        new_word_list[replace_idx] = antonyms
-                        break
-                new_word = [" ".join(new_word_list)]
-                sublist += new_word
-        return labels
-
     @staticmethod
-    def syntonyms_antonyms():
-        return {"open": "close", "raise": "drop", "narrow": "wide", "long": "short", "big": "small", "fat": "thin"}
-
-    @staticmethod
-    def get_random_betas_smplx(num_coeffs: int = 10, smpl: bool = False) -> torch.tensor:
+    def get_random_betas_smplx(num_coeffs: int = 10, tall_data: bool = False) -> torch.tensor:
         """SMPLX body shape"""
-        if smpl:
-            return torch.randn(1, num_coeffs)
         random_offset = torch.randint(-2, 2, (1, num_coeffs)).float()
-        random_offset[:, 0] = 4.0
+        if tall_data:
+            random_offset[:, 0] = 4.0
         return torch.randn(1, num_coeffs) * random_offset
 
     @staticmethod
@@ -1050,21 +1029,10 @@ class ModelsFactory:
             return Pytorch3dRenderer(**kwargs)
         return Open3dRenderer(**kwargs)
 
-    def get_random_params(
-        self, with_face: bool = False, rest_pose: bool = False, num_coeffs: int = 10
-    ) -> Dict[str, torch.tensor]:
+    def get_random_params(self, with_face: bool = False, num_coeffs: int = 10, tall_data: bool = False) -> Dict[str, torch.tensor]:
         params = {}
-        if self.model_type == "smplx" or self.model_type == "smpl":
-            smpl = True if self.model_type == "smpl" else False
-            params["betas"] = self.utils.get_random_betas_smplx(num_coeffs, smpl)
-            if with_face:
-                params["expression"] = self.utils.get_random_expression(num_coeffs)
-            else:
-                params["expression"] = self.utils.get_default_parameters(num_coeffs)
-            if rest_pose:
-                params["body_pose"] = self.utils.get_body_pose(num_coeffs)
-            else:
-                params["body_pose"] = torch.eye(3).expand(1, 21, 3, 3)
+        if self.model_type in ["smplx", "smpl"]:
+            params["betas"] = self.utils.get_random_betas_smplx(num_coeffs, tall_data=tall_data)
         elif self.model_type == "flame":
             if with_face:
                 params["expression_params"] = self.utils.get_random_expression_flame(num_coeffs)

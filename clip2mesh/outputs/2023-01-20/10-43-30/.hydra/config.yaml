@@ -1,0 +1,24 @@
+descriptors:
+- fat
+- thin
+- hourglass
+- short
+- long legs
+- narrow waist
+- skinny
+- tall
+- broad shoulders
+- pear shaped
+- average
+- big
+- curvy
+- lean
+- proportioned
+- sexy
+- fit
+- heavyset
+- petite
+- small
+device: cuda
+multiview: true
+imgs_dir: /home/nadav2/dev/data/CLIP2Shape/images/smplx_female_multiview
