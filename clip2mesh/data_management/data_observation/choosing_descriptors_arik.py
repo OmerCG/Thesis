@@ -65,8 +65,9 @@ class ChoosingDescriptorsArik(ChoosingDescriptors):
     def get_descriptor_iou(descriptor: str, ious_df: pd.DataFrame) -> float:
         return ious_df[(ious_df["descriptor_1"] == descriptor) | (ious_df["descriptor_2"] == descriptor)]["iou"].mean()
 
-    def get_clusters(self):
-        with open(self.descriptors_clusters_json, "r") as f:
+    @staticmethod
+    def get_clusters(descriptors_clusters_json: Path):
+        with open(descriptors_clusters_json, "r") as f:
             clusters = json.load(f)
         return clusters
 
@@ -78,6 +79,8 @@ class ChoosingDescriptorsArik(ChoosingDescriptors):
                 corr = abs(correlations_df.loc[descriptor, chosen_descriptor])
                 if math.isnan(corr):
                     raise KeyError
+                if corr > self.corr_threshold:
+                    return True, chosen_descriptor, corr
             except KeyError:
                 corr = abs(correlations_df.loc[chosen_descriptor, descriptor])
                 if corr > self.corr_threshold:
@@ -118,7 +121,7 @@ class ChoosingDescriptorsArik(ChoosingDescriptors):
             )
         else:
             chosen_descriptors = {0: {}}
-            summary_df["cluster"] = np.zeros(len(summary_df))
+            summary_df["cluster"] = np.zeros(len(summary_df)).astype(int)
 
         # start iterating over the clusters
         for cluster, cluster_df in summary_df.groupby("cluster"):
@@ -133,6 +136,10 @@ class ChoosingDescriptorsArik(ChoosingDescriptors):
 
                 descriptor = row["descriptor"]
                 self.logger.info(f"{i} most covering descriptor - {descriptor}")
+
+                if descriptor not in correlations_df.columns:
+                    self.logger.info(f"{descriptor} not in correlations df")
+                    continue
 
                 # if this is the descriptor with the highest vertex coverage - add it
                 if chosen_descriptors[cluster] == {}:

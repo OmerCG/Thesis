@@ -1,19 +1,20 @@
 defaults:
   - renderer_kwargs: smplx
 
-output_path: /home/nadav2/dev/data/CLIP2Shape/images/smplx_female_multiview # Path to save the images
+output_path: /home/nadav2/dev/data/CLIP2Shape/images/smpl_female_multiview # Path to save the images
 gender: female
 img_tag:
-model_type: smplx
+model_type: smpl
 with_face: False
-num_of_imgs: 500
+num_of_imgs: 10000
 num_coeffs: 10
 multiview: True
+get_tall_data: False
 # texture: /home/nadav2/dev/repos/CLIP2Shape/Flame/flame2020/mesh.png  # FLAME texture
-texture: /home/nadav2/dev/repos/CLIP2Shape/SMPLX/textures/smplx_texture_m_alb.png  # SMPLX texture
+# texture: #/home/nadav2/dev/repos/CLIP2Shape/SMPLX/textures/smplx_texture_m_alb.png  # SMPLX texture
 # texture:  # SMAL texture (keep empty for random texture)
 
 renderer_kwargs:
   img_size: [1024, 1024]
-  tex_path: ${texture}
+  tex_path: 
   background_color: [0.0, 0.0, 0.0]

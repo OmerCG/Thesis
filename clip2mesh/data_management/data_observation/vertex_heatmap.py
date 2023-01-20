@@ -16,27 +16,42 @@ from clip2mesh.utils import Utils, Pytorch3dRenderer, ModelsFactory
 
 
 class VertexHeatmap:
-    def __init__(self, args):
+    def __init__(
+        self,
+        descriptors_dir: str,
+        iou_threshold: float,
+        corr_threshold: float,
+        model_type: Literal["flame", "smplx", "smpl", "smal"],
+        compare_to_default_mesh: bool,
+        gender: Literal["male", "female", "neutral"],
+        method: Literal["L2", "diff_coords"],
+        effect_threshold: float,
+        optimize_feature: Literal["betas", "shape_params", "expression_params"],
+        renderer_kwargs: DictConfig,
+        color_map: str = "YlOrRd",
+        save_color_bar: bool = False,
+    ):
 
         self.utils: Utils = Utils()
-        self.descriptors_dir: Path = Path(args.descriptors_dir)
-        self.iou_threshold: float = args.iou_threshold
-        self.corr_threshold: float = args.corr_threshold
-        self.model_type: Literal["flame", "smplx", "smpl", "smal"] = args.model_type
-        self.compare_to_default_mesh: bool = args.compare_to_default_mesh
-        self.gender: Literal["male", "female", "neutral"] = args.gender
-        self.method: Literal["L2", "diff_coords"] = args.method
-        self.effect_threshold: float = args.effect_threshold
-        self.optimize_feature: Literal["betas", "shape_params", "expression_params"] = args.optimize_feature
-        self.color_map = plt.get_cmap(args.color_map)
+        self.descriptors_dir: Path = Path(descriptors_dir)
+        self.iou_threshold = iou_threshold
+        self.corr_threshold = corr_threshold
+        self.model_type = model_type
+        self.compare_to_default_mesh = compare_to_default_mesh
+        self.gender = gender
+        self.method = method
+        self.effect_threshold = effect_threshold
+        self.optimize_feature = optimize_feature
+        self.color_map = plt.get_cmap(color_map)
         self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
         self.view_angles = range(0, 360, 45)
-        self.models_factory = ModelsFactory(model_type=args.model_type)
+        self.models_factory = ModelsFactory(model_type=model_type)
+        self.save_color_bar = save_color_bar
 
         self.num_rows, self.num_cols = self.get_collage_shape()
 
         self._assertions()
-        self._load_renderer(args.renderer_kwargs)
+        self._load_renderer(renderer_kwargs)
         self._load_def_mesh()
         self._initialize_df()
 
@@ -62,7 +77,7 @@ class VertexHeatmap:
         assert self.gender in ["male", "female", "neutral"], "gender must be either male, female or neutral"
 
     def _load_def_mesh(self):
-        verts, faces, vt, ft = self.models_factory.get_model()
+        verts, faces, vt, ft = self.models_factory.get_model(gender=self.gender)
         if self.model_type == "smplx":
             verts += self.utils.smplx_offset_numpy
         self.def_verts = torch.tensor(verts).to(self.device)
@@ -78,7 +93,9 @@ class VertexHeatmap:
                 verts = verts[0]
             if faces.shape.__len__() == 3:
                 faces = faces[0]
-            self.def_diff_coords = self.get_verts_diff_coords(verts, trimesh.Trimesh(vertices=verts, faces=faces))
+            self.def_diff_coords = self.get_verts_diff_coords(
+                verts, trimesh.Trimesh(vertices=verts, faces=faces, process=False)
+            )
 
     @staticmethod
     def adjust_rendered_img(img: torch.Tensor):
@@ -129,7 +146,7 @@ class VertexHeatmap:
         one_ring = [list(g[i].keys()) for i in range(len(mesh.vertices))]
         verts_diff_coords = np.zeros_like(verts)
         for i, v in enumerate(verts):
-            verts_diff_coords[i] = v - verts[one_ring[i]].mean()
+            verts_diff_coords[i] = v - verts[one_ring[i]].mean(axis=0)
         return verts_diff_coords
 
     def create_ious_csv(self, path):
@@ -168,21 +185,25 @@ class VertexHeatmap:
                 diffs = diffs.squeeze()
         else:
             diff_coords_regular = self.get_verts_diff_coords(
-                verts_regular, trimesh.Trimesh(vertices=verts_regular, faces=faces_regular)
+                verts_regular, trimesh.Trimesh(vertices=verts_regular, faces=faces_regular, process=False)
             )
             if not self.compare_to_default_mesh:
                 to_compare_features = self.get_verts_faces_by_model_type(*to_compare_features)
                 diff_coords_to_compare = self.get_verts_diff_coords(
                     to_compare_features[0],
-                    trimesh.Trimesh(vertices=to_compare_features[0], faces=to_compare_features[1]),
+                    trimesh.Trimesh(vertices=to_compare_features[0], faces=to_compare_features[1], process=False),
                 )
                 diffs = np.linalg.norm(diff_coords_regular - diff_coords_to_compare, axis=-1)
+                return diffs
+
             diffs = np.linalg.norm(self.def_diff_coords - diff_coords_regular, axis=-1)
         return diffs
 
     def __call__(self):
         descriptors_generator = list(self.descriptors_dir.iterdir())
-        for descriptor in tqdm(descriptors_generator, desc="descriptors", total=len(descriptors_generator)):
+        progress_bar = tqdm(descriptors_generator, desc="descriptors", total=len(descriptors_generator))
+        for descriptor in progress_bar:
+            progress_bar.set_description(f"descriptor: {descriptor.name}")
             regular = torch.tensor(np.load(descriptor / f"{descriptor.name}.npy")).float()
             if regular.dim() == 1:
                 regular = regular.unsqueeze(0)
@@ -240,12 +261,13 @@ class VertexHeatmap:
         self.create_ious_csv(vertex_heatmaps_dir / "ious.csv")
         for vertex_heatmap_file in self.descriptors_dir.rglob("vertex_heatmap.png"):
             shutil.copy(vertex_heatmap_file, vertex_heatmaps_dir / (vertex_heatmap_file.parent.name + ".png"))
-        self.save_color_bar_with_threshold(vertex_heatmaps_dir / "color_bar_w_threshold.png")
+        if self.save_color_bar:
+            self.save_color_bar_with_threshold(vertex_heatmaps_dir / "color_bar_w_threshold.png")
 
 
 @hydra.main(config_path="../../config", config_name="vertex_heatmap")
 def main(cfg: DictConfig):
-    vertex_heatmap = VertexHeatmap(cfg)
+    vertex_heatmap = VertexHeatmap(**cfg)
     vertex_heatmap()
 
 

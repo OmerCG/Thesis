@@ -1,0 +1,21 @@
+renderer_kwargs:
+  dist: 4.2
+  elev: 10.0
+  azim: 0.0
+  img_size:
+  - 1024
+  - 1024
+  tex_path: null
+  background_color:
+  - 0.0
+  - 0.0
+  - 0.0
+output_path: /home/nadav2/dev/data/CLIP2Shape/images/smpl_female_multiview
+gender: female
+img_tag: null
+model_type: smpl
+with_face: false
+num_of_imgs: 10000
+num_coeffs: 10
+multiview: true
+get_tall_data: false

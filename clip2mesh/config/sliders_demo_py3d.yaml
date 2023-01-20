@@ -8,7 +8,7 @@ device: cuda
 
 # # FLAME - expression
 # texture: #/home/nadav2/dev/repos/Thesis/Flame/flame2020/mesh.png
-# model_path: /home/nadav2/dev/repos/Thesis/production/flame_expression.ckpt
+# model_path: /home/nadav2/dev/repos/Thesis/end2end_pipeline/flame_exp_e2e_test.ckpt
 # model_type: flame
 # with_face: True
 # on_parameters: False
@@ -22,7 +22,7 @@ device: cuda
 
 # SMPLX
 texture: #/home/nadav2/dev/repos/Thesis/SMPLX/textures/smplx_texture_m_alb.png
-model_path: /home/nadav2/dev/repos/Thesis/pre_production/smplx_male_arik_choosing_algo.ckpt
+model_path: /home/nadav2/dev/repos/Thesis/pre_production/smplx_male_free_choosing.ckpt
 model_type: smplx
 with_face: False
 on_parameters: False

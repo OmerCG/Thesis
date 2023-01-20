@@ -1,0 +1,58 @@
+[2023-01-20 18:17:53,266][choosing_descriptors][INFO] - There are total of 26 descriptors
+[2023-01-20 18:18:36,554][choosing_descriptors][INFO] - Working on cluster 0
+[2023-01-20 18:18:36,554][choosing_descriptors][INFO] - 0 most covering descriptor - tall
+[2023-01-20 18:18:36,554][choosing_descriptors][INFO] - Adding tall to chosen descriptors
+[2023-01-20 18:18:36,555][choosing_descriptors][INFO] - 1 most covering descriptor - small
+[2023-01-20 18:18:36,557][choosing_descriptors][INFO] - Adding small to chosen descriptors
+[2023-01-20 18:18:36,557][choosing_descriptors][INFO] - 2 most covering descriptor - narrow waist
+[2023-01-20 18:18:36,559][choosing_descriptors][INFO] - Adding narrow waist to chosen descriptors
+[2023-01-20 18:18:36,560][choosing_descriptors][INFO] - 3 most covering descriptor - average
+[2023-01-20 18:18:36,560][choosing_descriptors][INFO] - average not in correlations df
+[2023-01-20 18:18:36,560][choosing_descriptors][INFO] - 4 most covering descriptor - long legs
+[2023-01-20 18:18:36,563][choosing_descriptors][INFO] - long legs is correlated with tall with corr 0.9176663553775308
+[2023-01-20 18:18:36,563][choosing_descriptors][INFO] - 5 most covering descriptor - round apple
+[2023-01-20 18:18:36,566][choosing_descriptors][INFO] - round apple is correlated with tall with corr 0.5778776293618371
+[2023-01-20 18:18:36,566][choosing_descriptors][INFO] - 6 most covering descriptor - big
+[2023-01-20 18:18:36,567][choosing_descriptors][INFO] - big not in correlations df
+[2023-01-20 18:18:36,567][choosing_descriptors][INFO] - 7 most covering descriptor - heavyset
+[2023-01-20 18:18:36,570][choosing_descriptors][INFO] - heavyset is correlated with tall with corr 0.6911307336071115
+[2023-01-20 18:18:36,570][choosing_descriptors][INFO] - 8 most covering descriptor - rectangular
+[2023-01-20 18:18:36,573][choosing_descriptors][INFO] - Adding rectangular to chosen descriptors
+[2023-01-20 18:18:36,573][choosing_descriptors][INFO] - 9 most covering descriptor - petite
+[2023-01-20 18:18:36,578][choosing_descriptors][INFO] - petite is correlated with small with corr 0.5321996211710347
+[2023-01-20 18:18:36,578][choosing_descriptors][INFO] - 10 most covering descriptor - thin
+[2023-01-20 18:18:36,578][choosing_descriptors][INFO] - thin not in correlations df
+[2023-01-20 18:18:36,578][choosing_descriptors][INFO] - 11 most covering descriptor - short
+[2023-01-20 18:18:36,582][choosing_descriptors][INFO] - short is correlated with small with corr 0.5659254002785569
+[2023-01-20 18:18:36,582][choosing_descriptors][INFO] - 12 most covering descriptor - sexy
+[2023-01-20 18:18:36,586][choosing_descriptors][INFO] - Adding sexy to chosen descriptors
+[2023-01-20 18:18:36,586][choosing_descriptors][INFO] - 13 most covering descriptor - lean
+[2023-01-20 18:18:36,591][choosing_descriptors][INFO] - lean is correlated with small with corr 0.5832153607742092
+[2023-01-20 18:18:36,592][choosing_descriptors][INFO] - 14 most covering descriptor - fat
+[2023-01-20 18:18:36,597][choosing_descriptors][INFO] - fat is correlated with tall with corr 0.7038442270895775
+[2023-01-20 18:18:36,597][choosing_descriptors][INFO] - 15 most covering descriptor - pear shaped
+[2023-01-20 18:18:36,602][choosing_descriptors][INFO] - pear shaped is correlated with tall with corr 0.6305544642011431
+[2023-01-20 18:18:36,602][choosing_descriptors][INFO] - 16 most covering descriptor - stocky
+[2023-01-20 18:18:36,607][choosing_descriptors][INFO] - stocky is correlated with tall with corr 0.5634796973676293
+[2023-01-20 18:18:36,607][choosing_descriptors][INFO] - 17 most covering descriptor - built
+[2023-01-20 18:18:36,612][choosing_descriptors][INFO] - built is correlated with small with corr 0.7037692135157987
+[2023-01-20 18:18:36,613][choosing_descriptors][INFO] - 18 most covering descriptor - sturdy
+[2023-01-20 18:18:36,618][choosing_descriptors][INFO] - sturdy is correlated with small with corr 0.6141310570073067
+[2023-01-20 18:18:36,618][choosing_descriptors][INFO] - 19 most covering descriptor - proportioned
+[2023-01-20 18:18:36,622][choosing_descriptors][INFO] - proportioned is correlated with tall with corr 0.6433700862894263
+[2023-01-20 18:18:36,623][choosing_descriptors][INFO] - 20 most covering descriptor - skinny
+[2023-01-20 18:18:36,627][choosing_descriptors][INFO] - skinny is correlated with tall with corr 0.7164685048282492
+[2023-01-20 18:18:36,628][choosing_descriptors][INFO] - 21 most covering descriptor - broad shoulders
+[2023-01-20 18:18:36,632][choosing_descriptors][INFO] - broad shoulders is correlated with tall with corr 0.6339819976522921
+[2023-01-20 18:18:36,633][choosing_descriptors][INFO] - 22 most covering descriptor - masculine
+[2023-01-20 18:18:36,637][choosing_descriptors][INFO] - masculine is correlated with rectangular with corr 0.5870150376875785
+[2023-01-20 18:18:36,637][choosing_descriptors][INFO] - 23 most covering descriptor - muscular
+[2023-01-20 18:18:36,642][choosing_descriptors][INFO] - muscular is correlated with rectangular with corr 0.5344097001831697
+[2023-01-20 18:18:36,642][choosing_descriptors][INFO] - 24 most covering descriptor - curvy
+[2023-01-20 18:18:36,647][choosing_descriptors][INFO] - curvy is correlated with tall with corr 0.6484901307229695
+[2023-01-20 18:18:36,647][choosing_descriptors][INFO] - 25 most covering descriptor - fit
+[2023-01-20 18:18:36,652][choosing_descriptors][INFO] - fit is correlated with sexy with corr 0.8122148229981427
+[2023-01-20 18:18:36,652][choosing_descriptors][INFO] - currently chosen descriptors: {'tall': {'iou': 0.12011997282446175, 'vertex_coverage': 123}, 'small': {'iou': 0.16176064480861221, 'vertex_coverage': 83}, 'narrow waist': {'iou': 0.1785246465275676, 'vertex_coverage': 54}, 'rectangular': {'iou': 0.16035828212031408, 'vertex_coverage': 45}, 'sexy': {'iou': 0.15738325301938358, 'vertex_coverage': 34}}
+[2023-01-20 18:18:36,652][choosing_descriptors][INFO] - Finished cluster 0
+[2023-01-20 18:18:36,652][choosing_descriptors][INFO] - There are 5 chosen descriptors
+[2023-01-20 18:18:36,652][choosing_descriptors][INFO] - chosen descriptors: [['tall', 'small', 'narrow waist', 'rectangular', 'sexy']]

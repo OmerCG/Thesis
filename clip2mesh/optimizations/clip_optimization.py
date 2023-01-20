@@ -4,13 +4,14 @@ import hydra
 import torch
 import logging
 import numpy as np
+import matplotlib.pyplot as plt
 from torch import nn
 from tqdm import tqdm
 from pathlib import Path
 from omegaconf import DictConfig
 from typing import Tuple, Literal, List
-from torchvision.transforms import Resize
 from pytorch_lightning import seed_everything
+from torchvision.transforms import Resize, Compose, RandomResizedCrop, Normalize
 from clip2mesh.utils import ModelsFactory, Pytorch3dRenderer, Utils
 
 seed_everything(42)
@@ -33,10 +34,20 @@ class CLIPLoss(nn.Module):
 
     def forward(self, image, text):
         if self.inverse:
-            similarity = self.model(image, text)[0]
+            similarity = self.model(image, text)[0] / 100
         else:
-            similarity = -self.model(image, text)[0]
+            similarity = 1 - self.model(image, text)[0] / 100
         return similarity
+
+    # def forward(self, image, text):
+    #     gt_similarity = torch.tensor([0.15]).to(image.device) if self.inverse else torch.tensor([0.3]).to(image.device)
+    #     encoded_image = self.model.encode_image(image)
+    #     encoded_text = self.model.encode_text(text)
+    #     if self.inverse:
+    #         similarity = torch.cosine_similarity(encoded_image, encoded_text, axis=-1)
+    #     else:
+    #         similarity = -torch.cosine_similarity(encoded_image, encoded_text, axis=-1)
+    #     return self.mse(similarity.float(), gt_similarity)
 
 
 class Optimization:
@@ -44,7 +55,7 @@ class Optimization:
         self,
         model_type: str,
         optimize_features: str,
-        text: List[str],
+        descriptors: List[str],
         renderer_kwargs: DictConfig,
         device: str = "cuda" if torch.cuda.is_available() else "cpu",
         total_steps: int = 1000,
@@ -67,15 +78,18 @@ class Optimization:
         self.lr = lr
         self.utils = Utils()
         self.clip_renderer = Pytorch3dRenderer(**renderer_kwargs)
-        self.text = text
+        self.descriptors = descriptors
         self.output_dir = Path(output_dir)
         self.fps = fps
         self.display = display
         self.num_coeffs = num_coeffs
         self.img_out_size = renderer_kwargs["img_size"]
         self.resize = Resize((224, 224))
-        self.view_angles = range(0, 360, 90)
-        self.num_rows, self.num_cols = self.get_collage_shape()
+        self.view_angles = range(45, 46)
+        try:
+            self.num_rows, self.num_cols = self.get_collage_shape()
+        except TypeError:
+            self.num_rows, self.num_cols = 1, 1
 
         self._load_logger()
 
@@ -114,13 +128,17 @@ class Optimization:
             return num_cols, num_rows
         return num_rows, num_cols
 
-    def get_collage(self, images_list: List[np.ndarray]) -> np.ndarray:
+    def get_collage(self, images_list: List[np.ndarray], losses: List[float]) -> np.ndarray:
         imgs_collage = [
             cv2.cvtColor(
                 rend_img.detach().cpu().numpy()[0],
                 cv2.COLOR_RGB2BGR,
             )
             for rend_img in images_list
+        ]
+        imgs_collage = [
+            cv2.putText(img, f"loss: {loss:.4f}", (10, 30), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 255), 3)
+            for img, loss in zip(imgs_collage, losses)
         ]
         collage = np.concatenate(
             [
@@ -133,9 +151,7 @@ class Optimization:
 
     def optimize(self):
 
-        torch.seed()
-
-        for word_desciptor in self.text:
+        for word_desciptor in self.descriptors:
 
             self.logger.info(f"Optimizing for {word_desciptor}...")
             output_dir = self.output_dir / word_desciptor
@@ -152,36 +168,41 @@ class Optimization:
                     continue
 
                 self.logger.info(f"Phase: {phase}")
-                if phase == "inverse":
-                    loss_fn = CLIPLoss(inverse=True)
-                else:
-                    loss_fn = CLIPLoss(inverse=False)
+                inverse = True if phase == "inverse" else False
+                loss_fn = CLIPLoss(inverse=inverse)
                 video_recorder = self.record_video(self.fps, output_dir, f"{word_desciptor}_{phase}")
                 model = Model().to(self.device)
+                self.logger.info(f"learning rate: {self.lr}")
                 optimizer = torch.optim.Adam(model.parameters(), lr=self.lr)
+                total_losses = []
                 pbar = tqdm(range(self.total_steps))
                 for _ in pbar:
                     optimizer.zero_grad()
                     parameters = model()
                     loss = 0
                     rend_imgs = []
+                    losses = []
                     for angle in self.view_angles:
                         temp_loss, temp_rendered_img = self.loss(
                             parameters, loss_fn=loss_fn, text=encoded_text, angle=angle
                         )
                         loss += temp_loss
+                        losses.append(temp_loss.item())
                         rend_imgs.append(temp_rendered_img)
+                    total_losses.append(loss.item())
                     loss.backward()
                     optimizer.step()
                     pbar.set_description(f"Loss: {loss.item():.4f}")
-                    collage = self.get_collage(rend_imgs)
+                    collage = self.get_collage(rend_imgs, losses)
                     collage = cv2.resize(collage.copy(), (896, 896))
                     if self.display:
                         cv2.imshow("image", collage)
                         cv2.waitKey(1)
                     img_for_vid = np.clip((collage * 255), 0, 255).astype(np.uint8)
                     video_recorder.write(img_for_vid)
-
+                plt.plot(total_losses)
+                plt.savefig(output_dir / f"{word_desciptor}_{phase}.png")
+                plt.close()
                 video_recorder.release()
                 cv2.destroyAllWindows()
                 model_weights = model().detach().cpu().numpy()

@@ -1,0 +1,27 @@
+[2023-01-20 15:11:03,329][__main__][INFO] - Optimizing for short...
+[2023-01-20 15:11:03,330][__main__][INFO] - Phase: regular
+[2023-01-20 15:11:06,257][__main__][INFO] - learning rate: 0.3
+[2023-01-20 15:11:41,387][__main__][INFO] - Phase: inverse
+[2023-01-20 15:11:44,577][__main__][INFO] - learning rate: 0.3
+[2023-01-20 15:12:19,046][__main__][INFO] - Optimizing for tall...
+[2023-01-20 15:12:19,048][__main__][INFO] - Phase: regular
+[2023-01-20 15:12:22,183][__main__][INFO] - learning rate: 0.3
+[2023-01-20 15:12:57,543][__main__][INFO] - Phase: inverse
+[2023-01-20 15:13:00,314][__main__][INFO] - learning rate: 0.3
+[2023-01-20 15:13:34,485][__main__][INFO] - Optimizing for long legs...
+[2023-01-20 15:13:34,487][__main__][INFO] - Phase: regular
+[2023-01-20 15:13:37,283][__main__][INFO] - learning rate: 0.3
+[2023-01-20 15:14:12,409][__main__][INFO] - Phase: inverse
+[2023-01-20 15:14:15,211][__main__][INFO] - learning rate: 0.3
+[2023-01-20 15:14:50,232][__main__][INFO] - Optimizing for big...
+[2023-01-20 15:14:50,233][__main__][INFO] - Phase: regular
+[2023-01-20 15:14:53,048][__main__][INFO] - learning rate: 0.3
+[2023-01-20 15:15:32,042][__main__][INFO] - Phase: inverse
+[2023-01-20 15:15:35,265][__main__][INFO] - learning rate: 0.3
+[2023-01-20 15:16:12,150][__main__][INFO] - Optimizing for fat...
+[2023-01-20 15:16:12,151][__main__][INFO] - Phase: regular
+[2023-01-20 15:16:15,135][__main__][INFO] - learning rate: 0.3
+[2023-01-20 15:16:50,497][__main__][INFO] - Phase: inverse
+[2023-01-20 15:16:53,761][__main__][INFO] - learning rate: 0.3
+[2023-01-20 15:17:28,644][__main__][INFO] - Optimizing for broad shoulders...
+[2023-01-20 15:17:28,645][__main__][INFO] - Phase: regular

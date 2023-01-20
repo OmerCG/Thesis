@@ -7,7 +7,6 @@ from tqdm import tqdm
 from typing import List
 from pathlib import Path
 from omegaconf import DictConfig
-from clip2mesh.utils import Utils
 
 
 def generate_clip_scores(device: str, multiview: bool, imgs_dir: str, descriptors: List[List[str]]):
@@ -28,6 +27,10 @@ def generate_clip_scores(device: str, multiview: bool, imgs_dir: str, descriptor
         json_path = file.parent / f"{file.stem.split('_')[0]}_labels.json"
         json_data = {}
 
+        if json_path.exists():
+            with open(json_path, "r") as f:
+                json_data = json.load(f)
+
         encoded_frontal_image = preprocess(Image.open(file.as_posix())).unsqueeze(0).to(device)
         if multiview:
             try:
@@ -44,6 +47,8 @@ def generate_clip_scores(device: str, multiview: bool, imgs_dir: str, descriptor
 
             # get the mean value of the front and side images for each label
             for label, encoded_label in encoded_labels.items():
+                if label in json_data:
+                    continue
                 front_score = model(encoded_frontal_image, encoded_label)[0].cpu().numpy()
                 if multiview:
                     side_score = model(encoded_side_image, encoded_label)[0].cpu().numpy()

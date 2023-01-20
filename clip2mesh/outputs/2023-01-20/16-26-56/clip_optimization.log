@@ -1,0 +1,5 @@
+[2023-01-20 16:27:02,507][__main__][INFO] - Optimizing for short...
+[2023-01-20 16:27:02,509][__main__][INFO] - Phase: regular
+[2023-01-20 16:27:05,652][__main__][INFO] - learning rate: 0.1
+[2023-01-20 16:27:26,654][__main__][INFO] - Phase: inverse
+[2023-01-20 16:27:29,785][__main__][INFO] - learning rate: 0.1

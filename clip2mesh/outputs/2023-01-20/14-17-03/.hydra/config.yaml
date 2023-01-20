@@ -1,0 +1,48 @@
+renderer_kwargs:
+  dist: 5.0
+  elev: 10.0
+  azim: 0.0
+  tex_path: /home/nadav2/dev/repos/CLIP2Shape/SMPLX/textures/smplx_texture_m_alb.png
+  img_size:
+  - 896
+  - 896
+descriptors:
+- tall
+- long legs
+- big
+- fat
+- broad shoulders
+- built
+- curvy
+- feminine
+- fit
+- heavyset
+- lean
+- long torso
+- long
+- masculine
+- muscular
+- pear shaped
+- petite
+- proportioned
+- rectangular
+- round apple
+- short legs
+- short torso
+- short
+- skinny
+- small
+- stocky
+- sturdy
+- attractive
+- sexy
+- hourglass
+model_type: smplx
+gender: male
+device: cuda
+total_steps: 100
+num_coeffs: 10
+optimize_features: betas
+output_dir: /home/nadav2/dev/data/CLIP2Shape/outs/vertices_heatmap/optimizations/compared_to_inv/smplx_multiview_diff_coords
+lr: 0.01
+display: true

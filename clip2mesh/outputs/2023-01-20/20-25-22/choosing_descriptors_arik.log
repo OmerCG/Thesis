@@ -1,0 +1,68 @@
+[2023-01-20 20:25:22,097][choosing_descriptors][INFO] - There are total of 31 descriptors
+[2023-01-20 20:26:06,712][choosing_descriptors][INFO] - Working on cluster 0
+[2023-01-20 20:26:06,713][choosing_descriptors][INFO] - 0 most covering descriptor - small
+[2023-01-20 20:26:06,713][choosing_descriptors][INFO] - Adding small to chosen descriptors
+[2023-01-20 20:26:06,714][choosing_descriptors][INFO] - 1 most covering descriptor - short torso
+[2023-01-20 20:26:06,715][choosing_descriptors][INFO] - Adding short torso to chosen descriptors
+[2023-01-20 20:26:06,715][choosing_descriptors][INFO] - 2 most covering descriptor - skinny
+[2023-01-20 20:26:06,717][choosing_descriptors][INFO] - skinny has high IoU with short torso with iou 0.8294117647058824, skipping
+[2023-01-20 20:26:06,717][choosing_descriptors][INFO] - 3 most covering descriptor - lean
+[2023-01-20 20:26:06,719][choosing_descriptors][INFO] - lean is correlated with small with corr 0.5832153607742092
+[2023-01-20 20:26:06,719][choosing_descriptors][INFO] - 4 most covering descriptor - short
+[2023-01-20 20:26:06,720][choosing_descriptors][INFO] - short has high IoU with small with iou 0.5402843601895735, skipping
+[2023-01-20 20:26:06,721][choosing_descriptors][INFO] - 5 most covering descriptor - curvy
+[2023-01-20 20:26:06,723][choosing_descriptors][INFO] - curvy has high IoU with short torso with iou 0.8353658536585366, skipping
+[2023-01-20 20:26:06,724][choosing_descriptors][INFO] - 6 most covering descriptor - masculine
+[2023-01-20 20:26:06,725][choosing_descriptors][INFO] - Adding masculine to chosen descriptors
+[2023-01-20 20:26:06,725][choosing_descriptors][INFO] - 7 most covering descriptor - long
+[2023-01-20 20:26:06,727][choosing_descriptors][INFO] - long has high IoU with short torso with iou 0.5824175824175825, skipping
+[2023-01-20 20:26:06,727][choosing_descriptors][INFO] - 8 most covering descriptor - fit
+[2023-01-20 20:26:06,729][choosing_descriptors][INFO] - fit has high IoU with short torso with iou 0.5444444444444444, skipping
+[2023-01-20 20:26:06,729][choosing_descriptors][INFO] - 9 most covering descriptor - narrow waist
+[2023-01-20 20:26:06,731][choosing_descriptors][INFO] - narrow waist has high IoU with short torso with iou 0.6198830409356725, skipping
+[2023-01-20 20:26:06,731][choosing_descriptors][INFO] - 10 most covering descriptor - proportioned
+[2023-01-20 20:26:06,734][choosing_descriptors][INFO] - proportioned is correlated with short torso with corr 0.5256221130481543
+[2023-01-20 20:26:06,734][choosing_descriptors][INFO] - 11 most covering descriptor - stocky
+[2023-01-20 20:26:06,736][choosing_descriptors][INFO] - stocky has high IoU with short torso with iou 0.56875, skipping
+[2023-01-20 20:26:06,736][choosing_descriptors][INFO] - 12 most covering descriptor - broad shoulders
+[2023-01-20 20:26:06,739][choosing_descriptors][INFO] - broad shoulders is correlated with small with corr 0.5199970383815335
+[2023-01-20 20:26:06,739][choosing_descriptors][INFO] - 13 most covering descriptor - feminine
+[2023-01-20 20:26:06,742][choosing_descriptors][INFO] - Adding feminine to chosen descriptors
+[2023-01-20 20:26:06,742][choosing_descriptors][INFO] - 14 most covering descriptor - long legs
+[2023-01-20 20:26:06,745][choosing_descriptors][INFO] - Adding long legs to chosen descriptors
+[2023-01-20 20:26:06,745][choosing_descriptors][INFO] - 15 most covering descriptor - hourglass
+[2023-01-20 20:26:06,749][choosing_descriptors][INFO] - hourglass is correlated with masculine with corr 0.5572517188216186
+[2023-01-20 20:26:06,749][choosing_descriptors][INFO] - 16 most covering descriptor - long torso
+[2023-01-20 20:26:06,755][choosing_descriptors][INFO] - long torso has high IoU with long legs with iou 0.5211267605633803, skipping
+[2023-01-20 20:26:06,756][choosing_descriptors][INFO] - 17 most covering descriptor - sturdy
+[2023-01-20 20:26:06,760][choosing_descriptors][INFO] - sturdy is correlated with small with corr 0.6141310570073067
+[2023-01-20 20:26:06,760][choosing_descriptors][INFO] - 18 most covering descriptor - pear shaped
+[2023-01-20 20:26:06,764][choosing_descriptors][INFO] - pear shaped is correlated with masculine with corr 0.539670139992468
+[2023-01-20 20:26:06,764][choosing_descriptors][INFO] - 19 most covering descriptor - rectangular
+[2023-01-20 20:26:06,769][choosing_descriptors][INFO] - rectangular is correlated with short torso with corr 0.5343943406564854
+[2023-01-20 20:26:06,769][choosing_descriptors][INFO] - 20 most covering descriptor - heavyset
+[2023-01-20 20:26:06,775][choosing_descriptors][INFO] - heavyset is correlated with small with corr 0.5243409403442946
+[2023-01-20 20:26:06,775][choosing_descriptors][INFO] - 21 most covering descriptor - attractive
+[2023-01-20 20:26:06,779][choosing_descriptors][INFO] - attractive is correlated with masculine with corr 0.5762359089559367
+[2023-01-20 20:26:06,779][choosing_descriptors][INFO] - 22 most covering descriptor - petite
+[2023-01-20 20:26:06,784][choosing_descriptors][INFO] - petite is correlated with small with corr 0.5321996211710347
+[2023-01-20 20:26:06,784][choosing_descriptors][INFO] - 23 most covering descriptor - fat
+[2023-01-20 20:26:06,788][choosing_descriptors][INFO] - fat is correlated with small with corr 0.5409008356380423
+[2023-01-20 20:26:06,788][choosing_descriptors][INFO] - 24 most covering descriptor - short legs
+[2023-01-20 20:26:06,792][choosing_descriptors][INFO] - short legs is correlated with long legs with corr 0.8557258642792487
+[2023-01-20 20:26:06,792][choosing_descriptors][INFO] - 25 most covering descriptor - muscular
+[2023-01-20 20:26:06,796][choosing_descriptors][INFO] - muscular is correlated with masculine with corr 0.727292142680245
+[2023-01-20 20:26:06,796][choosing_descriptors][INFO] - 26 most covering descriptor - tall
+[2023-01-20 20:26:06,800][choosing_descriptors][INFO] - tall is correlated with long legs with corr 0.9176663553775308
+[2023-01-20 20:26:06,801][choosing_descriptors][INFO] - 27 most covering descriptor - round apple
+[2023-01-20 20:26:06,805][choosing_descriptors][INFO] - round apple is correlated with small with corr 0.657379698758107
+[2023-01-20 20:26:06,805][choosing_descriptors][INFO] - 28 most covering descriptor - built
+[2023-01-20 20:26:06,809][choosing_descriptors][INFO] - built is correlated with small with corr 0.7037692135157987
+[2023-01-20 20:26:06,809][choosing_descriptors][INFO] - 29 most covering descriptor - big
+[2023-01-20 20:26:06,809][choosing_descriptors][INFO] - big not in correlations df
+[2023-01-20 20:26:06,809][choosing_descriptors][INFO] - 30 most covering descriptor - sexy
+[2023-01-20 20:26:06,813][choosing_descriptors][INFO] - sexy is correlated with masculine with corr 0.5547438544513527
+[2023-01-20 20:26:06,813][choosing_descriptors][INFO] - currently chosen descriptors: {'small': {'iou': 0.17719049681029356, 'vertex_coverage': 180}, 'short torso': {'iou': 0.27472340209369556, 'vertex_coverage': 158}, 'masculine': {'iou': 0.2472158936964438, 'vertex_coverage': 136}, 'feminine': {'iou': 0.23801802756704996, 'vertex_coverage': 85}, 'long legs': {'iou': 0.18452568125027088, 'vertex_coverage': 61}}
+[2023-01-20 20:26:06,813][choosing_descriptors][INFO] - Finished cluster 0
+[2023-01-20 20:26:06,813][choosing_descriptors][INFO] - There are 5 chosen descriptors
+[2023-01-20 20:26:06,813][choosing_descriptors][INFO] - chosen descriptors: [['small', 'short torso', 'masculine', 'feminine', 'long legs']]
