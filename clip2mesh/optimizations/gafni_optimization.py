@@ -16,7 +16,7 @@ from clip2mesh.utils import ModelsFactory, Pytorch3dRenderer, Utils
 class Model(nn.Module):
     def __init__(self, params_size: Tuple[int, int] = (1, 10)):
         super().__init__()
-        self.weights = nn.Parameter(torch.zeros(params_size))
+        self.weights = nn.Parameter(torch.rand(params_size))
 
     def forward(self):
         return self.weights
@@ -74,6 +74,7 @@ class GafniOptimization:
         self.num_rows, self.num_cols = self.get_collage_shape()
 
         self._load_logger()
+        self._get_default_model_img()
         self._encode_labels(text)
 
     def record_video(self, fps, output_dir, text) -> cv2.VideoWriter:
@@ -95,6 +96,12 @@ class GafniOptimization:
         logging.basicConfig(level=logging.INFO, format="%(asctime)s: - %(message)s")
         self.logger = logging.getLogger(__name__)
 
+    def _get_default_model_img(self):
+        verts, faces, vt, ft = self.models_factory.get_model(device=self.device, gender=self.gender)
+        if self.model_type == "smplx":
+            verts += self.utils.smplx_offset_tensor.to(self.device)
+        self.default_model_img = self.clip_renderer.render_mesh(verts=verts, faces=faces[None], vt=vt, ft=ft)
+
     def render_image(self, parameters: torch.Tensor, angle: float) -> torch.Tensor:
         model_kwargs = {
             self.optimize_features: parameters,
@@ -109,7 +116,8 @@ class GafniOptimization:
         image_for_clip = self.clip_renderer.render_mesh(
             verts=verts, faces=faces[None], vt=vt, ft=ft, rotate_mesh=rotate_meah_kwargs
         )
-        return image_for_clip
+
+        return torch.cat([image_for_clip[0], self.default_model_img[0]], 1).unsqueeze(0)
 
     def get_collage_shape(self):
         num_rows, num_cols = self.utils.get_plot_shape(len(self.view_angles))[0]
@@ -136,12 +144,13 @@ class GafniOptimization:
 
     def optimize(self, idx_to_modify: int):
 
-        rendered_img = self.clip_renderer.render_mesh(*self.models_factory.get_model(gender=self.gender))
+        rendered_img = self.clip_renderer.render_mesh(
+            *self.models_factory.get_model(gender=self.gender, device=self.device)
+        )
         clip_rendered_image = self.resize(rendered_img[..., :3].permute(0, 3, 1, 2))
 
         gt_scores = self.get_first_scores(clip_rendered_image)
-        gt_scores[0, idx_to_modify] = 30.0
-        # gt_scores = torch.tensor([[45.7031, 22.6875, 24.1406, 23.3750, 24.4531]], device="cuda:0", dtype=torch.float16)
+        gt_scores[0, idx_to_modify] = 100.0
 
         loss_fn = nn.MSELoss() if self.loss_type == "mse" else CLIPLoss()
         optimizer = torch.optim.Adam(self.model.parameters(), lr=self.lr)
@@ -157,7 +166,7 @@ class GafniOptimization:
             if self.loss_type == "mse":
                 scores = self.clip_model(img_to_clip, self.encoded_labels)[0]
                 loss = loss_fn(scores, gt_scores)
-                loss += loss_fn(scores[0, idx_to_modify], gt_scores[0, idx_to_modify])
+                loss += loss_fn(scores[0, idx_to_modify], gt_scores[0, idx_to_modify]) * 5
             else:
                 loss = loss_fn(img_to_clip, self.encoded_labels)
             loss.backward()
@@ -166,7 +175,7 @@ class GafniOptimization:
             self.logger.info(f"parameters: {parameters}")
             progress_bar.set_description(f"loss: {loss.item():.4f}")
 
-            img_to_video = cv2.resize(img_to_video, (512, 512))
+            img_to_video = cv2.resize(img_to_video, (896, 896))
             cv2.putText(
                 img_to_video,
                 f"loss: {loss.item():.4f}",

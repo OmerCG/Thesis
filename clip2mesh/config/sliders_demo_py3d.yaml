@@ -8,43 +8,36 @@ device: cuda
 
 # # FLAME - expression
 # texture: #/home/nadav2/dev/repos/Thesis/Flame/flame2020/mesh.png
-# model_path: /home/nadav2/dev/repos/Thesis/end2end_pipeline/flame_exp_e2e_test.ckpt
+# model_path: /home/nadav2/dev/repos/Thesis/pre_production/check_of_algo_flame_exp.ckpt
 # model_type: flame
 # with_face: True
-# on_parameters: False
 
-# # FLAME - shape
-# texture: #/home/nadav2/dev/repos/Thesis/Flame/flame2020/mesh.png
-# model_path: /home/nadav2/dev/repos/Thesis/production/flame_shape.ckpt
-# model_type: flame
-# with_face: False
-# on_parameters: False
+# FLAME - shape
+texture: #/home/nadav2/dev/repos/Thesis/Flame/flame2020/mesh.png
+model_path: /home/nadav2/dev/repos/Thesis/pre_production/check_of_algo_flame_shape.ckpt
+model_type: flame
 
-# SMPLX
-texture: #/home/nadav2/dev/repos/Thesis/SMPLX/textures/smplx_texture_m_alb.png
-model_path: /home/nadav2/dev/repos/Thesis/pre_production/smplx_male_free_choosing.ckpt
-model_type: smplx
-with_face: False
-on_parameters: False
+# # SMPLX
+# texture: #/home/nadav2/dev/repos/Thesis/SMPLX/textures/smplx_texture_m_alb.png
+# model_path: /home/nadav2/dev/repos/Thesis/pre_production/smplx_male_new_algorithm.ckpt
+# model_type: smplx
 
 # # SMPL
 # texture: #/home/nadav2/dev/repos/Thesis/SMPLX/textures/smplx_texture_m_alb.png
-# model_path: /home/nadav2/dev/repos/Thesis/production/smpl_male_multiview.ckpt
+# model_path: /home/nadav2/dev/repos/Thesis/pre_production/smpl_male_new_algorithm.ckpt
 # model_type: smpl
 # with_face: False
-# on_parameters: False
 
 # # SMAL
 # texture:  # there is no texture for smal yet
 # model_path: /home/nadav2/dev/repos/Thesis/production/smal.ckpt
 # model_type: smal
-# with_face: False
-# on_parameters: False
+
 
 # # GENERIC
 # with_face: False
-# model_type: smplx
-# texture: #/home/nadav2/dev/repos/Thesis/Flame/flame2020/mesh.png
+# model_type: smpl
+# texture: /home/nadav2/dev/repos/Thesis/SMPLX/textures/smplx_texture_m_alb.png
 # model_path: # keep empty
 # on_parameters: True
 # num_coeffs: 10

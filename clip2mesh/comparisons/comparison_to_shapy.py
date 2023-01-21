@@ -35,15 +35,6 @@ class CompareToShapy:
         self._encode_labels()
         self._load_renderer(renderer_kwargs)
 
-    def _load_weights(self, labels_weights: Dict[str, float]):
-        self.labels_weights = {}
-        for gender, weights in labels_weights.items():
-            self.labels_weights[gender] = (
-                torch.tensor(weights).to(self.device)
-                if weights is not None
-                else torch.ones(len(self.labels[gender])).to(self.device)
-            )
-
     def _load_renderer(self, kwargs: Union[DictConfig, Dict[str, Any]]):
         self.renderer = Pytorch3dRenderer(**kwargs)
 
@@ -55,10 +46,6 @@ class CompareToShapy:
     @staticmethod
     def _flatten_list_of_lists(list_of_lists: List[List[str]]) -> List[str]:
         return [item for sublist in list_of_lists for item in sublist]
-
-    def normalize_scores(self, scores: torch.Tensor, gender: Literal["male", "female", "neutral"]) -> torch.Tensor:
-        normalized_score = scores * self.labels_weights[gender]
-        return normalized_score.float()
 
     def _load_smplx_models(self, smplx_male: str, smplx_female: str) -> Tuple[nn.Module, nn.Module]:
         smplx_female, labels_female = self.utils.get_model_to_eval(smplx_female)
@@ -121,7 +108,10 @@ class CompareToShapy:
         # show images
         if self.display:
             cv2.imshow("concat", concat_img)
-            cv2.waitKey(0)
+            key = cv2.waitKey(0)
+            if key == ord("q"):
+                cv2.destroyAllWindows()
+                exit()
 
     def _encode_labels(self):
         self.encoded_labels = {
@@ -144,7 +134,12 @@ class CompareToShapy:
             global_orient=global_orient,
             transl=transl,
         )
-        kwargs = {"verts": smplx_out[0], "faces": smplx_out[1], "vt": smplx_out[2], "ft": smplx_out[3]}
+        kwargs = {
+            "verts": smplx_out[0] + self.utils.smplx_offset_numpy,
+            "faces": smplx_out[1],
+            "vt": smplx_out[2],
+            "ft": smplx_out[3],
+        }
         return kwargs
 
     def _load_gender_dict(self):
@@ -206,8 +201,7 @@ class CompareToShapy:
         # get pred data
         with torch.no_grad():
             clip_scores = self.clip_model(encoded_image, self.encoded_labels[gender])[0]
-            clip_scores = self.normalize_scores(clip_scores, gender)
-            pred_shape_tensor = self.model[gender](clip_scores)
+            pred_shape_tensor = self.model[gender](clip_scores.float())
 
         # calculate distance between shapy and pred
         l2_loss = F.mse_loss(pred_shape_tensor.cpu(), shapy_shape_tensor)

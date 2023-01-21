@@ -1,0 +1,69 @@
+[2023-01-21 13:03:15,588][choosing_descriptors][INFO] - There are total of 20 descriptors
+[2023-01-21 13:03:15,591][choosing_descriptors][INFO] - Working on cluster 0
+[2023-01-21 13:03:15,591][choosing_descriptors][INFO] - 0 most variance descriptor - fat
+[2023-01-21 13:03:15,591][choosing_descriptors][INFO] - Adding fat to chosen descriptors
+[2023-01-21 13:03:15,591][choosing_descriptors][INFO] - 1 most variance descriptor - long legs
+[2023-01-21 13:03:15,592][choosing_descriptors][INFO] - long legs is correlated with fat with corr -0.8131331155620838
+[2023-01-21 13:03:15,592][choosing_descriptors][INFO] - 2 most variance descriptor - lean
+[2023-01-21 13:03:15,593][choosing_descriptors][INFO] - lean is correlated with fat with corr 0.8451303511463475
+[2023-01-21 13:03:15,593][choosing_descriptors][INFO] - 3 most variance descriptor - hourglass
+[2023-01-21 13:03:15,594][choosing_descriptors][INFO] - hourglass is correlated with fat with corr 0.7370569875762306
+[2023-01-21 13:03:15,594][choosing_descriptors][INFO] - 4 most variance descriptor - average
+[2023-01-21 13:03:15,594][choosing_descriptors][INFO] - average is correlated with fat with corr 0.7304334042535859
+[2023-01-21 13:03:15,595][choosing_descriptors][INFO] - 5 most variance descriptor - broad shoulders
+[2023-01-21 13:03:15,595][choosing_descriptors][INFO] - Adding broad shoulders to chosen descriptors
+[2023-01-21 13:03:15,595][choosing_descriptors][INFO] - 6 most variance descriptor - sexy
+[2023-01-21 13:03:15,596][choosing_descriptors][INFO] - sexy is correlated with fat with corr 0.7375949094539147
+[2023-01-21 13:03:15,596][choosing_descriptors][INFO] - 7 most variance descriptor - narrow waist
+[2023-01-21 13:03:15,597][choosing_descriptors][INFO] - narrow waist is correlated with fat with corr 0.589954902822737
+[2023-01-21 13:03:15,597][choosing_descriptors][INFO] - 8 most variance descriptor - thin
+[2023-01-21 13:03:15,598][choosing_descriptors][INFO] - Adding thin to chosen descriptors
+[2023-01-21 13:03:15,598][choosing_descriptors][INFO] - 9 most variance descriptor - fit
+[2023-01-21 13:03:15,599][choosing_descriptors][INFO] - fit is correlated with fat with corr 0.8386335763604043
+[2023-01-21 13:03:15,599][choosing_descriptors][INFO] - 10 most variance descriptor - short
+[2023-01-21 13:03:15,600][choosing_descriptors][INFO] - Adding short to chosen descriptors
+[2023-01-21 13:03:15,601][choosing_descriptors][INFO] - 11 most variance descriptor - tall
+[2023-01-21 13:03:15,601][choosing_descriptors][INFO] - tall is correlated with fat with corr -0.606397755242457
+[2023-01-21 13:03:15,601][choosing_descriptors][INFO] - currently chosen descriptors: {'fat': {'variance': 1.9107488583752261}, 'broad shoulders': {'variance': 0.11660109450771027}, 'thin': {'variance': 0.10825094740956233}, 'short': {'variance': 0.08676066952439923}}
+[2023-01-21 13:03:15,601][choosing_descriptors][INFO] - Finished cluster 0
+[2023-01-21 13:03:15,601][choosing_descriptors][INFO] - Working on cluster 1
+[2023-01-21 13:03:15,602][choosing_descriptors][INFO] - 0 most variance descriptor - proportioned
+[2023-01-21 13:03:15,602][choosing_descriptors][INFO] - Adding proportioned to chosen descriptors
+[2023-01-21 13:03:15,602][choosing_descriptors][INFO] - 1 most variance descriptor - skinny
+[2023-01-21 13:03:15,603][choosing_descriptors][INFO] - Adding skinny to chosen descriptors
+[2023-01-21 13:03:15,603][choosing_descriptors][INFO] - currently chosen descriptors: {'proportioned': {'variance': 0.10147094902597588}, 'skinny': {'variance': 0.0852177618354383}}
+[2023-01-21 13:03:15,603][choosing_descriptors][INFO] - Finished cluster 1
+[2023-01-21 13:03:15,603][choosing_descriptors][INFO] - Working on cluster 2
+[2023-01-21 13:03:15,604][choosing_descriptors][INFO] - 0 most variance descriptor - pear shaped
+[2023-01-21 13:03:15,604][choosing_descriptors][INFO] - Adding pear shaped to chosen descriptors
+[2023-01-21 13:03:15,604][choosing_descriptors][INFO] - 1 most variance descriptor - curvy
+[2023-01-21 13:03:15,604][choosing_descriptors][INFO] - curvy is correlated with pear shaped with corr 0.9721046187609779
+[2023-01-21 13:03:15,604][choosing_descriptors][INFO] - 2 most variance descriptor - heavyset
+[2023-01-21 13:03:15,605][choosing_descriptors][INFO] - heavyset is correlated with pear shaped with corr 0.9256701053640951
+[2023-01-21 13:03:15,605][choosing_descriptors][INFO] - currently chosen descriptors: {'pear shaped': {'variance': 1.314099174814297}}
+[2023-01-21 13:03:15,605][choosing_descriptors][INFO] - Finished cluster 2
+[2023-01-21 13:03:15,605][choosing_descriptors][INFO] - Working on cluster 3
+[2023-01-21 13:03:15,606][choosing_descriptors][INFO] - 0 most variance descriptor - big
+[2023-01-21 13:03:15,606][choosing_descriptors][INFO] - Adding big to chosen descriptors
+[2023-01-21 13:03:15,606][choosing_descriptors][INFO] - currently chosen descriptors: {'big': {'variance': 0.7428049072937906}}
+[2023-01-21 13:03:15,606][choosing_descriptors][INFO] - Finished cluster 3
+[2023-01-21 13:03:15,606][choosing_descriptors][INFO] - Working on cluster 4
+[2023-01-21 13:03:15,606][choosing_descriptors][INFO] - 0 most variance descriptor - petite
+[2023-01-21 13:03:15,607][choosing_descriptors][INFO] - Adding petite to chosen descriptors
+[2023-01-21 13:03:15,607][choosing_descriptors][INFO] - 1 most variance descriptor - small
+[2023-01-21 13:03:15,607][choosing_descriptors][INFO] - small is correlated with petite with corr 0.5223774595815032
+[2023-01-21 13:03:15,607][choosing_descriptors][INFO] - currently chosen descriptors: {'petite': {'variance': 0.09107834054693496}}
+[2023-01-21 13:03:15,607][choosing_descriptors][INFO] - Finished cluster 4
+[2023-01-21 13:03:15,608][choosing_descriptors][INFO] - There are 9 chosen descriptors
+[2023-01-21 13:03:15,608][choosing_descriptors][INFO] - chosen descriptors: [['fat', 'broad shoulders', 'thin', 'short'], ['proportioned', 'skinny'], ['pear shaped'], ['big'], ['petite']]
+[2023-01-21 13:03:15,608][choosing_descriptors][INFO] - Final filter
+[2023-01-21 13:03:15,609][choosing_descriptors][INFO] - Descriptor fat has variance 1.9107488583752261
+[2023-01-21 13:03:15,610][choosing_descriptors][INFO] - Descriptor fat is correlated with pear shaped with correlation 0.9282932893351364 - removing pear shaped
+[2023-01-21 13:03:15,611][choosing_descriptors][INFO] - Descriptor fat is correlated with big with correlation 0.9908356316424305 - removing big
+[2023-01-21 13:03:15,611][choosing_descriptors][INFO] - Descriptor broad shoulders has variance 0.11660109450771027
+[2023-01-21 13:03:15,614][choosing_descriptors][INFO] - Descriptor thin has variance 0.10825094740956233
+[2023-01-21 13:03:15,614][choosing_descriptors][INFO] - Descriptor thin is correlated with proportioned with correlation 0.5883745095355912 - removing proportioned
+[2023-01-21 13:03:15,615][choosing_descriptors][INFO] - Descriptor petite has variance 0.09107834054693496
+[2023-01-21 13:03:15,617][choosing_descriptors][INFO] - Descriptor petite is correlated with short with correlation 0.7026921644397073 - removing short
+[2023-01-21 13:03:15,619][choosing_descriptors][INFO] - Descriptor skinny has variance 0.0852177618354383
+[2023-01-21 13:03:15,621][choosing_descriptors][INFO] - Descriptor skinny is correlated with thin with correlation 0.9019247511592643 - removing thin

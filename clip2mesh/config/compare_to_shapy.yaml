@@ -1,19 +1,14 @@
+defaults:
+  - renderer_kwargs: smplx
+
 shapy_dir: /home/nadav2/dev/repos/shapy/samples/shapy_fit
 output_path: /home/nadav2/dev/data/CLIP2Shape/outs/images_to_shape/smplx_shape/shapy_cherry_pick/comparison_new_net
 display: True
 
 smplx_models_paths:
-  smplx_male: /home/nadav2/dev/repos/Thesis/production/smplx_male.ckpt
-  # smplx_female: /home/nadav2/dev/repos/Thesis/production/smplx_female.ckpt
-  smplx_female: /home/nadav2/dev/repos/Thesis/pre_production/super_data_smplx_female_multiview.ckpt
-
-labels_weights:
-  male: #[0.9, 0.8, 1.0, 1.2, 1.0]
-  female: #[1.1, 1.0, 0.9, 1.0, 1.0]
+  smplx_male: /home/nadav2/dev/repos/Thesis/pre_production/smplx_male_new_algorithm.ckpt
+  smplx_female: /home/nadav2/dev/repos/Thesis/pre_production/smplx_female_manual_choosing.ckpt
 
 renderer_kwargs:
     img_size: [450, 300]
     tex_path:
-    dist: 2.2
-    elev: 15.0
-    azim: 15.0

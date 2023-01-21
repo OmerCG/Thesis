@@ -1,0 +1,20 @@
+renderer_kwargs:
+  dist: 4.0
+  elev: 10.0
+  azim: 0.0
+  tex_path: /home/nadav2/dev/repos/CLIP2Shape/SMPLX/textures/smplx_texture_m_alb.png
+  img_size:
+  - 896
+  - 448
+model_type: smplx
+optimize_features: betas
+gender: male
+img_out_size:
+- 1024
+- 1024
+display: true
+lr: 0.3
+total_steps: 1000
+loss_type: clip
+text:
+- tall

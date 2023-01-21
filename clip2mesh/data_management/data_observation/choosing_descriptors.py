@@ -292,10 +292,10 @@ class ChoosingDescriptors:
 
 
 if __name__ == "__main__":
-    df_path = "/home/nadav2/dev/data/CLIP2Shape/outs/vertices_heatmap/optimizations/compared_to_inv/smplx_male_multiview_diff_coord/vertex_heatmaps/ious.csv"
+    df_path = "/home/nadav2/dev/data/CLIP2Shape/outs/vertices_heatmap/optimizations/compared_to_inv/smplx_singleview_diff_coords/vertex_heatmaps/ious.csv"
     descriptors_groups_json = "/home/nadav2/dev/data/CLIP2Shape/outs/clustering_images/words_jsons/smplx_male.json"
     choosing_descriptors = ChoosingDescriptors(verbose=True)
     finalists_descriptors, num_of_descriptors = choosing_descriptors.choose(
-        df_path, descriptors_groups_json, max_descriptors_overall=5, min_descriptors_overall=5
+        df_path, descriptors_groups_json, max_descriptors_overall=14, min_descriptors_overall=2
     )
     print(finalists_descriptors, num_of_descriptors)

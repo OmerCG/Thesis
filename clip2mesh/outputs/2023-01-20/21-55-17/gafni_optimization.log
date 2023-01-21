@@ -1,0 +1,108 @@
+[2023-01-20 21:55:24,910][__main__][INFO] - parameters: Parameter containing:
+tensor([[0.5279, 0.1313, 0.6654, 0.8225, 0.8537, 0.9967, 0.4201, 0.0691, 0.3677,
+         0.8074]], requires_grad=True)
+[2023-01-20 21:55:25,147][__main__][INFO] - parameters: Parameter containing:
+tensor([[0.5284, 0.1268, 0.6587, 0.8285, 0.8603, 1.0063, 0.4127, 0.0791, 0.3582,
+         0.7979]], requires_grad=True)
+[2023-01-20 21:55:25,350][__main__][INFO] - parameters: Parameter containing:
+tensor([[0.5227, 0.1227, 0.6641, 0.8320, 0.8674, 1.0102, 0.4139, 0.0845, 0.3562,
+         0.7973]], requires_grad=True)
+[2023-01-20 21:55:25,547][__main__][INFO] - parameters: Parameter containing:
+tensor([[0.5163, 0.1170, 0.6693, 0.8342, 0.8755, 1.0139, 0.4157, 0.0918, 0.3551,
+         0.7952]], requires_grad=True)
+[2023-01-20 21:55:25,744][__main__][INFO] - parameters: Parameter containing:
+tensor([[0.5107, 0.1098, 0.6693, 0.8362, 0.8830, 1.0176, 0.4174, 0.0951, 0.3544,
+         0.7987]], requires_grad=True)
+[2023-01-20 21:55:25,937][__main__][INFO] - parameters: Parameter containing:
+tensor([[0.5039, 0.1062, 0.6724, 0.8396, 0.8885, 1.0177, 0.4162, 0.0945, 0.3550,
+         0.8028]], requires_grad=True)
+[2023-01-20 21:55:26,147][__main__][INFO] - parameters: Parameter containing:
+tensor([[0.4969, 0.1065, 0.6772, 0.8427, 0.8905, 1.0147, 0.4128, 0.0918, 0.3572,
+         0.8075]], requires_grad=True)
+[2023-01-20 21:55:26,342][__main__][INFO] - parameters: Parameter containing:
+tensor([[0.4923, 0.1054, 0.6796, 0.8445, 0.8940, 1.0116, 0.4104, 0.0912, 0.3583,
+         0.8110]], requires_grad=True)
+[2023-01-20 21:55:26,544][__main__][INFO] - parameters: Parameter containing:
+tensor([[0.4882, 0.1047, 0.6811, 0.8458, 0.8979, 1.0083, 0.4073, 0.0914, 0.3569,
+         0.8128]], requires_grad=True)
+[2023-01-20 21:55:26,742][__main__][INFO] - parameters: Parameter containing:
+tensor([[0.4850, 0.1042, 0.6827, 0.8467, 0.9016, 1.0048, 0.4062, 0.0904, 0.3566,
+         0.8138]], requires_grad=True)
+[2023-01-20 21:55:26,946][__main__][INFO] - parameters: Parameter containing:
+tensor([[0.4851, 0.1034, 0.6824, 0.8471, 0.9045, 1.0025, 0.4055, 0.0895, 0.3573,
+         0.8148]], requires_grad=True)
+[2023-01-20 21:55:27,175][__main__][INFO] - parameters: Parameter containing:
+tensor([[0.4873, 0.1020, 0.6804, 0.8474, 0.9070, 1.0011, 0.4050, 0.0888, 0.3576,
+         0.8156]], requires_grad=True)
+[2023-01-20 21:55:27,363][__main__][INFO] - parameters: Parameter containing:
+tensor([[0.4894, 0.1017, 0.6792, 0.8476, 0.9090, 0.9988, 0.4050, 0.0875, 0.3589,
+         0.8160]], requires_grad=True)
+[2023-01-20 21:55:27,554][__main__][INFO] - parameters: Parameter containing:
+tensor([[0.4912, 0.1021, 0.6786, 0.8470, 0.9109, 0.9964, 0.4057, 0.0849, 0.3606,
+         0.8163]], requires_grad=True)
+[2023-01-20 21:55:27,765][__main__][INFO] - parameters: Parameter containing:
+tensor([[0.4915, 0.1027, 0.6785, 0.8458, 0.9123, 0.9941, 0.4062, 0.0813, 0.3629,
+         0.8176]], requires_grad=True)
+[2023-01-20 21:55:27,959][__main__][INFO] - parameters: Parameter containing:
+tensor([[0.4913, 0.1041, 0.6787, 0.8449, 0.9141, 0.9916, 0.4058, 0.0775, 0.3638,
+         0.8181]], requires_grad=True)
+[2023-01-20 21:55:28,153][__main__][INFO] - parameters: Parameter containing:
+tensor([[0.4899, 0.1067, 0.6807, 0.8434, 0.9159, 0.9888, 0.4057, 0.0745, 0.3665,
+         0.8175]], requires_grad=True)
+[2023-01-20 21:55:28,350][__main__][INFO] - parameters: Parameter containing:
+tensor([[0.4907, 0.1061, 0.6796, 0.8417, 0.9180, 0.9904, 0.4065, 0.0719, 0.3697,
+         0.8173]], requires_grad=True)
+[2023-01-20 21:55:28,548][__main__][INFO] - parameters: Parameter containing:
+tensor([[0.4914, 0.1053, 0.6783, 0.8407, 0.9202, 0.9931, 0.4075, 0.0695, 0.3728,
+         0.8170]], requires_grad=True)
+[2023-01-20 21:55:28,736][__main__][INFO] - parameters: Parameter containing:
+tensor([[0.4909, 0.1056, 0.6784, 0.8399, 0.9222, 0.9954, 0.4084, 0.0671, 0.3765,
+         0.8158]], requires_grad=True)
+[2023-01-20 21:55:28,939][__main__][INFO] - parameters: Parameter containing:
+tensor([[0.4909, 0.1062, 0.6776, 0.8385, 0.9242, 0.9980, 0.4082, 0.0670, 0.3789,
+         0.8122]], requires_grad=True)
+[2023-01-20 21:55:29,148][__main__][INFO] - parameters: Parameter containing:
+tensor([[0.4911, 0.1062, 0.6761, 0.8366, 0.9264, 1.0011, 0.4084, 0.0674, 0.3806,
+         0.8076]], requires_grad=True)
+[2023-01-20 21:55:29,340][__main__][INFO] - parameters: Parameter containing:
+tensor([[0.4894, 0.1073, 0.6763, 0.8353, 0.9290, 1.0033, 0.4089, 0.0676, 0.3821,
+         0.8027]], requires_grad=True)
+[2023-01-20 21:55:29,533][__main__][INFO] - parameters: Parameter containing:
+tensor([[0.4881, 0.1084, 0.6755, 0.8316, 0.9311, 1.0029, 0.4104, 0.0677, 0.3831,
+         0.7976]], requires_grad=True)
+[2023-01-20 21:55:29,722][__main__][INFO] - parameters: Parameter containing:
+tensor([[0.4889, 0.1091, 0.6734, 0.8286, 0.9322, 1.0047, 0.4117, 0.0680, 0.3829,
+         0.7913]], requires_grad=True)
+[2023-01-20 21:55:29,917][__main__][INFO] - parameters: Parameter containing:
+tensor([[0.4906, 0.1093, 0.6712, 0.8273, 0.9336, 1.0074, 0.4139, 0.0680, 0.3830,
+         0.7848]], requires_grad=True)
+[2023-01-20 21:55:30,119][__main__][INFO] - parameters: Parameter containing:
+tensor([[0.4917, 0.1097, 0.6692, 0.8257, 0.9353, 1.0086, 0.4168, 0.0677, 0.3822,
+         0.7786]], requires_grad=True)
+[2023-01-20 21:55:30,346][__main__][INFO] - parameters: Parameter containing:
+tensor([[0.4910, 0.1111, 0.6677, 0.8235, 0.9358, 1.0086, 0.4186, 0.0659, 0.3802,
+         0.7730]], requires_grad=True)
+[2023-01-20 21:55:30,551][__main__][INFO] - parameters: Parameter containing:
+tensor([[0.4899, 0.1123, 0.6661, 0.8221, 0.9363, 1.0090, 0.4197, 0.0641, 0.3777,
+         0.7672]], requires_grad=True)
+[2023-01-20 21:55:30,772][__main__][INFO] - parameters: Parameter containing:
+tensor([[0.4889, 0.1120, 0.6640, 0.8240, 0.9386, 1.0112, 0.4198, 0.0625, 0.3737,
+         0.7619]], requires_grad=True)
+[2023-01-20 21:55:31,003][__main__][INFO] - parameters: Parameter containing:
+tensor([[0.4876, 0.1120, 0.6619, 0.8266, 0.9408, 1.0128, 0.4186, 0.0604, 0.3684,
+         0.7570]], requires_grad=True)
+[2023-01-20 21:55:31,194][__main__][INFO] - parameters: Parameter containing:
+tensor([[0.4861, 0.1128, 0.6598, 0.8289, 0.9434, 1.0126, 0.4180, 0.0577, 0.3623,
+         0.7521]], requires_grad=True)
+[2023-01-20 21:55:31,412][__main__][INFO] - parameters: Parameter containing:
+tensor([[0.4862, 0.1130, 0.6574, 0.8327, 0.9459, 1.0138, 0.4181, 0.0540, 0.3565,
+         0.7476]], requires_grad=True)
+[2023-01-20 21:55:31,625][__main__][INFO] - parameters: Parameter containing:
+tensor([[0.4866, 0.1132, 0.6547, 0.8359, 0.9481, 1.0151, 0.4183, 0.0515, 0.3516,
+         0.7423]], requires_grad=True)
+[2023-01-20 21:55:31,829][__main__][INFO] - parameters: Parameter containing:
+tensor([[0.4867, 0.1118, 0.6519, 0.8395, 0.9521, 1.0162, 0.4210, 0.0491, 0.3474,
+         0.7381]], requires_grad=True)
+[2023-01-20 21:55:32,027][__main__][INFO] - parameters: Parameter containing:
+tensor([[0.4859, 0.1119, 0.6505, 0.8428, 0.9555, 1.0176, 0.4221, 0.0493, 0.3454,
+         0.7324]], requires_grad=True)

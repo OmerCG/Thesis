@@ -22,12 +22,11 @@ class MultiViewCompare:
         img = np.clip(img.cpu().numpy()[0, ..., :3] * 255, 0, 255).astype(np.uint8)
         return img
 
-    @staticmethod
     def get_kwargs_to_renderer(
-        verts: np.ndarray, faces: np.ndarray, vt: np.ndarray = None, ft: np.ndarray = None
+        self, verts: np.ndarray, faces: np.ndarray, vt: np.ndarray = None, ft: np.ndarray = None
     ) -> Dict[str, torch.Tensor]:
         return {
-            "verts": torch.tensor(verts).unsqueeze(0),
+            "verts": torch.tensor(verts + self.utils.smplx_offset_numpy.astype(np.float32)).unsqueeze(0),
             "faces": torch.tensor(faces).unsqueeze(0),
             "vt": torch.tensor(vt).unsqueeze(0) if vt is not None else None,
             "ft": torch.tensor(ft).unsqueeze(0) if ft is not None else None,

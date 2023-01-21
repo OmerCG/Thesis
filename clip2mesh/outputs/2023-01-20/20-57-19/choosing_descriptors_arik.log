@@ -1,0 +1,64 @@
+[2023-01-20 20:57:19,286][choosing_descriptors][INFO] - There are total of 29 descriptors
+[2023-01-20 20:58:05,804][choosing_descriptors][INFO] - Working on cluster 0
+[2023-01-20 20:58:05,805][choosing_descriptors][INFO] - 0 most covering descriptor - curvy
+[2023-01-20 20:58:05,805][choosing_descriptors][INFO] - Adding curvy to chosen descriptors
+[2023-01-20 20:58:05,806][choosing_descriptors][INFO] - 1 most covering descriptor - pear shaped
+[2023-01-20 20:58:05,807][choosing_descriptors][INFO] - pear shaped has high IoU with curvy with iou 0.3888888888888889, skipping
+[2023-01-20 20:58:05,807][choosing_descriptors][INFO] - 2 most covering descriptor - short torso
+[2023-01-20 20:58:05,809][choosing_descriptors][INFO] - short torso has high IoU with curvy with iou 0.6157407407407407, skipping
+[2023-01-20 20:58:05,809][choosing_descriptors][INFO] - 3 most covering descriptor - small
+[2023-01-20 20:58:05,810][choosing_descriptors][INFO] - small has high IoU with curvy with iou 0.5528846153846154, skipping
+[2023-01-20 20:58:05,810][choosing_descriptors][INFO] - 4 most covering descriptor - fit
+[2023-01-20 20:58:05,812][choosing_descriptors][INFO] - fit has high IoU with curvy with iou 0.5167464114832536, skipping
+[2023-01-20 20:58:05,812][choosing_descriptors][INFO] - 5 most covering descriptor - heavyset
+[2023-01-20 20:58:05,814][choosing_descriptors][INFO] - heavyset has high IoU with curvy with iou 0.25, skipping
+[2023-01-20 20:58:05,814][choosing_descriptors][INFO] - 6 most covering descriptor - short
+[2023-01-20 20:58:05,815][choosing_descriptors][INFO] - Adding short to chosen descriptors
+[2023-01-20 20:58:05,815][choosing_descriptors][INFO] - 7 most covering descriptor - fat
+[2023-01-20 20:58:05,817][choosing_descriptors][INFO] - fat has high IoU with curvy with iou 0.4072164948453608, skipping
+[2023-01-20 20:58:05,817][choosing_descriptors][INFO] - 8 most covering descriptor - long legs
+[2023-01-20 20:58:05,819][choosing_descriptors][INFO] - long legs has high IoU with curvy with iou 0.3743589743589743, skipping
+[2023-01-20 20:58:05,819][choosing_descriptors][INFO] - 9 most covering descriptor - lean
+[2023-01-20 20:58:05,820][choosing_descriptors][INFO] - lean has high IoU with curvy with iou 0.2736318407960199, skipping
+[2023-01-20 20:58:05,820][choosing_descriptors][INFO] - 10 most covering descriptor - masculine
+[2023-01-20 20:58:05,822][choosing_descriptors][INFO] - masculine has high IoU with curvy with iou 0.3689839572192513, skipping
+[2023-01-20 20:58:05,822][choosing_descriptors][INFO] - 11 most covering descriptor - skinny
+[2023-01-20 20:58:05,824][choosing_descriptors][INFO] - skinny has high IoU with curvy with iou 0.235, skipping
+[2023-01-20 20:58:05,824][choosing_descriptors][INFO] - 12 most covering descriptor - muscular
+[2023-01-20 20:58:05,825][choosing_descriptors][INFO] - muscular has high IoU with curvy with iou 0.2525773195876288, skipping
+[2023-01-20 20:58:05,825][choosing_descriptors][INFO] - 13 most covering descriptor - proportioned
+[2023-01-20 20:58:05,827][choosing_descriptors][INFO] - proportioned has high IoU with curvy with iou 0.2171717171717171, skipping
+[2023-01-20 20:58:05,827][choosing_descriptors][INFO] - 14 most covering descriptor - round apple
+[2023-01-20 20:58:05,830][choosing_descriptors][INFO] - round apple is correlated with curvy with corr 0.8594333476409223
+[2023-01-20 20:58:05,830][choosing_descriptors][INFO] - 15 most covering descriptor - attractive
+[2023-01-20 20:58:05,832][choosing_descriptors][INFO] - Adding attractive to chosen descriptors
+[2023-01-20 20:58:05,832][choosing_descriptors][INFO] - 16 most covering descriptor - petite
+[2023-01-20 20:58:05,836][choosing_descriptors][INFO] - petite has high IoU with attractive with iou 0.4888888888888889, skipping
+[2023-01-20 20:58:05,836][choosing_descriptors][INFO] - 17 most covering descriptor - broad shoulders
+[2023-01-20 20:58:05,839][choosing_descriptors][INFO] - broad shoulders has high IoU with attractive with iou 0.7777777777777778, skipping
+[2023-01-20 20:58:05,839][choosing_descriptors][INFO] - 18 most covering descriptor - long torso
+[2023-01-20 20:58:05,842][choosing_descriptors][INFO] - long torso is correlated with curvy with corr 0.5533749760442889
+[2023-01-20 20:58:05,843][choosing_descriptors][INFO] - 19 most covering descriptor - stocky
+[2023-01-20 20:58:05,846][choosing_descriptors][INFO] - stocky has high IoU with attractive with iou 0.6666666666666666, skipping
+[2023-01-20 20:58:05,846][choosing_descriptors][INFO] - 20 most covering descriptor - long
+[2023-01-20 20:58:05,849][choosing_descriptors][INFO] - long is correlated with curvy with corr 0.4843980403954397
+[2023-01-20 20:58:05,849][choosing_descriptors][INFO] - 21 most covering descriptor - rectangular
+[2023-01-20 20:58:05,853][choosing_descriptors][INFO] - rectangular is correlated with short with corr 0.3250383767313529
+[2023-01-20 20:58:05,853][choosing_descriptors][INFO] - 22 most covering descriptor - built
+[2023-01-20 20:58:05,856][choosing_descriptors][INFO] - built has high IoU with attractive with iou 0.217391304347826, skipping
+[2023-01-20 20:58:05,856][choosing_descriptors][INFO] - 23 most covering descriptor - sturdy
+[2023-01-20 20:58:05,860][choosing_descriptors][INFO] - sturdy is correlated with curvy with corr 0.6592298122335114
+[2023-01-20 20:58:05,860][choosing_descriptors][INFO] - 24 most covering descriptor - narrow waist
+[2023-01-20 20:58:05,863][choosing_descriptors][INFO] - narrow waist has high IoU with attractive with iou 0.3333333333333333, skipping
+[2023-01-20 20:58:05,863][choosing_descriptors][INFO] - 25 most covering descriptor - short legs
+[2023-01-20 20:58:05,866][choosing_descriptors][INFO] - short legs is correlated with curvy with corr 0.693632991290143
+[2023-01-20 20:58:05,867][choosing_descriptors][INFO] - 26 most covering descriptor - sexy
+[2023-01-20 20:58:05,870][choosing_descriptors][INFO] - sexy has high IoU with attractive with iou 0.3513513513513513, skipping
+[2023-01-20 20:58:05,870][choosing_descriptors][INFO] - 27 most covering descriptor - big
+[2023-01-20 20:58:05,870][choosing_descriptors][INFO] - big not in correlations df
+[2023-01-20 20:58:05,870][choosing_descriptors][INFO] - 28 most covering descriptor - tall
+[2023-01-20 20:58:05,873][choosing_descriptors][INFO] - tall is correlated with curvy with corr 0.6484901307229695
+[2023-01-20 20:58:05,874][choosing_descriptors][INFO] - currently chosen descriptors: {'curvy': {'iou': 0.20455225253625084, 'vertex_coverage': 187}, 'short': {'iou': 0.10945195492538917, 'vertex_coverage': 87}, 'attractive': {'iou': 0.22522510842805543, 'vertex_coverage': 34}}
+[2023-01-20 20:58:05,874][choosing_descriptors][INFO] - Finished cluster 0
+[2023-01-20 20:58:05,874][choosing_descriptors][INFO] - There are 3 chosen descriptors
+[2023-01-20 20:58:05,874][choosing_descriptors][INFO] - chosen descriptors: [['curvy', 'short', 'attractive']]

@@ -1,0 +1,7 @@
+working_dir: /home/nadav2/dev/data/CLIP2Shape/outs/vertices_heatmap/optimizations/compared_to_inv/smplx_singleview_diff_coords
+images_dir: /home/nadav2/dev/data/CLIP2Shape/images/flame_exp_e2e
+descriptors_clusters_json: /home/nadav2/dev/data/CLIP2Shape/outs/clustering_images/words_jsons/flame_expression.json
+max_num_of_descriptors: 20
+min_num_of_descriptors: 10
+corr_threshold: 0.5
+iou_threshold: 0.2

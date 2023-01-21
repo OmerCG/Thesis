@@ -1,0 +1,16 @@
+renderer_kwargs:
+  dist: 4.2
+  elev: 10.0
+  azim: 0.0
+  img_size:
+  - 1024
+  - 1024
+  tex_path: ${texture}
+out_dir: /home/nadav2/dev/data/CLIP2Shape/outs/images_from_demo
+gender: male
+device: cuda
+texture: null
+model_path: /home/nadav2/dev/repos/Thesis/pre_production/smpl_male_manual_choosing.ckpt
+model_type: smpl
+with_face: false
+on_parameters: false

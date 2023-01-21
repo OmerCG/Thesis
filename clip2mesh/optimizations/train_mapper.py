@@ -1,3 +1,4 @@
+import time
 import torch
 import hydra
 import logging
@@ -13,6 +14,8 @@ from clip2mesh.data_management.dataset import CLIP2MESHDataset
 
 
 def train(config: DictConfig):
+
+    start_time = time.time()
 
     seed_everything(config.seed)
 
@@ -47,7 +50,7 @@ def train(config: DictConfig):
     log.info(f"training model")
     trainer.fit(model, train_dataloader, val_dataloader)
 
-    log.info(f"finished training")
+    log.info(f"finished training in {time.time() - start_time} seconds")
 
 
 @hydra.main(config_path="../config", config_name="train")

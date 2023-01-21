@@ -1,0 +1,5 @@
+[2023-01-21 12:36:24,839][choosing_descriptors][INFO] - There are total of 30 descriptors
+[2023-01-21 12:36:24,840][choosing_descriptors][INFO] - Working on cluster 0
+[2023-01-21 12:36:24,841][choosing_descriptors][INFO] - 0 most variance descriptor - pear shaped
+[2023-01-21 12:36:24,841][choosing_descriptors][INFO] - Adding pear shaped to chosen descriptors
+[2023-01-21 12:36:24,841][choosing_descriptors][INFO] - 1 most variance descriptor - curvy

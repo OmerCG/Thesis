@@ -1,0 +1,15 @@
+descriptors:
+- fat
+- thin
+- long neck
+- big forhead
+- nose sticking-out
+- big mouth
+- ears sticking-out
+- big eyebrows
+- small chin
+- long head
+- chubby cheeks
+device: cuda
+multiview: false
+imgs_dir: /home/nadav2/dev/data/CLIP2Shape/images/flame_textured
