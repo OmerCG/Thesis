@@ -277,8 +277,19 @@ class SlidersApp:
         self.img_label.configure(image=img)
         self.img_label.image = img
 
-    def get_key_for_model(self) -> str:
-        return self.models_factory.get_key_name_for_model(self.model_type)
+    @property
+    def name(self):
+        if self.model_type in ["smplx", "smpl"]:
+            return "betas"
+        elif self.model_type == "flame":
+            if self.with_face:
+                return "expression_params"
+            else:
+                return "shape_params"
+        elif self.model_type == "smal":
+            return "beta"
+        else:
+            raise ValueError("Unknown model type")
 
     def mouse_wheel(self, action):
         """
@@ -289,10 +300,10 @@ class SlidersApp:
 
     def save_png(self):
         if self.on_parameters:  # TODO
-            self.renderer.visualizer.capture_screen_image(self.outpath.as_posix())
-            key = self.get_key_for_model()
-            concat_params = self._zeros_to_concat()
-            params = {key: [self.params[0].tolist()[0] + concat_params]}
+            self.img = np.array(self.img)
+            self.renderer.save_rendered_image(self.img, self.outpath.as_posix())
+            key = self.name
+            params = {key: [self.params[0].tolist()[0]]}
             with open(self.outpath.with_suffix(".json"), "w") as f:
                 json.dump(params, f)
         else:
@@ -321,7 +332,7 @@ class SlidersApp:
 
     def random_button(self):
         if self.on_parameters:
-            random_params = self.models_factory.get_random_params(self.with_face)[self.get_key_for_model()][0, :10]
+            random_params = self.models_factory.get_random_params(self.with_face)[self.name][0, :10]
             scales_list = self.production_scales if not self.ignore_random_jaw else self.production_scales[:-1]
             for idx, scale in enumerate(scales_list):
                 scale.set(random_params[idx].item())

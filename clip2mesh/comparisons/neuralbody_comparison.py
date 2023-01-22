@@ -14,7 +14,7 @@ from clip2mesh.comparisons.comparison_utils import ComparisonUtils
 
 class NeuralBodyComparison(ComparisonUtils):
     def __init__(self, args):
-        super().__init__(args)
+        super().__init__(**args)
 
     @staticmethod
     def get_gt_data(h5_path: Path) -> torch.Tensor:
@@ -54,8 +54,7 @@ class NeuralBodyComparison(ComparisonUtils):
 
         # our prediction
         with torch.no_grad():
-            clip_scores = self.clip_model(encoded_image, self.encoded_labels[gender])[0]
-            clip_scores = self.normalize_scores(clip_scores, gender)
+            clip_scores = self.clip_model(encoded_image, self.encoded_labels[gender])[0].float()
             our_body_shape = self.model[gender](clip_scores).cpu()
 
         return {

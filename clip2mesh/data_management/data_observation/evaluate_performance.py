@@ -19,6 +19,8 @@ class EvaluatePerformance:
         self,
         model_path: str,
         out_path: str,
+        method: Literal["diff_coords", "L2"],
+        gender: Literal["male", "female", "neutral"],
         model_type: Literal["smplx", "smpl", "flame", "smal"],
         optimize_feature: Literal["betas", "beta", "shape_params", "expression_params"],
         renderer_kwargs: DictConfig,
@@ -29,6 +31,8 @@ class EvaluatePerformance:
     ):
         self.utils = Utils()
         self.model_type = model_type
+        self.gender = gender
+        self.method = method
         self.models_factory = ModelsFactory(self.model_type)
         self.min_value = min_value
         self.max_value: float = max_value
@@ -57,7 +61,7 @@ class EvaluatePerformance:
         self.renderer = self.models_factory.get_renderer(py3d=True, **kwargs)
 
     def _get_total_possible_idxs(self):
-        self.verts, self.faces, self.vt, self.ft = self.models_factory.get_model()
+        self.verts, self.faces, self.vt, self.ft = self.models_factory.get_model(gender=self.gender)
         if self.model_type in ["smpl", "smplx"]:
             self.verts += self.utils.smplx_offset_numpy
             total_possible_verts = self.verts.shape[0]
@@ -113,10 +117,15 @@ class EvaluatePerformance:
                 with torch.no_grad():
                     out = self.model(temp_input.to(self.device))
 
-                model_kwargs = {self.optimize_feature: out.cpu()}
+                model_kwargs = {self.optimize_feature: out.cpu(), "gender": self.gender}
                 verts, faces, _, _ = self.models_factory.get_model(**model_kwargs)
                 verts, faces = self.get_verts_faces_by_model_type(verts, faces)
-                diff = self.get_verts_diff_coords(verts, trimesh.Trimesh(vertices=verts, faces=faces, process=False))
+                if self.method == "diff_coords":
+                    diff = self.get_verts_diff_coords(
+                        verts, trimesh.Trimesh(vertices=verts, faces=faces, process=False)
+                    )
+                else:
+                    diff = verts
                 diffs.append(diff)
 
             diffs = np.linalg.norm(diffs[1] - diffs[0], axis=-1)

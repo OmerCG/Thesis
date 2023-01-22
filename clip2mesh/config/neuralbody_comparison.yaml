@@ -15,16 +15,12 @@ comparison_kwargs:
     pixie: ${predictions_dir}/pixie_predictions
   
   smplx_models_paths:
-    smplx_male: /home/nadav2/dev/repos/Thesis/production/smplx_male.ckpt
-    smplx_female: /home/nadav2/dev/repos/Thesis/production/smplx_female.ckpt
-
-  labels_weights:
-    male: #[1.0, 0.8, 1.0, 1.2, 0.8]
-    female:
+    smplx_male: /home/nadav2/dev/repos/Thesis/pre_production/smplx_male_5_descriptors.ckpt
+    smplx_female: /home/nadav2/dev/repos/Thesis/pre_production/smplx_female_10_descriptors.ckpt
 
   renderer_kwargs:
       img_size: [450, 300]
       tex_path:
-      dist: 2.4
-      elev: 8.6
-      azim: 2.1
+      dist: 4.2
+      elev: 10.0
+      azim: 0.0

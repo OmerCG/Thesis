@@ -107,6 +107,9 @@ class MultiViewCompare:
                 pred_img = self.adjust_rendered_img(pred_img)
                 shapy_img = self.adjust_rendered_img(shapy_img)
 
+                pred_img = cv2.resize(pred_img, (orig_image.shape[1], orig_image.shape[0]))
+                shapy_img = cv2.resize(shapy_img, (orig_image.shape[1], orig_image.shape[0]))
+
                 cv2.putText(
                     orig_image,
                     f"orig",
@@ -137,9 +140,6 @@ class MultiViewCompare:
                     1,
                     cv2.LINE_AA,
                 )
-
-                if orig_image.shape[:2] != pred_img.shape[:2]:
-                    orig_image = cv2.resize(orig_image, pred_img.shape[:2][::-1])
 
                 concatenated_img = np.concatenate([orig_image, pred_img, shapy_img], axis=1)
                 cv2.imshow("comparison", concatenated_img)

@@ -1,4 +1,7 @@
-data_dir: /home/nadav2/dev/data/CLIP2Shape/outs/images_to_shape/smal/data
+defaults:
+    - renderer_kwargs: flame_expression
+
+data_dir: /home/nadav2/dev/data/CLIP2Shape/images/real_images_face_expression
 output_path: /home/nadav2/dev/data/CLIP2Shape/outs/images_to_shape/smal/predictions
 body_pose_path:
 verbose: False
@@ -16,12 +19,11 @@ mode: image
 max_images_in_collage: 20
 optimize_feature: beta
 
-# # FLAME - EXPRESSION
-# with_face: True
-# model_type: flame
-# model_path: /home/nadav2/dev/repos/CLIP2Shape/production/flame_expression.ckpt
-# texture: #/home/nadav2/dev/repos/CLIP2Shape/Flame/flame2020/mesh.png
-# sliders_max_value: 30
+# FLAME - EXPRESSION
+with_face: True
+model_type: flame
+model_path: /home/nadav2/dev/repos/Thesis/pre_production/flame_expression_5_descriptors.ckpt
+texture: #/home/nadav2/dev/repos/CLIP2Shape/Flame/flame2020/mesh.png
 
 # # FLAME - SHAPE
 # with_face: False
@@ -35,31 +37,10 @@ optimize_feature: beta
 #   smplx_male: /home/nadav2/dev/repos/Thesis/production/smplx_male.ckpt
 #   smplx_female: /home/nadav2/dev/repos/Thesis/production/smplx_female.ckpt
 
-
-# SMAL
-model_path: /home/nadav2/dev/repos/CLIP2Shape/production/smal.ckpt
-texture:  # SMAL texture (keep empty for random texture)
+# # SMAL
+# model_path: /home/nadav2/dev/repos/CLIP2Shape/production/smal.ckpt
+# texture:  # SMAL texture (keep empty for random texture)
 
 renderer_kwargs:
     img_size: [450, 300]
     tex_path:
-
-    # # SMPLX cam params
-    # dist: 2.4
-    # elev: 8.6
-    # azim: 2.1
-
-    # FLAME shape cam params
-    # dist: 0.8
-    # elev: 0.0
-    # azim: 0.0
-
-    # # FLAME expression cam params
-    # dist: 0.5
-    # elev: 0.0
-    # azim: 0.0
-
-    # SMAL cam params
-    dist: 6.0
-    elev: 20.0
-    azim: 15.0

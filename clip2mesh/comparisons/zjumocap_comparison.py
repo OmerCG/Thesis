@@ -14,7 +14,7 @@ from clip2mesh.comparisons.comparison_utils import ComparisonUtils
 
 class ZjuMocapComparison(ComparisonUtils):
     def __init__(self, args):
-        super().__init__(args)
+        super().__init__(**args)
         self._load_gt_jsons()
 
     def _load_gt_jsons(self, file_name: str = "smpl_params.npy"):
@@ -73,7 +73,7 @@ class ZjuMocapComparison(ComparisonUtils):
     def __call__(self):
         max_num_imgs = 20
         for subject_id in self.raw_imgs_dir.iterdir():
-            if subject_id.name == "377":
+            if not subject_id.name == "377":
                 continue
             for camera_id in subject_id.iterdir():
                 images_counter = 0

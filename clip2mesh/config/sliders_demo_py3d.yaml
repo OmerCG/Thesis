@@ -1,26 +1,25 @@
 defaults:
   - renderer_kwargs: smplx
 
-# out_dir: /home/nadav2/dev/data/CLIP2Shape/outs/objs  # for caputring obj
-out_dir: /home/nadav2/dev/data/CLIP2Shape/outs/images_from_demo  # for caputring png
+out_dir: /home/nadav2/dev/data/CLIP2Shape/outs/sliders_vs_blendshapes/images_to_fit
 gender: male
 device: cuda
 
 # # FLAME - expression
 # texture: #/home/nadav2/dev/repos/Thesis/Flame/flame2020/mesh.png
-# model_path: /home/nadav2/dev/repos/Thesis/pre_production/check_of_algo_flame_exp.ckpt
+# model_path: /home/nadav2/dev/repos/Thesis/pre_production/flame_expression_15_descriptors.ckpt
 # model_type: flame
 # with_face: True
 
-# FLAME - shape
-texture: #/home/nadav2/dev/repos/Thesis/Flame/flame2020/mesh.png
-model_path: /home/nadav2/dev/repos/Thesis/pre_production/check_of_algo_flame_shape.ckpt
-model_type: flame
+# # FLAME - shape
+# texture: #/home/nadav2/dev/repos/Thesis/Flame/flame2020/mesh.png
+# model_path: /home/nadav2/dev/repos/Thesis/pre_production/flame_neutral_10_descriptors.ckpt
+# model_type: flame
 
-# # SMPLX
-# texture: #/home/nadav2/dev/repos/Thesis/SMPLX/textures/smplx_texture_m_alb.png
-# model_path: /home/nadav2/dev/repos/Thesis/pre_production/smplx_male_new_algorithm.ckpt
-# model_type: smplx
+# SMPLX
+texture: /home/nadav2/dev/repos/Thesis/SMPLX/textures/smplx_texture_m_alb.png
+model_path: /home/nadav2/dev/repos/Thesis/pre_production/smplx_male_new_algorithm.ckpt
+model_type: smplx
 
 # # SMPL
 # texture: #/home/nadav2/dev/repos/Thesis/SMPLX/textures/smplx_texture_m_alb.png
@@ -36,7 +35,7 @@ model_type: flame
 
 # # GENERIC
 # with_face: False
-# model_type: smpl
+# model_type: smplx
 # texture: /home/nadav2/dev/repos/Thesis/SMPLX/textures/smplx_texture_m_alb.png
 # model_path: # keep empty
 # on_parameters: True

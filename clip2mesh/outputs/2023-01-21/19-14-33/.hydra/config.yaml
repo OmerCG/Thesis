@@ -1,0 +1,23 @@
+renderer_kwargs:
+  dist: 4.2
+  elev: 10.0
+  azim: 0.0
+  img_size:
+  - 1024
+  - 1024
+  tex_path: null
+  texture_optimization: true
+model_type: smplx
+gender: male
+optimize_feature: betas
+data_path: /home/nadav2/dev/data/CLIP2Shape/images/smplx_male_multiview
+descriptors_clusters_json: /home/nadav2/dev/data/CLIP2Shape/outs/clustering_images/words_jsons/smplx_male.json
+batch_size: 2500
+output_path: /home/nadav2/dev/data/CLIP2Shape/outs/descriptors_ablations
+descriptors_options:
+- 2
+- 5
+- 10
+- 15
+- 20
+- 25

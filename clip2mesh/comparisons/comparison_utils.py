@@ -105,6 +105,7 @@ class ComparisonUtils(Image2ShapeUtils):
         smplx_kwargs = {}
         for method, body_shape in body_shapes.items():
             get_smpl = True if method in ["spin", "gt"] else False
+            gender = "neutral" if method == "gt" else gender
             smplx_kwargs[method] = self._get_smplx_attributes(body_shape, gender, get_smpl=get_smpl)
         return smplx_kwargs
 
@@ -139,6 +140,10 @@ class ComparisonUtils(Image2ShapeUtils):
         for frame_idx, angle in enumerate(range(0, 365, 5)):
 
             rendered_imgs: Dict[str, np.ndarray] = self.get_rendered_images(smplx_kwargs, angle)
+
+            # resize images to the same size  as the raw image
+            for method, img in rendered_imgs.items():
+                rendered_imgs[method] = cv2.resize(img, (raw_img.shape[1], raw_img.shape[0]))
 
             # add description to the image of its type (gt, shapy, pixie, spin, our)
             for method, img in rendered_imgs.items():

@@ -1,0 +1,37 @@
+[2023-01-22 15:01:28,990][__main__][INFO] - Starting optimization for smplx betas
+[2023-01-22 15:01:28,990][__main__][INFO] - labels: [['muscular'], ['attractive'], ['pear shaped'], ['short'], ['curvy'], ['long legs'], ['stocky'], ['fat'], ['short torso'], ['broad shoulders'], ['big'], ['rectangular'], ['heavyset'], ['long'], ['petite']]
+[2023-01-22 15:01:28,990][__main__][INFO] - Optimizing 7.png
+[2023-01-22 15:01:28,990][__main__][INFO] - Writing video to /home/nadav2/dev/data/CLIP2Shape/outs/sliders_vs_blendshapes/smplx_male/15_descriptors/7.mp4
+[2023-01-22 15:06:44,508][__main__][INFO] - Finished optimizing 7.png
+[2023-01-22 15:06:44,508][__main__][INFO] - Pred sliders values {'muscular': 5.2957816, 'attractive': 6.4202766, 'pear shaped': 8.690242, 'short': -2.2849803, 'curvy': -5.281694, 'long legs': 0.9843206, 'stocky': -4.187106, 'fat': 6.9449944, 'short torso': -0.12693383, 'broad shoulders': 1.2286563, 'big': 2.001723, 'rectangular': 1.0131447, 'heavyset': -4.476318, 'long': 3.8395534, 'petite': -5.926925}
+[2023-01-22 15:06:44,508][__main__][INFO] - Geometric distance: [0.0037265769205987453]
+[2023-01-22 15:06:44,509][__main__][INFO] - Optimizing 2.png
+[2023-01-22 15:06:44,509][__main__][INFO] - Writing video to /home/nadav2/dev/data/CLIP2Shape/outs/sliders_vs_blendshapes/smplx_male/15_descriptors/2.mp4
+[2023-01-22 15:11:47,987][__main__][INFO] - Finished optimizing 2.png
+[2023-01-22 15:11:47,987][__main__][INFO] - Pred sliders values {'muscular': 15.139703, 'attractive': 17.22745, 'pear shaped': 16.666082, 'short': -1.0107174, 'curvy': -20.022068, 'long legs': 3.891521, 'stocky': -17.807451, 'fat': 8.745113, 'short torso': 7.360085, 'broad shoulders': 9.08024, 'big': -11.7755785, 'rectangular': -5.62756, 'heavyset': -11.54449, 'long': -9.090445, 'petite': 2.3288038}
+[2023-01-22 15:11:47,987][__main__][INFO] - Geometric distance: [0.0037265769205987453, 0.014733913354575634]
+[2023-01-22 15:11:47,987][__main__][INFO] - Optimizing 8.png
+[2023-01-22 15:11:47,987][__main__][INFO] - Writing video to /home/nadav2/dev/data/CLIP2Shape/outs/sliders_vs_blendshapes/smplx_male/15_descriptors/8.mp4
+[2023-01-22 15:16:31,520][__main__][INFO] - Finished optimizing 8.png
+[2023-01-22 15:16:31,520][__main__][INFO] - Pred sliders values {'muscular': 1.7042259, 'attractive': 9.712969, 'pear shaped': 2.846484, 'short': -2.7953608, 'curvy': -9.581013, 'long legs': 0.17856698, 'stocky': -8.398709, 'fat': -0.4826755, 'short torso': -2.884193, 'broad shoulders': 11.283706, 'big': -6.954902, 'rectangular': -4.638974, 'heavyset': -3.3706028, 'long': -2.9912934, 'petite': -5.9272103}
+[2023-01-22 15:16:31,520][__main__][INFO] - Geometric distance: [0.0037265769205987453, 0.014733913354575634, 0.019830863922834396]
+[2023-01-22 15:16:31,520][__main__][INFO] - Optimizing 9.png
+[2023-01-22 15:16:31,520][__main__][INFO] - Writing video to /home/nadav2/dev/data/CLIP2Shape/outs/sliders_vs_blendshapes/smplx_male/15_descriptors/9.mp4
+[2023-01-22 15:21:32,546][__main__][INFO] - Finished optimizing 9.png
+[2023-01-22 15:21:32,546][__main__][INFO] - Pred sliders values {'muscular': -6.1372714, 'attractive': 12.937744, 'pear shaped': 1.0709329, 'short': -9.269461, 'curvy': -5.170373, 'long legs': -3.1803486, 'stocky': -9.566169, 'fat': -1.0340298, 'short torso': -10.810273, 'broad shoulders': 14.80553, 'big': -9.883688, 'rectangular': 7.7608404, 'heavyset': -0.72244024, 'long': -0.47287384, 'petite': -4.2763476}
+[2023-01-22 15:21:32,546][__main__][INFO] - Geometric distance: [0.0037265769205987453, 0.014733913354575634, 0.019830863922834396, 0.011353607289493084]
+[2023-01-22 15:21:32,546][__main__][INFO] - Optimizing 11.png
+[2023-01-22 15:21:32,546][__main__][INFO] - Writing video to /home/nadav2/dev/data/CLIP2Shape/outs/sliders_vs_blendshapes/smplx_male/15_descriptors/11.mp4
+[2023-01-22 15:26:33,916][__main__][INFO] - Finished optimizing 11.png
+[2023-01-22 15:26:33,916][__main__][INFO] - Pred sliders values {'muscular': -9.396421, 'attractive': -0.9877588, 'pear shaped': -1.409719, 'short': -6.1627707, 'curvy': -4.8879876, 'long legs': -0.14932804, 'stocky': -16.542057, 'fat': -9.379675, 'short torso': -7.7976036, 'broad shoulders': 9.486484, 'big': -16.04269, 'rectangular': -1.1319891, 'heavyset': -6.3965244, 'long': 1.8892803, 'petite': 1.2308985}
+[2023-01-22 15:26:33,916][__main__][INFO] - Geometric distance: [0.0037265769205987453, 0.014733913354575634, 0.019830863922834396, 0.011353607289493084, 0.017570313066244125]
+[2023-01-22 15:26:33,916][__main__][INFO] - Optimizing 0.png
+[2023-01-22 15:26:33,916][__main__][INFO] - Writing video to /home/nadav2/dev/data/CLIP2Shape/outs/sliders_vs_blendshapes/smplx_male/15_descriptors/0.mp4
+[2023-01-22 15:31:24,541][__main__][INFO] - Finished optimizing 0.png
+[2023-01-22 15:31:24,541][__main__][INFO] - Pred sliders values {'muscular': -10.42421, 'attractive': 2.305218, 'pear shaped': 4.72212, 'short': -3.952463, 'curvy': -0.4012834, 'long legs': -4.2729363, 'stocky': -8.476162, 'fat': 1.3812376, 'short torso': -11.291276, 'broad shoulders': 16.141037, 'big': -6.173526, 'rectangular': -8.242543, 'heavyset': -5.016669, 'long': -8.299907, 'petite': -7.758999}
+[2023-01-22 15:31:24,541][__main__][INFO] - Geometric distance: [0.0037265769205987453, 0.014733913354575634, 0.019830863922834396, 0.011353607289493084, 0.017570313066244125, 0.04610397666692734]
+[2023-01-22 15:31:24,541][__main__][INFO] - Optimizing 12.png
+[2023-01-22 15:31:24,541][__main__][INFO] - Writing video to /home/nadav2/dev/data/CLIP2Shape/outs/sliders_vs_blendshapes/smplx_male/15_descriptors/12.mp4
+[2023-01-22 15:36:24,826][__main__][INFO] - Finished optimizing 12.png
+[2023-01-22 15:36:24,826][__main__][INFO] - Pred sliders values {'muscular': -15.328135, 'attractive': 1.487152, 'pear shaped': 4.2359066, 'short': -6.6843934, 'curvy': 3.90297, 'long legs': -3.9004722, 'stocky': -8.6996765, 'fat': -0.6466707, 'short torso': -13.588466, 'broad shoulders': 17.591244, 'big': -4.8267083, 'rectangular': -0.47191697, 'heavyset': -15.701745, 'long': -7.961532, 'petite': -10.927471}
+[2023-01-22 15:36:24,826][__main__][INFO] - Geometric distance: [0.0037265769205987453, 0.014733913354575634, 0.019830863922834396, 0.011353607289493084, 0.017570313066244125, 0.04610397666692734, 0.005578628275543451]

@@ -31,6 +31,16 @@ class Human3DComparison(ComparisonUtils):
                 data = json.load(f)
             self.gt_jsons[json_id] = data
 
+    def get_smplx_kwargs(
+        self, body_shapes: Dict[str, torch.Tensor], gender: Literal["male", "female", "neutral"]
+    ) -> Dict[str, Tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray]]:
+        """Get the smplx kwargs for the different methods -> (vertices, faces, vt, ft)"""
+        smplx_kwargs = {}
+        for method, body_shape in body_shapes.items():
+            get_smpl = True if method in ["spin"] else False
+            smplx_kwargs[method] = self._get_smplx_attributes(body_shape, gender, get_smpl=get_smpl)
+        return smplx_kwargs
+
     def get_body_shapes(
         self, raw_img_path: Path, gender: Literal["male", "female", "neutral"]
     ) -> Tuple[Dict[str, torch.Tensor], np.ndarray]:
@@ -130,10 +140,6 @@ class Human3DComparison(ComparisonUtils):
                         num_blocks = num_methods + 1  # +1 for the raw image
                         video_struct = self.get_video_structure(num_blocks)
                         video_shape = (self.renderer.height * video_struct[0], self.renderer.width * video_struct[1])
-
-                        # create video from multiview data
-                        if raw_img.shape[:2] != (self.renderer.height, self.renderer.width):
-                            raw_img = cv2.resize(raw_img, (self.renderer.width, self.renderer.height))
 
                         smplx_kwargs: Dict[str, Dict[str, np.ndarray]] = self.mesh_attributes_to_kwargs(
                             smplx_args, to_tensor=True

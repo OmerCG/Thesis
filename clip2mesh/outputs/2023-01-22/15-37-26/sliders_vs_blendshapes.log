@@ -1,0 +1,4 @@
+[2023-01-22 15:37:29,969][__main__][INFO] - Starting optimization for smplx betas
+[2023-01-22 15:37:29,969][__main__][INFO] - labels: [['muscular'], ['attractive'], ['pear shaped'], ['short'], ['curvy'], ['long legs'], ['stocky'], ['round apple'], ['short legs'], ['fat'], ['short torso'], ['broad shoulders'], ['long torso'], ['tall'], ['narrow waist'], ['big'], ['rectangular'], ['heavyset'], ['long'], ['petite']]
+[2023-01-22 15:37:29,970][__main__][INFO] - Optimizing 7.png
+[2023-01-22 15:37:29,970][__main__][INFO] - Writing video to /home/nadav2/dev/data/CLIP2Shape/outs/sliders_vs_blendshapes/smplx_male/20_descriptors/7.mp4

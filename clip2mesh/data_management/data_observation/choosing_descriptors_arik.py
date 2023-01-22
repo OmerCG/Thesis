@@ -265,6 +265,8 @@ class ChoosingDescriptorsArik(ChoosingDescriptors):
                             cluster_id = self.find_cluster_of_descriptor(row.descriptor, self.clusters)
                             final_choose[cluster_id][row.descriptor] = row.variance
                             number_of_descriptors = self.get_num_of_chosen_descriptors(final_choose)
+                            if number_of_descriptors >= self.min_num_of_descriptors:
+                                break
 
         if hasattr(self, "output_dir"):
             with open(self.output_dir / f"chosen_descriptors.json", "w") as f:

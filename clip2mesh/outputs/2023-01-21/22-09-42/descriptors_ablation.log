@@ -1,0 +1,288 @@
+[2023-01-21 22:09:42,531][__main__][INFO] - Starting descriptors ablation for flame neutral model
+[2023-01-21 22:09:42,531][__main__][INFO] - Starting with 2 descriptors
+[2023-01-21 22:09:43,859][choosing_descriptors][INFO] - There are total of 10 descriptors
+[2023-01-21 22:09:43,860][choosing_descriptors][INFO] - Working on cluster 0
+[2023-01-21 22:09:43,861][choosing_descriptors][INFO] - 0 most variance descriptor - ears sticking-out
+[2023-01-21 22:09:43,861][choosing_descriptors][INFO] - Adding ears sticking-out to chosen descriptors
+[2023-01-21 22:09:43,861][choosing_descriptors][INFO] - 1 most variance descriptor - chubby cheeks
+[2023-01-21 22:09:43,862][choosing_descriptors][INFO] - chubby cheeks is correlated with ears sticking-out with corr -0.611327923917199
+[2023-01-21 22:09:43,862][choosing_descriptors][INFO] - 2 most variance descriptor - big mouth
+[2023-01-21 22:09:43,863][choosing_descriptors][INFO] - Adding big mouth to chosen descriptors
+[2023-01-21 22:09:43,863][choosing_descriptors][INFO] - currently chosen descriptors: {'ears sticking-out': {'variance': 0.4786706156246535}, 'big mouth': {'variance': 0.23328302654801417}}
+[2023-01-21 22:09:43,863][choosing_descriptors][INFO] - Finished cluster 0
+[2023-01-21 22:09:43,863][choosing_descriptors][INFO] - Working on cluster 2
+[2023-01-21 22:09:43,864][choosing_descriptors][INFO] - 0 most variance descriptor - fat
+[2023-01-21 22:09:43,864][choosing_descriptors][INFO] - Adding fat to chosen descriptors
+[2023-01-21 22:09:43,864][choosing_descriptors][INFO] - currently chosen descriptors: {'fat': {'variance': 0.5097797707085544}}
+[2023-01-21 22:09:43,864][choosing_descriptors][INFO] - Finished cluster 2
+[2023-01-21 22:09:43,864][choosing_descriptors][INFO] - Working on cluster 3
+[2023-01-21 22:09:43,865][choosing_descriptors][INFO] - 0 most variance descriptor - thin
+[2023-01-21 22:09:43,865][choosing_descriptors][INFO] - Adding thin to chosen descriptors
+[2023-01-21 22:09:43,865][choosing_descriptors][INFO] - currently chosen descriptors: {'thin': {'variance': 1.2125299531405125}}
+[2023-01-21 22:09:43,865][choosing_descriptors][INFO] - Finished cluster 3
+[2023-01-21 22:09:43,865][choosing_descriptors][INFO] - Working on cluster 4
+[2023-01-21 22:09:43,865][choosing_descriptors][INFO] - 0 most variance descriptor - long neck
+[2023-01-21 22:09:43,866][choosing_descriptors][INFO] - Adding long neck to chosen descriptors
+[2023-01-21 22:09:43,866][choosing_descriptors][INFO] - 1 most variance descriptor - long head
+[2023-01-21 22:09:43,866][choosing_descriptors][INFO] - long head is correlated with long neck with corr 0.8757543449564797
+[2023-01-21 22:09:43,867][choosing_descriptors][INFO] - 2 most variance descriptor - big forhead
+[2023-01-21 22:09:43,868][choosing_descriptors][INFO] - Adding big forhead to chosen descriptors
+[2023-01-21 22:09:43,868][choosing_descriptors][INFO] - 3 most variance descriptor - small chin
+[2023-01-21 22:09:43,869][choosing_descriptors][INFO] - Adding small chin to chosen descriptors
+[2023-01-21 22:09:43,869][choosing_descriptors][INFO] - 4 most variance descriptor - nose sticking-out
+[2023-01-21 22:09:43,869][choosing_descriptors][INFO] - nose sticking-out is correlated with long neck with corr 0.6065349830205996
+[2023-01-21 22:09:43,869][choosing_descriptors][INFO] - currently chosen descriptors: {'long neck': {'variance': 1.229582960183979}, 'big forhead': {'variance': 0.40178241967526285}, 'small chin': {'variance': 0.14107360869645102}}
+[2023-01-21 22:09:43,870][choosing_descriptors][INFO] - Finished cluster 4
+[2023-01-21 22:09:43,870][choosing_descriptors][INFO] - There are 7 chosen descriptors in initial filter
+[2023-01-21 22:09:43,870][choosing_descriptors][INFO] - chosen descriptors: [['ears sticking-out', 'big mouth'], ['fat'], ['thin'], ['long neck', 'big forhead', 'small chin'], []]
+[2023-01-21 22:09:43,870][choosing_descriptors][INFO] - Final filter
+[2023-01-21 22:09:43,871][choosing_descriptors][INFO] - Descriptor long neck has variance 1.229582960183979
+[2023-01-21 22:09:43,872][choosing_descriptors][INFO] - Descriptor long neck is correlated with big mouth with correlation 0.6167662045777805 - removing big mouth
+[2023-01-21 22:09:43,872][choosing_descriptors][INFO] - Descriptor long neck is correlated with ears sticking-out with correlation 0.8870348757322982 - removing ears sticking-out
+[2023-01-21 22:09:43,873][choosing_descriptors][INFO] - Descriptor long neck is correlated with thin with correlation 0.9406391553486161 - removing thin
+[2023-01-21 22:09:43,874][choosing_descriptors][INFO] - Descriptor fat has variance 0.5097797707085544
+[2023-01-21 22:09:43,877][choosing_descriptors][INFO] - Descriptor fat is correlated with small chin with correlation 0.5805732470000375 - removing small chin
+[2023-01-21 22:09:43,878][choosing_descriptors][INFO] - Descriptor big forhead has variance 0.40178241967526285
+[2023-01-21 22:09:43,879][choosing_descriptors][INFO] - Descriptor big forhead is correlated with big mouth with correlation 0.5874760239752619 - removing big mouth
+[2023-01-21 22:09:43,881][choosing_descriptors][INFO] - Descriptor big forhead is correlated with thin with correlation 0.6171284219884929 - removing thin
+[2023-01-21 22:09:43,884][choosing_descriptors][INFO] - Too many descriptors (3) - reducing
+[2023-01-21 22:09:43,884][__main__][INFO] - Chosen descriptors: ['fat', 'long neck']
+[2023-01-21 22:09:43,884][__main__][INFO] - Starting training
+[2023-01-21 22:09:43,898][clip2mesh.optimizations.train_mapper][INFO] - Instantiating callback <pytorch_lightning.callbacks.ModelCheckpoint>
+[2023-01-21 22:09:43,899][clip2mesh.optimizations.train_mapper][INFO] - dataloader batch size: 200
+[2023-01-21 22:09:43,900][clip2mesh.optimizations.train_mapper][INFO] - tensorboard run name: flame_neutral_2_descriptors
+[2023-01-21 22:09:43,900][clip2mesh.optimizations.train_mapper][INFO] - instantiating model
+[2023-01-21 22:09:43,907][clip2mesh.optimizations.train_mapper][INFO] - training model
+[2023-01-21 22:10:00,583][clip2mesh.optimizations.train_mapper][INFO] - finished training in 16.698005199432373 seconds
+[2023-01-21 22:10:00,583][__main__][INFO] - Starting evaluation
+[2023-01-21 22:10:02,206][clip2mesh.data_management.data_observation.evaluate_performance][INFO] - IOU: 0.0481687898089172 | Overlap: 0.47161572052401746
+[2023-01-21 22:10:02,210][__main__][INFO] - Finished with 2 descriptors
+[2023-01-21 22:10:02,210][__main__][INFO] - Starting with 4 descriptors
+[2023-01-21 22:10:02,843][choosing_descriptors][INFO] - There are total of 10 descriptors
+[2023-01-21 22:10:02,844][choosing_descriptors][INFO] - Working on cluster 0
+[2023-01-21 22:10:02,845][choosing_descriptors][INFO] - 0 most variance descriptor - ears sticking-out
+[2023-01-21 22:10:02,845][choosing_descriptors][INFO] - Adding ears sticking-out to chosen descriptors
+[2023-01-21 22:10:02,845][choosing_descriptors][INFO] - 1 most variance descriptor - chubby cheeks
+[2023-01-21 22:10:02,845][choosing_descriptors][INFO] - chubby cheeks is correlated with ears sticking-out with corr -0.611327923917199
+[2023-01-21 22:10:02,846][choosing_descriptors][INFO] - 2 most variance descriptor - big mouth
+[2023-01-21 22:10:02,846][choosing_descriptors][INFO] - Adding big mouth to chosen descriptors
+[2023-01-21 22:10:02,846][choosing_descriptors][INFO] - currently chosen descriptors: {'ears sticking-out': {'variance': 0.4786706156246535}, 'big mouth': {'variance': 0.23328302654801417}}
+[2023-01-21 22:10:02,846][choosing_descriptors][INFO] - Finished cluster 0
+[2023-01-21 22:10:02,846][choosing_descriptors][INFO] - Working on cluster 2
+[2023-01-21 22:10:02,846][choosing_descriptors][INFO] - 0 most variance descriptor - fat
+[2023-01-21 22:10:02,847][choosing_descriptors][INFO] - Adding fat to chosen descriptors
+[2023-01-21 22:10:02,847][choosing_descriptors][INFO] - currently chosen descriptors: {'fat': {'variance': 0.5097797707085544}}
+[2023-01-21 22:10:02,847][choosing_descriptors][INFO] - Finished cluster 2
+[2023-01-21 22:10:02,847][choosing_descriptors][INFO] - Working on cluster 3
+[2023-01-21 22:10:02,847][choosing_descriptors][INFO] - 0 most variance descriptor - thin
+[2023-01-21 22:10:02,847][choosing_descriptors][INFO] - Adding thin to chosen descriptors
+[2023-01-21 22:10:02,847][choosing_descriptors][INFO] - currently chosen descriptors: {'thin': {'variance': 1.2125299531405125}}
+[2023-01-21 22:10:02,847][choosing_descriptors][INFO] - Finished cluster 3
+[2023-01-21 22:10:02,847][choosing_descriptors][INFO] - Working on cluster 4
+[2023-01-21 22:10:02,848][choosing_descriptors][INFO] - 0 most variance descriptor - long neck
+[2023-01-21 22:10:02,848][choosing_descriptors][INFO] - Adding long neck to chosen descriptors
+[2023-01-21 22:10:02,848][choosing_descriptors][INFO] - 1 most variance descriptor - long head
+[2023-01-21 22:10:02,849][choosing_descriptors][INFO] - long head is correlated with long neck with corr 0.8757543449564797
+[2023-01-21 22:10:02,849][choosing_descriptors][INFO] - 2 most variance descriptor - big forhead
+[2023-01-21 22:10:02,849][choosing_descriptors][INFO] - Adding big forhead to chosen descriptors
+[2023-01-21 22:10:02,849][choosing_descriptors][INFO] - 3 most variance descriptor - small chin
+[2023-01-21 22:10:02,850][choosing_descriptors][INFO] - Adding small chin to chosen descriptors
+[2023-01-21 22:10:02,851][choosing_descriptors][INFO] - 4 most variance descriptor - nose sticking-out
+[2023-01-21 22:10:02,851][choosing_descriptors][INFO] - nose sticking-out is correlated with long neck with corr 0.6065349830205996
+[2023-01-21 22:10:02,851][choosing_descriptors][INFO] - currently chosen descriptors: {'long neck': {'variance': 1.229582960183979}, 'big forhead': {'variance': 0.40178241967526285}, 'small chin': {'variance': 0.14107360869645102}}
+[2023-01-21 22:10:02,851][choosing_descriptors][INFO] - Finished cluster 4
+[2023-01-21 22:10:02,851][choosing_descriptors][INFO] - There are 7 chosen descriptors in initial filter
+[2023-01-21 22:10:02,851][choosing_descriptors][INFO] - chosen descriptors: [['ears sticking-out', 'big mouth'], ['fat'], ['thin'], ['long neck', 'big forhead', 'small chin'], []]
+[2023-01-21 22:10:02,851][choosing_descriptors][INFO] - Final filter
+[2023-01-21 22:10:02,853][choosing_descriptors][INFO] - Descriptor long neck has variance 1.229582960183979
+[2023-01-21 22:10:02,854][choosing_descriptors][INFO] - Descriptor long neck is correlated with big mouth with correlation 0.6167662045777805 - removing big mouth
+[2023-01-21 22:10:02,854][choosing_descriptors][INFO] - Descriptor long neck is correlated with ears sticking-out with correlation 0.8870348757322982 - removing ears sticking-out
+[2023-01-21 22:10:02,855][choosing_descriptors][INFO] - Descriptor long neck is correlated with thin with correlation 0.9406391553486161 - removing thin
+[2023-01-21 22:10:02,856][choosing_descriptors][INFO] - Descriptor fat has variance 0.5097797707085544
+[2023-01-21 22:10:02,858][choosing_descriptors][INFO] - Descriptor fat is correlated with small chin with correlation 0.5805732470000375 - removing small chin
+[2023-01-21 22:10:02,859][choosing_descriptors][INFO] - Descriptor big forhead has variance 0.40178241967526285
+[2023-01-21 22:10:02,860][choosing_descriptors][INFO] - Descriptor big forhead is correlated with big mouth with correlation 0.5874760239752619 - removing big mouth
+[2023-01-21 22:10:02,861][choosing_descriptors][INFO] - Descriptor big forhead is correlated with thin with correlation 0.6171284219884929 - removing thin
+[2023-01-21 22:10:02,863][__main__][INFO] - Chosen descriptors: ['fat', 'thin', 'long neck', 'big forhead']
+[2023-01-21 22:10:02,863][__main__][INFO] - Starting training
+[2023-01-21 22:10:02,874][clip2mesh.optimizations.train_mapper][INFO] - Instantiating callback <pytorch_lightning.callbacks.ModelCheckpoint>
+[2023-01-21 22:10:02,875][clip2mesh.optimizations.train_mapper][INFO] - dataloader batch size: 200
+[2023-01-21 22:10:02,876][clip2mesh.optimizations.train_mapper][INFO] - tensorboard run name: flame_neutral_4_descriptors
+[2023-01-21 22:10:02,876][clip2mesh.optimizations.train_mapper][INFO] - instantiating model
+[2023-01-21 22:10:02,880][clip2mesh.optimizations.train_mapper][INFO] - training model
+[2023-01-21 22:10:16,911][clip2mesh.optimizations.train_mapper][INFO] - finished training in 14.047542810440063 seconds
+[2023-01-21 22:10:16,911][__main__][INFO] - Starting evaluation
+[2023-01-21 22:10:19,833][clip2mesh.data_management.data_observation.evaluate_performance][INFO] - IOU: 0.09574044585987261 | Overlap: 0.6239249413604379
+[2023-01-21 22:10:19,837][__main__][INFO] - Finished with 4 descriptors
+[2023-01-21 22:10:19,837][__main__][INFO] - Starting with 6 descriptors
+[2023-01-21 22:10:20,467][choosing_descriptors][INFO] - There are total of 10 descriptors
+[2023-01-21 22:10:20,469][choosing_descriptors][INFO] - Working on cluster 0
+[2023-01-21 22:10:20,469][choosing_descriptors][INFO] - 0 most variance descriptor - ears sticking-out
+[2023-01-21 22:10:20,470][choosing_descriptors][INFO] - Adding ears sticking-out to chosen descriptors
+[2023-01-21 22:10:20,470][choosing_descriptors][INFO] - 1 most variance descriptor - chubby cheeks
+[2023-01-21 22:10:20,470][choosing_descriptors][INFO] - chubby cheeks is correlated with ears sticking-out with corr -0.611327923917199
+[2023-01-21 22:10:20,470][choosing_descriptors][INFO] - 2 most variance descriptor - big mouth
+[2023-01-21 22:10:20,471][choosing_descriptors][INFO] - Adding big mouth to chosen descriptors
+[2023-01-21 22:10:20,471][choosing_descriptors][INFO] - currently chosen descriptors: {'ears sticking-out': {'variance': 0.4786706156246535}, 'big mouth': {'variance': 0.23328302654801417}}
+[2023-01-21 22:10:20,471][choosing_descriptors][INFO] - Finished cluster 0
+[2023-01-21 22:10:20,471][choosing_descriptors][INFO] - Working on cluster 2
+[2023-01-21 22:10:20,472][choosing_descriptors][INFO] - 0 most variance descriptor - fat
+[2023-01-21 22:10:20,472][choosing_descriptors][INFO] - Adding fat to chosen descriptors
+[2023-01-21 22:10:20,472][choosing_descriptors][INFO] - currently chosen descriptors: {'fat': {'variance': 0.5097797707085544}}
+[2023-01-21 22:10:20,472][choosing_descriptors][INFO] - Finished cluster 2
+[2023-01-21 22:10:20,472][choosing_descriptors][INFO] - Working on cluster 3
+[2023-01-21 22:10:20,473][choosing_descriptors][INFO] - 0 most variance descriptor - thin
+[2023-01-21 22:10:20,473][choosing_descriptors][INFO] - Adding thin to chosen descriptors
+[2023-01-21 22:10:20,473][choosing_descriptors][INFO] - currently chosen descriptors: {'thin': {'variance': 1.2125299531405125}}
+[2023-01-21 22:10:20,473][choosing_descriptors][INFO] - Finished cluster 3
+[2023-01-21 22:10:20,473][choosing_descriptors][INFO] - Working on cluster 4
+[2023-01-21 22:10:20,474][choosing_descriptors][INFO] - 0 most variance descriptor - long neck
+[2023-01-21 22:10:20,474][choosing_descriptors][INFO] - Adding long neck to chosen descriptors
+[2023-01-21 22:10:20,474][choosing_descriptors][INFO] - 1 most variance descriptor - long head
+[2023-01-21 22:10:20,475][choosing_descriptors][INFO] - long head is correlated with long neck with corr 0.8757543449564797
+[2023-01-21 22:10:20,475][choosing_descriptors][INFO] - 2 most variance descriptor - big forhead
+[2023-01-21 22:10:20,476][choosing_descriptors][INFO] - Adding big forhead to chosen descriptors
+[2023-01-21 22:10:20,476][choosing_descriptors][INFO] - 3 most variance descriptor - small chin
+[2023-01-21 22:10:20,478][choosing_descriptors][INFO] - Adding small chin to chosen descriptors
+[2023-01-21 22:10:20,478][choosing_descriptors][INFO] - 4 most variance descriptor - nose sticking-out
+[2023-01-21 22:10:20,479][choosing_descriptors][INFO] - nose sticking-out is correlated with long neck with corr 0.6065349830205996
+[2023-01-21 22:10:20,479][choosing_descriptors][INFO] - currently chosen descriptors: {'long neck': {'variance': 1.229582960183979}, 'big forhead': {'variance': 0.40178241967526285}, 'small chin': {'variance': 0.14107360869645102}}
+[2023-01-21 22:10:20,479][choosing_descriptors][INFO] - Finished cluster 4
+[2023-01-21 22:10:20,480][choosing_descriptors][INFO] - There are 7 chosen descriptors in initial filter
+[2023-01-21 22:10:20,480][choosing_descriptors][INFO] - chosen descriptors: [['ears sticking-out', 'big mouth'], ['fat'], ['thin'], ['long neck', 'big forhead', 'small chin'], []]
+[2023-01-21 22:10:20,480][choosing_descriptors][INFO] - Final filter
+[2023-01-21 22:10:20,482][choosing_descriptors][INFO] - Descriptor long neck has variance 1.229582960183979
+[2023-01-21 22:10:20,484][choosing_descriptors][INFO] - Descriptor long neck is correlated with big mouth with correlation 0.6167662045777805 - removing big mouth
+[2023-01-21 22:10:20,485][choosing_descriptors][INFO] - Descriptor long neck is correlated with ears sticking-out with correlation 0.8870348757322982 - removing ears sticking-out
+[2023-01-21 22:10:20,487][choosing_descriptors][INFO] - Descriptor long neck is correlated with thin with correlation 0.9406391553486161 - removing thin
+[2023-01-21 22:10:20,488][choosing_descriptors][INFO] - Descriptor fat has variance 0.5097797707085544
+[2023-01-21 22:10:20,491][choosing_descriptors][INFO] - Descriptor fat is correlated with small chin with correlation 0.5805732470000375 - removing small chin
+[2023-01-21 22:10:20,492][choosing_descriptors][INFO] - Descriptor big forhead has variance 0.40178241967526285
+[2023-01-21 22:10:20,493][choosing_descriptors][INFO] - Descriptor big forhead is correlated with big mouth with correlation 0.5874760239752619 - removing big mouth
+[2023-01-21 22:10:20,495][choosing_descriptors][INFO] - Descriptor big forhead is correlated with thin with correlation 0.6171284219884929 - removing thin
+[2023-01-21 22:10:20,497][__main__][INFO] - Chosen descriptors: ['ears sticking-out', 'big mouth', 'fat', 'thin', 'long neck', 'big forhead']
+[2023-01-21 22:10:20,497][__main__][INFO] - Starting training
+[2023-01-21 22:10:20,506][clip2mesh.optimizations.train_mapper][INFO] - Instantiating callback <pytorch_lightning.callbacks.ModelCheckpoint>
+[2023-01-21 22:10:20,507][clip2mesh.optimizations.train_mapper][INFO] - dataloader batch size: 200
+[2023-01-21 22:10:20,508][clip2mesh.optimizations.train_mapper][INFO] - tensorboard run name: flame_neutral_6_descriptors
+[2023-01-21 22:10:20,508][clip2mesh.optimizations.train_mapper][INFO] - instantiating model
+[2023-01-21 22:10:20,513][clip2mesh.optimizations.train_mapper][INFO] - training model
+[2023-01-21 22:10:35,330][clip2mesh.optimizations.train_mapper][INFO] - finished training in 14.832054615020752 seconds
+[2023-01-21 22:10:35,330][__main__][INFO] - Starting evaluation
+[2023-01-21 22:10:39,698][clip2mesh.data_management.data_observation.evaluate_performance][INFO] - IOU: 0.5023885350318471 | Overlap: 0.48740861088545895
+[2023-01-21 22:10:39,701][__main__][INFO] - Finished with 6 descriptors
+[2023-01-21 22:10:39,701][__main__][INFO] - Starting with 8 descriptors
+[2023-01-21 22:10:40,378][choosing_descriptors][INFO] - There are total of 10 descriptors
+[2023-01-21 22:10:40,379][choosing_descriptors][INFO] - Working on cluster 0
+[2023-01-21 22:10:40,380][choosing_descriptors][INFO] - 0 most variance descriptor - ears sticking-out
+[2023-01-21 22:10:40,380][choosing_descriptors][INFO] - Adding ears sticking-out to chosen descriptors
+[2023-01-21 22:10:40,380][choosing_descriptors][INFO] - 1 most variance descriptor - chubby cheeks
+[2023-01-21 22:10:40,380][choosing_descriptors][INFO] - chubby cheeks is correlated with ears sticking-out with corr -0.611327923917199
+[2023-01-21 22:10:40,381][choosing_descriptors][INFO] - 2 most variance descriptor - big mouth
+[2023-01-21 22:10:40,381][choosing_descriptors][INFO] - Adding big mouth to chosen descriptors
+[2023-01-21 22:10:40,381][choosing_descriptors][INFO] - currently chosen descriptors: {'ears sticking-out': {'variance': 0.4786706156246535}, 'big mouth': {'variance': 0.23328302654801417}}
+[2023-01-21 22:10:40,381][choosing_descriptors][INFO] - Finished cluster 0
+[2023-01-21 22:10:40,381][choosing_descriptors][INFO] - Working on cluster 2
+[2023-01-21 22:10:40,382][choosing_descriptors][INFO] - 0 most variance descriptor - fat
+[2023-01-21 22:10:40,382][choosing_descriptors][INFO] - Adding fat to chosen descriptors
+[2023-01-21 22:10:40,382][choosing_descriptors][INFO] - currently chosen descriptors: {'fat': {'variance': 0.5097797707085544}}
+[2023-01-21 22:10:40,382][choosing_descriptors][INFO] - Finished cluster 2
+[2023-01-21 22:10:40,382][choosing_descriptors][INFO] - Working on cluster 3
+[2023-01-21 22:10:40,382][choosing_descriptors][INFO] - 0 most variance descriptor - thin
+[2023-01-21 22:10:40,382][choosing_descriptors][INFO] - Adding thin to chosen descriptors
+[2023-01-21 22:10:40,382][choosing_descriptors][INFO] - currently chosen descriptors: {'thin': {'variance': 1.2125299531405125}}
+[2023-01-21 22:10:40,382][choosing_descriptors][INFO] - Finished cluster 3
+[2023-01-21 22:10:40,383][choosing_descriptors][INFO] - Working on cluster 4
+[2023-01-21 22:10:40,383][choosing_descriptors][INFO] - 0 most variance descriptor - long neck
+[2023-01-21 22:10:40,383][choosing_descriptors][INFO] - Adding long neck to chosen descriptors
+[2023-01-21 22:10:40,383][choosing_descriptors][INFO] - 1 most variance descriptor - long head
+[2023-01-21 22:10:40,384][choosing_descriptors][INFO] - long head is correlated with long neck with corr 0.8757543449564797
+[2023-01-21 22:10:40,384][choosing_descriptors][INFO] - 2 most variance descriptor - big forhead
+[2023-01-21 22:10:40,384][choosing_descriptors][INFO] - Adding big forhead to chosen descriptors
+[2023-01-21 22:10:40,384][choosing_descriptors][INFO] - 3 most variance descriptor - small chin
+[2023-01-21 22:10:40,385][choosing_descriptors][INFO] - Adding small chin to chosen descriptors
+[2023-01-21 22:10:40,385][choosing_descriptors][INFO] - 4 most variance descriptor - nose sticking-out
+[2023-01-21 22:10:40,386][choosing_descriptors][INFO] - nose sticking-out is correlated with long neck with corr 0.6065349830205996
+[2023-01-21 22:10:40,386][choosing_descriptors][INFO] - currently chosen descriptors: {'long neck': {'variance': 1.229582960183979}, 'big forhead': {'variance': 0.40178241967526285}, 'small chin': {'variance': 0.14107360869645102}}
+[2023-01-21 22:10:40,386][choosing_descriptors][INFO] - Finished cluster 4
+[2023-01-21 22:10:40,386][choosing_descriptors][INFO] - There are 7 chosen descriptors in initial filter
+[2023-01-21 22:10:40,386][choosing_descriptors][INFO] - chosen descriptors: [['ears sticking-out', 'big mouth'], ['fat'], ['thin'], ['long neck', 'big forhead', 'small chin'], []]
+[2023-01-21 22:10:40,386][choosing_descriptors][INFO] - Final filter
+[2023-01-21 22:10:40,387][choosing_descriptors][INFO] - Descriptor long neck has variance 1.229582960183979
+[2023-01-21 22:10:40,388][choosing_descriptors][INFO] - Descriptor long neck is correlated with big mouth with correlation 0.6167662045777805 - removing big mouth
+[2023-01-21 22:10:40,388][choosing_descriptors][INFO] - Descriptor long neck is correlated with ears sticking-out with correlation 0.8870348757322982 - removing ears sticking-out
+[2023-01-21 22:10:40,389][choosing_descriptors][INFO] - Descriptor long neck is correlated with thin with correlation 0.9406391553486161 - removing thin
+[2023-01-21 22:10:40,390][choosing_descriptors][INFO] - Descriptor fat has variance 0.5097797707085544
+[2023-01-21 22:10:40,392][choosing_descriptors][INFO] - Descriptor fat is correlated with small chin with correlation 0.5805732470000375 - removing small chin
+[2023-01-21 22:10:40,393][choosing_descriptors][INFO] - Descriptor big forhead has variance 0.40178241967526285
+[2023-01-21 22:10:40,394][choosing_descriptors][INFO] - Descriptor big forhead is correlated with big mouth with correlation 0.5874760239752619 - removing big mouth
+[2023-01-21 22:10:40,395][choosing_descriptors][INFO] - Descriptor big forhead is correlated with thin with correlation 0.6171284219884929 - removing thin
+[2023-01-21 22:10:40,398][__main__][INFO] - Chosen descriptors: ['ears sticking-out', 'big mouth', 'fat', 'thin', 'long neck', 'big forhead', 'small chin', 'long head']
+[2023-01-21 22:10:40,398][__main__][INFO] - Starting training
+[2023-01-21 22:10:40,407][clip2mesh.optimizations.train_mapper][INFO] - Instantiating callback <pytorch_lightning.callbacks.ModelCheckpoint>
+[2023-01-21 22:10:40,408][clip2mesh.optimizations.train_mapper][INFO] - dataloader batch size: 200
+[2023-01-21 22:10:40,409][clip2mesh.optimizations.train_mapper][INFO] - tensorboard run name: flame_neutral_8_descriptors
+[2023-01-21 22:10:40,409][clip2mesh.optimizations.train_mapper][INFO] - instantiating model
+[2023-01-21 22:10:40,414][clip2mesh.optimizations.train_mapper][INFO] - training model
+[2023-01-21 22:10:55,751][clip2mesh.optimizations.train_mapper][INFO] - finished training in 15.352679967880249 seconds
+[2023-01-21 22:10:55,752][__main__][INFO] - Starting evaluation
+[2023-01-21 22:11:01,306][clip2mesh.data_management.data_observation.evaluate_performance][INFO] - IOU: 0.26910828025477707 | Overlap: 0.6084564147118448
+[2023-01-21 22:11:01,309][__main__][INFO] - Finished with 8 descriptors
+[2023-01-21 22:11:01,309][__main__][INFO] - Starting with 10 descriptors
+[2023-01-21 22:11:02,057][choosing_descriptors][INFO] - There are total of 10 descriptors
+[2023-01-21 22:11:02,058][choosing_descriptors][INFO] - Working on cluster 0
+[2023-01-21 22:11:02,059][choosing_descriptors][INFO] - 0 most variance descriptor - ears sticking-out
+[2023-01-21 22:11:02,059][choosing_descriptors][INFO] - Adding ears sticking-out to chosen descriptors
+[2023-01-21 22:11:02,059][choosing_descriptors][INFO] - 1 most variance descriptor - chubby cheeks
+[2023-01-21 22:11:02,060][choosing_descriptors][INFO] - chubby cheeks is correlated with ears sticking-out with corr -0.611327923917199
+[2023-01-21 22:11:02,060][choosing_descriptors][INFO] - 2 most variance descriptor - big mouth
+[2023-01-21 22:11:02,060][choosing_descriptors][INFO] - Adding big mouth to chosen descriptors
+[2023-01-21 22:11:02,060][choosing_descriptors][INFO] - currently chosen descriptors: {'ears sticking-out': {'variance': 0.4786706156246535}, 'big mouth': {'variance': 0.23328302654801417}}
+[2023-01-21 22:11:02,060][choosing_descriptors][INFO] - Finished cluster 0
+[2023-01-21 22:11:02,060][choosing_descriptors][INFO] - Working on cluster 2
+[2023-01-21 22:11:02,061][choosing_descriptors][INFO] - 0 most variance descriptor - fat
+[2023-01-21 22:11:02,061][choosing_descriptors][INFO] - Adding fat to chosen descriptors
+[2023-01-21 22:11:02,061][choosing_descriptors][INFO] - currently chosen descriptors: {'fat': {'variance': 0.5097797707085544}}
+[2023-01-21 22:11:02,061][choosing_descriptors][INFO] - Finished cluster 2
+[2023-01-21 22:11:02,061][choosing_descriptors][INFO] - Working on cluster 3
+[2023-01-21 22:11:02,061][choosing_descriptors][INFO] - 0 most variance descriptor - thin
+[2023-01-21 22:11:02,061][choosing_descriptors][INFO] - Adding thin to chosen descriptors
+[2023-01-21 22:11:02,061][choosing_descriptors][INFO] - currently chosen descriptors: {'thin': {'variance': 1.2125299531405125}}
+[2023-01-21 22:11:02,061][choosing_descriptors][INFO] - Finished cluster 3
+[2023-01-21 22:11:02,061][choosing_descriptors][INFO] - Working on cluster 4
+[2023-01-21 22:11:02,062][choosing_descriptors][INFO] - 0 most variance descriptor - long neck
+[2023-01-21 22:11:02,062][choosing_descriptors][INFO] - Adding long neck to chosen descriptors
+[2023-01-21 22:11:02,062][choosing_descriptors][INFO] - 1 most variance descriptor - long head
+[2023-01-21 22:11:02,062][choosing_descriptors][INFO] - long head is correlated with long neck with corr 0.8757543449564797
+[2023-01-21 22:11:02,062][choosing_descriptors][INFO] - 2 most variance descriptor - big forhead
+[2023-01-21 22:11:02,063][choosing_descriptors][INFO] - Adding big forhead to chosen descriptors
+[2023-01-21 22:11:02,063][choosing_descriptors][INFO] - 3 most variance descriptor - small chin
+[2023-01-21 22:11:02,064][choosing_descriptors][INFO] - Adding small chin to chosen descriptors
+[2023-01-21 22:11:02,064][choosing_descriptors][INFO] - 4 most variance descriptor - nose sticking-out
+[2023-01-21 22:11:02,064][choosing_descriptors][INFO] - nose sticking-out is correlated with long neck with corr 0.6065349830205996
+[2023-01-21 22:11:02,064][choosing_descriptors][INFO] - currently chosen descriptors: {'long neck': {'variance': 1.229582960183979}, 'big forhead': {'variance': 0.40178241967526285}, 'small chin': {'variance': 0.14107360869645102}}
+[2023-01-21 22:11:02,065][choosing_descriptors][INFO] - Finished cluster 4
+[2023-01-21 22:11:02,065][choosing_descriptors][INFO] - There are 7 chosen descriptors in initial filter
+[2023-01-21 22:11:02,065][choosing_descriptors][INFO] - chosen descriptors: [['ears sticking-out', 'big mouth'], ['fat'], ['thin'], ['long neck', 'big forhead', 'small chin'], []]
+[2023-01-21 22:11:02,065][choosing_descriptors][INFO] - Final filter
+[2023-01-21 22:11:02,066][choosing_descriptors][INFO] - Descriptor long neck has variance 1.229582960183979
+[2023-01-21 22:11:02,067][choosing_descriptors][INFO] - Descriptor long neck is correlated with big mouth with correlation 0.6167662045777805 - removing big mouth
+[2023-01-21 22:11:02,067][choosing_descriptors][INFO] - Descriptor long neck is correlated with ears sticking-out with correlation 0.8870348757322982 - removing ears sticking-out
+[2023-01-21 22:11:02,068][choosing_descriptors][INFO] - Descriptor long neck is correlated with thin with correlation 0.9406391553486161 - removing thin
+[2023-01-21 22:11:02,069][choosing_descriptors][INFO] - Descriptor fat has variance 0.5097797707085544
+[2023-01-21 22:11:02,071][choosing_descriptors][INFO] - Descriptor fat is correlated with small chin with correlation 0.5805732470000375 - removing small chin
+[2023-01-21 22:11:02,072][choosing_descriptors][INFO] - Descriptor big forhead has variance 0.40178241967526285
+[2023-01-21 22:11:02,073][choosing_descriptors][INFO] - Descriptor big forhead is correlated with big mouth with correlation 0.5874760239752619 - removing big mouth
+[2023-01-21 22:11:02,074][choosing_descriptors][INFO] - Descriptor big forhead is correlated with thin with correlation 0.6171284219884929 - removing thin
+[2023-01-21 22:11:02,077][__main__][INFO] - Chosen descriptors: ['ears sticking-out', 'big mouth', 'chubby cheeks', 'fat', 'thin', 'long neck', 'big forhead', 'small chin', 'long head', 'nose sticking-out']
+[2023-01-21 22:11:02,077][__main__][INFO] - Starting training
+[2023-01-21 22:11:02,087][clip2mesh.optimizations.train_mapper][INFO] - Instantiating callback <pytorch_lightning.callbacks.ModelCheckpoint>
+[2023-01-21 22:11:02,088][clip2mesh.optimizations.train_mapper][INFO] - dataloader batch size: 200
+[2023-01-21 22:11:02,089][clip2mesh.optimizations.train_mapper][INFO] - tensorboard run name: flame_neutral_10_descriptors
+[2023-01-21 22:11:02,089][clip2mesh.optimizations.train_mapper][INFO] - instantiating model
+[2023-01-21 22:11:02,094][clip2mesh.optimizations.train_mapper][INFO] - training model
+[2023-01-21 22:11:18,406][clip2mesh.optimizations.train_mapper][INFO] - finished training in 16.32772135734558 seconds
+[2023-01-21 22:11:18,406][__main__][INFO] - Starting evaluation
+[2023-01-21 22:11:25,375][clip2mesh.data_management.data_observation.evaluate_performance][INFO] - IOU: 0.22054140127388536 | Overlap: 0.6556867619639528
+[2023-01-21 22:11:25,378][__main__][INFO] - Finished with 10 descriptors
+[2023-01-21 22:11:25,747][__main__][INFO] - Finished descriptors ablation for flame neutral

@@ -522,7 +522,6 @@ class Utils:
 
     def _get_smplx_layer(self, gender: str, num_coeffs: int, get_smpl: bool):
         if get_smpl:
-            gender = "male"
             if gender == "male":
                 smplx_path = "/home/nadav2/dev/repos/Thesis/SMPL/smpl_male.pkl"
             elif gender == "female":
@@ -549,11 +548,19 @@ class Utils:
 
     @property
     def smplx_offset_tensor(self):
-        return torch.tensor([0.6, 0.7, 0.0], device=self.device)
+        return torch.tensor([0.0, 0.7, 0.0], device=self.device)
 
     @property
     def smplx_offset_numpy(self):
-        return np.array([0.6, 0.7, 0.0])
+        return np.array([0.0, 0.2, 0.0])
+
+    @property
+    def smpl_offset_numpy(self):
+        return np.array([0.0, 0.2, 0.0])
+
+    @property
+    def smpl_offset_tensor(self):
+        return torch.tensor([0.0, 0.2, 0.0], device=self.device)
 
     def get_smplx_model(
         self,
@@ -588,7 +595,8 @@ class Utils:
         else:
             verts = self.smplx_layer(**smplx_model.params).vertices
             verts = verts.detach().cpu().numpy()
-        verts = self.translate_mesh_smplx(verts.squeeze())
+        # verts = self.translate_mesh_smplx(verts.squeeze())
+        verts = verts.squeeze()
         if not hasattr(self, "vt_smplx") and not hasattr(self, "ft_smpl"):
             self._get_vt_ft("smplx")
 
@@ -1029,7 +1037,9 @@ class ModelsFactory:
             return Pytorch3dRenderer(**kwargs)
         return Open3dRenderer(**kwargs)
 
-    def get_random_params(self, with_face: bool = False, num_coeffs: int = 10, tall_data: bool = False) -> Dict[str, torch.tensor]:
+    def get_random_params(
+        self, with_face: bool = False, num_coeffs: int = 10, tall_data: bool = False
+    ) -> Dict[str, torch.tensor]:
         params = {}
         if self.model_type in ["smplx", "smpl"]:
             params["betas"] = self.utils.get_random_betas_smplx(num_coeffs, tall_data=tall_data)
@@ -1179,8 +1189,14 @@ class Image2ShapeUtils:
             body_pose = self.body_pose
         else:
             body_pose = None
-        smplx_out = self.utils.get_smplx_model(betas=betas, gender=gender, body_pose=body_pose, get_smpl=get_smpl)
-        return smplx_out
+        verts, faces, vt, ft = self.utils.get_smplx_model(
+            betas=betas, gender=gender, body_pose=body_pose, get_smpl=get_smpl
+        )
+        if get_smpl:
+            verts += self.utils.smpl_offset_numpy
+        else:
+            verts += self.utils.smplx_offset_numpy
+        return verts, faces, vt, ft
 
     def _get_flame_attributes(
         self, pred_vec: torch.Tensor, gender: Literal["male", "female", "neutral"]

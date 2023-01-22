@@ -206,26 +206,19 @@ class ChoosingDescriptors:
 
     def reduce_descriptor(self, dict_of_desctiptors: Dict[str, Dict[str, float]]) -> Dict[str, Dict[str, float]]:
         flattened_dict = self.flatten_dict_of_dicts(dict_of_desctiptors)
-        sorted_dict = sorted(flattened_dict, key=flattened_dict.get, reverse=True)
-        clusters_counter = {clutser: len(descriptors) for clutser, descriptors in dict_of_desctiptors.items()}
-        remove_idx = 0
-        while True:
-            max_iou_descriptor = sorted_dict[remove_idx]
-            cluster_of_descriptor = self.find_cluster_of_descriptor(max_iou_descriptor, dict_of_desctiptors)
-            all_clusters_have_one_descriptor = all(
-                [cluster_counter == 1 for cluster_counter in clusters_counter.values()]
-            )
-            if all_clusters_have_one_descriptor:
-                if self.verbose:
-                    self.logger.info(f"all clusters have one descriptor, that is the minimal number of descriptors")
-                return dict_of_desctiptors
-            if clusters_counter[cluster_of_descriptor] > 1:
-                break
-            else:
-                remove_idx += 1
+        sorted_dict = sorted(flattened_dict, key=flattened_dict.get, reverse=False)
+        minimal_var_descriptor = sorted_dict[0]
+        cluster_of_descriptor = self.find_cluster_of_descriptor(minimal_var_descriptor, dict_of_desctiptors)
         if self.verbose:
-            print(f"removing {max_iou_descriptor} from cluster {cluster_of_descriptor}")
-        del dict_of_desctiptors[cluster_of_descriptor][max_iou_descriptor]
+            print(f"removing {minimal_var_descriptor} from cluster {cluster_of_descriptor}")
+        del dict_of_desctiptors[cluster_of_descriptor][minimal_var_descriptor]
+
+        clusters_to_delete = []
+        for cluster in dict_of_desctiptors.keys():
+            if dict_of_desctiptors[cluster] == {}:
+                clusters_to_delete.append(cluster)
+        for cluster in clusters_to_delete:
+            del dict_of_desctiptors[cluster]
         return dict_of_desctiptors
 
     @staticmethod

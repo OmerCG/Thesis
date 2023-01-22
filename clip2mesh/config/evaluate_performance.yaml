@@ -1,12 +1,14 @@
 defaults:
     - renderer_kwargs: smplx
 
-out_path: /home/nadav2/dev/data/CLIP2Shape/outs/performance_evaluation/smplx_male
-model_path: /home/nadav2/dev/repos/Thesis/pre_production/smplx_male_new_algorithm.ckpt
+out_path: /home/nadav2/dev/data/CLIP2Shape/outs/descriptors_ablations/smplx_male_03
+model_path: /home/nadav2/dev/repos/Thesis/pre_production/smpl_male_new_algorithm.ckpt
 min_value: 15.0
 max_value: 30.0
-effect_threshold: 0.5
+effect_threshold: 0.2
 color_map: YlOrRd
+gender: male
+method: diff_coords
 
 optimize_feature: betas
 model_type: smplx

@@ -34,6 +34,7 @@ class BSOptimization:
         gender: Literal["male", "female", "neutral"] = "neutral",
         total_steps: int = 500,
         lr: float = 0.001,
+        loss_delta_threshold: float = 0.00001,
         fps: int = 10,
         device: str = "cuda" if torch.cuda.is_available() else "cpu",
         display: bool = False,
@@ -42,6 +43,7 @@ class BSOptimization:
         self.acumulated_3d_distance = []
         self.bs_dir = bs_dir
         self.num_coeffs = num_coeffs
+        self.loss_delta_threshold = loss_delta_threshold
         self.device = device
         self.total_steps = total_steps
         self.model_type = model_type
@@ -132,8 +134,14 @@ class BSOptimization:
         pred_model_kwargs = {self.optimizing_feature: pred_bs, "device": self.device, "gender": self.gender}
         gt_model_kwargs = {self.optimizing_feature: gt_bs, "device": self.device, "gender": self.gender}
 
-        pred_rendered_img = self.renderer.render_mesh(*self.three_dmm_model(**pred_model_kwargs))
-        gt_rendered_img = self.renderer.render_mesh(*self.three_dmm_model(**gt_model_kwargs))
+        pred_verts, pred_faces, pred_vt, pred_ft = self.three_dmm_model(**pred_model_kwargs)
+        gt_verts, gt_faces, gt_vt, gt_ft = self.three_dmm_model(**gt_model_kwargs)
+
+        pred_verts += self.utils.smplx_offset_tensor.to(self.device)
+        gt_verts += self.utils.smplx_offset_tensor.to(self.device)
+
+        pred_rendered_img = self.renderer.render_mesh(pred_verts, pred_faces, pred_vt, pred_ft)
+        gt_rendered_img = self.renderer.render_mesh(gt_verts, gt_faces, gt_vt, gt_ft)
 
         pred_rendered_img = self.adjust_rendered_img(pred_rendered_img.detach())
         gt_rendered_img = self.adjust_rendered_img(gt_rendered_img)
@@ -176,17 +184,16 @@ class BSOptimization:
         for img_path in Path(self.bs_dir).rglob("*.png"):
             self.logger.info(f"Optimizing {img_path.name}")
             bs_json_path = img_path.parent / f"{img_path.stem}.json"
-            labels_json_path = img_path.parent / f"{img_path.stem}_labels.json"
 
             if self.write_videos:
                 self._prepare_video_writer(self.output_dir / f"{img_path.stem}.mp4")
 
             gt = self._get_gt(bs_json_path)
-            sliders_values = self._get_sliders_values(labels_json_path)
 
             progress_bar = tqdm(range(self.total_steps), total=self.total_steps)
+            prev_loss = 0
 
-            for _ in progress_bar:
+            for step in progress_bar:
 
                 self.optimizer.zero_grad()
                 pred = self.clip2mesh_mapper(self.model().to(self.device))
@@ -199,17 +206,26 @@ class BSOptimization:
 
                 progress_bar.set_description(f"total loss: {loss.item()}")
 
+                loss_delta = abs(loss.item() - prev_loss)
+                prev_loss = loss.item()
+                if loss_delta < self.loss_delta_threshold:
+                    break
+
             if self.write_videos:
                 self.close_video_writer()
 
             geometric_dist = self.get_geometric_distance(pred, gt)
-            self.acumulated_3d_distance.append(geometric_dist)
             labels_to_print = {
                 label[0]: value for label, value in zip(self.labels, self.model().cpu().detach().numpy()[0])
             }
+            with open(self.output_dir / f"{img_path.stem}.txt", "w") as f:
+                f.write(
+                    f"Geometric dist: {geometric_dist}\npred: {pred.cpu().detach().numpy()[0]}\ngt: {gt.cpu().detach().numpy()[0]}\nnum steps: {step}\nPred sliders values {labels_to_print}"
+                )
+
+            self.acumulated_3d_distance.append(geometric_dist)
             self.logger.info(f"Finished optimizing {img_path.name}")
             self.logger.info(f"Pred sliders values {labels_to_print}")
-            self.logger.info(f"acctual sliders values {sliders_values}")
             self.logger.info(f"Geometric distance: {self.acumulated_3d_distance}")
             print()
 
