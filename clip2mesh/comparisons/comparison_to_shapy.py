@@ -209,7 +209,7 @@ class CompareToShapy:
         # get shapy rendered image
         shapy_mesh_kwargs = self._get_smplx_kwargs(
             shapy_shape_tensor,
-            gender=gender,
+            gender="neutral",
             body_pose=body_pose,
             global_orient=global_orient,
             transl=transl,

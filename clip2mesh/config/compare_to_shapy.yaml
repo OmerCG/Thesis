@@ -10,5 +10,5 @@ smplx_models_paths:
   smplx_female: /home/nadav2/dev/repos/Thesis/pre_production/smplx_female_10_descriptors.ckpt
   
 renderer_kwargs:
-    img_size: [1024, 1024]
+    img_size: [512, 512]
     tex_path:

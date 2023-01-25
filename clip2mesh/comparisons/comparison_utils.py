@@ -104,9 +104,9 @@ class ComparisonUtils(Image2ShapeUtils):
         """Get the smplx kwargs for the different methods -> (vertices, faces, vt, ft)"""
         smplx_kwargs = {}
         for method, body_shape in body_shapes.items():
-            get_smpl = True if method in ["spin", "gt"] else False
-            gender = "neutral" if method == "gt" else gender
-            smplx_kwargs[method] = self._get_smplx_attributes(body_shape, gender, get_smpl=get_smpl)
+            get_smpl = True if method in ["spin"] else False
+            fixed_gender = "neutral" if method == "gt" else gender
+            smplx_kwargs[method] = self._get_smplx_attributes(body_shape, fixed_gender, get_smpl=get_smpl)
         return smplx_kwargs
 
     def get_meshes_from_shapes(

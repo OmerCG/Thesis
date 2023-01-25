@@ -1,0 +1,29 @@
+[2023-01-24 18:45:41,392][__main__][INFO] - Starting optimization for smplx betas
+[2023-01-24 18:45:41,393][__main__][INFO] - labels: [['fat'], ['muscular'], ['petite'], ['long'], ['rectangular'], ['attractive']]
+[2023-01-24 18:45:41,393][__main__][INFO] - Optimizing 7.png
+[2023-01-24 18:45:41,393][__main__][INFO] - Video for 7.png already exists
+[2023-01-24 18:45:41,393][__main__][INFO] - Optimizing 2.png
+[2023-01-24 18:45:41,393][__main__][INFO] - Video for 2.png already exists
+[2023-01-24 18:45:41,393][__main__][INFO] - Optimizing 9.png
+[2023-01-24 18:45:41,393][__main__][INFO] - Video for 9.png already exists
+[2023-01-24 18:45:41,393][__main__][INFO] - Optimizing 0.png
+[2023-01-24 18:45:41,393][__main__][INFO] - Video for 0.png already exists
+[2023-01-24 18:45:41,393][__main__][INFO] - Optimizing 6.png
+[2023-01-24 18:45:41,393][__main__][INFO] - Video for 6.png already exists
+[2023-01-24 18:45:41,394][__main__][INFO] - Optimizing 4.png
+[2023-01-24 18:45:41,394][__main__][INFO] - Video for 4.png already exists
+[2023-01-24 18:45:41,394][__main__][INFO] - Optimizing 1.png
+[2023-01-24 18:45:41,394][__main__][INFO] - Writing video to /home/nadav2/dev/data/CLIP2Shape/outs/sliders_vs_blendshapes/smplx_male/data_amount_ablation/smplx_male_singleview_10K/1.mp4
+[2023-01-24 18:53:08,667][__main__][INFO] - Finished optimizing 1.png
+[2023-01-24 18:53:08,668][__main__][INFO] - Pred sliders values {'fat': -4.6255903, 'muscular': 17.347258, 'petite': -12.394624, 'long': -4.07201, 'rectangular': -16.169966, 'attractive': -3.5906026}
+[2023-01-24 18:53:08,668][__main__][INFO] - Geometric distance: [0.03146055340766907]
+[2023-01-24 18:53:08,669][__main__][INFO] - Optimizing 3.png
+[2023-01-24 18:53:08,669][__main__][INFO] - Writing video to /home/nadav2/dev/data/CLIP2Shape/outs/sliders_vs_blendshapes/smplx_male/data_amount_ablation/smplx_male_singleview_10K/3.mp4
+[2023-01-24 18:55:41,533][__main__][INFO] - Finished optimizing 3.png
+[2023-01-24 18:55:41,533][__main__][INFO] - Pred sliders values {'fat': -4.4613347, 'muscular': 10.367805, 'petite': -7.6663985, 'long': -3.7180066, 'rectangular': -9.667932, 'attractive': -5.265974}
+[2023-01-24 18:55:41,533][__main__][INFO] - Geometric distance: [0.03146055340766907, 0.02399352379143238]
+[2023-01-24 18:55:41,533][__main__][INFO] - Optimizing 5.png
+[2023-01-24 18:55:41,533][__main__][INFO] - Writing video to /home/nadav2/dev/data/CLIP2Shape/outs/sliders_vs_blendshapes/smplx_male/data_amount_ablation/smplx_male_singleview_10K/5.mp4
+[2023-01-24 19:03:29,979][__main__][INFO] - Finished optimizing 5.png
+[2023-01-24 19:03:29,979][__main__][INFO] - Pred sliders values {'fat': 5.9111104, 'muscular': 31.635845, 'petite': -20.690573, 'long': -25.84029, 'rectangular': 2.2695458, 'attractive': 15.687013}
+[2023-01-24 19:03:29,979][__main__][INFO] - Geometric distance: [0.03146055340766907, 0.02399352379143238, 0.01566389575600624]

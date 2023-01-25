@@ -26,6 +26,7 @@ class BSOptimization:
         self,
         bs_dir: str,
         model_path: str,
+        model_paths: List[str],
         num_coeffs: int,
         output_dir: str,
         renderer_kwargs: Dict[str, Any],
@@ -179,11 +180,13 @@ class BSOptimization:
 
     def optimize(self):
 
-        max_images = 10
-        images_count = 0
         for img_path in Path(self.bs_dir).rglob("*.png"):
             self.logger.info(f"Optimizing {img_path.name}")
             bs_json_path = img_path.parent / f"{img_path.stem}.json"
+
+            if (self.output_dir / f"{img_path.stem}.mp4").exists():
+                self.logger.info(f"Video for {img_path.name} already exists")
+                continue
 
             if self.write_videos:
                 self._prepare_video_writer(self.output_dir / f"{img_path.stem}.mp4")
@@ -229,16 +232,17 @@ class BSOptimization:
             self.logger.info(f"Geometric distance: {self.acumulated_3d_distance}")
             print()
 
-            images_count += 1
-            if images_count == max_images:
-
-                break
-
 
 @hydra.main(config_path="../config", config_name="sliders_vs_blendshapes")
 def main(cfg: DictConfig):
-    bs_optimization = BSOptimization(**cfg)
-    bs_optimization.optimize()
+    root_output_path = Path(cfg["output_dir"])
+    for model_path in cfg["model_paths"]:
+        print("Optimizing", model_path)
+        output_path = root_output_path / model_path.split("/")[-1].replace(".ckpt", "")
+        output_path.mkdir(parents=True, exist_ok=True)
+        cfg["output_dir"] = output_path.as_posix()
+        bs_optimization = BSOptimization(model_path=model_path, **cfg)
+        bs_optimization.optimize()
 
 
 if __name__ == "__main__":

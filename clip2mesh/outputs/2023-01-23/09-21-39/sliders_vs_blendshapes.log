@@ -1,0 +1,9 @@
+[2023-01-23 09:21:41,529][__main__][INFO] - Starting optimization for smplx betas
+[2023-01-23 09:21:41,529][__main__][INFO] - labels: [['fat'], ['muscular'], ['petite'], ['long'], ['rectangular'], ['attractive']]
+[2023-01-23 09:21:41,530][__main__][INFO] - Optimizing 7.png
+[2023-01-23 09:21:41,530][__main__][INFO] - Writing video to /home/nadav2/dev/data/CLIP2Shape/outs/sliders_vs_blendshapes/smplx_male/data_amount_ablation/smplx_male_multiview_500/7.mp4
+[2023-01-23 09:26:34,361][__main__][INFO] - Finished optimizing 7.png
+[2023-01-23 09:26:34,362][__main__][INFO] - Pred sliders values {'fat': 3.9219167, 'muscular': 6.6242766, 'petite': -4.2729383, 'long': 5.6540513, 'rectangular': 3.350951, 'attractive': -5.679688}
+[2023-01-23 09:26:34,362][__main__][INFO] - Geometric distance: [0.0053946152329444885]
+[2023-01-23 09:26:34,362][__main__][INFO] - Optimizing 2.png
+[2023-01-23 09:26:34,362][__main__][INFO] - Writing video to /home/nadav2/dev/data/CLIP2Shape/outs/sliders_vs_blendshapes/smplx_male/data_amount_ablation/smplx_male_multiview_500/2.mp4

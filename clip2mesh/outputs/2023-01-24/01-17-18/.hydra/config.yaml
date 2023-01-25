@@ -1,0 +1,23 @@
+renderer_kwargs:
+  dist: 4.2
+  elev: 10.0
+  azim: 0.0
+  img_size:
+  - 1024
+  - 1024
+  tex_path: null
+bs_dir: /home/nadav2/dev/data/CLIP2Shape/outs/sliders_vs_blendshapes/images_to_fit
+model_paths:
+- /home/nadav2/dev/repos/Thesis/pre_production/smplx_male_multiview_3k.ckpt
+- /home/nadav2/dev/repos/Thesis/pre_production/smplx_male_multiview_7K.ckpt
+- /home/nadav2/dev/repos/Thesis/pre_production/smplx_male_multiview_10K.ckpt
+- /home/nadav2/dev/repos/Thesis/pre_production/smplx_male_singleview_10K.ckpt
+output_dir: /home/nadav2/dev/data/CLIP2Shape/outs/sliders_vs_blendshapes/smplx_male/data_amount_ablation
+gender: male
+num_coeffs: 10
+optimizing_feature: betas
+model_type: smplx
+display: true
+write_videos: true
+total_steps: 5000
+lr: 0.01

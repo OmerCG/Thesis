@@ -37,20 +37,10 @@ class DataCreator:
         # utils
         self.utils: Utils = Utils()
         self.models_factory: ModelsFactory = ModelsFactory(self.model_type)
-        renderer_kwargs: Dict[str, Any] = self._get_renderer_kwargs(renderer_kwargs)
         self._load_renderer(renderer_kwargs)
 
     def _load_renderer(self, kwargs):
         self.renderer: Union[Pytorch3dRenderer, Open3dRenderer] = self.models_factory.get_renderer(**kwargs)
-
-    def _get_renderer_kwargs(self, renderer_kwargs: DictConfig):
-        if self.renderer_type == "open3d":
-            raise NotImplementedError  # TODO: implement open3d renderer
-        else:
-            renderer_kwargs = {"py3d": True}
-            renderer_kwargs.update(renderer_kwargs)
-
-        return renderer_kwargs
 
     def __call__(self):
         # start creating data

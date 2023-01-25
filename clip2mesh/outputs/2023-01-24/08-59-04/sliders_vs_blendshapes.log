@@ -1,0 +1,175 @@
+[2023-01-24 08:59:08,530][__main__][INFO] - Starting optimization for smplx betas
+[2023-01-24 08:59:08,530][__main__][INFO] - labels: [['fat'], ['muscular'], ['petite'], ['long'], ['rectangular'], ['attractive']]
+[2023-01-24 08:59:08,530][__main__][INFO] - Optimizing 7.png
+[2023-01-24 08:59:08,531][__main__][INFO] - Writing video to /home/nadav2/dev/data/CLIP2Shape/outs/sliders_vs_blendshapes/smplx_male/data_amount_ablation/smplx_male_multiview_3k/7.mp4
+[2023-01-24 09:04:24,893][__main__][INFO] - Finished optimizing 7.png
+[2023-01-24 09:04:24,893][__main__][INFO] - Pred sliders values {'fat': -4.033391, 'muscular': 12.300927, 'petite': 0.5077034, 'long': 1.1465073, 'rectangular': 12.8207245, 'attractive': 3.8555949}
+[2023-01-24 09:04:24,893][__main__][INFO] - Geometric distance: [0.01718638651072979]
+[2023-01-24 09:04:24,893][__main__][INFO] - Optimizing 2.png
+[2023-01-24 09:04:24,893][__main__][INFO] - Writing video to /home/nadav2/dev/data/CLIP2Shape/outs/sliders_vs_blendshapes/smplx_male/data_amount_ablation/smplx_male_multiview_3k/2.mp4
+[2023-01-24 09:11:24,383][__main__][INFO] - Finished optimizing 2.png
+[2023-01-24 09:11:24,383][__main__][INFO] - Pred sliders values {'fat': -5.733671, 'muscular': 19.37605, 'petite': -5.675883, 'long': 6.9194174, 'rectangular': 20.553957, 'attractive': -16.678164}
+[2023-01-24 09:11:24,383][__main__][INFO] - Geometric distance: [0.01718638651072979, 0.014168876223266125]
+[2023-01-24 09:11:24,383][__main__][INFO] - Optimizing 9.png
+[2023-01-24 09:11:24,384][__main__][INFO] - Writing video to /home/nadav2/dev/data/CLIP2Shape/outs/sliders_vs_blendshapes/smplx_male/data_amount_ablation/smplx_male_multiview_3k/9.mp4
+[2023-01-24 09:16:51,036][__main__][INFO] - Finished optimizing 9.png
+[2023-01-24 09:16:51,036][__main__][INFO] - Pred sliders values {'fat': -6.6997447, 'muscular': -0.79217887, 'petite': 5.2958994, 'long': 0.9900285, 'rectangular': 13.770465, 'attractive': -19.979336}
+[2023-01-24 09:16:51,036][__main__][INFO] - Geometric distance: [0.01718638651072979, 0.014168876223266125, 0.0379670150578022]
+[2023-01-24 09:16:51,036][__main__][INFO] - Optimizing 0.png
+[2023-01-24 09:16:51,036][__main__][INFO] - Writing video to /home/nadav2/dev/data/CLIP2Shape/outs/sliders_vs_blendshapes/smplx_male/data_amount_ablation/smplx_male_multiview_3k/0.mp4
+[2023-01-24 09:30:37,795][__main__][INFO] - Finished optimizing 0.png
+[2023-01-24 09:30:37,796][__main__][INFO] - Pred sliders values {'fat': 29.085976, 'muscular': 8.85334, 'petite': -1.7132907, 'long': 25.052578, 'rectangular': 5.010286, 'attractive': -24.646246}
+[2023-01-24 09:30:37,796][__main__][INFO] - Geometric distance: [0.01718638651072979, 0.014168876223266125, 0.0379670150578022, 0.027470998466014862]
+[2023-01-24 09:30:37,796][__main__][INFO] - Optimizing 6.png
+[2023-01-24 09:30:37,796][__main__][INFO] - Writing video to /home/nadav2/dev/data/CLIP2Shape/outs/sliders_vs_blendshapes/smplx_male/data_amount_ablation/smplx_male_multiview_3k/6.mp4
+[2023-01-24 09:35:46,037][__main__][INFO] - Finished optimizing 6.png
+[2023-01-24 09:35:46,037][__main__][INFO] - Pred sliders values {'fat': 17.415932, 'muscular': 1.3347409, 'petite': -3.862328, 'long': 15.112565, 'rectangular': 21.974604, 'attractive': -3.6570613}
+[2023-01-24 09:35:46,037][__main__][INFO] - Geometric distance: [0.01718638651072979, 0.014168876223266125, 0.0379670150578022, 0.027470998466014862, 0.01339602842926979]
+[2023-01-24 09:35:46,037][__main__][INFO] - Optimizing 4.png
+[2023-01-24 09:35:46,037][__main__][INFO] - Writing video to /home/nadav2/dev/data/CLIP2Shape/outs/sliders_vs_blendshapes/smplx_male/data_amount_ablation/smplx_male_multiview_3k/4.mp4
+[2023-01-24 09:43:35,884][__main__][INFO] - Finished optimizing 4.png
+[2023-01-24 09:43:35,884][__main__][INFO] - Pred sliders values {'fat': 21.463156, 'muscular': 13.210698, 'petite': -6.412171, 'long': 10.792468, 'rectangular': 22.186356, 'attractive': 21.518518}
+[2023-01-24 09:43:35,884][__main__][INFO] - Geometric distance: [0.01718638651072979, 0.014168876223266125, 0.0379670150578022, 0.027470998466014862, 0.01339602842926979, 0.010393569245934486]
+[2023-01-24 09:43:35,884][__main__][INFO] - Optimizing 1.png
+[2023-01-24 09:43:35,884][__main__][INFO] - Writing video to /home/nadav2/dev/data/CLIP2Shape/outs/sliders_vs_blendshapes/smplx_male/data_amount_ablation/smplx_male_multiview_3k/1.mp4
+[2023-01-24 09:51:26,991][__main__][INFO] - Finished optimizing 1.png
+[2023-01-24 09:51:26,991][__main__][INFO] - Pred sliders values {'fat': 9.735142, 'muscular': -4.892526, 'petite': -13.471885, 'long': 22.94048, 'rectangular': 16.680075, 'attractive': 20.330145}
+[2023-01-24 09:51:26,991][__main__][INFO] - Geometric distance: [0.01718638651072979, 0.014168876223266125, 0.0379670150578022, 0.027470998466014862, 0.01339602842926979, 0.010393569245934486, 0.008691147901117802]
+[2023-01-24 09:51:26,991][__main__][INFO] - Optimizing 3.png
+[2023-01-24 09:51:26,991][__main__][INFO] - Writing video to /home/nadav2/dev/data/CLIP2Shape/outs/sliders_vs_blendshapes/smplx_male/data_amount_ablation/smplx_male_multiview_3k/3.mp4
+[2023-01-24 09:55:33,668][__main__][INFO] - Finished optimizing 3.png
+[2023-01-24 09:55:33,668][__main__][INFO] - Pred sliders values {'fat': 11.4487, 'muscular': 8.623507, 'petite': 2.4383323, 'long': 13.026741, 'rectangular': 1.2742473, 'attractive': 22.747746}
+[2023-01-24 09:55:33,668][__main__][INFO] - Geometric distance: [0.01718638651072979, 0.014168876223266125, 0.0379670150578022, 0.027470998466014862, 0.01339602842926979, 0.010393569245934486, 0.008691147901117802, 0.03350379317998886]
+[2023-01-24 09:55:33,668][__main__][INFO] - Optimizing 5.png
+[2023-01-24 09:55:33,668][__main__][INFO] - Writing video to /home/nadav2/dev/data/CLIP2Shape/outs/sliders_vs_blendshapes/smplx_male/data_amount_ablation/smplx_male_multiview_3k/5.mp4
+[2023-01-24 10:09:24,986][__main__][INFO] - Finished optimizing 5.png
+[2023-01-24 10:09:24,987][__main__][INFO] - Pred sliders values {'fat': 26.570744, 'muscular': 42.30131, 'petite': 8.954831, 'long': -3.8619275, 'rectangular': 30.087961, 'attractive': 69.23281}
+[2023-01-24 10:09:24,987][__main__][INFO] - Geometric distance: [0.01718638651072979, 0.014168876223266125, 0.0379670150578022, 0.027470998466014862, 0.01339602842926979, 0.010393569245934486, 0.008691147901117802, 0.03350379317998886, 0.009362619370222092]
+[2023-01-24 10:09:25,004][__main__][INFO] - Starting optimization for smplx betas
+[2023-01-24 10:09:25,004][__main__][INFO] - labels: [['fat'], ['muscular'], ['petite'], ['long'], ['rectangular'], ['attractive']]
+[2023-01-24 10:09:25,004][__main__][INFO] - Optimizing 7.png
+[2023-01-24 10:09:25,004][__main__][INFO] - Writing video to /home/nadav2/dev/data/CLIP2Shape/outs/sliders_vs_blendshapes/smplx_male/data_amount_ablation/smplx_male_multiview_7K/7.mp4
+[2023-01-24 10:23:02,183][__main__][INFO] - Finished optimizing 7.png
+[2023-01-24 10:23:02,184][__main__][INFO] - Pred sliders values {'fat': -1.688796, 'muscular': -5.782271, 'petite': -14.395139, 'long': 1.7342612, 'rectangular': 31.644733, 'attractive': -9.122623}
+[2023-01-24 10:23:02,184][__main__][INFO] - Geometric distance: [0.01685134880244732]
+[2023-01-24 10:23:02,184][__main__][INFO] - Optimizing 2.png
+[2023-01-24 10:23:02,184][__main__][INFO] - Writing video to /home/nadav2/dev/data/CLIP2Shape/outs/sliders_vs_blendshapes/smplx_male/data_amount_ablation/smplx_male_multiview_7K/2.mp4
+[2023-01-24 10:27:34,361][__main__][INFO] - Finished optimizing 2.png
+[2023-01-24 10:27:34,361][__main__][INFO] - Pred sliders values {'fat': 5.108893, 'muscular': 6.6819654, 'petite': -11.118117, 'long': 1.4500691, 'rectangular': 42.760906, 'attractive': -0.74165225}
+[2023-01-24 10:27:34,361][__main__][INFO] - Geometric distance: [0.01685134880244732, 0.028594153001904488]
+[2023-01-24 10:27:34,361][__main__][INFO] - Optimizing 9.png
+[2023-01-24 10:27:34,362][__main__][INFO] - Writing video to /home/nadav2/dev/data/CLIP2Shape/outs/sliders_vs_blendshapes/smplx_male/data_amount_ablation/smplx_male_multiview_7K/9.mp4
+[2023-01-24 10:33:35,068][__main__][INFO] - Finished optimizing 9.png
+[2023-01-24 10:33:35,068][__main__][INFO] - Pred sliders values {'fat': 7.55341, 'muscular': -3.5142076, 'petite': 7.9542847, 'long': 2.811065, 'rectangular': 26.788221, 'attractive': 0.58367914}
+[2023-01-24 10:33:35,068][__main__][INFO] - Geometric distance: [0.01685134880244732, 0.028594153001904488, 0.028273163363337517]
+[2023-01-24 10:33:35,068][__main__][INFO] - Optimizing 0.png
+[2023-01-24 10:33:35,068][__main__][INFO] - Writing video to /home/nadav2/dev/data/CLIP2Shape/outs/sliders_vs_blendshapes/smplx_male/data_amount_ablation/smplx_male_multiview_7K/0.mp4
+[2023-01-24 10:47:36,411][__main__][INFO] - Finished optimizing 0.png
+[2023-01-24 10:47:36,412][__main__][INFO] - Pred sliders values {'fat': 30.58768, 'muscular': 20.91358, 'petite': 2.329944, 'long': 16.54622, 'rectangular': 28.608925, 'attractive': -8.121784}
+[2023-01-24 10:47:36,412][__main__][INFO] - Geometric distance: [0.01685134880244732, 0.028594153001904488, 0.028273163363337517, 0.013942064717411995]
+[2023-01-24 10:47:36,412][__main__][INFO] - Optimizing 6.png
+[2023-01-24 10:47:36,412][__main__][INFO] - Writing video to /home/nadav2/dev/data/CLIP2Shape/outs/sliders_vs_blendshapes/smplx_male/data_amount_ablation/smplx_male_multiview_7K/6.mp4
+[2023-01-24 10:53:20,886][__main__][INFO] - Finished optimizing 6.png
+[2023-01-24 10:53:20,886][__main__][INFO] - Pred sliders values {'fat': 17.665968, 'muscular': 13.505661, 'petite': 11.060438, 'long': 17.769392, 'rectangular': 8.536622, 'attractive': 10.38163}
+[2023-01-24 10:53:20,886][__main__][INFO] - Geometric distance: [0.01685134880244732, 0.028594153001904488, 0.028273163363337517, 0.013942064717411995, 0.023605674505233765]
+[2023-01-24 10:53:20,886][__main__][INFO] - Optimizing 4.png
+[2023-01-24 10:53:20,886][__main__][INFO] - Writing video to /home/nadav2/dev/data/CLIP2Shape/outs/sliders_vs_blendshapes/smplx_male/data_amount_ablation/smplx_male_multiview_7K/4.mp4
+[2023-01-24 10:53:32,433][__main__][INFO] - Finished optimizing 4.png
+[2023-01-24 10:53:32,433][__main__][INFO] - Pred sliders values {'fat': 18.760914, 'muscular': 12.54052, 'petite': 9.276564, 'long': 19.969791, 'rectangular': 8.366684, 'attractive': 10.864044}
+[2023-01-24 10:53:32,433][__main__][INFO] - Geometric distance: [0.01685134880244732, 0.028594153001904488, 0.028273163363337517, 0.013942064717411995, 0.023605674505233765, 0.01700478605926037]
+[2023-01-24 10:53:32,433][__main__][INFO] - Optimizing 1.png
+[2023-01-24 10:53:32,433][__main__][INFO] - Writing video to /home/nadav2/dev/data/CLIP2Shape/outs/sliders_vs_blendshapes/smplx_male/data_amount_ablation/smplx_male_multiview_7K/1.mp4
+[2023-01-24 10:55:49,190][__main__][INFO] - Finished optimizing 1.png
+[2023-01-24 10:55:49,190][__main__][INFO] - Pred sliders values {'fat': 13.23257, 'muscular': 5.236345, 'petite': 10.613001, 'long': 26.819912, 'rectangular': 12.845393, 'attractive': 12.383505}
+[2023-01-24 10:55:49,191][__main__][INFO] - Geometric distance: [0.01685134880244732, 0.028594153001904488, 0.028273163363337517, 0.013942064717411995, 0.023605674505233765, 0.01700478605926037, 0.01836611144244671]
+[2023-01-24 10:55:49,191][__main__][INFO] - Optimizing 3.png
+[2023-01-24 10:55:49,191][__main__][INFO] - Writing video to /home/nadav2/dev/data/CLIP2Shape/outs/sliders_vs_blendshapes/smplx_male/data_amount_ablation/smplx_male_multiview_7K/3.mp4
+[2023-01-24 10:59:46,296][__main__][INFO] - Finished optimizing 3.png
+[2023-01-24 10:59:46,297][__main__][INFO] - Pred sliders values {'fat': 12.769246, 'muscular': 17.420748, 'petite': 11.144023, 'long': 22.021229, 'rectangular': 14.168154, 'attractive': 2.459026}
+[2023-01-24 10:59:46,297][__main__][INFO] - Geometric distance: [0.01685134880244732, 0.028594153001904488, 0.028273163363337517, 0.013942064717411995, 0.023605674505233765, 0.01700478605926037, 0.01836611144244671, 0.023116780444979668]
+[2023-01-24 10:59:46,297][__main__][INFO] - Optimizing 5.png
+[2023-01-24 10:59:46,297][__main__][INFO] - Writing video to /home/nadav2/dev/data/CLIP2Shape/outs/sliders_vs_blendshapes/smplx_male/data_amount_ablation/smplx_male_multiview_7K/5.mp4
+[2023-01-24 11:01:12,285][__main__][INFO] - Finished optimizing 5.png
+[2023-01-24 11:01:12,285][__main__][INFO] - Pred sliders values {'fat': 15.944558, 'muscular': 24.049526, 'petite': 10.146993, 'long': 14.905855, 'rectangular': 8.624727, 'attractive': 6.13633}
+[2023-01-24 11:01:12,286][__main__][INFO] - Geometric distance: [0.01685134880244732, 0.028594153001904488, 0.028273163363337517, 0.013942064717411995, 0.023605674505233765, 0.01700478605926037, 0.01836611144244671, 0.023116780444979668, 0.024791056290268898]
+[2023-01-24 11:01:12,333][__main__][INFO] - Starting optimization for smplx betas
+[2023-01-24 11:01:12,333][__main__][INFO] - labels: [['fat'], ['muscular'], ['petite'], ['long'], ['rectangular'], ['attractive']]
+[2023-01-24 11:01:12,333][__main__][INFO] - Optimizing 7.png
+[2023-01-24 11:01:12,334][__main__][INFO] - Writing video to /home/nadav2/dev/data/CLIP2Shape/outs/sliders_vs_blendshapes/smplx_male/data_amount_ablation/smplx_male_multiview_10K/7.mp4
+[2023-01-24 11:12:13,012][__main__][INFO] - Finished optimizing 7.png
+[2023-01-24 11:12:13,012][__main__][INFO] - Pred sliders values {'fat': -12.354691, 'muscular': -26.531471, 'petite': -22.174788, 'long': 11.272118, 'rectangular': 4.257671, 'attractive': -3.608104}
+[2023-01-24 11:12:13,012][__main__][INFO] - Geometric distance: [0.02356027439236641]
+[2023-01-24 11:12:13,012][__main__][INFO] - Optimizing 2.png
+[2023-01-24 11:12:13,012][__main__][INFO] - Writing video to /home/nadav2/dev/data/CLIP2Shape/outs/sliders_vs_blendshapes/smplx_male/data_amount_ablation/smplx_male_multiview_10K/2.mp4
+[2023-01-24 11:14:34,460][__main__][INFO] - Finished optimizing 2.png
+[2023-01-24 11:14:34,461][__main__][INFO] - Pred sliders values {'fat': -15.139791, 'muscular': -20.205942, 'petite': -21.18803, 'long': 1.6595542, 'rectangular': -0.11560606, 'attractive': -7.975004}
+[2023-01-24 11:14:34,461][__main__][INFO] - Geometric distance: [0.02356027439236641, 0.03145766630768776]
+[2023-01-24 11:14:34,461][__main__][INFO] - Optimizing 9.png
+[2023-01-24 11:14:34,461][__main__][INFO] - Writing video to /home/nadav2/dev/data/CLIP2Shape/outs/sliders_vs_blendshapes/smplx_male/data_amount_ablation/smplx_male_multiview_10K/9.mp4
+[2023-01-24 11:28:03,380][__main__][INFO] - Finished optimizing 9.png
+[2023-01-24 11:28:03,380][__main__][INFO] - Pred sliders values {'fat': -6.523601, 'muscular': -5.440607, 'petite': 20.691254, 'long': -15.565728, 'rectangular': 28.82186, 'attractive': 5.3989253}
+[2023-01-24 11:28:03,380][__main__][INFO] - Geometric distance: [0.02356027439236641, 0.03145766630768776, 0.007872584275901318]
+[2023-01-24 11:28:03,380][__main__][INFO] - Optimizing 0.png
+[2023-01-24 11:28:03,381][__main__][INFO] - Writing video to /home/nadav2/dev/data/CLIP2Shape/outs/sliders_vs_blendshapes/smplx_male/data_amount_ablation/smplx_male_multiview_10K/0.mp4
+[2023-01-24 11:36:11,652][__main__][INFO] - Finished optimizing 0.png
+[2023-01-24 11:36:11,653][__main__][INFO] - Pred sliders values {'fat': 13.54049, 'muscular': -19.793907, 'petite': 2.3330986, 'long': -3.396094, 'rectangular': 12.404753, 'attractive': 4.8108196}
+[2023-01-24 11:36:11,653][__main__][INFO] - Geometric distance: [0.02356027439236641, 0.03145766630768776, 0.007872584275901318, 0.020077448338270187]
+[2023-01-24 11:36:11,653][__main__][INFO] - Optimizing 6.png
+[2023-01-24 11:36:11,653][__main__][INFO] - Writing video to /home/nadav2/dev/data/CLIP2Shape/outs/sliders_vs_blendshapes/smplx_male/data_amount_ablation/smplx_male_multiview_10K/6.mp4
+[2023-01-24 11:42:23,232][__main__][INFO] - Finished optimizing 6.png
+[2023-01-24 11:42:23,232][__main__][INFO] - Pred sliders values {'fat': 12.746062, 'muscular': -9.185132, 'petite': 2.2085907, 'long': 1.8947643, 'rectangular': 15.304706, 'attractive': 19.626392}
+[2023-01-24 11:42:23,232][__main__][INFO] - Geometric distance: [0.02356027439236641, 0.03145766630768776, 0.007872584275901318, 0.020077448338270187, 0.01876392588019371]
+[2023-01-24 11:42:23,232][__main__][INFO] - Optimizing 4.png
+[2023-01-24 11:42:23,233][__main__][INFO] - Writing video to /home/nadav2/dev/data/CLIP2Shape/outs/sliders_vs_blendshapes/smplx_male/data_amount_ablation/smplx_male_multiview_10K/4.mp4
+[2023-01-24 11:46:10,261][__main__][INFO] - Finished optimizing 4.png
+[2023-01-24 11:46:10,261][__main__][INFO] - Pred sliders values {'fat': 18.376228, 'muscular': -11.43763, 'petite': 0.58250374, 'long': 9.856138, 'rectangular': 14.673535, 'attractive': 27.765785}
+[2023-01-24 11:46:10,261][__main__][INFO] - Geometric distance: [0.02356027439236641, 0.03145766630768776, 0.007872584275901318, 0.020077448338270187, 0.01876392588019371, 0.013729501515626907]
+[2023-01-24 11:46:10,261][__main__][INFO] - Optimizing 1.png
+[2023-01-24 11:46:10,261][__main__][INFO] - Writing video to /home/nadav2/dev/data/CLIP2Shape/outs/sliders_vs_blendshapes/smplx_male/data_amount_ablation/smplx_male_multiview_10K/1.mp4
+[2023-01-24 11:47:49,786][__main__][INFO] - Finished optimizing 1.png
+[2023-01-24 11:47:49,786][__main__][INFO] - Pred sliders values {'fat': 11.232092, 'muscular': -6.9746275, 'petite': 8.296411, 'long': 19.524088, 'rectangular': 18.556921, 'attractive': 20.094992}
+[2023-01-24 11:47:49,786][__main__][INFO] - Geometric distance: [0.02356027439236641, 0.03145766630768776, 0.007872584275901318, 0.020077448338270187, 0.01876392588019371, 0.013729501515626907, 0.02317005768418312]
+[2023-01-24 11:47:49,786][__main__][INFO] - Optimizing 3.png
+[2023-01-24 11:47:49,787][__main__][INFO] - Writing video to /home/nadav2/dev/data/CLIP2Shape/outs/sliders_vs_blendshapes/smplx_male/data_amount_ablation/smplx_male_multiview_10K/3.mp4
+[2023-01-24 12:02:38,673][__main__][INFO] - Finished optimizing 3.png
+[2023-01-24 12:02:38,674][__main__][INFO] - Pred sliders values {'fat': 5.053338, 'muscular': 18.058329, 'petite': 20.829472, 'long': 17.106987, 'rectangular': -6.6859756, 'attractive': -3.1529582}
+[2023-01-24 12:02:38,674][__main__][INFO] - Geometric distance: [0.02356027439236641, 0.03145766630768776, 0.007872584275901318, 0.020077448338270187, 0.01876392588019371, 0.013729501515626907, 0.02317005768418312, 0.019417008385062218]
+[2023-01-24 12:02:38,674][__main__][INFO] - Optimizing 5.png
+[2023-01-24 12:02:38,674][__main__][INFO] - Writing video to /home/nadav2/dev/data/CLIP2Shape/outs/sliders_vs_blendshapes/smplx_male/data_amount_ablation/smplx_male_multiview_10K/5.mp4
+[2023-01-24 12:17:06,839][__main__][INFO] - Finished optimizing 5.png
+[2023-01-24 12:17:06,839][__main__][INFO] - Pred sliders values {'fat': -13.982871, 'muscular': 10.485501, 'petite': 53.31349, 'long': -3.490471, 'rectangular': -37.171795, 'attractive': -37.124836}
+[2023-01-24 12:17:06,839][__main__][INFO] - Geometric distance: [0.02356027439236641, 0.03145766630768776, 0.007872584275901318, 0.020077448338270187, 0.01876392588019371, 0.013729501515626907, 0.02317005768418312, 0.019417008385062218, 0.03180253505706787]
+[2023-01-24 12:17:06,881][__main__][INFO] - Starting optimization for smplx betas
+[2023-01-24 12:17:06,881][__main__][INFO] - labels: [['fat'], ['muscular'], ['petite'], ['long'], ['rectangular'], ['attractive']]
+[2023-01-24 12:17:06,881][__main__][INFO] - Optimizing 7.png
+[2023-01-24 12:17:06,881][__main__][INFO] - Writing video to /home/nadav2/dev/data/CLIP2Shape/outs/sliders_vs_blendshapes/smplx_male/data_amount_ablation/smplx_male_singleview_10K/7.mp4
+[2023-01-24 12:29:06,973][__main__][INFO] - Finished optimizing 7.png
+[2023-01-24 12:29:06,973][__main__][INFO] - Pred sliders values {'fat': -12.354691, 'muscular': -26.531471, 'petite': -22.174788, 'long': 11.272118, 'rectangular': 4.257671, 'attractive': -3.608104}
+[2023-01-24 12:29:06,973][__main__][INFO] - Geometric distance: [0.02356027439236641]
+[2023-01-24 12:29:06,973][__main__][INFO] - Optimizing 2.png
+[2023-01-24 12:29:06,973][__main__][INFO] - Writing video to /home/nadav2/dev/data/CLIP2Shape/outs/sliders_vs_blendshapes/smplx_male/data_amount_ablation/smplx_male_singleview_10K/2.mp4
+[2023-01-24 12:31:38,014][__main__][INFO] - Finished optimizing 2.png
+[2023-01-24 12:31:38,014][__main__][INFO] - Pred sliders values {'fat': -15.139791, 'muscular': -20.205942, 'petite': -21.18803, 'long': 1.6595542, 'rectangular': -0.11560606, 'attractive': -7.975004}
+[2023-01-24 12:31:38,014][__main__][INFO] - Geometric distance: [0.02356027439236641, 0.03145766630768776]
+[2023-01-24 12:31:38,014][__main__][INFO] - Optimizing 9.png
+[2023-01-24 12:31:38,014][__main__][INFO] - Writing video to /home/nadav2/dev/data/CLIP2Shape/outs/sliders_vs_blendshapes/smplx_male/data_amount_ablation/smplx_male_singleview_10K/9.mp4
+[2023-01-24 12:45:57,178][__main__][INFO] - Finished optimizing 9.png
+[2023-01-24 12:45:57,179][__main__][INFO] - Pred sliders values {'fat': -6.523601, 'muscular': -5.440607, 'petite': 20.691254, 'long': -15.565728, 'rectangular': 28.82186, 'attractive': 5.3989253}
+[2023-01-24 12:45:57,179][__main__][INFO] - Geometric distance: [0.02356027439236641, 0.03145766630768776, 0.007872584275901318]
+[2023-01-24 12:45:57,179][__main__][INFO] - Optimizing 0.png
+[2023-01-24 12:45:57,179][__main__][INFO] - Writing video to /home/nadav2/dev/data/CLIP2Shape/outs/sliders_vs_blendshapes/smplx_male/data_amount_ablation/smplx_male_singleview_10K/0.mp4
+[2023-01-24 12:54:13,787][__main__][INFO] - Finished optimizing 0.png
+[2023-01-24 12:54:13,788][__main__][INFO] - Pred sliders values {'fat': 13.54049, 'muscular': -19.793907, 'petite': 2.3330986, 'long': -3.396094, 'rectangular': 12.404753, 'attractive': 4.8108196}
+[2023-01-24 12:54:13,788][__main__][INFO] - Geometric distance: [0.02356027439236641, 0.03145766630768776, 0.007872584275901318, 0.020077448338270187]
+[2023-01-24 12:54:13,788][__main__][INFO] - Optimizing 6.png
+[2023-01-24 12:54:13,788][__main__][INFO] - Writing video to /home/nadav2/dev/data/CLIP2Shape/outs/sliders_vs_blendshapes/smplx_male/data_amount_ablation/smplx_male_singleview_10K/6.mp4
+[2023-01-24 12:59:33,462][__main__][INFO] - Finished optimizing 6.png
+[2023-01-24 12:59:33,462][__main__][INFO] - Pred sliders values {'fat': 12.746062, 'muscular': -9.185132, 'petite': 2.2085907, 'long': 1.8947643, 'rectangular': 15.304706, 'attractive': 19.626392}
+[2023-01-24 12:59:33,462][__main__][INFO] - Geometric distance: [0.02356027439236641, 0.03145766630768776, 0.007872584275901318, 0.020077448338270187, 0.01876392588019371]
+[2023-01-24 12:59:33,462][__main__][INFO] - Optimizing 4.png
+[2023-01-24 12:59:33,462][__main__][INFO] - Writing video to /home/nadav2/dev/data/CLIP2Shape/outs/sliders_vs_blendshapes/smplx_male/data_amount_ablation/smplx_male_singleview_10K/4.mp4
+[2023-01-24 13:02:45,625][__main__][INFO] - Finished optimizing 4.png
+[2023-01-24 13:02:45,625][__main__][INFO] - Pred sliders values {'fat': 18.376228, 'muscular': -11.43763, 'petite': 0.58250374, 'long': 9.856138, 'rectangular': 14.673535, 'attractive': 27.765785}
+[2023-01-24 13:02:45,625][__main__][INFO] - Geometric distance: [0.02356027439236641, 0.03145766630768776, 0.007872584275901318, 0.020077448338270187, 0.01876392588019371, 0.013729501515626907]
+[2023-01-24 13:02:45,625][__main__][INFO] - Optimizing 1.png
+[2023-01-24 13:02:45,625][__main__][INFO] - Writing video to /home/nadav2/dev/data/CLIP2Shape/outs/sliders_vs_blendshapes/smplx_male/data_amount_ablation/smplx_male_singleview_10K/1.mp4

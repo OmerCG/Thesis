@@ -1,0 +1,4 @@
+[2023-01-23 10:36:57,233][__main__][INFO] - Starting optimization for smplx betas
+[2023-01-23 10:36:57,233][__main__][INFO] - labels: [['fat'], ['muscular'], ['petite'], ['long'], ['rectangular'], ['attractive']]
+[2023-01-23 10:36:57,234][__main__][INFO] - Optimizing 7.png
+[2023-01-23 10:36:57,234][__main__][INFO] - Writing video to /home/nadav2/dev/data/CLIP2Shape/outs/sliders_vs_blendshapes/smplx_male/data_amount_ablation/smplx_male_multiview_500/7.mp4

@@ -1,0 +1,14 @@
+descriptors:
+- big
+- curvy
+- long legs
+- tall
+- long
+- muscular
+- pear shaped
+- petite
+- skinny
+- small
+device: cuda
+multiview: false
+imgs_dir: /home/nadav2/dev/data/CLIP2Shape/images/smpl_male_multiview

@@ -1,29 +1,29 @@
 defaults:
-  - renderer_kwargs: smplx
+  - renderer_kwargs: flame_shape
 
-out_dir: /home/nadav2/dev/data/CLIP2Shape/outs/sliders_vs_blendshapes/images_to_fit
-gender: male
+out_dir: /home/nadav2/dev/data/CLIP2Shape/images/temp
+gender: neutral
 device: cuda
 
 # # FLAME - expression
 # texture: #/home/nadav2/dev/repos/Thesis/Flame/flame2020/mesh.png
-# model_path: /home/nadav2/dev/repos/Thesis/pre_production/flame_expression_15_descriptors.ckpt
+# model_path: /home/nadav2/dev/repos/Thesis/pre_production/flame_exp_unfiltered.ckpt
 # model_type: flame
 # with_face: True
 
-# # FLAME - shape
-# texture: #/home/nadav2/dev/repos/Thesis/Flame/flame2020/mesh.png
-# model_path: /home/nadav2/dev/repos/Thesis/pre_production/flame_neutral_10_descriptors.ckpt
-# model_type: flame
+# FLAME - shape
+texture: #/home/nadav2/dev/repos/Thesis/Flame/flame2020/mesh.png
+model_path: /home/nadav2/dev/repos/Thesis/pre_production/flame_shape_unfiltered.ckpt
+model_type: flame
 
-# SMPLX
-texture: /home/nadav2/dev/repos/Thesis/SMPLX/textures/smplx_texture_m_alb.png
-model_path: /home/nadav2/dev/repos/Thesis/pre_production/smplx_male_new_algorithm.ckpt
-model_type: smplx
+# # SMPLX
+# texture: /home/nadav2/dev/repos/Thesis/SMPLX/textures/smplx_texture_m_alb.png
+# model_path: /home/nadav2/dev/repos/Thesis/pre_production/smplx_neutral_unfiltered.ckpt
+# model_type: smplx
 
 # # SMPL
 # texture: #/home/nadav2/dev/repos/Thesis/SMPLX/textures/smplx_texture_m_alb.png
-# model_path: /home/nadav2/dev/repos/Thesis/pre_production/smpl_male_new_algorithm.ckpt
+# model_path: /home/nadav2/dev/repos/Thesis/pre_production/smpl_male_multiview.ckpt
 # model_type: smpl
 # with_face: False
 
@@ -36,7 +36,7 @@ model_type: smplx
 # # GENERIC
 # with_face: False
 # model_type: smplx
-# texture: /home/nadav2/dev/repos/Thesis/SMPLX/textures/smplx_texture_m_alb.png
+# texture: #/home/nadav2/dev/repos/Thesis/SMPLX/textures/smplx_texture_m_alb.png
 # model_path: # keep empty
 # on_parameters: True
 # num_coeffs: 10

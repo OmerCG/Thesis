@@ -1,7 +1,20 @@
 output_dir: /home/nadav2/dev/data/CLIP2Shape/outs/choosing_descriptors
-images_dir: /home/nadav2/dev/data/CLIP2Shape/images/smplx_male_multiview
-descriptors_clusters_json: # /home/nadav2/dev/data/CLIP2Shape/outs/clustering_images/words_jsons/smplx_male.json
+images_dir: /home/nadav2/dev/data/CLIP2Shape/images/flame_shape_py3d
+descriptors_clusters_json: /home/nadav2/dev/data/CLIP2Shape/outs/clustering_images/words_jsons/words_clusters.json
 max_num_of_descriptors: 20
-min_num_of_descriptors: 2
+min_num_of_descriptors: 4
 corr_threshold: 0.5
 iou_threshold: 0.2
+
+
+# SMPLX - FEMALE
+# 'proportioned' 'petite' 'skinny' 'fat'
+# 'proportioned' 'petite' 'skinny' 'fat'
+
+# FLAME - Expression
+# 'big forehead' 'fat' 'long neck'
+# 'big forehead' 'fat' 'long neck'
+
+# FLAME - Shape
+# 'smiling' 'nervous' 'serious' 'raised eyebrows' 'open mouth'
+# 'smiling' 'nervous' 'serious' 'raised eyebrows' 'open mouth'

@@ -548,19 +548,19 @@ class Utils:
 
     @property
     def smplx_offset_tensor(self):
-        return torch.tensor([0.0, 0.7, 0.0], device=self.device)
+        return torch.tensor([0.0, 0.4, 0.0], device=self.device)
 
     @property
     def smplx_offset_numpy(self):
-        return np.array([0.0, 0.2, 0.0])
+        return np.array([0.0, 0.4, 0.0])
 
     @property
     def smpl_offset_numpy(self):
-        return np.array([0.0, 0.2, 0.0])
+        return np.array([0.0, 0.4, 0.0])
 
     @property
     def smpl_offset_tensor(self):
-        return torch.tensor([0.0, 0.2, 0.0], device=self.device)
+        return torch.tensor([0.0, 0.4, 0.0], device=self.device)
 
     def get_smplx_model(
         self,
@@ -782,7 +782,7 @@ class Utils:
     @staticmethod
     def get_random_betas_smplx(num_coeffs: int = 10, tall_data: bool = False) -> torch.tensor:
         """SMPLX body shape"""
-        random_offset = torch.randint(-2, 2, (1, num_coeffs)).float()
+        random_offset = torch.randint(-4, 4, (1, num_coeffs)).float()
         if tall_data:
             random_offset[:, 0] = 4.0
         return torch.randn(1, num_coeffs) * random_offset

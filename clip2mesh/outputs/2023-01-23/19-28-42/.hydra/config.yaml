@@ -1,0 +1,32 @@
+descriptors:
+- short
+- tall
+- long legs
+- big
+- fat
+- curvy
+- feminine
+- fit
+- heavyset
+- lean
+- long torso
+- long
+- masculine
+- muscular
+- pear shaped
+- petite
+- proportioned
+- rectangular
+- round apple
+- short legs
+- short torso
+- skinny
+- small
+- stocky
+- sturdy
+- attractive
+- sexy
+- narrow waist
+- hourglass
+images_dir: /home/nadav2/dev/data/CLIP2Shape/images/smplx_female_multiview
+out_path: /home/nadav2/dev/data/CLIP2Shape/outs/clustering_images/words_jsons

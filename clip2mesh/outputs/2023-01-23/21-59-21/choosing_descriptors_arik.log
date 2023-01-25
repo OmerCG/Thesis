@@ -1,0 +1,63 @@
+[2023-01-23 21:59:23,749][choosing_descriptors][INFO] - There are total of 23 descriptors
+[2023-01-23 21:59:23,750][choosing_descriptors][INFO] - Working on cluster 0
+[2023-01-23 21:59:23,751][choosing_descriptors][INFO] - 0 most variance descriptor - open mouth
+[2023-01-23 21:59:23,751][choosing_descriptors][INFO] - Adding open mouth to chosen descriptors
+[2023-01-23 21:59:23,751][choosing_descriptors][INFO] - 1 most variance descriptor - smiling
+[2023-01-23 21:59:23,752][choosing_descriptors][INFO] - Adding smiling to chosen descriptors
+[2023-01-23 21:59:23,753][choosing_descriptors][INFO] - 2 most variance descriptor - happy
+[2023-01-23 21:59:23,753][choosing_descriptors][INFO] - happy is correlated with open mouth with corr 0.6034115565228041
+[2023-01-23 21:59:23,754][choosing_descriptors][INFO] - 3 most variance descriptor - angry
+[2023-01-23 21:59:23,754][choosing_descriptors][INFO] - angry is correlated with open mouth with corr 0.7363620036460965
+[2023-01-23 21:59:23,754][choosing_descriptors][INFO] - 4 most variance descriptor - excited
+[2023-01-23 21:59:23,755][choosing_descriptors][INFO] - excited is correlated with open mouth with corr 0.76899186303275
+[2023-01-23 21:59:23,755][choosing_descriptors][INFO] - 5 most variance descriptor - pensive
+[2023-01-23 21:59:23,756][choosing_descriptors][INFO] - pensive is correlated with smiling with corr -0.5239707416093944
+[2023-01-23 21:59:23,756][choosing_descriptors][INFO] - 6 most variance descriptor - open eyes
+[2023-01-23 21:59:23,757][choosing_descriptors][INFO] - open eyes is correlated with open mouth with corr 0.7415155451481605
+[2023-01-23 21:59:23,757][choosing_descriptors][INFO] - 7 most variance descriptor - sleepy
+[2023-01-23 21:59:23,757][choosing_descriptors][INFO] - sleepy is correlated with open mouth with corr 0.6912988387326392
+[2023-01-23 21:59:23,758][choosing_descriptors][INFO] - 8 most variance descriptor - calm
+[2023-01-23 21:59:23,758][choosing_descriptors][INFO] - calm is correlated with open mouth with corr 0.682660058937869
+[2023-01-23 21:59:23,758][choosing_descriptors][INFO] - 9 most variance descriptor - bored
+[2023-01-23 21:59:23,759][choosing_descriptors][INFO] - bored is correlated with open mouth with corr 0.861329469121124
+[2023-01-23 21:59:23,759][choosing_descriptors][INFO] - 10 most variance descriptor - relaxed
+[2023-01-23 21:59:23,759][choosing_descriptors][INFO] - relaxed is correlated with open mouth with corr 0.5548844179551785
+[2023-01-23 21:59:23,760][choosing_descriptors][INFO] - 11 most variance descriptor - tired
+[2023-01-23 21:59:23,760][choosing_descriptors][INFO] - tired is correlated with open mouth with corr 0.6939851731235444
+[2023-01-23 21:59:23,760][choosing_descriptors][INFO] - 12 most variance descriptor - nervous
+[2023-01-23 21:59:23,762][choosing_descriptors][INFO] - Adding nervous to chosen descriptors
+[2023-01-23 21:59:23,762][choosing_descriptors][INFO] - 13 most variance descriptor - confused
+[2023-01-23 21:59:23,762][choosing_descriptors][INFO] - confused is correlated with open mouth with corr 0.6580568101446859
+[2023-01-23 21:59:23,762][choosing_descriptors][INFO] - 14 most variance descriptor - disgusted
+[2023-01-23 21:59:23,763][choosing_descriptors][INFO] - disgusted is correlated with open mouth with corr 0.7884596807534427
+[2023-01-23 21:59:23,763][choosing_descriptors][INFO] - 15 most variance descriptor - sad
+[2023-01-23 21:59:23,764][choosing_descriptors][INFO] - sad is correlated with open mouth with corr 0.5634233710475007
+[2023-01-23 21:59:23,764][choosing_descriptors][INFO] - currently chosen descriptors: {'open mouth': {'variance': 1.9951242487537362}, 'smiling': {'variance': 1.9283539637330411}, 'nervous': {'variance': 0.1831517844014062}}
+[2023-01-23 21:59:23,764][choosing_descriptors][INFO] - Finished cluster 0
+[2023-01-23 21:59:23,764][choosing_descriptors][INFO] - Working on cluster 1
+[2023-01-23 21:59:23,765][choosing_descriptors][INFO] - 0 most variance descriptor - surprised
+[2023-01-23 21:59:23,765][choosing_descriptors][INFO] - Adding surprised to chosen descriptors
+[2023-01-23 21:59:23,765][choosing_descriptors][INFO] - 1 most variance descriptor - serious
+[2023-01-23 21:59:23,765][choosing_descriptors][INFO] - Adding serious to chosen descriptors
+[2023-01-23 21:59:23,766][choosing_descriptors][INFO] - 2 most variance descriptor - scared
+[2023-01-23 21:59:23,766][choosing_descriptors][INFO] - scared is correlated with surprised with corr 0.8548306985752759
+[2023-01-23 21:59:23,766][choosing_descriptors][INFO] - 3 most variance descriptor - fearful
+[2023-01-23 21:59:23,767][choosing_descriptors][INFO] - fearful is correlated with surprised with corr 0.6750095049832734
+[2023-01-23 21:59:23,767][choosing_descriptors][INFO] - 4 most variance descriptor - worried
+[2023-01-23 21:59:23,768][choosing_descriptors][INFO] - worried is correlated with surprised with corr 0.6268842480392369
+[2023-01-23 21:59:23,768][choosing_descriptors][INFO] - 5 most variance descriptor - neutral
+[2023-01-23 21:59:23,769][choosing_descriptors][INFO] - neutral is correlated with surprised with corr 0.53676386862763
+[2023-01-23 21:59:23,769][choosing_descriptors][INFO] - 6 most variance descriptor - raised eyebrows
+[2023-01-23 21:59:23,770][choosing_descriptors][INFO] - Adding raised eyebrows to chosen descriptors
+[2023-01-23 21:59:23,770][choosing_descriptors][INFO] - currently chosen descriptors: {'surprised': {'variance': 0.5492131286431122}, 'serious': {'variance': 0.29897397606976367}, 'raised eyebrows': {'variance': 0.08350287828721445}}
+[2023-01-23 21:59:23,770][choosing_descriptors][INFO] - Finished cluster 1
+[2023-01-23 21:59:23,770][choosing_descriptors][INFO] - There are 6 chosen descriptors in initial filter
+[2023-01-23 21:59:23,770][choosing_descriptors][INFO] - chosen descriptors: [['open mouth', 'smiling', 'nervous'], ['surprised', 'serious', 'raised eyebrows']]
+[2023-01-23 21:59:23,770][choosing_descriptors][INFO] - Final filter
+[2023-01-23 21:59:23,772][choosing_descriptors][INFO] - Descriptor open mouth has variance 1.9951242487537362
+[2023-01-23 21:59:23,774][choosing_descriptors][INFO] - Descriptor open mouth is correlated with surprised with correlation 0.7687695859158153 - removing surprised
+[2023-01-23 21:59:23,774][choosing_descriptors][INFO] - Descriptor smiling has variance 1.9283539637330411
+[2023-01-23 21:59:23,775][choosing_descriptors][INFO] - Descriptor serious has variance 0.29897397606976367
+[2023-01-23 21:59:23,777][choosing_descriptors][INFO] - Descriptor nervous has variance 0.1831517844014062
+[2023-01-23 21:59:23,778][choosing_descriptors][INFO] - Descriptor nervous is correlated with surprised with correlation 0.7588658474096112 - removing surprised
+[2023-01-23 21:59:23,778][choosing_descriptors][INFO] - Descriptor raised eyebrows has variance 0.08350287828721445

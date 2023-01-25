@@ -1,0 +1,17 @@
+renderer_kwargs:
+  dist: 4.2
+  elev: 10.0
+  azim: 0.0
+  img_size:
+  - 1024
+  - 1024
+  tex_path: ${texture}
+out_dir: /home/nadav2/dev/data/CLIP2Shape/outs/sliders_vs_blendshapes/images_to_fit
+gender: male
+device: cuda
+with_face: false
+model_type: smpl
+texture: null
+model_path: null
+on_parameters: true
+num_coeffs: 10

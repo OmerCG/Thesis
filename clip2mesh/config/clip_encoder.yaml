@@ -1,6 +1,6 @@
 defaults:
-  - descriptors: flame_expression
+  - descriptors: smplx_neutral
 
 device: cuda
 multiview: False
-imgs_dir: /home/nadav2/dev/data/CLIP2Shape/images/flame_textured_exp
+imgs_dir: /home/nadav2/dev/data/CLIP2Shape/images/temp
