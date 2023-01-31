@@ -1,0 +1,22 @@
+renderer_kwargs:
+  dist: 0.5
+  elev: 0.0
+  azim: 0.0
+  py3d: true
+  img_size:
+  - 1024
+  - 1024
+  background_color:
+  - 0.0
+  - 0.0
+  - 0.0
+  tex_path: /home/nadav2/dev/repos/CLIP2Shape/Flame/flame2020/def_tex.png
+output_path: /home/nadav2/dev/data/CLIP2Shape/images/flame_expression_with_jaw
+gender: neutral
+img_tag: null
+model_type: flame
+with_face: true
+num_of_imgs: 1
+num_coeffs: 10
+multiview: false
+get_tall_data: false

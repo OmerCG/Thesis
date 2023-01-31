@@ -1,0 +1,22 @@
+renderer_kwargs:
+  tex_path: /home/nadav2/dev/repos/Thesis/SMPLX/textures/test_2.jpg
+  dist: 4.2
+  elev: 10.0
+  azim: 0.0
+  py3d: true
+  img_size:
+  - 1024
+  - 1024
+  background_color:
+  - 0.0
+  - 0.0
+  - 0.0
+output_path: /home/nadav2/dev/data/CLIP2Shape/images/temp
+gender: male
+img_tag: null
+model_type: smplx
+with_face: false
+num_of_imgs: 2
+num_coeffs: 10
+multiview: false
+get_tall_data: false

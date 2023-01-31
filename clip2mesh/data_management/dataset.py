@@ -6,11 +6,11 @@ from torch.utils.data import Dataset
 
 
 class CLIP2MESHDataset(Dataset):
-    def __init__(self, data_dir: str, optimize_feature: str, labels_to_get: List[str], out_features: int = 10):
+    def __init__(self, data_dir: str, optimize_features: List[str], labels_to_get: List[str], out_features: int = 10):
 
         self.data_dir = data_dir
         self.out_features = out_features
-        self.optimize_feature = optimize_feature
+        self.optimize_features = optimize_features
         self.labels_to_get = labels_to_get
         self.files = sorted(
             [file for file in Path(data_dir).rglob("*_labels.json")], key=lambda x: int(x.stem.split("_")[0])
@@ -38,12 +38,12 @@ class CLIP2MESHDataset(Dataset):
 
     def params_dict_to_tensor(self, dict: Dict[str, List[float]]) -> torch.Tensor:
         parameters_tensor = torch.tensor([])
-        if self.optimize_feature not in dict:
-            raise ValueError(f"Feature {self.optimize_feature} not in dict {dict}")
-        feature_data = dict[self.optimize_feature][0]
-        if feature_data.__len__() > self.out_features:
-            feature_data = feature_data[: self.out_features]
-        parameters_tensor = torch.cat((parameters_tensor, torch.tensor(feature_data)[None]))
+        for optimize_feature in self.optimize_features:
+            if optimize_feature not in dict:
+                raise ValueError(f"Feature {optimize_feature} not in dict {dict}")
+            parameters_tensor = torch.cat([parameters_tensor, torch.tensor(dict[optimize_feature])], 1)
+        if parameters_tensor.shape[1] > self.out_features:
+            parameters_tensor = parameters_tensor[..., : self.out_features]
         return parameters_tensor
 
     def labels_dict_to_tensor(self, dict: Dict[str, List[List[float]]]) -> torch.Tensor:

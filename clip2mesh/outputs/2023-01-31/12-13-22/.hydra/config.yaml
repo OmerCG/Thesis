@@ -1,0 +1,15 @@
+descriptors:
+- big
+- fat
+- curvy
+- long legs
+- tall
+- long
+- muscular
+- pear shaped
+- petite
+- short
+- skinny
+- small
+images_dir: /home/nadav2/dev/data/CLIP2Shape/images/smpl_male_singleview
+out_path: /home/nadav2/dev/data/CLIP2Shape/outs/clustering_images/words_jsons

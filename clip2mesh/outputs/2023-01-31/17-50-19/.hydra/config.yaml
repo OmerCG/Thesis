@@ -1,0 +1,7 @@
+output_dir: /home/nadav2/dev/data/CLIP2Shape/outs/choosing_descriptors
+images_dir: /home/nadav2/dev/data/CLIP2Shape/images/smpl_female_multiview
+descriptors_clusters_json: /home/nadav2/dev/data/CLIP2Shape/outs/clustering_images/words_jsons/smpl_female_multiview.json
+max_num_of_descriptors: 20
+min_num_of_descriptors: 5
+corr_threshold: 0.6
+iou_threshold: 0.2

@@ -1,6 +1,6 @@
 defaults:
-  - descriptors: smplx_male
+  - descriptors: smplx_female
 
 device: cuda
-multiview: False
-imgs_dir: /home/nadav2/dev/data/CLIP2Shape/images/smplx_male_singleview_3K
+multiview: True
+imgs_dir: /home/nadav2/dev/data/CLIP2Shape/images/smpl_female_multiview

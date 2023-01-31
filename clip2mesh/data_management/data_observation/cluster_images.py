@@ -145,7 +145,13 @@ class ClusterImages:
         encoded_images = np.concatenate(encoded_images, axis=0)
         return encoded_images, preprocessed_images
 
-    def cluster_images(self, images_dir: Union[Path, str], descriptors: List[str], out_path: Union[str, Path]) -> None:
+    def cluster_images(
+        self,
+        images_dir: Union[Path, str],
+        descriptors: List[str],
+        out_path: Union[str, Path],
+        json_name: str = "words_clusters",
+    ) -> None:
         if isinstance(images_dir, Path):
             images_dir = images_dir.as_posix()
         if isinstance(out_path, str):
@@ -159,14 +165,19 @@ class ClusterImages:
         del images_embedding
         torch.cuda.empty_cache()
         possible_words = self.calc_top_descriptors(descriptors, preprocessed_images, kmeans_labels)
-        self.write_words_clusters_to_json(possible_words, out_path / "words_clusters.json")
+        self.write_words_clusters_to_json(possible_words, out_path / f"{json_name}.json")
 
 
 @hydra.main(config_path="../../config", config_name="cluster_images")
 def main(cfg: DictConfig) -> None:
     clusterer = ClusterImages()
     descriptors = list(cfg.descriptors)
-    clusterer.cluster_images(images_dir=cfg.images_dir, descriptors=descriptors, out_path=cfg.out_path)
+    clusterer.cluster_images(
+        images_dir=cfg.images_dir,
+        descriptors=descriptors,
+        out_path=cfg.out_path,
+        json_name=cfg.images_dir.split("/")[-1],
+    )
 
 
 if __name__ == "__main__":

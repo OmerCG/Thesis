@@ -7,26 +7,27 @@ device: cuda
 
 # # FLAME - expression
 # texture: #/home/nadav2/dev/repos/Thesis/Flame/flame2020/mesh.png
-# model_path: /home/nadav2/dev/repos/Thesis/pre_production/flame_exp_unfiltered.ckpt
+# model_path: /home/nadav2/dev/repos/Thesis/pre_production/flame_expression_w_jaw.ckpt
 # model_type: flame
 # with_face: True
+# predict_jaw_pose: True
 
 # # FLAME - shape
 # texture: #/home/nadav2/dev/repos/Thesis/Flame/flame2020/mesh.png
 # model_path: /home/nadav2/dev/repos/Thesis/pre_production/flame_shape_new.ckpt
 # model_type: flame
 
-# SMPLX
-texture: #/home/nadav2/dev/repos/Thesis/SMPLX/textures/smplx_texture_m_alb.png
-model_path: /home/nadav2/dev/repos/Thesis/pre_production/smplx_male_singleview_3k.ckpt
-model_type: smplx
-num_coeffs: 8
-
-# # SMPL
+# # SMPLX
 # texture: #/home/nadav2/dev/repos/Thesis/SMPLX/textures/smplx_texture_m_alb.png
-# model_path: /home/nadav2/dev/repos/Thesis/pre_production/smpl_male_multiview.ckpt
-# model_type: smpl
-# with_face: False
+# model_path: /home/nadav2/dev/repos/Thesis/pre_production/smplx_female_3k.ckpt
+# model_type: smplx
+# num_coeffs: 10
+
+# SMPL
+texture: /home/nadav2/dev/repos/Thesis/SMPLX/textures/smplx_texture_m_alb.png
+model_path: /home/nadav2/dev/repos/Thesis/pre_production/smpl_male_multiview_8desc.ckpt
+model_type: smpl
+with_face: False
 
 # # SMAL
 # texture:  # there is no texture for smal yet
@@ -36,7 +37,7 @@ num_coeffs: 8
 
 # # GENERIC
 # with_face: False
-# model_type: smplx
+# model_type: smpl
 # texture: #/home/nadav2/dev/repos/Thesis/SMPLX/textures/smplx_texture_m_alb.png
 # model_path: # keep empty
 # on_parameters: True

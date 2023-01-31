@@ -1,0 +1,4 @@
+descriptors: {}
+device: cuda
+multiview: true
+imgs_dir: /home/nadav2/dev/data/CLIP2Shape/images/smpl_female_multiview

@@ -23,6 +23,7 @@ class SlidersApp:
         out_dir: str = None,
         gender: Literal["male", "female", "neutral"] = "neutral",
         with_face: bool = False,
+        predict_jaw_pose: bool = False,
         renderer_kwargs: DictConfig = None,
         model_path: str = None,
     ):
@@ -32,6 +33,7 @@ class SlidersApp:
         self.device = device
         self.texture = texture
         self.num_coeffs = num_coeffs
+        self.predict_jaw_pose = predict_jaw_pose
         self.on_parameters: bool = on_parameters
 
         assert model_type in ["smplx", "flame", "smal", "smpl"], "Model type should be smplx, smpl, flame or smal"
@@ -52,11 +54,14 @@ class SlidersApp:
         self.models_factory = ModelsFactory(self.model_type)
         self.gender = gender
         self.with_face = with_face
+
         self.model_kwargs = self.models_factory.get_default_params(with_face, num_coeffs=num_coeffs)
         if self.model_type == "smpl":
             self.model_kwargs["get_smpl"] = True
         if hasattr(self, "num_coeffs"):
             self.model_kwargs["num_coeffs"] = self.num_coeffs
+        if hasattr(self, "gender"):
+            self.model_kwargs["gender"] = self.gender
         self.verts, self.faces, self.vt, self.ft = self.models_factory.get_model(**self.model_kwargs)
         if self.model_type == "smplx":
             self.verts += self.utils.smplx_offset_numpy  # center the model with offsets
@@ -179,23 +184,32 @@ class SlidersApp:
             self.input_for_model[0, idx] = value
             # print(self.input_for_model)  # for debug
             with torch.no_grad():
-                out = self.model(self.input_for_model.to(self.device))
+                out = self.model(self.input_for_model.to(self.device)).cpu()
                 if self.model_type == "smplx" or self.model_type == "smpl":
-                    betas = out.cpu()
+                    betas = out
+                    get_smpl = True if self.model_type == "smpl" else False
                     self.verts, self.faces, self.vt, self.ft = self.utils.get_smplx_model(
-                        betas=betas, gender=self.gender, num_coeffs=self.num_coeffs
+                        betas=betas, gender=self.gender, num_coeffs=self.num_coeffs, get_smpl=get_smpl
                     )
                     self.verts += self.utils.smplx_offset_numpy
                 elif self.model_type == "flame":
                     if self.with_face:
-                        self.verts, self.faces, self.vt, self.ft = self.utils.get_flame_model(
-                            expression_params=out.cpu()
-                        )
+                        if self.predict_jaw_pose:
+                            jaw_pose = out[..., 0]
+                            expression_params = out[..., 1:]
+                            self.verts, self.faces, self.vt, self.ft = self.utils.get_flame_model(
+                                expression_params=expression_params, jaw_pose=jaw_pose
+                            )
+                        else:
+                            expression_params = out
+                            self.verts, self.faces, self.vt, self.ft = self.utils.get_flame_model(
+                                expression_params=expression_params
+                            )
                     else:
-                        self.verts, self.faces, self.vt, self.ft = self.utils.get_flame_model(shape_params=out.cpu())
+                        self.verts, self.faces, self.vt, self.ft = self.utils.get_flame_model(shape_params=out)
 
                 else:
-                    self.verts, self.faces, self.vt, self.ft = self.utils.get_smal_model(beta=out.cpu())
+                    self.verts, self.faces, self.vt, self.ft = self.utils.get_smal_model(beta=out)
 
             img = self.renderer.render_mesh(
                 verts=self.verts,

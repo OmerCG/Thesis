@@ -263,7 +263,7 @@ class FLAMEParams:
         self,
         shape_params: torch.tensor = None,
         expression_params: torch.tensor = None,
-        jaw_pose: float = None,
+        jaw_pose: torch.Tensor = None,
     ):
         if shape_params is None:
             shape_params = torch.zeros(1, 100, dtype=torch.float32)
@@ -598,19 +598,20 @@ class Utils:
         else:
             verts = self.smplx_layer(**smplx_model.params).vertices
             verts = verts.detach().cpu().numpy()
-        # verts = self.translate_mesh_smplx(verts.squeeze())
         verts = verts.squeeze()
-        if not hasattr(self, "vt_smplx") and not hasattr(self, "ft_smpl"):
-            self._get_vt_ft("smplx")
+        if not hasattr(self, "vt_smplx") and not hasattr(self, "ft_smplx"):
+            model_type = "smpl" if get_smpl else "smplx"
+            self._get_vt_ft(model_type)
 
         return verts, self.smplx_faces, self.vt_smplx, self.ft_smplx
 
-    def _get_vt_ft(
-        self, model_type: Literal["smplx", "flame", "smpl"], gender: str = None
-    ) -> Tuple[np.ndarray, np.ndarray]:
+    def _get_vt_ft(self, model_type: Literal["smplx", "flame", "smpl"]) -> Tuple[np.ndarray, np.ndarray]:
         if model_type == "smplx":
             self.vt_smplx = np.load("/home/nadav2/dev/repos/CLIP2Shape/SMPLX/textures/smplx_vt.npy")
             self.ft_smplx = np.load("/home/nadav2/dev/repos/CLIP2Shape/SMPLX/textures/smplx_ft.npy")
+        elif model_type == "smpl":
+            self.vt_smplx = np.load("/home/nadav2/dev/repos/CLIP2Shape/SMPLX/textures/smpl_uv_map.npy")
+            self.ft_smplx = self.smplx_faces
         else:
             flame_uv_path = "/home/nadav2/dev/repos/CLIP2Shape/Flame/flame2020/flame_texture_data_v6.pkl"
             flame_uv = np.load(flame_uv_path, allow_pickle=True)
@@ -785,7 +786,7 @@ class Utils:
     @staticmethod
     def get_random_betas_smplx(num_coeffs: int = 10, tall_data: bool = False) -> torch.tensor:
         """SMPLX body shape"""
-        random_offset = torch.randint(-3, 3, (1, num_coeffs)).float()
+        random_offset = torch.randint(-2, 2, (1, num_coeffs)).float()
         if tall_data:
             random_offset[:, 0] = 4.0
         return torch.randn(1, num_coeffs) * random_offset
@@ -794,30 +795,33 @@ class Utils:
     def get_random_betas_smal(num_coeffs: int = 10) -> torch.tensor:
         """SMAL body shape"""
         shape = torch.rand(1, num_coeffs) * torch.randint(-2, 2, (1, num_coeffs)).float()
-        if shape.shape != (1, MaxCoeffs.SMAL.value):
+        if num_coeffs < MaxCoeffs.SMAL.value:
             shape = torch.cat([shape, torch.zeros(1, MaxCoeffs.SMAL.value - num_coeffs)], 1)
         return shape
-
-    @staticmethod
-    def get_random_expression(num_coeffs: int = 10) -> torch.tensor:
-        """SMPLX face expression"""
-        return torch.randn(1, num_coeffs) * torch.randint(-2, 2, (1, num_coeffs)).float()
 
     @staticmethod
     def get_random_shape(num_coeffs: int = 10) -> torch.tensor:
         """FLAME face shape"""
         shape = torch.randn(1, num_coeffs) * torch.randint(-2, 2, (1, num_coeffs)).float()
-        if shape.shape != (1, MaxCoeffs.FLAME_SHAPE.value):
+        if num_coeffs < MaxCoeffs.FLAME_SHAPE.value:
             shape = torch.cat([shape, torch.zeros(1, MaxCoeffs.FLAME_SHAPE.value - num_coeffs)], 1)
         # return torch.cat([shape, torch.zeros(1, 90)], dim=1)
         return shape
 
     @staticmethod
-    def get_random_expression_flame(num_coeffs: int = 50) -> torch.tensor:
+    def get_random_expression_flame(num_coeffs: int = 10) -> torch.tensor:
         """FLAME face expression"""
-        expression = torch.randn(1, num_coeffs) * torch.randint(-2, 2, (1, num_coeffs)).float()
-        # return torch.cat([expression, torch.zeros(1, 40)], dim=1)
+        expression = torch.randn(1, num_coeffs)  # * torch.randint(-1, 1, (1, num_coeffs)).float()
+        if num_coeffs < MaxCoeffs.FLAME_EXPRESSION.value:
+            expression = torch.cat([expression, torch.zeros(1, MaxCoeffs.FLAME_EXPRESSION.value - num_coeffs)], 1)
         return expression
+
+    @staticmethod
+    def get_random_jaw_pose() -> torch.tensor:
+        """FLAME jaw pose"""
+        # jaw_pose = torch.randn(1, 1).abs() * torch.tensor(np.random.choice([0.5, 0], p=[0.1, 0.9]))
+        jaw_pose = F.relu(torch.randn(1, 1)) * torch.tensor([0.1])
+        return jaw_pose
 
     @staticmethod
     def convert_str_list_to_float_tensor(strs_list: List[str]) -> torch.tensor:
@@ -1052,6 +1056,7 @@ class ModelsFactory:
         elif self.model_type == "flame":
             if with_face:
                 params["expression_params"] = self.utils.get_random_expression_flame(num_coeffs)
+                params["jaw_pose"] = self.utils.get_random_jaw_pose()
             else:
                 params["shape_params"] = self.utils.get_random_shape(num_coeffs)
 
@@ -1284,3 +1289,12 @@ class MaxCoeffs(Enum):
     FLAME_SHAPE = 100
     FLAME_EXPRESSION = 50
     SMAL = 41
+    JAW_POSE = 3
+
+
+class VertsIdx(Enum):
+
+    TOP_LIP_MIN = 3531
+    TOP_LIP_MAX = 3532
+    BOTTOM_LIP_MIN = 3504
+    BOTTOM_LIP_MAX = 3505

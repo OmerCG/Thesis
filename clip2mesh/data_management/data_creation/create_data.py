@@ -2,8 +2,8 @@ import hydra
 from tqdm import tqdm
 from pathlib import Path
 from omegaconf import DictConfig
-from typing import Dict, Any, Union, Literal
-from clip2mesh.utils import Utils, ModelsFactory, Pytorch3dRenderer, Open3dRenderer
+from typing import Union, Literal
+from clip2mesh.utils import Utils, ModelsFactory, Pytorch3dRenderer, Open3dRenderer, VertsIdx
 
 
 class DataCreator:
@@ -74,6 +74,12 @@ class DataCreator:
             verts, faces, vt, ft = self.models_factory.get_model(
                 **model_kwargs, gender=self.gender, num_coeffs=self.num_coeffs
             )
+            if self.model_type == "flame":
+                y_top_lip = verts[0, VertsIdx.TOP_LIP_MIN.value : VertsIdx.TOP_LIP_MAX.value, 1]
+                y_bottom_lip = verts[0, VertsIdx.BOTTOM_LIP_MIN.value : VertsIdx.BOTTOM_LIP_MAX.value, 1]
+                if y_top_lip - y_bottom_lip < 1e-3:
+                    continue
+
             if self.model_type in ["smplx", "smpl"]:
                 verts += self.utils.smplx_offset_numpy
 

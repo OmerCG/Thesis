@@ -7,7 +7,7 @@ models_dir: /home/nadav2/dev/repos/CLIP2Shape/models
 seed: 42
 
 tensorboard_logger:
-  name: smplx_male_singleview_3k # IMPORTANT
+  name: smpl_female_multiview_6desc # IMPORTANT
   save_dir: /home/nadav2/dev/data/CLIP2Shape/runs
   log_graph: True
 
@@ -37,20 +37,20 @@ trainer:
   log_every_n_steps: 3
 
 dataset:
-  data_dir: /home/nadav2/dev/data/CLIP2Shape/images/smplx_male_singleview_3K
-  optimize_feature: betas  # IMPORTANT
+  data_dir: /home/nadav2/dev/data/CLIP2Shape/images/smpl_female_multiview
+  optimize_features:
+    - betas
   out_features: ${model_conf.out_features}
   labels_to_get:
     - fat
+    - long legs
+    - small
+    - hourglass
     - narrow waist
-    - muscular
-    - long torso
-    - pear shaped
-    - petite
-    - rectangular
+    - proportioned
 
 model_conf:
-  num_stats: 7  # IMPORTANT
+  num_stats: 6  # IMPORTANT
   hidden_size: [800, 500]
-  out_features: 8
+  out_features: 10
   num_hiddens: 1
