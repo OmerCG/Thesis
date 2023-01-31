@@ -1,0 +1,14 @@
+renderer_kwargs:
+  tex_path: ${texture}
+  dist: 4.2
+  elev: 10.0
+  azim: 0.0
+  img_size:
+  - 1024
+  - 1024
+out_dir: /home/nadav2/dev/data/CLIP2Shape/images/temp
+gender: male
+device: cuda
+texture: null
+model_path: /home/nadav2/dev/repos/Thesis/pre_production/smplx_male_singleview_3k.ckpt
+model_type: smplx

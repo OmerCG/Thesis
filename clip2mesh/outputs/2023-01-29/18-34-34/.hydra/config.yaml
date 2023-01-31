@@ -1,0 +1,22 @@
+data_dir: /home/nadav2/dev/data/CLIP2Shape/outs/images_to_shape/celebrities/data/images
+predictions_dir: /home/nadav2/dev/data/CLIP2Shape/outs/images_to_shape/celebrities/predictions
+output_dir: /home/nadav2/dev/data/CLIP2Shape/outs/images_to_shape/celebrities/comparison
+comparison_kwargs:
+  raw_imgs_dir: ${data_dir}
+  output_path: ${output_dir}
+  comparison_dirs:
+    shapy: ${predictions_dir}/shapy_predictions
+    pixie: ${predictions_dir}/pixie_predictions
+  smplx_models:
+    male: /home/nadav2/dev/repos/Thesis/pre_production/smplx_male_singleview_3k.ckpt
+    female: /home/nadav2/dev/repos/Thesis/pre_production/smplx_female_new.ckpt
+    neutral: /home/nadav2/dev/repos/Thesis/pre_production/smplx_neutral_1K.ckpt
+  renderer_kwargs:
+    img_size:
+    - 1024
+    - 1024
+    tex_path: null
+    dist: 4.2
+    elev: 10.0
+    azim: 0.0
+    texture_optimization: true

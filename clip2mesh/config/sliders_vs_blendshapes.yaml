@@ -3,11 +3,11 @@ defaults:
 
 bs_dir: /home/nadav2/dev/data/CLIP2Shape/outs/sliders_vs_blendshapes/images_to_fit
 model_paths:
-    - /home/nadav2/dev/repos/Thesis/pre_production/smplx_male_2_descriptors.ckpt
-    - /home/nadav2/dev/repos/Thesis/pre_production/smplx_male_5_descriptors.ckpt
-    - /home/nadav2/dev/repos/Thesis/pre_production/smplx_male_10_descriptors.ckpt
-    - /home/nadav2/dev/repos/Thesis/pre_production/smplx_male_15_descriptors.ckpt
-    - /home/nadav2/dev/repos/Thesis/pre_production/smplx_male_20_descriptors.ckpt
+    # - /home/nadav2/dev/repos/Thesis/pre_production/smplx_male_2_descriptors.ckpt
+    # - /home/nadav2/dev/repos/Thesis/pre_production/smplx_male_5_descriptors.ckpt
+    # - /home/nadav2/dev/repos/Thesis/pre_production/smplx_male_10_descriptors.ckpt
+    # - /home/nadav2/dev/repos/Thesis/pre_production/smplx_male_15_descriptors.ckpt
+    # - /home/nadav2/dev/repos/Thesis/pre_production/smplx_male_20_descriptors.ckpt
     - /home/nadav2/dev/repos/Thesis/pre_production/smplx_male_25_descriptors.ckpt
 
 output_dir: /home/nadav2/dev/data/CLIP2Shape/outs/sliders_vs_blendshapes/smplx_male/descriptors_ablations

@@ -1,0 +1,22 @@
+renderer_kwargs:
+  dist: 4.2
+  elev: 10.0
+  azim: 0.0
+  py3d: true
+  img_size:
+  - 1024
+  - 1024
+  tex_path: /home/nadav2/dev/repos/CLIP2Shape/SMPLX/textures/smplx_texture_m_alb.png
+  background_color:
+  - 0.0
+  - 0.0
+  - 0.0
+output_path: /home/nadav2/dev/data/CLIP2Shape/images/smplx_neutral_multiview_5K
+gender: neutral
+img_tag: null
+model_type: smplx
+with_face: false
+num_of_imgs: 5000
+num_coeffs: 10
+multiview: true
+get_tall_data: false

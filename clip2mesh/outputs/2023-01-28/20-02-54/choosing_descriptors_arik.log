@@ -1,0 +1,34 @@
+[2023-01-28 20:02:56,640][choosing_descriptors][INFO] - There are total of 10 descriptors
+[2023-01-28 20:02:56,644][choosing_descriptors][INFO] - Working on cluster 0
+[2023-01-28 20:02:56,645][choosing_descriptors][INFO] - 0 most variance descriptor - fat
+[2023-01-28 20:02:56,645][choosing_descriptors][INFO] - Adding fat to chosen descriptors
+[2023-01-28 20:02:56,645][choosing_descriptors][INFO] - 1 most variance descriptor - long head
+[2023-01-28 20:02:56,648][choosing_descriptors][INFO] - Adding long head to chosen descriptors
+[2023-01-28 20:02:56,649][choosing_descriptors][INFO] - 2 most variance descriptor - chubby cheeks
+[2023-01-28 20:02:56,649][choosing_descriptors][INFO] - chubby cheeks is correlated with fat with corr 0.926394986917939
+[2023-01-28 20:02:56,650][choosing_descriptors][INFO] - 3 most variance descriptor - big forhead
+[2023-01-28 20:02:56,651][choosing_descriptors][INFO] - Adding big forhead to chosen descriptors
+[2023-01-28 20:02:56,651][choosing_descriptors][INFO] - 4 most variance descriptor - big mouth
+[2023-01-28 20:02:56,653][choosing_descriptors][INFO] - big mouth is correlated with big forhead with corr 0.8616773796259874
+[2023-01-28 20:02:56,653][choosing_descriptors][INFO] - 5 most variance descriptor - small chin
+[2023-01-28 20:02:56,653][choosing_descriptors][INFO] - small chin is correlated with fat with corr 0.7384433226635642
+[2023-01-28 20:02:56,654][choosing_descriptors][INFO] - 6 most variance descriptor - nose sticking-out
+[2023-01-28 20:02:56,660][choosing_descriptors][INFO] - nose sticking-out is correlated with long head with corr 0.654403732463493
+[2023-01-28 20:02:56,663][choosing_descriptors][INFO] - currently chosen descriptors: {'fat': {'variance': 0.40473027045083493}, 'long head': {'variance': 0.3680589340393564}, 'big forhead': {'variance': 0.2048437260802738}}
+[2023-01-28 20:02:56,664][choosing_descriptors][INFO] - Finished cluster 0
+[2023-01-28 20:02:56,665][choosing_descriptors][INFO] - Working on cluster 1
+[2023-01-28 20:02:56,667][choosing_descriptors][INFO] - 0 most variance descriptor - long neck
+[2023-01-28 20:02:56,669][choosing_descriptors][INFO] - Adding long neck to chosen descriptors
+[2023-01-28 20:02:56,670][choosing_descriptors][INFO] - 1 most variance descriptor - thin
+[2023-01-28 20:02:56,671][choosing_descriptors][INFO] - thin is correlated with long neck with corr 0.9597936328870353
+[2023-01-28 20:02:56,673][choosing_descriptors][INFO] - 2 most variance descriptor - ears sticking-out
+[2023-01-28 20:02:56,674][choosing_descriptors][INFO] - ears sticking-out is correlated with long neck with corr 0.8048608995355996
+[2023-01-28 20:02:56,676][choosing_descriptors][INFO] - currently chosen descriptors: {'long neck': {'variance': 0.5690055173911152}}
+[2023-01-28 20:02:56,676][choosing_descriptors][INFO] - Finished cluster 1
+[2023-01-28 20:02:56,677][choosing_descriptors][INFO] - There are 4 chosen descriptors in initial filter
+[2023-01-28 20:02:56,678][choosing_descriptors][INFO] - chosen descriptors: [['fat', 'long head', 'big forhead'], ['long neck']]
+[2023-01-28 20:02:56,679][choosing_descriptors][INFO] - Final filter
+[2023-01-28 20:02:56,681][choosing_descriptors][INFO] - Descriptor long neck has variance 0.5690055173911152
+[2023-01-28 20:02:56,685][choosing_descriptors][INFO] - Descriptor long neck is correlated with long head with correlation 0.9584094653183717 - removing long head
+[2023-01-28 20:02:56,686][choosing_descriptors][INFO] - Descriptor fat has variance 0.40473027045083493
+[2023-01-28 20:02:56,688][choosing_descriptors][INFO] - Descriptor big forhead has variance 0.2048437260802738

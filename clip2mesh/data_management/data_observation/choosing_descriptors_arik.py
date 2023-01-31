@@ -48,10 +48,14 @@ class ChoosingDescriptorsArik(ChoosingDescriptors):
             with open(json_file, "r") as f:
                 json_data = json.load(f)
                 df = pd.concat([df, pd.DataFrame(json_data)], axis=0)
+        if "broad shoulders" in df.columns:
+            df = df.drop("broad shoulders", axis=1)
+        if "built" in df.columns:
+            df = df.drop("built", axis=1)
         df = df.apply(lambda x: [y[0] for y in x])
 
-        if "feminine" in df.columns:
-            df = df.drop("feminine", axis=1)
+        # if "feminine" in df.columns:
+        #     df = df.drop("feminine", axis=1)
 
         # get variances
         variances = df.var(axis=0)

@@ -112,7 +112,7 @@ class ClusterImages:
             logits = self.model(image, tokenized_labels)[0]
             top_k_labels = [descriptors[i] for i in logits.topk(5).indices[0]]
             for label in top_k_labels:
-                labels_count_for_class[class_id][label] += 1  # / kmeans_labels[kmeans_labels == class_id].shape[0]
+                labels_count_for_class[class_id][label] += 1 / kmeans_labels[kmeans_labels == class_id].shape[0]
 
         df = pd.DataFrame(labels_count_for_class)
         max_vals = df.idxmax(1)

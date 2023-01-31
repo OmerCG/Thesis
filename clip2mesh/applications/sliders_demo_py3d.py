@@ -52,7 +52,7 @@ class SlidersApp:
         self.models_factory = ModelsFactory(self.model_type)
         self.gender = gender
         self.with_face = with_face
-        self.model_kwargs = self.models_factory.get_default_params(with_face)
+        self.model_kwargs = self.models_factory.get_default_params(with_face, num_coeffs=num_coeffs)
         if self.model_type == "smpl":
             self.model_kwargs["get_smpl"] = True
         if hasattr(self, "num_coeffs"):
@@ -183,7 +183,7 @@ class SlidersApp:
                 if self.model_type == "smplx" or self.model_type == "smpl":
                     betas = out.cpu()
                     self.verts, self.faces, self.vt, self.ft = self.utils.get_smplx_model(
-                        betas=betas, gender=self.gender
+                        betas=betas, gender=self.gender, num_coeffs=self.num_coeffs
                     )
                     self.verts += self.utils.smplx_offset_numpy
                 elif self.model_type == "flame":

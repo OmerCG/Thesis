@@ -1,4 +1,5 @@
 import cv2
+import clip
 import torch
 import hydra
 import logging
@@ -10,6 +11,7 @@ from omegaconf import DictConfig
 from torch.nn import functional as F
 from pytorch3d.structures import Meshes
 from typing import Dict, Tuple, Literal
+from pytorch3d.loss import chamfer_distance
 from pytorch3d.io import load_objs_as_meshes
 from clip2mesh.utils import Image2ShapeUtils, Utils
 
@@ -17,7 +19,7 @@ from clip2mesh.utils import Image2ShapeUtils, Utils
 class HBWComparison(Image2ShapeUtils):
     def __init__(
         self,
-        smplx_model: str,
+        smplx_models: Dict[str, str],
         raw_imgs_dir: str,
         gt_dir: str,
         output_path: str,
@@ -33,9 +35,8 @@ class HBWComparison(Image2ShapeUtils):
         self.device: str = "cuda" if torch.cuda.is_available() else "cpu"
 
         self._load_renderer(renderer_kwargs)
-        self.load_smplx_model(smplx_model)
+        self.load_smplx_model(smplx_models)
         self._load_clip_model()
-        self._encode_labels()
         self._perpare_comparisons_dir()
         self._load_results_df()
         self._load_logger()
@@ -65,8 +66,8 @@ class HBWComparison(Image2ShapeUtils):
         """Get the smplx kwargs for the different methods -> (vertices, faces, vt, ft)"""
         smplx_kwargs = {}
         for method, body_shape in body_shapes.items():
-            get_smpl = True if method in ["spin"] else False
-            verts, faces, vt, ft = self._get_smplx_attributes(body_shape, gender, get_smpl=get_smpl)
+            real_gender = gender if method == "ours_gender" else "neutral"
+            verts, faces, vt, ft = self._get_smplx_attributes(body_shape, real_gender)
             smplx_kwargs[method] = (verts, faces, vt, ft)
         return smplx_kwargs
 
@@ -74,9 +75,15 @@ class HBWComparison(Image2ShapeUtils):
         logging.basicConfig(level=logging.INFO, format="%(asctime)s: - %(message)s")
         self.logger = logging.getLogger(__name__)
 
-    def load_smplx_model(self, model_path: str):
-        self.model, labels = self.utils.get_model_to_eval(model_path)
-        self.labels = self._flatten_list_of_lists(labels)
+    def load_smplx_model(self, models_paths: Dict[str, str]):
+        smplx_models = {}
+        for gender, model_path in models_paths.items():
+            smplx_models[gender] = {"model": None, "labels": None}
+            model, labels = self.utils.get_model_to_eval(model_path)
+            labels = self._flatten_list_of_lists(labels)
+            smplx_models[gender]["model"] = model
+            smplx_models[gender]["labels"] = clip.tokenize(labels).to(self.device)
+        self.smplx_models = smplx_models
 
     def calc_l2_distances(
         self, methods_features: Dict[str, Tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray]], gt: torch.Tensor
@@ -97,6 +104,12 @@ class HBWComparison(Image2ShapeUtils):
             meshes[method] = self.renderer.get_mesh(*args)
         return meshes
 
+    @staticmethod
+    def get_pixie_data(pkl_path: Path) -> torch.Tensor:
+        """Load pixie predictions from pre-processed pkl file"""
+        data = np.load(pkl_path, allow_pickle=True)
+        return torch.tensor(data["shape"][:10])[None]
+
     def get_body_shapes(
         self, raw_img_path: Path, gender: Literal["male", "female", "neutral"]
     ) -> Tuple[Dict[str, torch.Tensor], np.ndarray]:
@@ -107,6 +120,10 @@ class HBWComparison(Image2ShapeUtils):
         raw_img = cv2.imread(str(raw_img_path))
         raw_img = cv2.cvtColor(raw_img, cv2.COLOR_BGR2RGB)
 
+        # pixie prediction
+        pixie_pkl_path = self.comparison_dirs["pixie"] / person_id / img_id / f"{img_id}_param.pkl"
+        pixie_body_shape = self.get_pixie_data(pixie_pkl_path)
+
         # shapy prediction
         shpay_npz_path = self.comparison_dirs["shapy"] / person_id / f"{img_id}.npz"
         shapy_data = self.get_shapy_data(shpay_npz_path)
@@ -115,14 +132,20 @@ class HBWComparison(Image2ShapeUtils):
         # clip preprocess
         encoded_image = self.clip_preprocess(Image.fromarray(raw_img)).unsqueeze(0).to(self.device)
 
-        # our prediction
         with torch.no_grad():
-            clip_scores = self.clip_model(encoded_image, self.encoded_labels)[0].float()
-            our_body_shape = self.model(clip_scores).cpu()
+            # our prediction - neutral
+            clip_scores = self.clip_model(encoded_image, self.smplx_models["neutral"]["labels"])[0].float()
+            our_neutral_body_shape = self.smplx_models["neutral"]["model"](clip_scores).cpu()
+
+            # out prediction - real gender
+            clip_scores = self.clip_model(encoded_image, self.smplx_models[gender]["labels"])[0].float()
+            our_real_gender_body_shape = self.smplx_models[gender]["model"](clip_scores).cpu()
 
         return {
             "shapy": shapy_body_shape,
-            "ours": our_body_shape,
+            "ours": our_neutral_body_shape,
+            "pixie": pixie_body_shape,
+            "ours_gender": our_real_gender_body_shape,
         }, raw_img
 
     def get_rendered_images(
@@ -135,6 +158,15 @@ class HBWComparison(Image2ShapeUtils):
             rendered_img = self.renderer.render_mesh(**kwargs)
             rendered_imgs[method] = self.adjust_rendered_img(rendered_img)
         return rendered_imgs
+
+    def calc_chamfer_distance(self, meshes: Dict[str, Meshes]) -> Dict[str, float]:
+        """Calculate the chamfer distance between the gt and the other methods"""
+        losses = {}
+        for method, mesh in meshes.items():
+            if method == "gt":
+                continue
+            losses[method] = chamfer_distance(meshes["gt"].verts_packed()[None], mesh.verts_packed()[None])[0].item()
+        return losses
 
     def multiview_data(
         self,
@@ -212,23 +244,23 @@ class HBWComparison(Image2ShapeUtils):
             image_counter = 0
 
             # ------ DEBUG ------
-            if person_id.name not in ["017_111_48", "029_66_21", "020_12_25", "022_12_34", "033_85_38"]:
-                continue
+            # if person_id.name not in ["017_111_48", "029_66_21", "020_12_25", "022_12_34", "033_85_38"]:
+            #     continue
             # -------------------
             for image_type in person_id.iterdir():
                 if image_type.name == "Pictures_in_the_Wild":
                     for raw_img_path in image_type.iterdir():
 
                         # ------ DEBUG ------
-                        if raw_img_path.name not in [
-                            # "01783_female.png",
-                            # "01770_female.png",
-                            # "00305_male.png",
-                            # "01119_female.png",
-                            # "01127_female.png",
-                            "02446_male.png",
-                        ]:
-                            continue
+                        # if raw_img_path.name not in [
+                        #     # "01783_female.png",
+                        #     # "01770_female.png",
+                        #     # "00305_male.png",
+                        #     # "01119_female.png",
+                        #     # "01127_female.png",
+                        #     "02446_male.png",
+                        # ]:
+                        #     continue
                         # -------------------
 
                         person_id_name = person_id.name.split("_")[0]
@@ -244,7 +276,7 @@ class HBWComparison(Image2ShapeUtils):
                         #     continue
                         # -------------------
 
-                        gender = "neutral"
+                        gender = raw_img_path.stem.split("_")[-1]
 
                         gt_verts, gt_mesh = self._get_gt_data(self.gt_dir / f"{person_id_name}.npy")
                         gt_verts += self.utils.smplx_offset_numpy.astype(np.float32)
@@ -266,7 +298,7 @@ class HBWComparison(Image2ShapeUtils):
 
                         meshes["gt"] = gt_mesh
 
-                        # chamfer_distances: Dict[str, torch.Tensor] = self.calc_chamfer_distance(meshes)
+                        chamfer_distances: Dict[str, torch.Tensor] = self.calc_chamfer_distance(meshes)
                         l2_distances: Dict[str, np.ndarray] = self.calc_l2_distances(smplx_args, gt_verts)
 
                         smplx_kwargs: Dict[str, Dict[str, np.ndarray]] = self.mesh_attributes_to_kwargs(
@@ -274,27 +306,27 @@ class HBWComparison(Image2ShapeUtils):
                         )
 
                         # ------ DEBUG ------
-                        import matplotlib.pyplot as plt
+                        # import matplotlib.pyplot as plt
 
-                        shapy_diff = np.linalg.norm(smplx_args["gt"][0] - smplx_args["shapy"][0], axis=-1)
-                        our_diff = np.linalg.norm(smplx_args["gt"][0] - smplx_args["ours"][0], axis=-1)
-                        shapy_diff_normed = shapy_diff / 0.12324481  # np.max(shapy_diff)
-                        our_diff_normed = our_diff / 0.12324481  # np.max(shapy_diff)
-                        color_map = plt.get_cmap("coolwarm")
-                        shapy_vertex_colors = torch.tensor(color_map(shapy_diff_normed)[:, :3]).float().to(self.device)
-                        our_vertex_colors = torch.tensor(color_map(our_diff_normed)[:, :3]).float().to(self.device)
-                        shapy_diff = self.adjust_rendered_img(
-                            self.renderer.render_mesh(
-                                **smplx_kwargs["shapy"], texture_color_values=shapy_vertex_colors[None]
-                            )
-                        )
-                        our_diff = self.adjust_rendered_img(
-                            self.renderer.render_mesh(
-                                **smplx_kwargs["ours"], texture_color_values=our_vertex_colors[None]
-                            )
-                        )
-                        gt_img = self.adjust_rendered_img(self.renderer.render_mesh(**smplx_kwargs["gt"]))
-                        np.concatenate([shapy_diff, our_diff, gt_img], axis=1)
+                        # shapy_diff = np.linalg.norm(smplx_args["gt"][0] - smplx_args["shapy"][0], axis=-1)
+                        # our_diff = np.linalg.norm(smplx_args["gt"][0] - smplx_args["ours"][0], axis=-1)
+                        # shapy_diff_normed = shapy_diff / 0.12324481  # np.max(shapy_diff)
+                        # our_diff_normed = our_diff / 0.12324481  # np.max(shapy_diff)
+                        # color_map = plt.get_cmap("coolwarm")
+                        # shapy_vertex_colors = torch.tensor(color_map(shapy_diff_normed)[:, :3]).float().to(self.device)
+                        # our_vertex_colors = torch.tensor(color_map(our_diff_normed)[:, :3]).float().to(self.device)
+                        # shapy_diff = self.adjust_rendered_img(
+                        #     self.renderer.render_mesh(
+                        #         **smplx_kwargs["shapy"], texture_color_values=shapy_vertex_colors[None]
+                        #     )
+                        # )
+                        # our_diff = self.adjust_rendered_img(
+                        #     self.renderer.render_mesh(
+                        #         **smplx_kwargs["ours"], texture_color_values=our_vertex_colors[None]
+                        #     )
+                        # )
+                        # gt_img = self.adjust_rendered_img(self.renderer.render_mesh(**smplx_kwargs["gt"]))
+                        # np.concatenate([shapy_diff, our_diff, gt_img], axis=1)
 
                         # -------------------
 
@@ -314,10 +346,13 @@ class HBWComparison(Image2ShapeUtils):
                         self.create_video_from_dir(frames_dir, video_shape)
 
                         # columns are: ["image_name", "loss", "shapy", "pixie", "spin", "ours"]
-                        single_img_results = pd.DataFrame.from_dict(
+                        single_img_results_l2 = pd.DataFrame.from_dict(
                             {"image_name": [raw_img_path.stem], "loss": "l2", **l2_distances}
                         )
-                        self.results_df = pd.concat([self.results_df, single_img_results])
+                        single_img_results_chamfer = pd.DataFrame.from_dict(
+                            {"image_name": [raw_img_path.stem], "loss": "chamfer", **chamfer_distances}
+                        )
+                        self.results_df = pd.concat([self.results_df, single_img_results_l2])
 
                         image_counter += 1
 

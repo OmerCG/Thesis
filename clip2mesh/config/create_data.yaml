@@ -1,14 +1,14 @@
 defaults:
   - renderer_kwargs: smplx
 
-output_path: /home/nadav2/dev/data/CLIP2Shape/images/temp # Path to save the images
-gender: neutral
+output_path: /home/nadav2/dev/data/CLIP2Shape/images/smplx_male_singleview_3K # Path to save the images
+gender: male
 img_tag:
 model_type: smplx
 with_face: False
-num_of_imgs: 500
-num_coeffs: 10
-multiview: True
+num_of_imgs: 3000
+num_coeffs: 8
+multiview: False
 get_tall_data: False
 # texture: /home/nadav2/dev/repos/CLIP2Shape/Flame/flame2020/mesh.png  # FLAME texture
 # texture:  # SMAL texture (keep empty for random texture)
@@ -16,5 +16,6 @@ get_tall_data: False
 renderer_kwargs:
   py3d: True
   img_size: [1024, 1024]
-  tex_path: /home/nadav2/dev/repos/CLIP2Shape/SMPLX/textures/smplx_texture_m_alb.png  # SMPLX texture
   background_color: [0.0, 0.0, 0.0]
+  # tex_path: /home/nadav2/dev/repos/CLIP2Shape/Flame/flame2020/mesh.png  # FLAME texture
+  tex_path: /home/nadav2/dev/repos/Thesis/SMPLX/textures/smplx_texture_m_alb.png  # SMPLX texture

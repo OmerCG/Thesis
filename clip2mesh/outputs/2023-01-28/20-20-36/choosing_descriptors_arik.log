@@ -1,0 +1,55 @@
+[2023-01-28 20:20:42,192][choosing_descriptors][INFO] - There are total of 19 descriptors
+[2023-01-28 20:20:42,194][choosing_descriptors][INFO] - Working on cluster 0
+[2023-01-28 20:20:42,195][choosing_descriptors][INFO] - 0 most variance descriptor - long legs
+[2023-01-28 20:20:42,195][choosing_descriptors][INFO] - Adding long legs to chosen descriptors
+[2023-01-28 20:20:42,195][choosing_descriptors][INFO] - 1 most variance descriptor - lean
+[2023-01-28 20:20:42,197][choosing_descriptors][INFO] - lean is correlated with long legs with corr -0.6480109967995085
+[2023-01-28 20:20:42,197][choosing_descriptors][INFO] - 2 most variance descriptor - hourglass
+[2023-01-28 20:20:42,198][choosing_descriptors][INFO] - Adding hourglass to chosen descriptors
+[2023-01-28 20:20:42,198][choosing_descriptors][INFO] - 3 most variance descriptor - average
+[2023-01-28 20:20:42,199][choosing_descriptors][INFO] - Adding average to chosen descriptors
+[2023-01-28 20:20:42,199][choosing_descriptors][INFO] - 4 most variance descriptor - sexy
+[2023-01-28 20:20:42,200][choosing_descriptors][INFO] - sexy is correlated with hourglass with corr 0.784311820416696
+[2023-01-28 20:20:42,200][choosing_descriptors][INFO] - 5 most variance descriptor - thin
+[2023-01-28 20:20:42,201][choosing_descriptors][INFO] - thin is correlated with long legs with corr 0.6821215005244394
+[2023-01-28 20:20:42,201][choosing_descriptors][INFO] - 6 most variance descriptor - fit
+[2023-01-28 20:20:42,202][choosing_descriptors][INFO] - fit is correlated with hourglass with corr 0.819446370223855
+[2023-01-28 20:20:42,202][choosing_descriptors][INFO] - 7 most variance descriptor - narrow waist
+[2023-01-28 20:20:42,203][choosing_descriptors][INFO] - narrow waist is correlated with hourglass with corr 0.715198307827724
+[2023-01-28 20:20:42,203][choosing_descriptors][INFO] - 8 most variance descriptor - proportioned
+[2023-01-28 20:20:42,205][choosing_descriptors][INFO] - Adding proportioned to chosen descriptors
+[2023-01-28 20:20:42,206][choosing_descriptors][INFO] - 9 most variance descriptor - petite
+[2023-01-28 20:20:42,208][choosing_descriptors][INFO] - Adding petite to chosen descriptors
+[2023-01-28 20:20:42,208][choosing_descriptors][INFO] - 10 most variance descriptor - short
+[2023-01-28 20:20:42,209][choosing_descriptors][INFO] - short is correlated with average with corr 0.7022685328179009
+[2023-01-28 20:20:42,209][choosing_descriptors][INFO] - 11 most variance descriptor - skinny
+[2023-01-28 20:20:42,212][choosing_descriptors][INFO] - Adding skinny to chosen descriptors
+[2023-01-28 20:20:42,212][choosing_descriptors][INFO] - 12 most variance descriptor - tall
+[2023-01-28 20:20:42,213][choosing_descriptors][INFO] - tall is correlated with long legs with corr 0.8591224728088966
+[2023-01-28 20:20:42,213][choosing_descriptors][INFO] - currently chosen descriptors: {'long legs': {'variance': 0.33877351562391456}, 'hourglass': {'variance': 0.1391679703781469}, 'average': {'variance': 0.12050321458606865}, 'proportioned': {'variance': 0.08741725537744352}, 'petite': {'variance': 0.08265128086857945}, 'skinny': {'variance': 0.07900849067744804}}
+[2023-01-28 20:20:42,213][choosing_descriptors][INFO] - Finished cluster 0
+[2023-01-28 20:20:42,213][choosing_descriptors][INFO] - Working on cluster 1
+[2023-01-28 20:20:42,214][choosing_descriptors][INFO] - 0 most variance descriptor - fat
+[2023-01-28 20:20:42,214][choosing_descriptors][INFO] - Adding fat to chosen descriptors
+[2023-01-28 20:20:42,214][choosing_descriptors][INFO] - 1 most variance descriptor - pear shaped
+[2023-01-28 20:20:42,215][choosing_descriptors][INFO] - pear shaped is correlated with fat with corr 0.9342076195478791
+[2023-01-28 20:20:42,215][choosing_descriptors][INFO] - 2 most variance descriptor - curvy
+[2023-01-28 20:20:42,215][choosing_descriptors][INFO] - curvy is correlated with fat with corr 0.9074047647192535
+[2023-01-28 20:20:42,216][choosing_descriptors][INFO] - 3 most variance descriptor - big
+[2023-01-28 20:20:42,216][choosing_descriptors][INFO] - big is correlated with fat with corr 0.9914903967349943
+[2023-01-28 20:20:42,216][choosing_descriptors][INFO] - 4 most variance descriptor - heavyset
+[2023-01-28 20:20:42,217][choosing_descriptors][INFO] - heavyset is correlated with fat with corr 0.9869596022448878
+[2023-01-28 20:20:42,217][choosing_descriptors][INFO] - 5 most variance descriptor - small
+[2023-01-28 20:20:42,218][choosing_descriptors][INFO] - small is correlated with fat with corr 0.7492765136250217
+[2023-01-28 20:20:42,218][choosing_descriptors][INFO] - currently chosen descriptors: {'fat': {'variance': 1.8645784291107015}}
+[2023-01-28 20:20:42,218][choosing_descriptors][INFO] - Finished cluster 1
+[2023-01-28 20:20:42,218][choosing_descriptors][INFO] - There are 7 chosen descriptors in initial filter
+[2023-01-28 20:20:42,218][choosing_descriptors][INFO] - chosen descriptors: [['long legs', 'hourglass', 'average', 'proportioned', 'petite', 'skinny'], ['fat']]
+[2023-01-28 20:20:42,218][choosing_descriptors][INFO] - Final filter
+[2023-01-28 20:20:42,219][choosing_descriptors][INFO] - Descriptor fat has variance 1.8645784291107015
+[2023-01-28 20:20:42,220][choosing_descriptors][INFO] - Descriptor fat is correlated with hourglass with correlation 0.7495304385499986 - removing hourglass
+[2023-01-28 20:20:42,220][choosing_descriptors][INFO] - Descriptor fat is correlated with average with correlation 0.7536793970399726 - removing average
+[2023-01-28 20:20:42,220][choosing_descriptors][INFO] - Descriptor long legs has variance 0.33877351562391456
+[2023-01-28 20:20:42,221][choosing_descriptors][INFO] - Descriptor proportioned has variance 0.08741725537744352
+[2023-01-28 20:20:42,222][choosing_descriptors][INFO] - Descriptor petite has variance 0.08265128086857945
+[2023-01-28 20:20:42,223][choosing_descriptors][INFO] - Descriptor skinny has variance 0.07900849067744804

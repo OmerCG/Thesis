@@ -2,7 +2,7 @@ defaults:
   - renderer_kwargs: smplx
 
 output_path: /home/nadav2/dev/data/CLIP2Shape/outs/images_from_demo/image2shape
-smplx_model: /home/nadav2/dev/repos/Thesis/pre_production/smplx_neutral_new_algorithm.ckpt
+smplx_model: /home/nadav2/dev/repos/Thesis/pre_production/smplx_male_10k.ckpt
 
 renderer_kwargs:
     img_size: [1024, 1024]

@@ -1,0 +1,21 @@
+data_dir: /home/nadav2/dev/data/CLIP2Shape/outs/images_to_shape/HBW/data
+predictions_dir: /home/nadav2/dev/data/CLIP2Shape/outs/images_to_shape/HBW/predictions
+output_dir: /home/nadav2/dev/data/CLIP2Shape/outs/images_to_shape/HBW/unfiltered_comparison
+gt_dir: /home/nadav2/dev/data/CLIP2Shape/outs/images_to_shape/HBW/Ground_Truth
+comparison_kwargs:
+  raw_imgs_dir: ${data_dir}
+  gt_dir: ${gt_dir}
+  output_path: ${output_dir}
+  comparison_dirs:
+    shapy: ${predictions_dir}/shapy_predictions
+    pixie: ${predictions_dir}/pixie_predictions
+  smplx_model: /home/nadav2/dev/repos/Thesis/pre_production/smplx_neutral_unfiltered.ckpt
+  renderer_kwargs:
+    img_size:
+    - 1024
+    - 1024
+    tex_path: null
+    dist: 4.2
+    elev: 10.0
+    azim: 0.0
+    texture_optimization: true

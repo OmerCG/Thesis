@@ -1,8 +1,8 @@
 defaults:
-  - renderer_kwargs: flame_shape
+  - renderer_kwargs: smplx
 
 out_dir: /home/nadav2/dev/data/CLIP2Shape/images/temp
-gender: neutral
+gender: male
 device: cuda
 
 # # FLAME - expression
@@ -11,15 +11,16 @@ device: cuda
 # model_type: flame
 # with_face: True
 
-# FLAME - shape
-texture: #/home/nadav2/dev/repos/Thesis/Flame/flame2020/mesh.png
-model_path: /home/nadav2/dev/repos/Thesis/pre_production/flame_shape_unfiltered.ckpt
-model_type: flame
+# # FLAME - shape
+# texture: #/home/nadav2/dev/repos/Thesis/Flame/flame2020/mesh.png
+# model_path: /home/nadav2/dev/repos/Thesis/pre_production/flame_shape_new.ckpt
+# model_type: flame
 
-# # SMPLX
-# texture: /home/nadav2/dev/repos/Thesis/SMPLX/textures/smplx_texture_m_alb.png
-# model_path: /home/nadav2/dev/repos/Thesis/pre_production/smplx_neutral_unfiltered.ckpt
-# model_type: smplx
+# SMPLX
+texture: #/home/nadav2/dev/repos/Thesis/SMPLX/textures/smplx_texture_m_alb.png
+model_path: /home/nadav2/dev/repos/Thesis/pre_production/smplx_male_singleview_3k.ckpt
+model_type: smplx
+num_coeffs: 8
 
 # # SMPL
 # texture: #/home/nadav2/dev/repos/Thesis/SMPLX/textures/smplx_texture_m_alb.png

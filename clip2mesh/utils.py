@@ -13,6 +13,7 @@ import open3d as o3d
 import altair as alt
 import pickle as pkl
 import pytorch_lightning as pl
+from enum import Enum
 from PIL import Image
 from io import BytesIO
 from tqdm import tqdm
@@ -212,11 +213,12 @@ class SMPLXParams:
         global_orient: torch.tensor = None,
         transl: torch.tensor = None,
         smpl_model: bool = False,
+        num_coeffs: int = 10,
     ):
         if betas is not None:
             betas: torch.Tensor = betas
         else:
-            betas = torch.zeros(1, 10)
+            betas = torch.zeros(1, num_coeffs)
         if expression is not None:
             expression: torch.Tensor = expression
         else:
@@ -581,6 +583,7 @@ class Utils:
             global_orient=global_orient,
             transl=transl,
             smpl_model=get_smpl,
+            num_coeffs=num_coeffs,
         )
         if self.comparison_mode:
             self._get_smplx_layer(gender, num_coeffs, get_smpl)
@@ -782,7 +785,7 @@ class Utils:
     @staticmethod
     def get_random_betas_smplx(num_coeffs: int = 10, tall_data: bool = False) -> torch.tensor:
         """SMPLX body shape"""
-        random_offset = torch.randint(-4, 4, (1, num_coeffs)).float()
+        random_offset = torch.randint(-3, 3, (1, num_coeffs)).float()
         if tall_data:
             random_offset[:, 0] = 4.0
         return torch.randn(1, num_coeffs) * random_offset
@@ -790,21 +793,22 @@ class Utils:
     @staticmethod
     def get_random_betas_smal(num_coeffs: int = 10) -> torch.tensor:
         """SMAL body shape"""
-        shape = torch.rand(1, num_coeffs) * torch.cat(
-            [torch.randint(-1, 1, (1, 10)), torch.ones(1, num_coeffs - 10)], 1
-        )  # * torch.randint(-1, 1, (1, 10)).float()
-        # return torch.cat([shape, torch.zeros(1, 31)], dim=1)
+        shape = torch.rand(1, num_coeffs) * torch.randint(-2, 2, (1, num_coeffs)).float()
+        if shape.shape != (1, MaxCoeffs.SMAL.value):
+            shape = torch.cat([shape, torch.zeros(1, MaxCoeffs.SMAL.value - num_coeffs)], 1)
         return shape
 
     @staticmethod
     def get_random_expression(num_coeffs: int = 10) -> torch.tensor:
         """SMPLX face expression"""
-        return torch.randn(1, num_coeffs) * torch.randint(-1, 1, (1, num_coeffs)).float()
+        return torch.randn(1, num_coeffs) * torch.randint(-2, 2, (1, num_coeffs)).float()
 
     @staticmethod
     def get_random_shape(num_coeffs: int = 10) -> torch.tensor:
         """FLAME face shape"""
-        shape = torch.rand(1, num_coeffs) * torch.randint(-3, 3, (1, num_coeffs)).float()
+        shape = torch.randn(1, num_coeffs) * torch.randint(-2, 2, (1, num_coeffs)).float()
+        if shape.shape != (1, MaxCoeffs.FLAME_SHAPE.value):
+            shape = torch.cat([shape, torch.zeros(1, MaxCoeffs.FLAME_SHAPE.value - num_coeffs)], 1)
         # return torch.cat([shape, torch.zeros(1, 90)], dim=1)
         return shape
 
@@ -1006,6 +1010,8 @@ class ModelsFactory:
         else:
             if "gender" in kwargs:
                 kwargs.pop("gender")
+            if "num_coeffs" in kwargs:
+                kwargs.pop("num_coeffs")
             return self.utils.get_smal_model(**kwargs)
 
     def get_default_params(self, with_face: bool = False, num_coeffs: int = 10) -> Dict[str, torch.tensor]:
@@ -1233,7 +1239,7 @@ class Image2ShapeUtils:
     def create_video_from_dir(self, dir_path: Union[str, Path], image_shape: Tuple[int, int]):
         dir_path = Path(dir_path)
         out_vid_path = dir_path.parent / "out_vid.mp4"
-        out_vid = cv2.VideoWriter(out_vid_path.as_posix(), cv2.VideoWriter_fourcc(*"mp4v"), 30, image_shape)
+        out_vid = cv2.VideoWriter(out_vid_path.as_posix(), cv2.VideoWriter_fourcc(*"mp4v"), 30, image_shape[::-1])
         sorted_frames = sorted(dir_path.iterdir(), key=lambda x: int(x.stem))
         for frame in tqdm(sorted_frames, desc="Creating video", total=len(sorted_frames)):
             out_vid.write(cv2.imread(frame.as_posix()))
@@ -1268,3 +1274,13 @@ class Image2ShapeUtils:
             if to_tensor:
                 kwargs = {k: torch.tensor(v)[None] for k, v in kwargs.items()}
         return kwargs
+
+
+class MaxCoeffs(Enum):
+    """Enum for max coeffs for each model type."""
+
+    SMPLX = 100
+    SMPL = 100
+    FLAME_SHAPE = 100
+    FLAME_EXPRESSION = 50
+    SMAL = 41

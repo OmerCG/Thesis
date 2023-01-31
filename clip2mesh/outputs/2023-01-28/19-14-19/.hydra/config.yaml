@@ -1,0 +1,21 @@
+renderer_kwargs:
+  dist: 4.0
+  elev: 20.0
+  azim: -20.1
+  py3d: true
+  img_size:
+  - 1024
+  - 1024
+  background_color:
+  - 0.0
+  - 0.0
+  - 0.0
+output_path: /home/nadav2/dev/data/CLIP2Shape/images/flame_shape_full_pca
+gender: neutral
+img_tag: null
+model_type: smal
+with_face: false
+num_of_imgs: 10
+num_coeffs: 100
+multiview: true
+get_tall_data: false

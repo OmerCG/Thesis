@@ -1,5 +1,5 @@
 defaults:
-  - descriptors: flame_shape
+  - descriptors: smplx_male
 
-images_dir: /home/nadav2/dev/data/CLIP2Shape/images/flame_shape_py3d
+images_dir: /home/nadav2/dev/data/CLIP2Shape/images/smplx_male_singleview_3K
 out_path: /home/nadav2/dev/data/CLIP2Shape/outs/clustering_images/words_jsons
