@@ -1,0 +1,15 @@
+renderer_kwargs:
+  tex_path: ${texture}
+  dist: 4.2
+  elev: 10.0
+  azim: 0.0
+  img_size:
+  - 1024
+  - 1024
+out_dir: /home/nadav2/dev/data/CLIP2Shape/images/temp
+gender: male
+device: cuda
+texture: /home/nadav2/dev/repos/Thesis/SMPLX/textures/smplx_texture_m_alb.png
+model_path: /home/nadav2/dev/repos/Thesis/pre_production/smpl_male_new_clusters_metadata.json
+model_type: smpl
+with_face: false

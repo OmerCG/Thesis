@@ -157,12 +157,12 @@ class ClusterImages:
         if isinstance(out_path, str):
             out_path = Path(out_path)
         encoded_images, preprocessed_images = self.get_encoded_images(images_dir=images_dir)
-        images_embedding = umap.UMAP(n_neighbors=300, min_dist=0.0, metric="euclidean").fit_transform(encoded_images)
-        best_k = self.get_best_k(images_embedding)
+        # images_embedding = umap.UMAP(n_neighbors=300, min_dist=0.0, metric="euclidean").fit_transform(encoded_images)
+        best_k = self.get_best_k(encoded_images)
         kmeans_labels = self.cluster_images_w_umap(encoded_images, n_clusters=best_k)
         # delete unnecessary variables to free GPU memory
         del encoded_images
-        del images_embedding
+        # del images_embedding
         torch.cuda.empty_cache()
         possible_words = self.calc_top_descriptors(descriptors, preprocessed_images, kmeans_labels)
         self.write_words_clusters_to_json(possible_words, out_path / f"{json_name}.json")

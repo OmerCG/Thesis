@@ -8,7 +8,7 @@ from omegaconf import DictConfig
 from typing import List, Literal
 from clip2mesh.optimizations.train_mapper import train
 from clip2mesh.data_management.data_observation.evaluate_performance import EvaluatePerformance
-from clip2mesh.data_management.data_observation.choosing_descriptors_arik import ChoosingDescriptorsArik
+from clip2mesh.data_management.data_observation.choosing_descriptors import ChoosingDescriptorsArik
 
 
 class DescriptorsAblation:

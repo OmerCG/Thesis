@@ -1,6 +1,6 @@
 data_dir: /home/nadav2/dev/data/CLIP2Shape/outs/images_to_shape/NeuralBody_DATA/new/data
 predictions_dir: /home/nadav2/dev/data/CLIP2Shape/outs/images_to_shape/NeuralBody_DATA/new/predictions
-output_dir: /home/nadav2/dev/data/CLIP2Shape/outs/images_to_shape/NeuralBody_DATA/new/comparison
+output_dir: /home/nadav2/dev/data/CLIP2Shape/outs/images_to_shape/NeuralBody_DATA/new/smpl_comparison_full_neutral
 gt_dir: /home/nadav2/dev/data/CLIP2Shape/outs/images_to_shape/NeuralBody_DATA/new/data
 
 comparison_kwargs:
@@ -10,13 +10,14 @@ comparison_kwargs:
   output_path: ${output_dir}
   
   comparison_dirs:
-    shapy: ${predictions_dir}/shapy_predictions
+    # shapy: ${predictions_dir}/shapy_predictions
     spin: ${predictions_dir}/spin_predictions
-    pixie: ${predictions_dir}/pixie_predictions
+    # pixie: ${predictions_dir}/pixie_predictions
   
   smplx_models_paths:
-    smplx_male: /home/nadav2/dev/repos/Thesis/pre_production/smplx_male_5_descriptors.ckpt
-    smplx_female: /home/nadav2/dev/repos/Thesis/pre_production/smplx_female_10_descriptors.ckpt
+    # smplx_male: /home/nadav2/dev/repos/Thesis/pre_production/smpl_male_e2e.ckpt
+    # smplx_female: /home/nadav2/dev/repos/Thesis/pre_production/smpl_female_e2e.ckpt
+    smplx_neutral: /home/nadav2/dev/repos/Thesis/pre_production/smpl_neutral_multiview_e2e.ckpt
 
   renderer_kwargs:
       img_size: [450, 300]

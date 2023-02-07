@@ -233,7 +233,7 @@ class SlidersApp:
 
     def add_texture(self):
         if self.texture is not None:
-            self.renderer_kwargs.update({"tex_path": self.texture})
+            self.renderer_kwargs.update({"use_tex": True})
             self.renderer = self.models_factory.get_renderer(**self.renderer_kwargs)
             img = self.renderer.render_mesh(verts=self.verts, faces=self.faces[None], vt=self.vt, ft=self.ft)
             img = self.adjust_rendered_img(img)
@@ -243,7 +243,7 @@ class SlidersApp:
             self.img_label.image = img
 
     def remove_texture(self):
-        self.renderer_kwargs.update({"tex_path": None})
+        self.renderer_kwargs.update({"use_tex": False})
         self.renderer = self.models_factory.get_renderer(**self.renderer_kwargs)
         img = self.renderer.render_mesh(verts=self.verts, faces=self.faces[None], vt=self.vt, ft=self.ft)
         img = self.adjust_rendered_img(img)

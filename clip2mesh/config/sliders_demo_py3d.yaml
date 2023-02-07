@@ -2,47 +2,40 @@ defaults:
   - renderer_kwargs: smplx
 
 out_dir: /home/nadav2/dev/data/CLIP2Shape/images/temp
-gender: male
+gender: neutral
 device: cuda
 
 # # FLAME - expression
-# texture: #/home/nadav2/dev/repos/Thesis/Flame/flame2020/mesh.png
-# model_path: /home/nadav2/dev/repos/Thesis/pre_production/flame_expression_w_jaw.ckpt
+# model_path: /home/nadav2/dev/repos/Thesis/pre_production/flame_expression_wo_jaw_e2e.ckpt
 # model_type: flame
 # with_face: True
-# predict_jaw_pose: True
+# predict_jaw_pose: False
 
 # # FLAME - shape
-# texture: #/home/nadav2/dev/repos/Thesis/Flame/flame2020/mesh.png
-# model_path: /home/nadav2/dev/repos/Thesis/pre_production/flame_shape_new.ckpt
+# model_path: /home/nadav2/dev/repos/Thesis/pre_production/flame_expression_wo_jaw_e2e.ckpt
 # model_type: flame
 
-# # SMPLX
-# texture: #/home/nadav2/dev/repos/Thesis/SMPLX/textures/smplx_texture_m_alb.png
-# model_path: /home/nadav2/dev/repos/Thesis/pre_production/smplx_female_3k.ckpt
-# model_type: smplx
-# num_coeffs: 10
+# SMPLX
+model_path: /home/nadav2/dev/repos/Thesis/pre_production/smplx_neutral_e2e_candidate.ckpt
+model_type: smplx
 
-# SMPL
-texture: /home/nadav2/dev/repos/Thesis/SMPLX/textures/smplx_texture_m_alb.png
-model_path: /home/nadav2/dev/repos/Thesis/pre_production/smpl_male_multiview_8desc.ckpt
-model_type: smpl
-with_face: False
+# # SMPL
+# model_path: /home/nadav2/dev/repos/Thesis/pre_production/smplx_neutral_1K.ckpt
+# model_type: smpl
 
 # # SMAL
 # texture:  # there is no texture for smal yet
 # model_path: /home/nadav2/dev/repos/Thesis/production/smal.ckpt
 # model_type: smal
 
-
 # # GENERIC
-# with_face: False
-# model_type: smpl
-# texture: #/home/nadav2/dev/repos/Thesis/SMPLX/textures/smplx_texture_m_alb.png
+# with_face: Tue
+# model_type: flame
 # model_path: # keep empty
 # on_parameters: True
 # num_coeffs: 10
 
 renderer_kwargs:
   img_size: [1024, 1024]
-  tex_path: ${texture}
+  use_tex: True
+  model_type: ${model_type}

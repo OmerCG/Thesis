@@ -1,294 +1,485 @@
 import json
+import hydra
 import logging
+import numpy as np
 import pandas as pd
-from typing import Tuple, Dict, Union, List
+from tqdm import tqdm
+from pathlib import Path
+from nltk.corpus import wordnet
+from omegaconf import DictConfig
+from itertools import permutations
+from typing import Union, Dict, Any, Set, List
+from clip2mesh.utils import Utils
+from clip2mesh.choosing_descriptors_utils import ChoosingDescriptorsUtils
 
 
-class ChoosingDescriptors:
-    def __init__(self, verbose: bool = False):
-        logging.basicConfig(level=logging.INFO, format="%(asctime)s: - %(message)s")
-        self.logger = logging.getLogger(__name__)
-        self.verbose = verbose
-
-    def choose_between_2_descriptors(
-        self, df: pd.DataFrame, first_descriptor: str, second_descriptor: str
-    ) -> Tuple[str, float]:
-        first_descriptor_avg_iou = df[
-            (df["descriptor_1"] == first_descriptor) | (df["descriptor_2"] == first_descriptor)
-        ]["iou"].mean()
-        second_descriptor_avg_iou = df[
-            (df["descriptor_1"] == second_descriptor) | (df["descriptor_2"] == second_descriptor)
-        ]["iou"].mean()
-        if self.verbose:
-            self.logger.info(f"{first_descriptor} iou: {first_descriptor_avg_iou}")
-        if self.verbose:
-            self.logger.info(f"{second_descriptor} iou: {second_descriptor_avg_iou}")
-        if first_descriptor_avg_iou < second_descriptor_avg_iou:
-            if self.verbose:
-                self.logger.info(f"chose {first_descriptor} with iou {first_descriptor_avg_iou}")
-            return first_descriptor, first_descriptor_avg_iou
-        else:
-            if self.verbose:
-                self.logger.info(f"chose {second_descriptor} with iou {second_descriptor_avg_iou}")
-            return second_descriptor, second_descriptor_avg_iou
-
-    @staticmethod
-    def flatten_dict_of_dicts(dict_of_dicts: Dict[int, Dict[str, float]]) -> Dict[str, float]:
-        flattened_dict = {}
-        for value in dict_of_dicts.values():
-            flattened_dict.update(value)
-        return flattened_dict
-
-    @staticmethod
-    def get_number_of_unique_descriptors(df: Union[pd.DataFrame, str]) -> int:
-        if isinstance(df, str):
-            df = pd.read_csv(df)
-        unique_descriptors = set(df["descriptor_1"].unique().tolist() + df["descriptor_2"].unique().tolist())
-        return len(unique_descriptors)
-
-    def initial_filter(
+class ChoosingDescriptors(ChoosingDescriptorsUtils):
+    def __init__(
         self,
-        df_path: str,
-        descriptors_groups_json: str,
-        max_descriptors_per_cluster: int = 6,
-        min_descriptors_overall: int = 1,
-    ) -> Dict[int, Dict[str, float]]:
-
-        # initializations
-        df = pd.read_csv(df_path)
-        descriptors_groups = json.load(open(descriptors_groups_json, "r"))
-        total_descriptors = self.get_number_of_unique_descriptors(df)
-        finalists_descriptors = {}
-        all_possible_descriptors = {}
-
-        # create a dictionary of all possible descriptors and their iou in case this function will return a lower number of descriptors than the minimum
-        for cluster, descriptors in descriptors_groups.items():
-            all_possible_descriptors[cluster] = {}
-            for descriptor in descriptors:
-                descriptor_iou = df[(df["descriptor_1"] == descriptor) | (df["descriptor_2"] == descriptor)][
-                    "iou"
-                ].mean()
-                all_possible_descriptors[cluster][descriptor] = descriptor_iou
-
-        # check if there are enough descriptors
-        if total_descriptors < min_descriptors_overall:
-            if self.verbose:
-                self.logger.info(f"Total number of descriptors is smaller than {min_descriptors_overall}")
-            return None, all_possible_descriptors
-
-        # print some info
-        if self.verbose:
-            self.logger.info(f"Total number of descriptors to choose from: {total_descriptors}")
-            self.logger.info(f"Total number of clusters: {len(descriptors_groups)}")
-
-        # iterate over clusters
-        for cluster, descriptors in descriptors_groups.items():
-
-            # check if there are enough descriptors in the cluster
-            # if not, return the single descriptor
-            if len(descriptors) == 1:
-                descriptor_iou = df[
-                    (df["descriptor_1"] == second_descriptor) | (df["descriptor_2"] == second_descriptor)
-                ]["iou"].mean()
-                finalists_descriptors[cluster] = {descriptors[0]: descriptor_iou}
-
-            # if there are enough descriptors in the cluster
-            else:
-
-                # filter the dataframe to only include the descriptors in the cluster
-                group_df = df[df["descriptor_1"].isin(descriptors) & df["descriptor_2"].isin(descriptors)]
-                group_df = group_df.sort_values("iou", ascending=False)
-                final_candidates = {}
-
-                # iterate over the groups
-                # for group_idx in group_df["group"].unique():
-
-                chosed_descriptors = {}
-
-                # iterate over the rows in the group
-                # for _, row in group_df[group_df["group"] == group_idx].iterrows():
-                for _, row in group_df.iterrows():
-
-                    if self.verbose:
-                        print(f"*" * 50)
-                    if self.verbose:
-                        self.logger.info(f"choosing between: {row['descriptor_1']} | {row['descriptor_2']}")
-
-                    # define the descriptors
-                    first_descriptor = row["descriptor_1"]
-                    second_descriptor = row["descriptor_2"]
-
-                    # choose one of the descriptors
-                    chosen_descriptor, chosen_descriptor_iou = self.choose_between_2_descriptors(
-                        group_df, first_descriptor, second_descriptor
-                    )
-
-                    # if the chosen descriptor is not in the chosed_descriptors dict, add it
-                    if chosen_descriptor not in chosed_descriptors.keys():
-
-                        # if the dict is empty, add the descriptor
-                        if chosed_descriptors == {}:
-                            if self.verbose:
-                                self.logger.info(f"first descriptor chosen -> {chosen_descriptor}")
-                            chosed_descriptors[chosen_descriptor] = chosen_descriptor_iou
-
-                        # if the dict is not empty, check if the chosen descriptor is better than the others
-                        else:
-
-                            if self.verbose:
-                                self.logger.info(f"iterating over chosed descriptors -> {chosed_descriptors}")
-
-                            # iterate over the chosed descriptors
-                            add_descriptor = False
-                            for descriptor in chosed_descriptors.keys():
-
-                                if self.verbose:
-                                    self.logger.info(f"choosing between: {descriptor} | {chosen_descriptor}")
-
-                                # choose one of the descriptors
-                                sub_chosen_descriptor, _ = self.choose_between_2_descriptors(
-                                    group_df, descriptor, chosen_descriptor
-                                )
-
-                                # if the chosen descriptor is not the same as the current one, it means that the current descriptor is worse, hence break
-                                if sub_chosen_descriptor != chosen_descriptor:
-                                    if self.verbose:
-                                        self.logger.info(
-                                            f"{chosen_descriptor} has higher iou than {descriptor}, hence {descriptor} is chosen"
-                                        )
-                                    break
-
-                                # if the chosen descriptor is not the same as the current one, it means that the current descriptor is better, hence add the chosen descriptor
-                                else:
-                                    add_descriptor = True
-
-                            # if the chosen descriptor is better than all the others, add it
-                            if add_descriptor:
-
-                                if self.verbose:
-                                    self.logger.info(
-                                        f"{chosen_descriptor} has lower iou than all chosed descriptors, hence {chosen_descriptor} is chosen"
-                                    )
-
-                                chosed_descriptors[chosen_descriptor] = chosen_descriptor_iou
-
-                    if self.verbose:
-                        self.logger.info(chosed_descriptors)
-
-                # add the chosen descriptors to the final candidates
-                for descriptor, iou in chosed_descriptors.items():
-                    if descriptor not in final_candidates.keys():
-                        final_candidates[descriptor] = iou
-
-                if self.verbose:
-                    print(f"*" * 50)
-
-                # sort the final candidates by iou
-                possible_options = df["descriptor_1"].unique().tolist()
-                possible_options = possible_options + [
-                    item for item in df["descriptor_2"].unique() if item not in possible_options
-                ]
-
-                if self.verbose:
-                    self.logger.info(f"possible_options: {possible_options} | total {len(possible_options)}")
-                if self.verbose:
-                    self.logger.info(f"final candidates: {final_candidates} | total {len(final_candidates)}")
-
-                sorted_descriptors_by_iou_ascending = sorted(final_candidates, key=final_candidates.get, reverse=False)[
-                    :max_descriptors_per_cluster
-                ]
-                finalists_descriptors[cluster] = {
-                    descriptor_name: final_candidates[descriptor_name]
-                    for descriptor_name in sorted_descriptors_by_iou_ascending
-                }
-
-        return finalists_descriptors, all_possible_descriptors
-
-    def reduce_descriptor(self, dict_of_desctiptors: Dict[str, Dict[str, float]]) -> Dict[str, Dict[str, float]]:
-        flattened_dict = self.flatten_dict_of_dicts(dict_of_desctiptors)
-        sorted_dict = sorted(flattened_dict, key=flattened_dict.get, reverse=False)
-        minimal_var_descriptor = sorted_dict[0]
-        cluster_of_descriptor = self.find_cluster_of_descriptor(minimal_var_descriptor, dict_of_desctiptors)
-        if self.verbose:
-            print(f"removing {minimal_var_descriptor} from cluster {cluster_of_descriptor}")
-        del dict_of_desctiptors[cluster_of_descriptor][minimal_var_descriptor]
-
-        clusters_to_delete = []
-        for cluster in dict_of_desctiptors.keys():
-            if dict_of_desctiptors[cluster] == {}:
-                clusters_to_delete.append(cluster)
-        for cluster in clusters_to_delete:
-            del dict_of_desctiptors[cluster]
-        return dict_of_desctiptors
-
-    @staticmethod
-    def find_cluster_of_descriptor(
-        descriptor: str, dict_of_desctiptors: Dict[str, Union[Dict[str, float], List[str]]]
-    ) -> int:
-        for cluster, descriptors_dict in dict_of_desctiptors.items():
-            if isinstance(descriptors_dict, dict):
-                if descriptor in descriptors_dict.keys():
-                    return cluster
-            else:
-                if descriptor in descriptors_dict:
-                    return cluster
-
-    @staticmethod
-    def get_num_of_chosen_descriptors(dict_of_desctiptors: Dict[str, Dict[str, float]]) -> int:
-        num_of_descriptors = 0
-        for descriptors in dict_of_desctiptors.values():
-            num_of_descriptors += len(descriptors)
-        return num_of_descriptors
-
-    def choose(
-        self,
-        df_path: str,
-        descriptors_groups_json: str,
-        min_descriptors_overall: int = 6,
-        max_descriptors_per_cluster: int = 6,
-        max_descriptors_overall: int = 12,
+        images_dir: Union[Path, str],
+        max_num_of_descriptors: int,
+        min_num_of_descriptors: int,
+        descriptors_clusters_json: str,
+        corr_threshold: float = 0.5,
+        output_dir: Union[Path, str] = None,
+        descriptors_to_keep: List[str] = None,
+        verbose: bool = False,
     ):
-        # get the initial filtered descriptors
-        initial_filter, all_possible_descriptors = self.initial_filter(
-            df_path, descriptors_groups_json, max_descriptors_per_cluster, min_descriptors_overall
-        )
+        super().__init__(verbose=verbose)
+        self.utils = Utils()
+        self.corr_threshold = corr_threshold
+        self.images_dir: Path = Path(images_dir)
+        self.max_num_of_descriptors = max_num_of_descriptors
+        self.min_num_of_descriptors = min_num_of_descriptors
+        self.descriptors_to_keep = descriptors_to_keep if descriptors_to_keep is not None else []
+        if output_dir is not None:
+            self.output_dir: Path = Path(output_dir)
+        if descriptors_clusters_json is not None:
+            self.clusters = self.get_clusters(Path(descriptors_clusters_json))
+        self._get_logger()
 
-        # get the number of descriptors chosen
-        num_of_descriptors = self.get_num_of_chosen_descriptors(initial_filter)
+    def _get_logger(self):
+        logging.basicConfig(level=logging.INFO, format="%(asctime)s: - %(message)s")
+        self.logger = logging.getLogger("choosing_descriptors")
 
-        # if the number of descriptors chosen is less than the minimum, choose the best k descriptors
-        if num_of_descriptors < min_descriptors_overall:
+    def _preprocess_2_words_descriptor(self, descriptor: str) -> str:
+        splitted_to_words = descriptor.split(" ")
+        if len(splitted_to_words) > 1:
+            return True
+        else:
+            return False
+
+    def _get_synonyms(self, descriptor: str) -> Set[str]:
+        multiple_words_descriptor = self._preprocess_2_words_descriptor(descriptor)
+        preprocessed_descriptor = descriptor.split(" ")[0] if multiple_words_descriptor else descriptor
+        synonyms = []
+        for syn in wordnet.synsets(preprocessed_descriptor):
+            for l in syn.lemmas():
+                synonyms.append(l.name())
+        if multiple_words_descriptor:
+            return set([f"{synonym} {descriptor.split(' ')[1]}" for synonym in synonyms])
+        else:
+            return set(synonyms)
+
+    def _get_antonyms(self, descriptor: str) -> Set[str]:
+        multiple_words_descriptor = self._preprocess_2_words_descriptor(descriptor)
+        preprocessed_descriptor = descriptor.split(" ")[0] if multiple_words_descriptor else descriptor
+        antonyms = []
+        for syn in wordnet.synsets(preprocessed_descriptor):
+            for l in syn.lemmas():
+                if l.antonyms():
+                    antonyms.append(l.antonyms()[0].name())
+        if multiple_words_descriptor:
+            return set([f"{antonym} {descriptor.split(' ')[1]}" for antonym in antonyms])
+        else:
+            return set(antonyms)
+
+    def get_dfs(self, jsons_dir: Union[Path, str]):
+        json_files = list(Path(jsons_dir).rglob("*_labels.json"))
+        df = pd.DataFrame()
+        for json_file in tqdm(json_files, desc="Loading json files", total=len(json_files)):
+            with open(json_file, "r") as f:
+                json_data = json.load(f)
+                df = pd.concat([df, pd.DataFrame(json_data)], axis=0)
+        if "broad shoulders" in df.columns:
+            df = df.drop("broad shoulders", axis=1)
+        if "built" in df.columns:
+            df = df.drop("built", axis=1)
+        df = df.apply(lambda x: [y[0] for y in x])
+
+        # get variances
+        variances = df.var(axis=0)
+        variances.sort_values(ascending=False, inplace=True)
+        variances = pd.DataFrame(zip(variances.index, variances.values), columns=["descriptor", "variance"])
+
+        # get corrlation matrix between descriptors
+        corr_df = pd.DataFrame(columns=["descriptor_1", "descriptor_2", "correlation"])
+        permut_list = []
+        for perm in permutations(df.columns, 2):
+            permut_list.append(perm)
+        for perm in tqdm(permut_list, desc="Calculating correlations", total=len(permut_list)):
+            corr_df = pd.concat(
+                [
+                    corr_df,
+                    pd.DataFrame(
+                        {
+                            "descriptor_1": [perm[0]],
+                            "descriptor_2": [perm[1]],
+                            "correlation": [np.corrcoef(df[perm[0]], df[perm[1]])[0, 1]],
+                        }
+                    ),
+                ],
+                axis=0,
+            )
+        return corr_df, variances
+
+    @staticmethod
+    def get_descriptor_iou(descriptor: str, ious_df: pd.DataFrame) -> float:
+        return ious_df[(ious_df["descriptor_1"] == descriptor) | (ious_df["descriptor_2"] == descriptor)]["iou"].mean()
+
+    @staticmethod
+    def get_clusters(descriptors_clusters_json: Path):
+        with open(descriptors_clusters_json, "r") as f:
+            clusters = json.load(f)
+        return clusters
+
+    def check_if_descriptor_is_correlated_with_chosen_descriptors(
+        self, descriptor: str, chosen_descriptors: Dict[str, Dict[str, Any]], correlations_df: pd.DataFrame
+    ) -> bool:
+        for chosen_descriptor in chosen_descriptors:
+            descriprtor_correlations = correlations_df[
+                (
+                    (correlations_df["descriptor_1"] == descriptor)
+                    & (correlations_df["descriptor_2"] == chosen_descriptor)
+                )
+            ]
+            if abs(descriprtor_correlations["correlation"][0]) > self.corr_threshold:
+                return True, chosen_descriptor, descriprtor_correlations["correlation"][0]
+        return False, None, None
+
+    def initial_filter(self):
+        # get the correlations and variances of the data
+        correlations_df, variances = self.get_dfs(self.images_dir)
+        if self.verbose:
+            self.logger.info(f"There are total of {len(variances)} descriptors")
+
+        # get the clusters
+        if hasattr(self, "clusters"):
+            chosen_descriptors = {cluster_id: {} for cluster_id in self.clusters}
+            # add column of cluster to summary df
+            variances["cluster"] = variances["descriptor"].apply(
+                lambda x: self.find_cluster_of_descriptor(x, self.clusters)
+            )
+        else:
+            chosen_descriptors = {0: {}}
+            variances["cluster"] = np.zeros(len(variances)).astype(int)
+
+        # if there are descriptors to keep, add them to the chosen descriptors
+        if self.descriptors_to_keep is not None:
             if self.verbose:
-                self.logger.info(f"Too few descriptors, choosing the best {min_descriptors_overall} descriptors")
-            all_possible_descriptors = self.flatten_dict_of_dicts(all_possible_descriptors)
-            return sorted(all_possible_descriptors, key=all_possible_descriptors.get, reverse=False)[
-                :min_descriptors_overall
-            ], len(all_possible_descriptors.keys())
+                self.logger.info(f"Keeping {self.descriptors_to_keep}")
+            for descriptor in self.descriptors_to_keep:
+                cluster_id = self.find_cluster_of_descriptor(descriptor, self.clusters)
+                descriptor_var = variances[variances["descriptor"] == descriptor]["variance"].values[0]
+                chosen_descriptors[cluster_id][descriptor] = {"variance": descriptor_var}
 
+        # start iterating over the clusters
+        for cluster, cluster_df in variances.groupby("cluster"):
+
+            if self.verbose:
+                self.logger.info(f"Working on cluster {cluster}")
+
+            # sort the cluster df by variance
+            cluster_df = cluster_df.sort_values(by="variance", ascending=False)
+
+            # iterate over the cluster descriptors
+            for i, (_, row) in enumerate(cluster_df.iterrows()):
+
+                # get the descriptor and its variance
+                descriptor = row["descriptor"]
+                descriptor_var = row["variance"]
+
+                if descriptor in chosen_descriptors[cluster]:
+                    if self.verbose:
+                        self.logger.info(f"{descriptor} already chosen")
+                    continue
+
+                if self.verbose:
+                    self.logger.info(f"{i} most variance descriptor - {descriptor}")
+
+                # if this is the descriptor with the highest variance - add it
+                if chosen_descriptors[cluster] == {}:
+
+                    if self.verbose:
+                        self.logger.info(f"Adding {row['descriptor']} to chosen descriptors")
+
+                    descriptor = row["descriptor"]
+
+                    chosen_descriptors[cluster][descriptor] = {
+                        "variance": descriptor_var,
+                    }
+
+                else:
+
+                    # check if the descriptor is correlated with the chosen descriptors
+                    corr_test = self.check_if_descriptor_is_correlated_with_chosen_descriptors(
+                        descriptor, chosen_descriptors[cluster], correlations_df
+                    )
+                    if not corr_test[0]:
+
+                        if self.verbose:
+                            self.logger.info(f"Adding {row['descriptor']} to chosen descriptors")
+
+                        chosen_descriptors[cluster][descriptor] = {
+                            "variance": descriptor_var,
+                        }
+
+                    else:
+
+                        if self.verbose:
+                            self.logger.info(
+                                f"{row['descriptor']} is correlated with {corr_test[1]} with corr {corr_test[2]}"
+                            )
+            if self.verbose:
+                self.logger.info(f"currently chosen descriptors: {chosen_descriptors[cluster]}")
+                self.logger.info(f"Finished cluster {cluster}")
+                print("*" * 100)
+
+        if self.verbose:
+            self.logger.info(
+                f"There are {sum([len(descriptors) for descriptors in chosen_descriptors.values()])} chosen descriptors in initial filter"
+            )
+            self.logger.info(f"chosen descriptors: {[list(chosen_descriptors[x].keys()) for x in chosen_descriptors]}")
+        return chosen_descriptors, correlations_df, variances
+
+    def final_filter(self, chosen_descriptors: Dict[str, Dict[str, float]], correlations_df: pd.DataFrame):
+        """
+        After the initial filter, we want to remove descriptors that are correlated with each other
+        or avoid synonyms and antonyms
+        """
+        # create df of chosen descriptors sorted by variance
         if self.verbose:
             print()
-            total_number_of_descriptors = self.get_number_of_unique_descriptors(df_path)
-            self.logger.info(f"There are {len(initial_filter.keys())} clusters of descriptors")
-            self.logger.info(
-                f"After filtering, there are {num_of_descriptors} descriptors left out of {total_number_of_descriptors} descriptors"
-            )
+            self.logger.info("Final filter")
+        chosen_descriptors_df = pd.DataFrame(self.flatten_dict_of_dicts(chosen_descriptors)).T.sort_values(
+            by="variance", ascending=False
+        )
 
-        # if the number of descriptors chosen is more than the maximum, start reducing the number of descriptors
-        if num_of_descriptors > max_descriptors_overall:
+        # create a subset of the correlations df with only the chosen descriptors
+        subset_correlation_df = correlations_df[(correlations_df["descriptor_1"].isin(chosen_descriptors_df.index))]
+
+        removed_descriptors = []
+        chosed_descriptors = []
+
+        # iterate over the chosen descriptors
+        for idx, (descriptor, data) in enumerate(chosen_descriptors_df.iterrows()):
+
+            # if the descriptor was removed in a previous iteration - skip it
+            if descriptor in removed_descriptors:
+                continue
+
+            # if this is the first descriptor - add it, since it has the highest variance
+            if idx == 0:
+                chosed_descriptors.append(descriptor)
+                continue
+
+            # get the cluster of the current descriptor
+            descriptor_cluster = self.find_cluster_of_descriptor(descriptor, chosen_descriptors)
+
             if self.verbose:
-                self.logger.info(f"Too many descriptors, choosing only {max_descriptors_overall} descriptors")
-            while num_of_descriptors > max_descriptors_overall:
-                initial_filter = self.reduce_descriptor(initial_filter)
-                num_of_descriptors -= 1
+                self.logger.info(f"Descriptor {descriptor} has variance {data['variance']}")
 
-        return self.flatten_dict_of_dicts(initial_filter), num_of_descriptors
+            # the check is across all clusters except the current one, since it was already checked
+            for cluster_id in chosen_descriptors.keys():
+
+                # if this is the current cluster - skip it
+                if cluster_id == descriptor_cluster:
+                    continue
+
+                # create a subset of the correlations df with only the chosen descriptors from the current cluster
+                corr_df = subset_correlation_df[
+                    (subset_correlation_df["descriptor_1"] == descriptor)
+                    & subset_correlation_df["descriptor_2"].isin(chosen_descriptors[cluster_id])
+                ]
+
+                # create a subset of the highly correlated descriptors
+                high_corr_df = corr_df[corr_df["correlation"] > self.corr_threshold]
+                if high_corr_df.index.__len__() > 0:
+
+                    # iterate over the highly correlated descriptors, and remove them
+                    corr_descriptors = high_corr_df["descriptor_2"].values
+                    for corr_descriptor, corr_value in zip(corr_descriptors, high_corr_df["correlation"].values):
+                        if self.verbose:
+                            self.logger.info(
+                                f"Descriptor {descriptor} is correlated with {corr_descriptor} with correlation {corr_value}"
+                            )
+                        if corr_descriptor in chosed_descriptors and descriptor not in self.descriptors_to_keep:
+                            if self.verbose:
+                                self.logger.info(f"Removing {descriptor} because {corr_descriptor} is already chosen")
+                            removed_descriptors.append(descriptor)
+                            break
+
+                        elif (
+                            corr_descriptor not in removed_descriptors
+                            and corr_descriptor not in self.descriptors_to_keep
+                        ):
+                            if self.verbose:
+                                self.logger.info(
+                                    f"Removing {corr_descriptor} because it is correlated with {descriptor}"
+                                )
+                            removed_descriptors.append(corr_descriptor)
+
+                # get synonyms of the current descriptor, and check if they are in the chosen descriptors - if so - remove them
+                synonyms = self._get_synonyms(descriptor)
+                if synonyms is not None:
+                    for synonym in synonyms:
+                        if synonym in chosen_descriptors:
+                            if descriptor in self.descriptors_to_keep:
+                                if self.verbose:
+                                    self.logger.info(
+                                        f"Removing {synonym} because it is a synonym of {descriptor} and {descriptor} is in the descriptors to keep"
+                                    )
+                                removed_descriptors.append(synonym)
+                            else:
+                                if self.verbose:
+                                    self.logger.info(f"Removing {descriptor} because it is a synonym of {synonym}")
+                                removed_descriptors.append(descriptor)
+
+                # get antonyms of the current descriptor, and check if they are in the chosen descriptors - if so - remove them
+                antonyms = self._get_antonyms(descriptor)
+                if antonyms is not None:
+                    for antonym in antonyms:
+                        if antonym in chosed_descriptors:
+                            if descriptor in self.descriptors_to_keep:
+                                if self.verbose:
+                                    self.logger.info(
+                                        f"Removing {antonym} because it is an antonym of {descriptor} and {descriptor} is in the descriptors to keep"
+                                    )
+                                removed_descriptors.append(antonym)
+                            else:
+                                if self.verbose:
+                                    self.logger.info(f"Removing {descriptor} because it is an antonym of {antonym}")
+                                removed_descriptors.append(descriptor)
+
+                # if the descriptor passed all the checks - add it to the chosen descriptors
+                if descriptor not in chosed_descriptors and descriptor not in removed_descriptors:
+                    chosed_descriptors.append(descriptor)
+
+        # create a df of the removed descriptors
+        removed_descriptors_df = chosen_descriptors_df[chosen_descriptors_df.index.isin(removed_descriptors)]
+
+        # remove the removed descriptors from the chosen descriptors df
+        chosen_descriptors_df = chosen_descriptors_df.drop(removed_descriptors)
+        return chosen_descriptors_df, removed_descriptors_df
+
+    def choose(self) -> Dict[str, Dict[str, float]]:
+        """
+        choose the descriptors, and return a dict of the chosen descriptors per cluster
+        """
+        # initial filter - remove descriptors with low variance, and high correlation
+        chosen_descriptors, correlations_df, variance_df = self.initial_filter()
+
+        # final filter - remove descriptors that are correlated across clusters, synonyms and antonyms
+        final_filtered_chosen_descriptors, removed_descriptors_df = self.final_filter(
+            chosen_descriptors, correlations_df
+        )
+
+        # create a dict of the chosen descriptors per cluster
+        final_choose = {cluster_id: {} for cluster_id in self.clusters}
+        for desc in final_filtered_chosen_descriptors.index:
+            final_choose[self.find_cluster_of_descriptor(desc, chosen_descriptors)][
+                desc
+            ] = final_filtered_chosen_descriptors.loc[desc]["variance"]
+
+        # check if the number of chosen descriptors is within the allowed range
+        number_of_descriptors = self.get_num_of_chosen_descriptors(final_choose)
+
+        # if the number of chosen descriptors is too high - reduce the number of descriptors
+        if number_of_descriptors > self.max_num_of_descriptors:
+
+            if self.verbose:
+                self.logger.info(f"Too many descriptors ({number_of_descriptors}) - reducing")
+
+            while number_of_descriptors > self.max_num_of_descriptors:
+                final_choose = self.reduce_descriptor(final_choose)
+                number_of_descriptors = self.get_num_of_chosen_descriptors(final_choose)
+
+        # if the number of chosen descriptors is too low - increase the number of descriptors
+        elif number_of_descriptors < self.min_num_of_descriptors:
+
+            if self.verbose:
+                self.logger.info(f"Too few descriptors ({number_of_descriptors}) - increasing")
+
+            iterator = 0
+
+            while number_of_descriptors < self.min_num_of_descriptors:
+
+                skip = False
+
+                # start with the discriptors that were removed in the final filter
+                if iterator < removed_descriptors_df.shape[0]:
+
+                    # get the cluster of the descriptor
+                    cluster_id = self.find_cluster_of_descriptor(
+                        removed_descriptors_df.iloc[iterator].name, self.clusters
+                    )
+
+                    synonyms = self._get_synonyms(removed_descriptors_df.iloc[iterator].name)
+                    antonyms = self._get_antonyms(removed_descriptors_df.iloc[iterator].name)
+
+                    # check if the descriptor is a synonym or antonym of a chosen descriptor - if so - skip it
+                    if synonyms is not None:
+                        for synonym in synonyms:
+                            if synonym in self.flatten_dict_of_dicts(final_choose):
+                                if self.verbose:
+                                    self.logger.info(
+                                        f"Descriptor {removed_descriptors_df.iloc[iterator].name} is a synonym of {synonym} - skipping"
+                                    )
+                                skip = True
+                    if antonyms is not None:
+                        for antonym in antonyms:
+                            if antonym in self.flatten_dict_of_dicts(final_choose):
+                                if self.verbose:
+                                    self.logger.info(
+                                        f"Descriptor {removed_descriptors_df.iloc[iterator].name} is an antonym of {antonym} - skipping"
+                                    )
+                                skip = True
+                    if not skip:
+                        (final_choose[cluster_id]).update(
+                            {removed_descriptors_df.iloc[iterator].name: removed_descriptors_df.iloc[iterator].variance}
+                        )
+                    number_of_descriptors = self.get_num_of_chosen_descriptors(final_choose)
+                    iterator += 1
+
+                # when all the descriptors that were removed in the final filter were added - start adding descriptors with high variance
+                else:
+                    for _, row in variance_df.iterrows():
+                        skip = False
+                        if row.descriptor not in self.flatten_dict_of_dicts(final_choose):
+                            cluster_id = self.find_cluster_of_descriptor(row.descriptor, self.clusters)
+
+                            synonyms = self._get_synonyms(row.descriptor)
+                            antonyms = self._get_antonyms(row.descriptor)
+
+                            # check if the descriptor is a synonym or antonym of a chosen descriptor - if so - skip it
+                            if synonyms is not None:
+                                for synonym in synonyms:
+                                    if synonym in self.flatten_dict_of_dicts(final_choose):
+                                        if self.verbose:
+                                            self.logger.info(
+                                                f"Descriptor {row.descriptor} is a synonym of {synonym} - skipping"
+                                            )
+                                        skip = True
+                            if antonyms is not None:
+                                for antonym in antonyms:
+                                    if antonym in self.flatten_dict_of_dicts(final_choose):
+                                        if self.verbose:
+                                            self.logger.info(
+                                                f"Descriptor {row.descriptor} is an antonym of {antonym} - skipping"
+                                            )
+                                        skip = True
+                            if not skip:
+                                final_choose[cluster_id][row.descriptor] = row.variance
+
+                            number_of_descriptors = self.get_num_of_chosen_descriptors(final_choose)
+                            if number_of_descriptors >= self.min_num_of_descriptors:
+                                break
+                    break
+
+        if hasattr(self, "output_dir"):
+            with open(self.output_dir / f"chosen_descriptors.json", "w") as f:
+                json.dump(final_choose, f)
+
+        return final_choose
+
+
+@hydra.main(config_path="../../config", config_name="choose_algorithm")
+def main(cfg: DictConfig) -> None:
+    choosing_descriptors = ChoosingDescriptors(**cfg)
+    final_choose = choosing_descriptors.choose()
+    print(f"Chosen descriptors: {final_choose}")
+    print("number of chosen descriptors: ", choosing_descriptors.get_num_of_chosen_descriptors(final_choose))
 
 
 if __name__ == "__main__":
-    df_path = "/home/nadav2/dev/data/CLIP2Shape/outs/vertices_heatmap/optimizations/compared_to_inv/smplx_singleview_diff_coords/vertex_heatmaps/ious.csv"
-    descriptors_groups_json = "/home/nadav2/dev/data/CLIP2Shape/outs/clustering_images/words_jsons/smplx_male.json"
-    choosing_descriptors = ChoosingDescriptors(verbose=True)
-    finalists_descriptors, num_of_descriptors = choosing_descriptors.choose(
-        df_path, descriptors_groups_json, max_descriptors_overall=14, min_descriptors_overall=2
-    )
-    print(finalists_descriptors, num_of_descriptors)
+    main()

@@ -54,7 +54,7 @@ class HBWComparison(Image2ShapeUtils):
         return {k: torch.from_numpy(v) for k, v in data.items() if k in relevant_keys}
 
     def _load_results_df(self):
-        self.results_df = pd.DataFrame(columns=["image_name", "loss", "shapy", "ours"])
+        self.results_df = pd.DataFrame(columns=["image_name", "loss", "shapy", "ours", "ours_gender"])
 
     def _perpare_comparisons_dir(self):
         """Create a directory for the comparison results"""
@@ -114,7 +114,7 @@ class HBWComparison(Image2ShapeUtils):
         self, raw_img_path: Path, gender: Literal["male", "female", "neutral"]
     ) -> Tuple[Dict[str, torch.Tensor], np.ndarray]:
         img_id = raw_img_path.stem
-        person_id = raw_img_path.parents[1].name
+        person_id = raw_img_path.parent.name
 
         # load raw image
         raw_img = cv2.imread(str(raw_img_path))
@@ -247,116 +247,114 @@ class HBWComparison(Image2ShapeUtils):
             # if person_id.name not in ["017_111_48", "029_66_21", "020_12_25", "022_12_34", "033_85_38"]:
             #     continue
             # -------------------
-            for image_type in person_id.iterdir():
-                if image_type.name == "Pictures_in_the_Wild":
-                    for raw_img_path in image_type.iterdir():
+            for raw_img_path in person_id.iterdir():
 
-                        # ------ DEBUG ------
-                        # if raw_img_path.name not in [
-                        #     # "01783_female.png",
-                        #     # "01770_female.png",
-                        #     # "00305_male.png",
-                        #     # "01119_female.png",
-                        #     # "01127_female.png",
-                        #     "02446_male.png",
-                        # ]:
-                        #     continue
-                        # -------------------
+                # ------ DEBUG ------
+                # if raw_img_path.name not in [
+                #     # "01783_female.png",
+                #     # "01770_female.png",
+                #     # "00305_male.png",
+                #     # "01119_female.png",
+                #     # "01127_female.png",
+                #     "02446_male.png",
+                # ]:
+                #     continue
+                # -------------------
 
-                        person_id_name = person_id.name.split("_")[0]
+                person_id_name = person_id.name.split("_")[0]
 
-                        self.logger.info(f"Processing {person_id.name} | {image_type.name} | {raw_img_path.name}...\n")
+                self.logger.info(f"Processing {person_id.name} | {raw_img_path.name}...\n")
 
-                        output_path = self.output_path / person_id.name / raw_img_path.stem
-                        output_path.mkdir(exist_ok=True, parents=True)
+                output_path = self.output_path / person_id.name / raw_img_path.stem
+                output_path.mkdir(exist_ok=True, parents=True)
 
-                        # ------ DEBUG ------
-                        # if (output_path / "out_vid.mp4").exists():
-                        #     self.logger.info(f"Video already exists, skipping...")
-                        #     continue
-                        # -------------------
+                # ------ DEBUG ------
+                # if (output_path / "out_vid.mp4").exists():
+                #     self.logger.info(f"Video already exists, skipping...")
+                #     continue
+                # -------------------
 
-                        gender = raw_img_path.stem.split("_")[-1]
+                gender = raw_img_path.stem.split("_")[-1]
 
-                        gt_verts, gt_mesh = self._get_gt_data(self.gt_dir / f"{person_id_name}.npy")
-                        gt_verts += self.utils.smplx_offset_numpy.astype(np.float32)
+                gt_verts, gt_mesh = self._get_gt_data(self.gt_dir / f"{person_id_name}.npy")
+                gt_verts += self.utils.smplx_offset_numpy.astype(np.float32)
 
-                        body_shapes, raw_img = self.get_body_shapes(raw_img_path, gender)
+                body_shapes, raw_img = self.get_body_shapes(raw_img_path, gender)
 
-                        smplx_args: Dict[
-                            str, Tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray]
-                        ] = self.get_smplx_kwargs(body_shapes, gender)
+                smplx_args: Dict[str, Tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray]] = self.get_smplx_kwargs(
+                    body_shapes, gender
+                )
 
-                        smplx_args["gt"] = (
-                            gt_verts,
-                            gt_mesh.faces_packed(),
-                            smplx_args["shapy"][2],
-                            smplx_args["shapy"][3],
-                        )
+                smplx_args["gt"] = (
+                    gt_verts,
+                    gt_mesh.faces_packed(),
+                    smplx_args["shapy"][2],
+                    smplx_args["shapy"][3],
+                )
 
-                        meshes: Dict[str, Meshes] = self.get_meshes_from_shapes(smplx_args)
+                meshes: Dict[str, Meshes] = self.get_meshes_from_shapes(smplx_args)
 
-                        meshes["gt"] = gt_mesh
+                meshes["gt"] = gt_mesh
 
-                        chamfer_distances: Dict[str, torch.Tensor] = self.calc_chamfer_distance(meshes)
-                        l2_distances: Dict[str, np.ndarray] = self.calc_l2_distances(smplx_args, gt_verts)
+                chamfer_distances: Dict[str, torch.Tensor] = self.calc_chamfer_distance(meshes)
+                l2_distances: Dict[str, np.ndarray] = self.calc_l2_distances(smplx_args, gt_verts)
 
-                        smplx_kwargs: Dict[str, Dict[str, np.ndarray]] = self.mesh_attributes_to_kwargs(
-                            smplx_args, to_tensor=True
-                        )
+                smplx_kwargs: Dict[str, Dict[str, np.ndarray]] = self.mesh_attributes_to_kwargs(
+                    smplx_args, to_tensor=True
+                )
 
-                        # ------ DEBUG ------
-                        # import matplotlib.pyplot as plt
+                # ------ DEBUG ------
+                # import matplotlib.pyplot as plt
 
-                        # shapy_diff = np.linalg.norm(smplx_args["gt"][0] - smplx_args["shapy"][0], axis=-1)
-                        # our_diff = np.linalg.norm(smplx_args["gt"][0] - smplx_args["ours"][0], axis=-1)
-                        # shapy_diff_normed = shapy_diff / 0.12324481  # np.max(shapy_diff)
-                        # our_diff_normed = our_diff / 0.12324481  # np.max(shapy_diff)
-                        # color_map = plt.get_cmap("coolwarm")
-                        # shapy_vertex_colors = torch.tensor(color_map(shapy_diff_normed)[:, :3]).float().to(self.device)
-                        # our_vertex_colors = torch.tensor(color_map(our_diff_normed)[:, :3]).float().to(self.device)
-                        # shapy_diff = self.adjust_rendered_img(
-                        #     self.renderer.render_mesh(
-                        #         **smplx_kwargs["shapy"], texture_color_values=shapy_vertex_colors[None]
-                        #     )
-                        # )
-                        # our_diff = self.adjust_rendered_img(
-                        #     self.renderer.render_mesh(
-                        #         **smplx_kwargs["ours"], texture_color_values=our_vertex_colors[None]
-                        #     )
-                        # )
-                        # gt_img = self.adjust_rendered_img(self.renderer.render_mesh(**smplx_kwargs["gt"]))
-                        # np.concatenate([shapy_diff, our_diff, gt_img], axis=1)
+                # shapy_diff = np.linalg.norm(smplx_args["gt"][0] - smplx_args["shapy"][0], axis=-1)
+                # our_diff = np.linalg.norm(smplx_args["gt"][0] - smplx_args["ours"][0], axis=-1)
+                # shapy_diff_normed = shapy_diff / 0.12324481  # np.max(shapy_diff)
+                # our_diff_normed = our_diff / 0.12324481  # np.max(shapy_diff)
+                # color_map = plt.get_cmap("coolwarm")
+                # shapy_vertex_colors = torch.tensor(color_map(shapy_diff_normed)[:, :3]).float().to(self.device)
+                # our_vertex_colors = torch.tensor(color_map(our_diff_normed)[:, :3]).float().to(self.device)
+                # shapy_diff = self.adjust_rendered_img(
+                #     self.renderer.render_mesh(
+                #         **smplx_kwargs["shapy"], texture_color_values=shapy_vertex_colors[None]
+                #     )
+                # )
+                # our_diff = self.adjust_rendered_img(
+                #     self.renderer.render_mesh(
+                #         **smplx_kwargs["ours"], texture_color_values=our_vertex_colors[None]
+                #     )
+                # )
+                # gt_img = self.adjust_rendered_img(self.renderer.render_mesh(**smplx_kwargs["gt"]))
+                # np.concatenate([shapy_diff, our_diff, gt_img], axis=1)
 
-                        # -------------------
+                # -------------------
 
-                        frames_dir = output_path / "frames"
-                        frames_dir.mkdir(exist_ok=True)
+                frames_dir = output_path / "frames"
+                frames_dir.mkdir(exist_ok=True)
 
-                        num_methods = len(meshes)
-                        num_blocks = num_methods + 1  # +1 because we have also the raw image
-                        video_struct = self.get_video_structure(num_blocks)
-                        video_shape = (self.renderer.height * video_struct[0], self.renderer.width * video_struct[1])
+                num_methods = len(meshes)
+                num_blocks = num_methods + 1  # +1 because we have also the raw image
+                video_struct = self.get_video_structure(num_blocks)
+                video_shape = (self.renderer.height * video_struct[0], self.renderer.width * video_struct[1])
 
-                        # create video from multiview data
-                        if raw_img.shape[:2] != (self.renderer.height, self.renderer.width):
-                            raw_img = cv2.resize(raw_img, (self.renderer.width, self.renderer.height))
+                # create video from multiview data
+                if raw_img.shape[:2] != (self.renderer.height, self.renderer.width):
+                    raw_img = cv2.resize(raw_img, (self.renderer.width, self.renderer.height))
 
-                        self.multiview_data(frames_dir, smplx_kwargs, video_struct, raw_img)
-                        self.create_video_from_dir(frames_dir, video_shape)
+                self.multiview_data(frames_dir, smplx_kwargs, video_struct, raw_img)
+                self.create_video_from_dir(frames_dir, video_shape)
 
-                        # columns are: ["image_name", "loss", "shapy", "pixie", "spin", "ours"]
-                        single_img_results_l2 = pd.DataFrame.from_dict(
-                            {"image_name": [raw_img_path.stem], "loss": "l2", **l2_distances}
-                        )
-                        single_img_results_chamfer = pd.DataFrame.from_dict(
-                            {"image_name": [raw_img_path.stem], "loss": "chamfer", **chamfer_distances}
-                        )
-                        self.results_df = pd.concat([self.results_df, single_img_results_l2])
+                # columns are: ["image_name", "loss", "shapy", "pixie", "spin", "ours"]
+                single_img_results_l2 = pd.DataFrame.from_dict(
+                    {"image_name": [raw_img_path.stem], "loss": "l2", **l2_distances}
+                )
+                # single_img_results_chamfer = pd.DataFrame.from_dict(
+                #     {"image_name": [raw_img_path.stem], "loss": "chamfer", **chamfer_distances}
+                # )
+                self.results_df = pd.concat([self.results_df, single_img_results_l2])  # , single_img_results_chamfer])
 
-                        image_counter += 1
+                image_counter += 1
 
-                    self.results_df.to_csv(self.output_path / "results.csv", index=False)
+                self.results_df.to_csv(self.output_path / "results.csv", index=False)
 
 
 @hydra.main(config_path="../config", config_name="hbw_comparison")

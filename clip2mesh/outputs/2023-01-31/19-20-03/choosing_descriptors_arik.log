@@ -1,0 +1,74 @@
+[2023-01-31 19:20:04,657][choosing_descriptors][INFO] - There are total of 24 descriptors
+[2023-01-31 19:20:04,660][choosing_descriptors][INFO] - Working on cluster 0
+[2023-01-31 19:20:04,660][choosing_descriptors][INFO] - 0 most variance descriptor - angry
+[2023-01-31 19:20:04,660][choosing_descriptors][INFO] - Adding angry to chosen descriptors
+[2023-01-31 19:20:04,661][choosing_descriptors][INFO] - 1 most variance descriptor - serious
+[2023-01-31 19:20:04,662][choosing_descriptors][INFO] - Adding serious to chosen descriptors
+[2023-01-31 19:20:04,662][choosing_descriptors][INFO] - 2 most variance descriptor - disgusted
+[2023-01-31 19:20:04,663][choosing_descriptors][INFO] - disgusted is correlated with angry with corr 0.9006837048858326
+[2023-01-31 19:20:04,663][choosing_descriptors][INFO] - 3 most variance descriptor - worried
+[2023-01-31 19:20:04,664][choosing_descriptors][INFO] - worried is correlated with angry with corr 0.7683981781075082
+[2023-01-31 19:20:04,664][choosing_descriptors][INFO] - 4 most variance descriptor - tired
+[2023-01-31 19:20:04,664][choosing_descriptors][INFO] - tired is correlated with angry with corr 0.6370161597378221
+[2023-01-31 19:20:04,665][choosing_descriptors][INFO] - 5 most variance descriptor - pensive
+[2023-01-31 19:20:04,666][choosing_descriptors][INFO] - pensive is correlated with serious with corr 0.8127314158958773
+[2023-01-31 19:20:04,666][choosing_descriptors][INFO] - 6 most variance descriptor - sleepy
+[2023-01-31 19:20:04,667][choosing_descriptors][INFO] - Adding sleepy to chosen descriptors
+[2023-01-31 19:20:04,667][choosing_descriptors][INFO] - 7 most variance descriptor - confused
+[2023-01-31 19:20:04,668][choosing_descriptors][INFO] - confused is correlated with angry with corr 0.8929703882909614
+[2023-01-31 19:20:04,668][choosing_descriptors][INFO] - 8 most variance descriptor - neutral
+[2023-01-31 19:20:04,668][choosing_descriptors][INFO] - neutral is correlated with angry with corr 0.6183451419955026
+[2023-01-31 19:20:04,668][choosing_descriptors][INFO] - 9 most variance descriptor - excited
+[2023-01-31 19:20:04,670][choosing_descriptors][INFO] - Adding excited to chosen descriptors
+[2023-01-31 19:20:04,670][choosing_descriptors][INFO] - 10 most variance descriptor - fearful
+[2023-01-31 19:20:04,671][choosing_descriptors][INFO] - fearful is correlated with angry with corr 0.7905809699254096
+[2023-01-31 19:20:04,671][choosing_descriptors][INFO] - 11 most variance descriptor - nervous
+[2023-01-31 19:20:04,671][choosing_descriptors][INFO] - nervous is correlated with angry with corr 0.7273170506487319
+[2023-01-31 19:20:04,671][choosing_descriptors][INFO] - 12 most variance descriptor - calm
+[2023-01-31 19:20:04,673][choosing_descriptors][INFO] - calm is correlated with sleepy with corr 0.7720110879685186
+[2023-01-31 19:20:04,673][choosing_descriptors][INFO] - 13 most variance descriptor - bored
+[2023-01-31 19:20:04,674][choosing_descriptors][INFO] - bored is correlated with angry with corr 0.7645602437110501
+[2023-01-31 19:20:04,674][choosing_descriptors][INFO] - 14 most variance descriptor - raise eyebrows
+[2023-01-31 19:20:04,675][choosing_descriptors][INFO] - Adding raise eyebrows to chosen descriptors
+[2023-01-31 19:20:04,676][choosing_descriptors][INFO] - 15 most variance descriptor - relaxed
+[2023-01-31 19:20:04,679][choosing_descriptors][INFO] - Adding relaxed to chosen descriptors
+[2023-01-31 19:20:04,679][choosing_descriptors][INFO] - currently chosen descriptors: {'angry': {'variance': 0.25193398703065994}, 'serious': {'variance': 0.12534847304874702}, 'sleepy': {'variance': 0.089456222790629}, 'excited': {'variance': 0.0554566695870778}, 'raise eyebrows': {'variance': 0.03448399941894679}, 'relaxed': {'variance': 0.026321231786802762}}
+[2023-01-31 19:20:04,679][choosing_descriptors][INFO] - Finished cluster 0
+[2023-01-31 19:20:04,679][choosing_descriptors][INFO] - Working on cluster 1
+[2023-01-31 19:20:04,680][choosing_descriptors][INFO] - 0 most variance descriptor - open mouth
+[2023-01-31 19:20:04,680][choosing_descriptors][INFO] - Adding open mouth to chosen descriptors
+[2023-01-31 19:20:04,680][choosing_descriptors][INFO] - 1 most variance descriptor - surprised
+[2023-01-31 19:20:04,680][choosing_descriptors][INFO] - Adding surprised to chosen descriptors
+[2023-01-31 19:20:04,680][choosing_descriptors][INFO] - 2 most variance descriptor - open eyes
+[2023-01-31 19:20:04,681][choosing_descriptors][INFO] - Adding open eyes to chosen descriptors
+[2023-01-31 19:20:04,681][choosing_descriptors][INFO] - currently chosen descriptors: {'open mouth': {'variance': 0.5331728007641974}, 'surprised': {'variance': 0.11662397169742306}, 'open eyes': {'variance': 0.021120081040618396}}
+[2023-01-31 19:20:04,681][choosing_descriptors][INFO] - Finished cluster 1
+[2023-01-31 19:20:04,682][choosing_descriptors][INFO] - Working on cluster 2
+[2023-01-31 19:20:04,682][choosing_descriptors][INFO] - 0 most variance descriptor - smiling
+[2023-01-31 19:20:04,682][choosing_descriptors][INFO] - Adding smiling to chosen descriptors
+[2023-01-31 19:20:04,682][choosing_descriptors][INFO] - 1 most variance descriptor - smile
+[2023-01-31 19:20:04,683][choosing_descriptors][INFO] - smile is correlated with smiling with corr 0.9328863203984812
+[2023-01-31 19:20:04,683][choosing_descriptors][INFO] - 2 most variance descriptor - sad
+[2023-01-31 19:20:04,683][choosing_descriptors][INFO] - Adding sad to chosen descriptors
+[2023-01-31 19:20:04,684][choosing_descriptors][INFO] - 3 most variance descriptor - happy
+[2023-01-31 19:20:04,684][choosing_descriptors][INFO] - happy is correlated with smiling with corr 0.8062415105696812
+[2023-01-31 19:20:04,684][choosing_descriptors][INFO] - 4 most variance descriptor - scared
+[2023-01-31 19:20:04,685][choosing_descriptors][INFO] - scared is correlated with sad with corr 0.7897550327621381
+[2023-01-31 19:20:04,685][choosing_descriptors][INFO] - currently chosen descriptors: {'smiling': {'variance': 0.33505292099729506}, 'sad': {'variance': 0.14414483638489314}}
+[2023-01-31 19:20:04,686][choosing_descriptors][INFO] - Finished cluster 2
+[2023-01-31 19:20:04,686][choosing_descriptors][INFO] - There are 11 chosen descriptors in initial filter
+[2023-01-31 19:20:04,686][choosing_descriptors][INFO] - chosen descriptors: [['angry', 'serious', 'sleepy', 'excited', 'raise eyebrows', 'relaxed'], ['open mouth', 'surprised', 'open eyes'], ['smiling', 'sad']]
+[2023-01-31 19:20:04,686][choosing_descriptors][INFO] - Final filter
+[2023-01-31 19:20:04,687][choosing_descriptors][INFO] - Descriptor open mouth has variance 0.5331728007641974
+[2023-01-31 19:20:04,688][choosing_descriptors][INFO] - Descriptor open mouth is correlated with excited with correlation 0.7508559297211228 - removing excited
+[2023-01-31 19:20:04,689][choosing_descriptors][INFO] - Descriptor smiling has variance 0.33505292099729506
+[2023-01-31 19:20:04,691][choosing_descriptors][INFO] - Descriptor angry has variance 0.25193398703065994
+[2023-01-31 19:20:04,691][choosing_descriptors][INFO] - Descriptor angry is correlated with surprised with correlation 0.753427602723332 - removing surprised
+[2023-01-31 19:20:04,692][choosing_descriptors][INFO] - Descriptor angry is correlated with sad with correlation 0.6679820922377393 - removing sad
+[2023-01-31 19:20:04,693][choosing_descriptors][INFO] - Descriptor serious has variance 0.12534847304874702
+[2023-01-31 19:20:04,694][choosing_descriptors][INFO] - Descriptor serious is correlated with sad with correlation 0.7221633596526014 - removing sad
+[2023-01-31 19:20:04,695][choosing_descriptors][INFO] - Descriptor sleepy has variance 0.089456222790629
+[2023-01-31 19:20:04,697][choosing_descriptors][INFO] - Descriptor raise eyebrows has variance 0.03448399941894679
+[2023-01-31 19:20:04,699][choosing_descriptors][INFO] - Descriptor relaxed has variance 0.026321231786802762
+[2023-01-31 19:20:04,700][choosing_descriptors][INFO] - Descriptor relaxed is correlated with sad with correlation 0.644995959599775 - removing sad
+[2023-01-31 19:20:04,700][choosing_descriptors][INFO] - Descriptor open eyes has variance 0.021120081040618396

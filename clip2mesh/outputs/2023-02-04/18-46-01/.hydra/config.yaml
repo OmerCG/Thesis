@@ -1,0 +1,17 @@
+renderer_kwargs:
+  dist: 0.5
+  elev: 0.0
+  azim: 0.0
+  img_size:
+  - 1024
+  - 1024
+  tex_path: ${texture}
+out_dir: /home/nadav2/dev/data/CLIP2Shape/images/temp
+gender: male
+device: cuda
+with_face: Tue
+model_type: flame
+texture: null
+model_path: null
+on_parameters: true
+num_coeffs: 10

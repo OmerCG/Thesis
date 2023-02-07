@@ -30,7 +30,7 @@ class ComparisonUtils(Image2ShapeUtils):
         self.device: str = "cuda" if torch.cuda.is_available() else "cpu"
 
         self._load_renderer(renderer_kwargs)
-        self._load_smplx_models(**smplx_models_paths)
+        self._load_smplx_models(smplx_models_paths)
         self._load_clip_model()
         self._encode_labels()
         self._perpare_comparisons_dir()
@@ -99,13 +99,13 @@ class ComparisonUtils(Image2ShapeUtils):
         return losses
 
     def get_smplx_kwargs(
-        self, body_shapes: Dict[str, torch.Tensor], gender: Literal["male", "female", "neutral"]
+        self, body_shapes: Dict[str, torch.Tensor], gender: Literal["male", "female", "neutral"], get_smpl: bool = False
     ) -> Dict[str, Tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray]]:
         """Get the smplx kwargs for the different methods -> (vertices, faces, vt, ft)"""
         smplx_kwargs = {}
         for method, body_shape in body_shapes.items():
-            get_smpl = True if method in ["spin"] else False
-            fixed_gender = "neutral" if method == "gt" else gender
+            # get_smpl = True if method in ["spin"] else False
+            fixed_gender = gender if method == "gt" else "neutral"
             smplx_kwargs[method] = self._get_smplx_attributes(body_shape, fixed_gender, get_smpl=get_smpl)
         return smplx_kwargs
 

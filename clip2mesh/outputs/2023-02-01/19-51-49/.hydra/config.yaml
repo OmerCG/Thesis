@@ -1,0 +1,21 @@
+data_dir: /home/nadav2/dev/data/CLIP2Shape/outs/images_to_shape/NeuralBody_DATA/new/data
+predictions_dir: /home/nadav2/dev/data/CLIP2Shape/outs/images_to_shape/NeuralBody_DATA/new/predictions
+output_dir: /home/nadav2/dev/data/CLIP2Shape/outs/images_to_shape/NeuralBody_DATA/new/smpl_comparison
+gt_dir: /home/nadav2/dev/data/CLIP2Shape/outs/images_to_shape/NeuralBody_DATA/new/data
+comparison_kwargs:
+  raw_imgs_dir: ${data_dir}
+  gt_dir: ${gt_dir}
+  output_path: ${output_dir}
+  comparison_dirs:
+    spin: ${predictions_dir}/spin_predictions
+  smplx_models_paths:
+    smplx_male: /home/nadav2/dev/repos/Thesis/pre_production/smpl_male_multiview_8desc.ckpt
+    smplx_female: /home/nadav2/dev/repos/Thesis/pre_production/smpl_female_multiview_6desc.ckpt
+  renderer_kwargs:
+    img_size:
+    - 450
+    - 300
+    tex_path: null
+    dist: 4.2
+    elev: 10.0
+    azim: 0.0

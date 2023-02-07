@@ -301,6 +301,13 @@ class SMALParams:
         return {param_name: param.to(device) for param_name, param in self.params.items()}
 
 
+class TexturesPaths(Enum):
+    SMPLX = "/home/nadav2/dev/repos/Thesis/SMPLX/textures/smplx_texture_m_alb.png"
+    SMPL = "/home/nadav2/dev/repos/Thesis/SMPLX/textures/smplx_texture_m_alb.png"
+    FLAME = "/home/nadav2/dev/repos/Thesis/Flame/flame2020/mesh.png"
+    SMAL = None
+
+
 class Pytorch3dRenderer:
     def __init__(
         self,
@@ -309,14 +316,16 @@ class Pytorch3dRenderer:
         elev: float = 0.0,
         azim: float = 0.0,
         img_size: Tuple[int, int] = (224, 224),
-        tex_path: str = None,
         texture_optimization: bool = False,
+        use_tex: bool = False,
+        model_type: Literal["smplx", "smal", "flame", "smpl"] = None,
         background_color: Tuple[float, float, float] = (255.0, 255.0, 255.0),
     ):
 
         self.device = device
         self.background_color = background_color
         self.texture_optimization = texture_optimization
+        tex_path = TexturesPaths[model_type.upper()].value if model_type is not None and use_tex else None
         self.tex_map = cv2.cvtColor(cv2.imread(tex_path), cv2.COLOR_BGR2RGB) if tex_path is not None else None
         self.height, self.width = img_size
 
@@ -811,7 +820,7 @@ class Utils:
     @staticmethod
     def get_random_expression_flame(num_coeffs: int = 10) -> torch.tensor:
         """FLAME face expression"""
-        expression = torch.randn(1, num_coeffs)  # * torch.randint(-1, 1, (1, num_coeffs)).float()
+        expression = torch.randn(1, num_coeffs)  # * torch.randint(-3, 3, (1, num_coeffs)).float()
         if num_coeffs < MaxCoeffs.FLAME_EXPRESSION.value:
             expression = torch.cat([expression, torch.zeros(1, MaxCoeffs.FLAME_EXPRESSION.value - num_coeffs)], 1)
         return expression
@@ -1056,7 +1065,6 @@ class ModelsFactory:
         elif self.model_type == "flame":
             if with_face:
                 params["expression_params"] = self.utils.get_random_expression_flame(num_coeffs)
-                params["jaw_pose"] = self.utils.get_random_jaw_pose()
             else:
                 params["shape_params"] = self.utils.get_random_shape(num_coeffs)
 
@@ -1143,19 +1151,27 @@ class Image2ShapeUtils:
     def __init__(self):
         pass
 
+    @staticmethod
+    def _gender_decider(arg: str) -> Literal["male", "female", "neutral"]:
+        possible_gender = arg.split("smplx_")[1]
+        assert possible_gender in ["male", "female", "neutral"], f"{possible_gender} is not supported"
+        return possible_gender
+
     def _load_renderer(self, kwargs: Union[DictConfig, Dict[str, Any]]):
         self.renderer: Pytorch3dRenderer = Pytorch3dRenderer(**kwargs)
 
     def _load_body_pose(self, body_pose_path: str):
         self.body_pose: torch.Tensor = torch.from_numpy(np.load(body_pose_path))
 
-    def _load_smplx_models(self, smplx_male: str, smplx_female: str):
-        smplx_female, labels_female = self.utils.get_model_to_eval(smplx_female)
-        smplx_male, labels_male = self.utils.get_model_to_eval(smplx_male)
-        labels_female = self._flatten_list_of_lists(labels_female)
-        labels_male = self._flatten_list_of_lists(labels_male)
-        self.model: Dict[str, nn.Module] = {"male": smplx_male, "female": smplx_female}
-        self.labels: Dict[str, List[str]] = {"male": labels_male, "female": labels_female}
+    def _load_smplx_models(self, smplx_models_paths: Dict[str, str]):
+        self.model: Dict[str, nn.Module] = {}
+        self.labels: Dict[str, List[str]] = {}
+        for model_name, model_path in smplx_models_paths.items():
+            model, labels = self.utils.get_model_to_eval(model_path)
+            labels = self._flatten_list_of_lists(labels)
+            gender = self._gender_decider(model_name)
+            self.model[gender] = model
+            self.labels[gender] = labels
 
     def _load_flame_smal_models(self, model_path: str):
         self.model, labels = self.utils.get_model_to_eval(model_path)

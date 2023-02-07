@@ -1,0 +1,8 @@
+output_dir: /home/nadav2/dev/data/CLIP2Shape/outs/choosing_descriptors
+images_dir: /home/nadav2/dev/data/CLIP2Shape/images/smpl_neutral_multiview
+descriptors_clusters_json: /home/nadav2/dev/data/CLIP2Shape/outs/clustering_images/words_jsons/smpl_neutral_multiview.json
+max_num_of_descriptors: 30
+min_num_of_descriptors: 2
+corr_threshold: 0.6
+verbose: false
+descriptors_to_keep: null

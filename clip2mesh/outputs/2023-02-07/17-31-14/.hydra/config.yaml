@@ -1,0 +1,16 @@
+renderer_kwargs:
+  dist: 0.5
+  elev: 0.0
+  azim: 0.0
+  img_size:
+  - 1024
+  - 1024
+  use_tex: true
+  model_type: ${model_type}
+out_dir: /home/nadav2/dev/data/CLIP2Shape/images/temp
+gender: neutral
+device: cuda
+model_path: /home/nadav2/dev/repos/Thesis/pre_production/flame_expression_wo_jaw_e2e.ckpt
+model_type: flame
+with_face: true
+predict_jaw_pose: false

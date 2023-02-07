@@ -1,6 +1,3 @@
-defaults:
-  - tex_path: smplx
-
 dist: 4.2
 elev: 10.0
 azim: 0.0
