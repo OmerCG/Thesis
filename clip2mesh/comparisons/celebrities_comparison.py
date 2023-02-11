@@ -162,7 +162,7 @@ class CelebComparison(Image2ShapeUtils):
         raw_img: np.ndarray,
     ):
         """Create the multiview frames for the different methods"""
-        for frame_idx, angle in enumerate(range(0, 365, 5)):
+        for frame_idx, angle in enumerate(range(0, 365, 45)):
 
             rendered_imgs: Dict[str, np.ndarray] = self.get_rendered_images(smplx_kwargs, angle)
 

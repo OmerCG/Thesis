@@ -1,0 +1,29 @@
+[2023-02-10 13:18:04,467][choosing_descriptors][INFO] - There are total of 7 descriptors
+[2023-02-10 13:18:04,468][choosing_descriptors][INFO] - Keeping []
+[2023-02-10 13:18:04,469][choosing_descriptors][INFO] - Working on cluster 0
+[2023-02-10 13:18:04,470][choosing_descriptors][INFO] - 0 most variance descriptor - cow
+[2023-02-10 13:18:04,470][choosing_descriptors][INFO] - Adding cow to chosen descriptors
+[2023-02-10 13:18:04,470][choosing_descriptors][INFO] - 1 most variance descriptor - horse
+[2023-02-10 13:18:04,471][choosing_descriptors][INFO] - horse is correlated with cow with corr 0.6229100054126174
+[2023-02-10 13:18:04,471][choosing_descriptors][INFO] - 2 most variance descriptor - hippo
+[2023-02-10 13:18:04,471][choosing_descriptors][INFO] - hippo is correlated with cow with corr 0.7521819199047015
+[2023-02-10 13:18:04,471][choosing_descriptors][INFO] - 3 most variance descriptor - donkey
+[2023-02-10 13:18:04,472][choosing_descriptors][INFO] - Adding donkey to chosen descriptors
+[2023-02-10 13:18:04,472][choosing_descriptors][INFO] - currently chosen descriptors: {'cow': {'variance': 3.239057163103036}, 'donkey': {'variance': 2.3062589067971486}}
+[2023-02-10 13:18:04,472][choosing_descriptors][INFO] - Finished cluster 0
+[2023-02-10 13:18:04,472][choosing_descriptors][INFO] - Working on cluster 1
+[2023-02-10 13:18:04,472][choosing_descriptors][INFO] - 0 most variance descriptor - lion
+[2023-02-10 13:18:04,472][choosing_descriptors][INFO] - Adding lion to chosen descriptors
+[2023-02-10 13:18:04,473][choosing_descriptors][INFO] - 1 most variance descriptor - cat
+[2023-02-10 13:18:04,473][choosing_descriptors][INFO] - Adding cat to chosen descriptors
+[2023-02-10 13:18:04,473][choosing_descriptors][INFO] - 2 most variance descriptor - dog
+[2023-02-10 13:18:04,474][choosing_descriptors][INFO] - Adding dog to chosen descriptors
+[2023-02-10 13:18:04,474][choosing_descriptors][INFO] - currently chosen descriptors: {'lion': {'variance': 2.0991930241854324}, 'cat': {'variance': 1.5685291315091139}, 'dog': {'variance': 1.1383693680336262}}
+[2023-02-10 13:18:04,474][choosing_descriptors][INFO] - Finished cluster 1
+[2023-02-10 13:18:04,474][choosing_descriptors][INFO] - There are 5 chosen descriptors in initial filter
+[2023-02-10 13:18:04,474][choosing_descriptors][INFO] - chosen descriptors: [['cow', 'donkey'], ['lion', 'cat', 'dog']]
+[2023-02-10 13:18:04,474][choosing_descriptors][INFO] - Final filter
+[2023-02-10 13:18:04,476][choosing_descriptors][INFO] - Descriptor donkey has variance 2.3062589067971486
+[2023-02-10 13:18:05,521][choosing_descriptors][INFO] - Descriptor lion has variance 2.0991930241854324
+[2023-02-10 13:18:05,522][choosing_descriptors][INFO] - Descriptor cat has variance 1.5685291315091139
+[2023-02-10 13:18:05,536][choosing_descriptors][INFO] - Descriptor dog has variance 1.1383693680336262

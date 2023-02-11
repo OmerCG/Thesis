@@ -176,7 +176,7 @@ class HBWComparison(Image2ShapeUtils):
         raw_img: np.ndarray,
     ):
         """Create the multiview frames for the different methods"""
-        for frame_idx, angle in enumerate(range(0, 365, 5)):
+        for frame_idx, angle in enumerate(range(0, 1, 1)):
 
             rendered_imgs: Dict[str, np.ndarray] = self.get_rendered_images(smplx_kwargs, angle)
 
@@ -251,12 +251,12 @@ class HBWComparison(Image2ShapeUtils):
 
                 # ------ DEBUG ------
                 # if raw_img_path.name not in [
-                #     # "01783_female.png",
+                #     "01783_female.png",
                 #     # "01770_female.png",
                 #     # "00305_male.png",
-                #     # "01119_female.png",
-                #     # "01127_female.png",
-                #     "02446_male.png",
+                #     "01119_female.png",
+                #     "00000_female.png",
+                #     # "02446_male.png",
                 # ]:
                 #     continue
                 # -------------------
@@ -341,7 +341,7 @@ class HBWComparison(Image2ShapeUtils):
                     raw_img = cv2.resize(raw_img, (self.renderer.width, self.renderer.height))
 
                 self.multiview_data(frames_dir, smplx_kwargs, video_struct, raw_img)
-                self.create_video_from_dir(frames_dir, video_shape)
+                # self.create_video_from_dir(frames_dir, video_shape)
 
                 # columns are: ["image_name", "loss", "shapy", "pixie", "spin", "ours"]
                 single_img_results_l2 = pd.DataFrame.from_dict(

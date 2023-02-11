@@ -1,0 +1,11 @@
+descriptors:
+- hippo
+- donkey
+- horse
+- cow
+- lion
+- cat
+- dog
+device: cuda
+multiview: true
+imgs_dir: /home/nadav2/dev/data/CLIP2Shape/images/smal_multiview_5k

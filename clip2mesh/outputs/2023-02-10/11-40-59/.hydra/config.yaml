@@ -1,0 +1,14 @@
+renderer_kwargs:
+  dist: 4.2
+  elev: 10.0
+  azim: 0.0
+  img_size:
+  - 1024
+  - 1024
+  use_tex: false
+  model_type: ${model_type}
+out_dir: /home/nadav2/dev/data/CLIP2Shape/images/temp
+gender: neutral
+device: cuda
+model_path: /home/nadav2/dev/repos/Thesis/pre_production/smplx_neutral_5k.ckpt
+model_type: smplx

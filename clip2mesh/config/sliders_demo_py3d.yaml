@@ -15,27 +15,26 @@ device: cuda
 # model_path: /home/nadav2/dev/repos/Thesis/pre_production/flame_expression_wo_jaw_e2e.ckpt
 # model_type: flame
 
-# SMPLX
-model_path: /home/nadav2/dev/repos/Thesis/pre_production/smplx_neutral_e2e_candidate.ckpt
-model_type: smplx
+# # SMPLX
+# model_path: /home/nadav2/dev/repos/Thesis/pre_production/smplx_neutral_5k.ckpt
+# model_type: smplx
 
 # # SMPL
 # model_path: /home/nadav2/dev/repos/Thesis/pre_production/smplx_neutral_1K.ckpt
 # model_type: smpl
 
 # # SMAL
-# texture:  # there is no texture for smal yet
-# model_path: /home/nadav2/dev/repos/Thesis/production/smal.ckpt
+# model_path: /home/nadav2/dev/repos/Thesis/pre_production/smal_e2e_5k.ckpt
 # model_type: smal
 
-# # GENERIC
-# with_face: Tue
-# model_type: flame
-# model_path: # keep empty
-# on_parameters: True
-# num_coeffs: 10
+# GENERIC
+with_face: false
+model_type: smplx
+model_path: # keep empty
+on_parameters: True
+num_coeffs: 10
 
 renderer_kwargs:
   img_size: [1024, 1024]
-  use_tex: True
+  use_tex: False
   model_type: ${model_type}

@@ -12,13 +12,12 @@ comparison_kwargs:
     pixie: ${predictions_dir}/pixie_predictions
   
   smplx_models: 
-    male: /home/nadav2/dev/repos/Thesis/pre_production/smplx_male_singleview_3k.ckpt
-    female: /home/nadav2/dev/repos/Thesis/pre_production/smplx_female_new.ckpt
-    neutral: /home/nadav2/dev/repos/Thesis/pre_production/smplx_neutral_1K.ckpt
+    male: /home/nadav2/dev/repos/Thesis/end2end_pipeline/smplx/smplx_male_multiview_e2e.ckpt
+    female: /home/nadav2/dev/repos/Thesis/end2end_pipeline/smplx/smplx_female_e2e.ckpt
+    neutral: /home/nadav2/dev/repos/Thesis/end2end_pipeline/smplx/smplx_neutral_e2e.ckpt
 
   renderer_kwargs:
       img_size: [1024, 1024]
-      tex_path:
       dist: 4.2
       elev: 10.0
       azim: 0.0

@@ -1,0 +1,14 @@
+renderer_kwargs:
+  dist: 4.0
+  elev: 20.0
+  azim: -20.1
+  img_size:
+  - 1024
+  - 1024
+  use_tex: false
+  model_type: ${model_type}
+out_dir: /home/nadav2/dev/data/CLIP2Shape/images/temp
+gender: neutral
+device: cuda
+model_path: /home/nadav2/dev/repos/Thesis/pre_production/smal_e2e.ckpt
+model_type: smal

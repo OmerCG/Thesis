@@ -4,7 +4,7 @@ import pandas as pd
 from typing import Tuple, Dict, Union, List
 
 
-class ChoosingDescriptors:
+class ChoosingDescriptorsUtils:
     def __init__(self, verbose: bool = False):
         logging.basicConfig(level=logging.INFO, format="%(asctime)s: - %(message)s")
         self.logger = logging.getLogger(__name__)

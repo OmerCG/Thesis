@@ -7,7 +7,7 @@ models_dir: /home/nadav2/dev/repos/CLIP2Shape/models
 seed: 42
 
 tensorboard_logger:
-  name: smplx_neutral_e2e_candidate # IMPORTANT
+  name: smal_e2e_5k # IMPORTANT
   save_dir: /home/nadav2/dev/data/CLIP2Shape/runs
   log_graph: True
 
@@ -37,22 +37,18 @@ trainer:
   log_every_n_steps: 3
 
 dataset:
-  data_dir: /home/nadav2/dev/data/CLIP2Shape/images/smplx_neutral_multiview_1K
+  data_dir: /home/nadav2/dev/data/CLIP2Shape/images/smal_multiview_5k
   optimize_features:
-    - betas
+    - beta
   out_features: ${model_conf.out_features}
   labels_to_get:
-    - fat
-    - masculine
-    - long torso
-    - hourglass
-    - tall
-    - rectangular
-    - small
-    - proportioned
+    - cow
+    - lion
+    - donkey
+    - cat
 
 model_conf:
-  num_stats: 8  # IMPORTANT
+  num_stats: 4  # IMPORTANT
   hidden_size: [800, 500]
   out_features: 10
   num_hiddens: 1

@@ -1,0 +1,10 @@
+descriptors:
+- hippo
+- donkey
+- horse
+- cow
+- lion
+- cat
+- dog
+images_dir: /home/nadav2/dev/data/CLIP2Shape/images/smal_multiview_5k
+out_path: /home/nadav2/dev/data/CLIP2Shape/outs/clustering_images/words_jsons
