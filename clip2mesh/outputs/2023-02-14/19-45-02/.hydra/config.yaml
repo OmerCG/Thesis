@@ -1,0 +1,20 @@
+renderer_kwargs:
+  dist: 0.5
+  elev: 0.0
+  azim: 0.0
+  img_size:
+  - 1024
+  - 1024
+  use_tex: false
+  model_type: ${model_type}
+  texture_optimization: true
+  py3d: true
+out_dir: /home/nadav2/dev/data/CLIP2Shape/images/temp
+gender: neutral
+device: cuda
+image_path: null
+comparison_mode: true
+model_path: /home/nadav2/dev/repos/Thesis/end2end_pipeline/flame/expression/flame_expression_e2e.ckpt
+model_type: flame
+with_face: true
+predict_jaw_pose: false

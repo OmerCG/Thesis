@@ -1,40 +1,44 @@
 defaults:
-  - renderer_kwargs: smplx
+  - renderer_kwargs: flame_expression
 
-out_dir: /home/nadav2/dev/data/CLIP2Shape/images/temp
+out_dir: /home/nadav2/dev/data/CLIP2Shape/outs/sliders_vs_blendshapes/images_to_fit/smal
 gender: neutral
 device: cuda
+image_path: #/home/nadav2/dev/data/CLIP2Shape/outs/images_to_shape/smal/data/cow.jpg
+comparison_mode: False
 
-# # FLAME - expression
-# model_path: /home/nadav2/dev/repos/Thesis/pre_production/flame_expression_wo_jaw_e2e.ckpt
-# model_type: flame
-# with_face: True
-# predict_jaw_pose: False
+# FLAME - expression
+model_path: /home/nadav2/dev/repos/Thesis/end2end_pipeline/flame/expression/flame_expression_e2e.ckpt
+model_type: flame
+with_face: True
+predict_jaw_pose: False
 
 # # FLAME - shape
-# model_path: /home/nadav2/dev/repos/Thesis/pre_production/flame_expression_wo_jaw_e2e.ckpt
+# model_path: /home/nadav2/dev/repos/Thesis/end2end_pipeline/flame/shape/flame_shape_e2e.ckpt
 # model_type: flame
 
 # # SMPLX
-# model_path: /home/nadav2/dev/repos/Thesis/pre_production/smplx_neutral_5k.ckpt
+# model_path: /home/nadav2/dev/repos/Thesis/end2end_pipeline/smplx/smplx_male_multiview_e2e.ckpt
 # model_type: smplx
 
 # # SMPL
-# model_path: /home/nadav2/dev/repos/Thesis/pre_production/smplx_neutral_1K.ckpt
+# model_path: /home/nadav2/dev/repos/Thesis/pre_production/smpl_female_multiview_manual.ckpt
 # model_type: smpl
 
 # # SMAL
-# model_path: /home/nadav2/dev/repos/Thesis/pre_production/smal_e2e_5k.ckpt
+# model_path: /home/nadav2/dev/repos/Thesis/pre_production/smal_multiview_5k_new.ckpt
 # model_type: smal
 
-# GENERIC
-with_face: false
-model_type: smplx
-model_path: # keep empty
-on_parameters: True
-num_coeffs: 10
+# # GENERIC
+# with_face: false
+# model_type: smpl
+# model_path: # keep empty
+# on_parameters: True
+# num_coeffs: 10
 
 renderer_kwargs:
   img_size: [1024, 1024]
   use_tex: False
   model_type: ${model_type}
+  texture_optimization: True
+  py3d: True

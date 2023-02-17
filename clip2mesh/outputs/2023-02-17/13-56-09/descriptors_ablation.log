@@ -1,0 +1,4 @@
+[2023-02-17 13:56:09,764][__main__][INFO] - Starting descriptors ablation for smplx male model
+[2023-02-17 13:56:09,764][__main__][INFO] - Starting with 2 descriptors
+[2023-02-17 13:56:15,685][__main__][INFO] - Chosen descriptors: ['fat', 'long torso']
+[2023-02-17 13:56:15,685][__main__][INFO] - Starting training

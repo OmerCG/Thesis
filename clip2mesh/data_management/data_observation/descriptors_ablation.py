@@ -8,7 +8,7 @@ from omegaconf import DictConfig
 from typing import List, Literal
 from clip2mesh.optimizations.train_mapper import train
 from clip2mesh.data_management.data_observation.evaluate_performance import EvaluatePerformance
-from clip2mesh.data_management.data_observation.choosing_descriptors import ChoosingDescriptorsArik
+from clip2mesh.data_management.data_observation.choosing_descriptors import ChoosingDescriptors
 
 
 class DescriptorsAblation:
@@ -25,7 +25,7 @@ class DescriptorsAblation:
         batch_size: int,
         renderer_kwargs: DictConfig,
         train_kwargs: DictConfig,
-        optimize_feature: Literal["betas", "flame_expression", "flame_shape", "beta"],
+        optimize_features: Literal["betas", "flame_expression", "flame_shape", "beta"],
         min_slider_value: int = 15,
         max_slider_value: int = 30,
         effect_threshold: float = 0.5,
@@ -38,7 +38,7 @@ class DescriptorsAblation:
         self.method = method
         self.batch_size = batch_size
         self.train_kwargs = train_kwargs
-        self.optimize_feature = optimize_feature
+        self.optimize_features = optimize_features
         self.min_slider_value = min_slider_value
         self.max_slider_value = max_slider_value
         self.effect_threshold = effect_threshold
@@ -55,7 +55,7 @@ class DescriptorsAblation:
         self.logger = logging.getLogger(__name__)
 
     def get_descriptors(self, num_of_descriptors: int) -> List[str]:
-        choosing_descriptors = ChoosingDescriptorsArik(
+        choosing_descriptors = ChoosingDescriptors(
             images_dir=self.data_path,
             max_num_of_descriptors=num_of_descriptors,
             min_num_of_descriptors=num_of_descriptors,
@@ -70,10 +70,12 @@ class DescriptorsAblation:
         self.train_kwargs.tensorboard_logger.name = run_name
         self.train_kwargs.dataloader.batch_size = self.batch_size
         self.train_kwargs.dataset.data_dir = self.data_path.as_posix()
-        self.train_kwargs.dataset.optimize_feature = self.optimize_feature
+        self.train_kwargs.dataset.optimize_features = (
+            [self.optimize_features] if isinstance(self.optimize_features, str) else self.optimize_features
+        )
         self.train_kwargs.dataset.labels_to_get = descriptors
-        self.train_kwargs.model_conf.num_stats = len(descriptors)
-        train(self.train_kwargs)
+        if self.mode == "run":
+            train(self.train_kwargs)
         return run_name
 
     def evaluate_performance(self, run_name: str):
@@ -86,7 +88,7 @@ class DescriptorsAblation:
             method=self.method,
             model_path=(self.models_dir / f"{run_name}.ckpt").as_posix(),
             out_path=self.output_path.as_posix(),
-            optimize_feature=self.optimize_feature,
+            optimize_feature=self.optimize_features,
             gender=self.gender,
         )
         evaluator.evaluate()

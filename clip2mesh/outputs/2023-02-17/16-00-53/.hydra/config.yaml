@@ -1,0 +1,19 @@
+renderer_kwargs:
+  dist: 4.2
+  elev: 10.0
+  azim: 0.0
+  img_size:
+  - 1024
+  - 1024
+  texture_optimization: true
+  model_type: ${model_type}
+out_path: /home/nadav2/dev/data/CLIP2Shape/outs/descriptors_ablations/smplx_male
+model_path: /home/nadav2/dev/repos/Thesis/end2end_pipeline/smplx/smplx_male_multiview_e2e.ckpt
+min_value: 10.0
+max_value: 40.0
+effect_threshold: 0.2
+color_map: YlOrRd
+gender: male
+method: diff_coords
+optimize_feature: betas
+model_type: smplx

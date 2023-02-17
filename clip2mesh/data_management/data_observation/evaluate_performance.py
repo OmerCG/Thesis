@@ -61,11 +61,14 @@ class EvaluatePerformance:
         self.renderer = self.models_factory.get_renderer(py3d=True, **kwargs)
 
     def _get_total_possible_idxs(self):
-        self.verts, self.faces, self.vt, self.ft = self.models_factory.get_model(gender=self.gender)
         if self.model_type in ["smpl", "smplx"]:
+            self.verts, self.faces, self.vt, self.ft = self.models_factory.get_model(
+                gender=self.gender, get_smpl=self.model_type == "smpl"
+            )
             self.verts += self.utils.smplx_offset_numpy
             total_possible_verts = self.verts.shape[0]
         elif self.model_type == "flame":
+            self.verts, self.faces, self.vt, self.ft = self.models_factory.get_model()
             total_possible_verts = self.verts.shape[1]
         self.total_possible_idxs = torch.range(0, total_possible_verts)
 
@@ -117,7 +120,12 @@ class EvaluatePerformance:
                 with torch.no_grad():
                     out = self.model(temp_input.to(self.device))
 
-                model_kwargs = {self.optimize_feature: out.cpu(), "gender": self.gender}
+                model_kwargs = {
+                    self.optimize_feature: out.cpu(),
+                    "gender": self.gender,
+                }
+                if self.model_type == "smpl":
+                    model_kwargs["get_smpl"] = True
                 verts, faces, _, _ = self.models_factory.get_model(**model_kwargs)
                 verts, faces = self.get_verts_faces_by_model_type(verts, faces)
                 if self.method == "diff_coords":

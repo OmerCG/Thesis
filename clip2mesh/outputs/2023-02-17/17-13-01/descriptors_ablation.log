@@ -1,0 +1,32 @@
+[2023-02-17 17:13:01,666][__main__][INFO] - Starting descriptors ablation for smplx male model
+[2023-02-17 17:13:01,666][__main__][INFO] - Starting with 2 descriptors
+[2023-02-17 17:13:07,881][__main__][INFO] - Chosen descriptors: ['fat', 'long torso']
+[2023-02-17 17:13:07,882][__main__][INFO] - Starting training
+[2023-02-17 17:13:07,882][__main__][INFO] - Starting evaluation
+[2023-02-17 17:13:12,882][clip2mesh.data_management.data_observation.evaluate_performance][INFO] - IOU: 0.3868843069873998 | Overlap: 0.3019290389252497
+[2023-02-17 17:13:12,886][__main__][INFO] - Finished with 2 descriptors
+[2023-02-17 17:13:12,887][__main__][INFO] - Starting with 5 descriptors
+[2023-02-17 17:13:17,823][__main__][INFO] - Chosen descriptors: ['fat', 'rectangular', 'fit', 'long torso', 'petite']
+[2023-02-17 17:13:17,823][__main__][INFO] - Starting training
+[2023-02-17 17:13:17,824][__main__][INFO] - Starting evaluation
+[2023-02-17 17:13:22,095][clip2mesh.data_management.data_observation.evaluate_performance][INFO] - IOU: 0.49866361206567394 | Overlap: 0.6871668962213306
+[2023-02-17 17:13:22,098][__main__][INFO] - Finished with 5 descriptors
+[2023-02-17 17:13:22,098][__main__][INFO] - Starting with 10 descriptors
+[2023-02-17 17:13:26,982][__main__][INFO] - Chosen descriptors: ['fat', 'rectangular', 'fit', 'proportioned', 'pear shaped', 'curvy', 'long torso', 'petite', 'tall', 'small']
+[2023-02-17 17:13:26,982][__main__][INFO] - Starting training
+[2023-02-17 17:13:26,983][__main__][INFO] - Starting evaluation
+[2023-02-17 17:13:34,208][clip2mesh.data_management.data_observation.evaluate_performance][INFO] - IOU: 0.505536464299351 | Overlap: 0.855946034163856
+[2023-02-17 17:13:34,211][__main__][INFO] - Finished with 10 descriptors
+[2023-02-17 17:13:34,211][__main__][INFO] - Starting with 15 descriptors
+[2023-02-17 17:13:38,629][__main__][INFO] - Chosen descriptors: ['fat', 'rectangular', 'fit', 'proportioned', 'pear shaped', 'curvy', 'long legs', 'heavyset', 'round apple', 'narrow waist', 'long torso', 'long', 'petite', 'tall', 'small']
+[2023-02-17 17:13:38,629][__main__][INFO] - Starting training
+[2023-02-17 17:13:38,631][__main__][INFO] - Starting evaluation
+[2023-02-17 17:13:48,979][clip2mesh.data_management.data_observation.evaluate_performance][INFO] - IOU: 0.9669721267659412 | Overlap: 0.804137664346481
+[2023-02-17 17:13:48,983][__main__][INFO] - Finished with 15 descriptors
+[2023-02-17 17:13:48,983][__main__][INFO] - Starting with 20 descriptors
+[2023-02-17 17:13:53,495][__main__][INFO] - Chosen descriptors: ['fat', 'rectangular', 'fit', 'proportioned', 'pear shaped', 'curvy', 'long legs', 'heavyset', 'round apple', 'narrow waist', 'sturdy', 'muscular', 'long torso', 'long', 'petite', 'tall', 'small', 'skinny']
+[2023-02-17 17:13:53,495][__main__][INFO] - Starting training
+[2023-02-17 17:13:53,497][__main__][INFO] - Starting evaluation
+[2023-02-17 17:14:06,355][clip2mesh.data_management.data_observation.evaluate_performance][INFO] - IOU: 0.6070064910271096 | Overlap: 0.8974305208316531
+[2023-02-17 17:14:06,358][__main__][INFO] - Finished with 20 descriptors
+[2023-02-17 17:14:06,358][__main__][INFO] - Finished descriptors ablation for smplx male

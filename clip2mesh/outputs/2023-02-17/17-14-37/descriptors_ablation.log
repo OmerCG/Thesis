@@ -1,0 +1,32 @@
+[2023-02-17 17:14:37,268][__main__][INFO] - Starting descriptors ablation for smplx female model
+[2023-02-17 17:14:37,268][__main__][INFO] - Starting with 2 descriptors
+[2023-02-17 17:14:41,718][__main__][INFO] - Chosen descriptors: ['fat', 'petite']
+[2023-02-17 17:14:41,718][__main__][INFO] - Starting training
+[2023-02-17 17:14:41,719][__main__][INFO] - Starting evaluation
+[2023-02-17 17:14:46,324][clip2mesh.data_management.data_observation.evaluate_performance][INFO] - IOU: 0.42754868270332186 | Overlap: 0.3458448955747042
+[2023-02-17 17:14:46,328][__main__][INFO] - Finished with 2 descriptors
+[2023-02-17 17:14:46,328][__main__][INFO] - Starting with 5 descriptors
+[2023-02-17 17:14:49,409][__main__][INFO] - Chosen descriptors: ['fat', 'short', 'pear shaped', 'petite', 'narrow waist']
+[2023-02-17 17:14:49,409][__main__][INFO] - Starting training
+[2023-02-17 17:14:49,410][__main__][INFO] - Starting evaluation
+[2023-02-17 17:14:53,211][clip2mesh.data_management.data_observation.evaluate_performance][INFO] - IOU: 0.460672012218404 | Overlap: 0.7232480789081317
+[2023-02-17 17:14:53,215][__main__][INFO] - Finished with 5 descriptors
+[2023-02-17 17:14:53,215][__main__][INFO] - Starting with 10 descriptors
+[2023-02-17 17:14:56,292][__main__][INFO] - Chosen descriptors: ['fat', 'short', 'pear shaped', 'curvy', 'big', 'heavyset', 'long legs', 'hourglass', 'petite', 'narrow waist']
+[2023-02-17 17:14:56,292][__main__][INFO] - Starting training
+[2023-02-17 17:14:56,293][__main__][INFO] - Starting evaluation
+[2023-02-17 17:15:03,550][clip2mesh.data_management.data_observation.evaluate_performance][INFO] - IOU: 0.4943680794196258 | Overlap: 0.8362216178609829
+[2023-02-17 17:15:03,553][__main__][INFO] - Finished with 10 descriptors
+[2023-02-17 17:15:03,553][__main__][INFO] - Starting with 15 descriptors
+[2023-02-17 17:15:06,831][__main__][INFO] - Chosen descriptors: ['fat', 'short', 'pear shaped', 'curvy', 'big', 'heavyset', 'long legs', 'hourglass', 'average', 'sexy', 'fit', 'petite', 'narrow waist', 'proportioned', 'skinny']
+[2023-02-17 17:15:06,831][__main__][INFO] - Starting training
+[2023-02-17 17:15:06,833][__main__][INFO] - Starting evaluation
+[2023-02-17 17:15:17,595][clip2mesh.data_management.data_observation.evaluate_performance][INFO] - IOU: 0.7662275677739595 | Overlap: 0.8429803798830227
+[2023-02-17 17:15:17,598][__main__][INFO] - Finished with 15 descriptors
+[2023-02-17 17:15:17,598][__main__][INFO] - Starting with 20 descriptors
+[2023-02-17 17:15:20,655][__main__][INFO] - Chosen descriptors: ['fat', 'short', 'pear shaped', 'curvy', 'big', 'heavyset', 'long legs', 'hourglass', 'average', 'sexy', 'fit', 'petite', 'narrow waist', 'proportioned', 'skinny']
+[2023-02-17 17:15:20,655][__main__][INFO] - Starting training
+[2023-02-17 17:15:20,657][__main__][INFO] - Starting evaluation
+[2023-02-17 17:15:32,088][clip2mesh.data_management.data_observation.evaluate_performance][INFO] - IOU: 0.7662275677739595 | Overlap: 0.8429803798830227
+[2023-02-17 17:15:32,091][__main__][INFO] - Finished with 20 descriptors
+[2023-02-17 17:15:32,091][__main__][INFO] - Finished descriptors ablation for smplx female

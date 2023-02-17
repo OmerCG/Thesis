@@ -1,0 +1,62 @@
+[2023-02-17 18:37:35,069][__main__][INFO] - Starting descriptors ablation for flame neutral model
+[2023-02-17 18:37:35,069][__main__][INFO] - Starting with 2 descriptors
+[2023-02-17 18:37:37,913][__main__][INFO] - Chosen descriptors: ['fat', 'big forehead']
+[2023-02-17 18:37:37,913][__main__][INFO] - Starting training
+[2023-02-17 18:37:37,937][clip2mesh.optimizations.train_mapper][INFO] - Instantiating callback <pytorch_lightning.callbacks.ModelCheckpoint>
+[2023-02-17 18:37:37,939][clip2mesh.optimizations.train_mapper][INFO] - dataloader batch size: 200
+[2023-02-17 18:37:37,939][clip2mesh.optimizations.train_mapper][INFO] - tensorboard run name: flame_neutral_2_descriptors
+[2023-02-17 18:37:37,939][clip2mesh.optimizations.train_mapper][INFO] - instantiating model
+[2023-02-17 18:37:37,944][clip2mesh.optimizations.train_mapper][INFO] - training model
+[2023-02-17 18:38:05,670][clip2mesh.optimizations.train_mapper][INFO] - finished training in 27.75605082511902 seconds
+[2023-02-17 18:38:05,670][__main__][INFO] - Starting evaluation
+[2023-02-17 18:38:07,397][clip2mesh.data_management.data_observation.evaluate_performance][INFO] - IOU: 0.39928343949044587 | Overlap: 0.48904737646459506
+[2023-02-17 18:38:07,399][__main__][INFO] - Finished with 2 descriptors
+[2023-02-17 18:38:07,399][__main__][INFO] - Starting with 4 descriptors
+[2023-02-17 18:38:09,253][__main__][INFO] - Chosen descriptors: ['fat', 'big forehead', 'ears sticking-out', 'long neck']
+[2023-02-17 18:38:09,253][__main__][INFO] - Starting training
+[2023-02-17 18:38:09,284][clip2mesh.optimizations.train_mapper][INFO] - Instantiating callback <pytorch_lightning.callbacks.ModelCheckpoint>
+[2023-02-17 18:38:09,285][clip2mesh.optimizations.train_mapper][INFO] - dataloader batch size: 200
+[2023-02-17 18:38:09,286][clip2mesh.optimizations.train_mapper][INFO] - tensorboard run name: flame_neutral_4_descriptors
+[2023-02-17 18:38:09,286][clip2mesh.optimizations.train_mapper][INFO] - instantiating model
+[2023-02-17 18:38:09,292][clip2mesh.optimizations.train_mapper][INFO] - training model
+[2023-02-17 18:38:36,307][clip2mesh.optimizations.train_mapper][INFO] - finished training in 27.05341124534607 seconds
+[2023-02-17 18:38:36,308][__main__][INFO] - Starting evaluation
+[2023-02-17 18:38:38,933][clip2mesh.data_management.data_observation.evaluate_performance][INFO] - IOU: 0.44745222929936307 | Overlap: 0.6036671368124118
+[2023-02-17 18:38:38,936][__main__][INFO] - Finished with 4 descriptors
+[2023-02-17 18:38:38,936][__main__][INFO] - Starting with 6 descriptors
+[2023-02-17 18:38:40,694][__main__][INFO] - Chosen descriptors: ['fat', 'chubby cheeks', 'big forehead', 'ears sticking-out', 'long neck', 'long head']
+[2023-02-17 18:38:40,694][__main__][INFO] - Starting training
+[2023-02-17 18:38:40,726][clip2mesh.optimizations.train_mapper][INFO] - Instantiating callback <pytorch_lightning.callbacks.ModelCheckpoint>
+[2023-02-17 18:38:40,727][clip2mesh.optimizations.train_mapper][INFO] - dataloader batch size: 200
+[2023-02-17 18:38:40,727][clip2mesh.optimizations.train_mapper][INFO] - tensorboard run name: flame_neutral_6_descriptors
+[2023-02-17 18:38:40,728][clip2mesh.optimizations.train_mapper][INFO] - instantiating model
+[2023-02-17 18:38:40,735][clip2mesh.optimizations.train_mapper][INFO] - training model
+[2023-02-17 18:39:08,759][clip2mesh.optimizations.train_mapper][INFO] - finished training in 28.06437087059021 seconds
+[2023-02-17 18:39:08,759][__main__][INFO] - Starting evaluation
+[2023-02-17 18:39:12,652][clip2mesh.data_management.data_observation.evaluate_performance][INFO] - IOU: 0.589171974522293 | Overlap: 0.6392003900536324
+[2023-02-17 18:39:12,655][__main__][INFO] - Finished with 6 descriptors
+[2023-02-17 18:39:12,655][__main__][INFO] - Starting with 8 descriptors
+[2023-02-17 18:39:14,347][__main__][INFO] - Chosen descriptors: ['fat', 'chubby cheeks', 'small chin', 'big forehead', 'ears sticking-out', 'long neck', 'long head']
+[2023-02-17 18:39:14,347][__main__][INFO] - Starting training
+[2023-02-17 18:39:14,376][clip2mesh.optimizations.train_mapper][INFO] - Instantiating callback <pytorch_lightning.callbacks.ModelCheckpoint>
+[2023-02-17 18:39:14,378][clip2mesh.optimizations.train_mapper][INFO] - dataloader batch size: 200
+[2023-02-17 18:39:14,378][clip2mesh.optimizations.train_mapper][INFO] - tensorboard run name: flame_neutral_7_descriptors
+[2023-02-17 18:39:14,379][clip2mesh.optimizations.train_mapper][INFO] - instantiating model
+[2023-02-17 18:39:14,384][clip2mesh.optimizations.train_mapper][INFO] - training model
+[2023-02-17 18:39:42,872][clip2mesh.optimizations.train_mapper][INFO] - finished training in 28.52355718612671 seconds
+[2023-02-17 18:39:42,873][__main__][INFO] - Starting evaluation
+[2023-02-17 18:39:47,420][clip2mesh.data_management.data_observation.evaluate_performance][INFO] - IOU: 0.8809713375796179 | Overlap: 0.6001445478362996
+[2023-02-17 18:39:47,424][__main__][INFO] - Finished with 8 descriptors
+[2023-02-17 18:39:47,424][__main__][INFO] - Starting with 10 descriptors
+[2023-02-17 18:39:49,127][__main__][INFO] - Chosen descriptors: ['fat', 'chubby cheeks', 'small chin', 'big forehead', 'ears sticking-out', 'long neck', 'long head']
+[2023-02-17 18:39:49,127][__main__][INFO] - Starting training
+[2023-02-17 18:39:49,152][clip2mesh.optimizations.train_mapper][INFO] - Instantiating callback <pytorch_lightning.callbacks.ModelCheckpoint>
+[2023-02-17 18:39:49,153][clip2mesh.optimizations.train_mapper][INFO] - dataloader batch size: 200
+[2023-02-17 18:39:49,154][clip2mesh.optimizations.train_mapper][INFO] - tensorboard run name: flame_neutral_7_descriptors
+[2023-02-17 18:39:49,154][clip2mesh.optimizations.train_mapper][INFO] - instantiating model
+[2023-02-17 18:39:49,160][clip2mesh.optimizations.train_mapper][INFO] - training model
+[2023-02-17 18:40:17,759][clip2mesh.optimizations.train_mapper][INFO] - finished training in 28.63156533241272 seconds
+[2023-02-17 18:40:17,760][__main__][INFO] - Starting evaluation
+[2023-02-17 18:40:22,283][clip2mesh.data_management.data_observation.evaluate_performance][INFO] - IOU: 0.8809713375796179 | Overlap: 0.6001445478362996
+[2023-02-17 18:40:22,288][__main__][INFO] - Finished with 10 descriptors
+[2023-02-17 18:40:22,288][__main__][INFO] - Finished descriptors ablation for flame neutral

@@ -63,23 +63,23 @@ class Image2Shape(Image2ShapeUtils):
         our_body_shape, raw_img = self.get_body_shapes(raw_img_path=Path(image_path), gender=gender)
 
         smplx_features = self._get_smplx_attributes(our_body_shape, gender)
-
         # get rendered images
-        rendered_img = self.get_rendered_images(smplx_features, angle=0)
+        rendered_img = self.get_rendered_images(smplx_features, angle=20)
         # rendered_img = cv2.resize(rendered_img, raw_img.shape[::-1][1:])
         # concatenate images
         # concatenated_img = np.concatenate([raw_img, rendered_img], axis=1)
         # concatenated_img = cv2.cvtColor(concatenated_img, cv2.COLOR_RGB2BGR)
         # save image
         image_suffix = Path(image_path).suffix
-        cv2.imwrite(image_path.replace(image_suffix, f"_out{image_suffix}"), rendered_img)
+        # cv2.imwrite(image_path.as_posix().replace(image_suffix, f"_out{image_suffix}"), rendered_img)
+        cv2.imwrite("/home/nadav2/dev/data/CLIP2Shape/outs/images_from_demo/image2shape/out.png", rendered_img)
 
 
 @hydra.main(config_path="../config", config_name="image2shape")
 def main(cfg: DictConfig) -> None:
-    image_path = Path("/home/nadav2/dev/data/CLIP2Shape/images/celebrities_dataset/zju_mocap.jpg")
+    image_path = Path("/home/nadav2/Downloads/image_for_teaser.jpg")
     hbw_comparison = Image2Shape(**cfg)
-    hbw_comparison(image_path, "male")
+    hbw_comparison(image_path, "female")
 
 
 if __name__ == "__main__":

@@ -250,13 +250,15 @@ class HBWComparison(Image2ShapeUtils):
             for raw_img_path in person_id.iterdir():
 
                 # ------ DEBUG ------
-                # if raw_img_path.name not in [
-                #     "01783_female.png",
-                #     # "01770_female.png",
-                #     # "00305_male.png",
-                #     "01119_female.png",
-                #     "00000_female.png",
-                #     # "02446_male.png",
+                # if raw_img_path.stem not in [
+                #     "00377_female",
+                #     "01071_male",
+                #     "02477_male",
+                #     "01115_female",
+                #     "00000_female",
+                #     "00381_female",
+                #     "00000_female",
+                #     "01016_female",
                 # ]:
                 #     continue
                 # -------------------
@@ -304,57 +306,58 @@ class HBWComparison(Image2ShapeUtils):
                 )
 
                 # ------ DEBUG ------
-                # import matplotlib.pyplot as plt
+                import matplotlib.pyplot as plt
 
-                # shapy_diff = np.linalg.norm(smplx_args["gt"][0] - smplx_args["shapy"][0], axis=-1)
-                # our_diff = np.linalg.norm(smplx_args["gt"][0] - smplx_args["ours"][0], axis=-1)
-                # shapy_diff_normed = shapy_diff / 0.12324481  # np.max(shapy_diff)
-                # our_diff_normed = our_diff / 0.12324481  # np.max(shapy_diff)
-                # color_map = plt.get_cmap("coolwarm")
-                # shapy_vertex_colors = torch.tensor(color_map(shapy_diff_normed)[:, :3]).float().to(self.device)
-                # our_vertex_colors = torch.tensor(color_map(our_diff_normed)[:, :3]).float().to(self.device)
-                # shapy_diff = self.adjust_rendered_img(
-                #     self.renderer.render_mesh(
-                #         **smplx_kwargs["shapy"], texture_color_values=shapy_vertex_colors[None]
-                #     )
-                # )
-                # our_diff = self.adjust_rendered_img(
-                #     self.renderer.render_mesh(
-                #         **smplx_kwargs["ours"], texture_color_values=our_vertex_colors[None]
-                #     )
-                # )
-                # gt_img = self.adjust_rendered_img(self.renderer.render_mesh(**smplx_kwargs["gt"]))
-                # np.concatenate([shapy_diff, our_diff, gt_img], axis=1)
-
+                shapy_diff = np.linalg.norm(smplx_args["gt"][0] - smplx_args["shapy"][0], axis=-1)
+                our_diff = np.linalg.norm(smplx_args["gt"][0] - smplx_args["ours"][0], axis=-1)
+                shapy_diff_normed = shapy_diff / 0.12324481  # np.max(shapy_diff)
+                our_diff_normed = our_diff / 0.12324481  # np.max(shapy_diff)
+                color_map = plt.get_cmap("YlOrRd")
+                shapy_vertex_colors = torch.tensor(color_map(shapy_diff_normed)[:, :3]).float().to(self.device)
+                our_vertex_colors = torch.tensor(color_map(our_diff_normed)[:, :3]).float().to(self.device)
+                shapy_diff = self.adjust_rendered_img(
+                    self.renderer.render_mesh(**smplx_kwargs["shapy"], texture_color_values=shapy_vertex_colors[None])
+                )
+                pixie_diff = self.adjust_rendered_img(
+                    self.renderer.render_mesh(**smplx_kwargs["pixie"], texture_color_values=shapy_vertex_colors[None])
+                )
+                our_diff = self.adjust_rendered_img(
+                    self.renderer.render_mesh(**smplx_kwargs["ours"], texture_color_values=our_vertex_colors[None])
+                )
+                gt_img = self.adjust_rendered_img(self.renderer.render_mesh(**smplx_kwargs["gt"]))
+                colored = np.concatenate([shapy_diff, pixie_diff, our_diff, gt_img], axis=1)
+                colored = cv2.cvtColor(colored, cv2.COLOR_RGB2BGR)
+                outpath = "/home/nadav2/dev/data/CLIP2Shape/outs/images_to_shape/HBW_DATA/comparison_2k/heatmaps"
+                cv2.imwrite(f"{outpath}/{person_id.name}_{raw_img_path.stem}.png", colored)
                 # -------------------
 
-                frames_dir = output_path / "frames"
-                frames_dir.mkdir(exist_ok=True)
+                # frames_dir = output_path / "frames"
+                # frames_dir.mkdir(exist_ok=True)
 
-                num_methods = len(meshes)
-                num_blocks = num_methods + 1  # +1 because we have also the raw image
-                video_struct = self.get_video_structure(num_blocks)
-                video_shape = (self.renderer.height * video_struct[0], self.renderer.width * video_struct[1])
+                # num_methods = len(meshes)
+                # num_blocks = num_methods + 1  # +1 because we have also the raw image
+                # video_struct = self.get_video_structure(num_blocks)
+                # video_shape = (self.renderer.height * video_struct[0], self.renderer.width * video_struct[1])
 
-                # create video from multiview data
-                if raw_img.shape[:2] != (self.renderer.height, self.renderer.width):
-                    raw_img = cv2.resize(raw_img, (self.renderer.width, self.renderer.height))
+                # # create video from multiview data
+                # if raw_img.shape[:2] != (self.renderer.height, self.renderer.width):
+                #     raw_img = cv2.resize(raw_img, (self.renderer.width, self.renderer.height))
 
-                self.multiview_data(frames_dir, smplx_kwargs, video_struct, raw_img)
-                # self.create_video_from_dir(frames_dir, video_shape)
+                # self.multiview_data(frames_dir, smplx_kwargs, video_struct, raw_img)
+                # # self.create_video_from_dir(frames_dir, video_shape)
 
-                # columns are: ["image_name", "loss", "shapy", "pixie", "spin", "ours"]
-                single_img_results_l2 = pd.DataFrame.from_dict(
-                    {"image_name": [raw_img_path.stem], "loss": "l2", **l2_distances}
-                )
-                # single_img_results_chamfer = pd.DataFrame.from_dict(
-                #     {"image_name": [raw_img_path.stem], "loss": "chamfer", **chamfer_distances}
+                # # columns are: ["image_name", "loss", "shapy", "pixie", "spin", "ours"]
+                # single_img_results_l2 = pd.DataFrame.from_dict(
+                #     {"image_name": [raw_img_path.stem], "loss": "l2", **l2_distances}
                 # )
-                self.results_df = pd.concat([self.results_df, single_img_results_l2])  # , single_img_results_chamfer])
+                # # single_img_results_chamfer = pd.DataFrame.from_dict(
+                # #     {"image_name": [raw_img_path.stem], "loss": "chamfer", **chamfer_distances}
+                # # )
+                # self.results_df = pd.concat([self.results_df, single_img_results_l2])  # , single_img_results_chamfer])
 
-                image_counter += 1
+                # image_counter += 1
 
-                self.results_df.to_csv(self.output_path / "results.csv", index=False)
+                # self.results_df.to_csv(self.output_path / "results.csv", index=False)
 
 
 @hydra.main(config_path="../config", config_name="hbw_comparison")

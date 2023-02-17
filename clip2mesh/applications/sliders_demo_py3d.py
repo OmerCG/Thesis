@@ -1,14 +1,16 @@
 import cv2
 import json
+import clip
 import torch
 import tkinter
 import hydra
 import numpy as np
+import matplotlib.pyplot as plt
 from pathlib import Path
 from PIL import ImageTk, Image
 from pytorch3d.io import save_obj
 from omegaconf import DictConfig
-from typing import Dict, Any, Literal
+from typing import Dict, Any, Literal, List
 from clip2mesh.utils import Utils, ModelsFactory
 
 
@@ -26,18 +28,24 @@ class SlidersApp:
         predict_jaw_pose: bool = False,
         renderer_kwargs: DictConfig = None,
         model_path: str = None,
+        image_path: str = None,
+        comparison_mode: bool = False,
     ):
 
         self.root = None
         self.img_label = None
+        self.predicted_coeffs = None
+        self.visualize_error = False
         self.device = device
         self.texture = texture
         self.num_coeffs = num_coeffs
+        self.on_parameters = on_parameters
         self.predict_jaw_pose = predict_jaw_pose
-        self.on_parameters: bool = on_parameters
+        self.comparison_mode = comparison_mode
 
-        assert model_type in ["smplx", "flame", "smal", "smpl"], "Model type should be smplx, smpl, flame or smal"
         self.model_type = model_type
+
+        self._assertions(image_path=image_path, model_path=model_path, model_type=model_type, gender=gender)
 
         self.outpath = None
         if out_dir is not None:
@@ -65,9 +73,18 @@ class SlidersApp:
         self.verts, self.faces, self.vt, self.ft = self.models_factory.get_model(**self.model_kwargs)
         if self.model_type == "smplx":
             self.verts += self.utils.smplx_offset_numpy  # center the model with offsets
-        self.renderer_kwargs = {"py3d": True}
-        self.renderer_kwargs.update(renderer_kwargs)
+        if self.model_type == "smpl":
+            self.verts += self.utils.smpl_offset_numpy
+
+        self.renderer_kwargs = renderer_kwargs
         self.renderer = self.models_factory.get_renderer(**self.renderer_kwargs)
+
+        if self.comparison_mode:
+            self.color_map = plt.get_cmap("coolwarm")
+            self._get_target_shape(image_path.replace(".png", ".json"))
+        elif image_path is not None:
+            self.target_image = cv2.cvtColor(cv2.imread(image_path), cv2.COLOR_BGR2RGB)
+
         img = self.renderer.render_mesh(verts=self.verts, faces=self.faces[None], vt=self.vt, ft=self.ft)
         self.img = self.adjust_rendered_img(img)
 
@@ -83,8 +100,8 @@ class SlidersApp:
 
         if model_path is not None:
             self.model, labels = self.utils.get_model_to_eval(model_path)
-            self.mean_values = {label[0]: 20 for label in labels}
-            self.input_for_model = torch.tensor(list(self.mean_values.values()), dtype=torch.float32)[None]
+            self._get_sliders_values(labels, image_path)
+            self.input_for_model = torch.tensor(list(self.sliders_values.values()), dtype=torch.float32)[None]
 
     def initialize_params(self):
         if self.on_parameters:
@@ -106,18 +123,76 @@ class SlidersApp:
                 self.beta = self.model_kwargs["beta"]
                 self.params.append(self.beta)
 
+    def _assertions(self, image_path: str = None, model_path: str = None, model_type: str = None, gender: str = None):
+        if image_path is not None:
+            assert Path(image_path).exists(), "Image path should be a valid path"
+            assert (
+                model_path is not None or self.comparison_mode is True
+            ), "Model path should be a valid path if image path is provided"
+        assert model_type in ["smplx", "flame", "smal", "smpl"], "Model type should be smplx, smpl, flame or smal"
+        assert gender in ["male", "female", "neutral"], "Gender is not valid"
+
+    def _get_target_shape(self, json_path: str):
+        feature = self.name
+        with open(json_path) as f:
+            data = json.load(f)
+        target_shape_list = data[feature]
+        target_shape_tensor = torch.tensor(target_shape_list, dtype=torch.float32)
+        get_smpl = True if self.model_type == "smpl" else False
+        verts, faces, vt, ft = self.models_factory.get_model(**{feature: target_shape_tensor, "get_smpl": get_smpl})
+        if get_smpl:
+            verts += self.utils.smpl_offset_numpy
+        else:
+            verts += self.utils.smplx_offset_numpy
+        self.target_mesh_features = {
+            "verts": verts,
+            "faces": faces,
+            "vt": vt,
+            "ft": ft,
+        }
+        self.target_coeffs = target_shape_tensor
+
+    @staticmethod
+    def _flatten_list_of_lists(list_of_lists: List[List[str]]) -> List[str]:
+        return [item for sublist in list_of_lists for item in sublist]
+
+    def _get_sliders_values(self, labels: List[List[str]], image_path: str = None):
+        if image_path is None or self.comparison_mode:
+            self.sliders_values = {label[0]: 20 for label in labels}
+        else:
+            if not hasattr(self, "clip_model"):
+                self._load_clip_model()
+            enc_image = self.clip_preprocess(Image.open(image_path)).unsqueeze(0).to(self.device)
+            labels = self._flatten_list_of_lists(labels)
+            enc_labels = clip.tokenize(labels).to(self.device)
+            with torch.no_grad():
+                clip_scores = self.clip_model(enc_image, enc_labels)[0].float()
+                self.sliders_values = {label: clip_scores[0, i].item() for i, label in enumerate(labels)}
+
+    def _load_clip_model(self):
+        self.clip_model, self.clip_preprocess = clip.load("ViT-B/32", device=self.device)
+
     def update_betas(self, idx: int):
         def update_betas_values(value: float):
             if isinstance(value, str):
                 value = float(value)
             self.betas[0, idx] = value
+            self.predicted_coeffs = self.betas.clone()
             get_smpl = True if self.model_type == "smpl" else False
             self.verts, self.faces, self.vt, self.ft = self.utils.get_smplx_model(
                 betas=self.betas, expression=self.expression, gender=self.gender, get_smpl=get_smpl
             )
             if self.model_type == "smplx":
                 self.verts += self.utils.smplx_offset_numpy
-            img = self.renderer.render_mesh(verts=self.verts, faces=self.faces[None], vt=self.vt, ft=self.ft)
+            if self.model_type == "smpl":
+                self.verts += self.utils.smpl_offset_numpy
+            img = self.renderer.render_mesh(
+                verts=self.verts,
+                faces=self.faces[None],
+                vt=self.vt,
+                ft=self.ft,
+                rotate_mesh=[{"degrees": self.azim, "axis": "y"}, {"degrees": self.elev, "axis": "x"}],
+            )
             img = self.adjust_rendered_img(img)
             self.img = img
             img = ImageTk.PhotoImage(image=img)
@@ -166,7 +241,6 @@ class SlidersApp:
             if isinstance(value, str):
                 value = float(value)
             self.beta[0, idx] = value
-
             self.verts, self.faces, self.vt, self.ft = self.utils.get_smal_model(beta=self.beta)
             img = self.renderer.render_mesh(verts=self.verts, faces=self.faces[None], vt=self.vt, ft=self.ft)
             img = self.adjust_rendered_img(img)
@@ -185,13 +259,17 @@ class SlidersApp:
             # print(self.input_for_model)  # for debug
             with torch.no_grad():
                 out = self.model(self.input_for_model.to(self.device)).cpu()
+                self.predicted_coeffs = out.clone()
                 if self.model_type == "smplx" or self.model_type == "smpl":
                     betas = out
                     get_smpl = True if self.model_type == "smpl" else False
                     self.verts, self.faces, self.vt, self.ft = self.utils.get_smplx_model(
                         betas=betas, gender=self.gender, num_coeffs=self.num_coeffs, get_smpl=get_smpl
                     )
-                    self.verts += self.utils.smplx_offset_numpy
+                    if get_smpl:
+                        self.verts += self.utils.smpl_offset_numpy
+                    else:
+                        self.verts += self.utils.smplx_offset_numpy
                 elif self.model_type == "flame":
                     if self.with_face:
                         if self.predict_jaw_pose:
@@ -216,7 +294,7 @@ class SlidersApp:
                 faces=self.faces[None],
                 vt=self.vt,
                 ft=self.ft,
-                rotate_mesh={"degrees": self.azim, "axis": "y"},
+                rotate_mesh=[{"degrees": self.azim, "axis": "y"}, {"degrees": self.elev, "axis": "x"}],
             )
             img = self.adjust_rendered_img(img)
             self.img = img
@@ -229,7 +307,59 @@ class SlidersApp:
     def adjust_rendered_img(self, img: torch.Tensor):
         img = np.clip(img.cpu().numpy()[0, ..., :3] * 255, 0, 255).astype(np.uint8)
         img = cv2.resize(img, (512, 512))
+        if self.comparison_mode:
+            if self.visualize_error:
+                diffs = self._calc_vertices_distance()
+                vertex_colors = self.color_map(diffs / diffs.max())[:, :3]
+                vertex_colors = torch.tensor(vertex_colors).float().to(self.device)
+                if vertex_colors.ndim == 2:
+                    vertex_colors = vertex_colors[None, ...]
+                self.target_mesh_features.update({"texture_color_values": vertex_colors})
+            else:
+                self.target_mesh_features.update(
+                    {
+                        "texture_color_values": torch.ones(*self.verts[None].shape, device=self.device)
+                        * torch.tensor([0.7, 0.7, 0.7], device=self.device)
+                    }
+                )
+            if hasattr(self, "azim"):
+                self.target_mesh_features["rotate_mesh"] = [
+                    {"degrees": self.azim, "axis": "y"},
+                    {"degrees": self.elev, "axis": "x"},
+                ]
+            target_img = self.renderer.render_mesh(**self.target_mesh_features)
+            target_img = np.clip(target_img.cpu().numpy()[0, ..., :3] * 255, 0, 255).astype(np.uint8)
+            target_img = cv2.resize(target_img, (512, 512))
+            img = np.concatenate([img, target_img], axis=1)
+            if self.visualize_error:
+                img = self.write_diff_on_img(img, np.sqrt(diffs).mean())
+        if hasattr(self, "target_image"):
+            target_image = cv2.resize(self.target_image, (512, 512))
+            img = np.concatenate([img, target_image], axis=1)
         return Image.fromarray(img)
+
+    def _calc_coeffs_distance(self) -> float:
+        distance = np.linalg.norm(self.predicted_coeffs - self.target_coeffs)
+        return distance
+
+    def _calc_vertices_distance(self):
+        distance = np.linalg.norm(self.verts - self.target_mesh_features["verts"], axis=-1)
+        return distance
+
+    def write_diff_on_img(self, img: np.ndarray, distance: float = None):
+        if distance is None:
+            distance = self._calc_coeffs_distance()
+        cv2.putText(
+            img,
+            f"verts_diff: {distance:.4f}",
+            (320, 30),
+            cv2.FONT_HERSHEY_SIMPLEX,
+            1,
+            (0, 0, 255),
+            2,
+            cv2.LINE_AA,
+        )
+        return img
 
     def add_texture(self):
         if self.texture is not None:
@@ -245,7 +375,13 @@ class SlidersApp:
     def remove_texture(self):
         self.renderer_kwargs.update({"use_tex": False})
         self.renderer = self.models_factory.get_renderer(**self.renderer_kwargs)
-        img = self.renderer.render_mesh(verts=self.verts, faces=self.faces[None], vt=self.vt, ft=self.ft)
+        img = self.renderer.render_mesh(
+            verts=self.verts,
+            faces=self.faces[None],
+            vt=self.vt,
+            ft=self.ft,
+            rotate_mesh=[{"degrees": self.azim, "axis": "y"}, {"degrees": self.elev, "axis": "x"}],
+        )
         img = self.adjust_rendered_img(img)
         self.img = img
         img = ImageTk.PhotoImage(image=img)
@@ -257,7 +393,13 @@ class SlidersApp:
             value = float(value)
         self.renderer_kwargs.update({"dist": value})
         self.renderer = self.models_factory.get_renderer(**self.renderer_kwargs)
-        img = self.renderer.render_mesh(verts=self.verts, faces=self.faces[None], vt=self.vt, ft=self.ft)
+        img = self.renderer.render_mesh(
+            verts=self.verts,
+            faces=self.faces[None],
+            vt=self.vt,
+            ft=self.ft,
+            rotate_mesh=[{"degrees": self.azim, "axis": "y"}, {"degrees": self.elev, "axis": "x"}],
+        )
         img = self.adjust_rendered_img(img)
         self.img = img
         img = ImageTk.PhotoImage(image=img)
@@ -267,10 +409,13 @@ class SlidersApp:
     def update_camera_azim(self, value: float):
         if isinstance(value, str):
             value = float(value)
-        rotate_mesh_kwargs = {"degrees": value, "axis": "y"}
         self.azim = value
         img = self.renderer.render_mesh(
-            verts=self.verts, faces=self.faces[None], vt=self.vt, ft=self.ft, rotate_mesh=rotate_mesh_kwargs
+            verts=self.verts,
+            faces=self.faces[None],
+            vt=self.vt,
+            ft=self.ft,
+            rotate_mesh=[{"degrees": value, "axis": "y"}, {"degrees": self.elev, "axis": "x"}],
         )
         img = self.adjust_rendered_img(img)
         self.img = img
@@ -281,11 +426,15 @@ class SlidersApp:
     def update_camera_elev(self, value: float):
         if isinstance(value, str):
             value = float(value)
-        rotate_mesh_kwargs = {"degrees": value, "axis": "x"}
         img = self.renderer.render_mesh(
-            verts=self.verts, faces=self.faces[None], vt=self.vt, ft=self.ft, rotate_mesh=rotate_mesh_kwargs
+            verts=self.verts,
+            faces=self.faces[None],
+            vt=self.vt,
+            ft=self.ft,
+            rotate_mesh=[{"degrees": self.azim, "axis": "y"}, {"degrees": value, "axis": "x"}],
         )
         img = self.adjust_rendered_img(img)
+        self.elev = value
         self.img = img
         img = ImageTk.PhotoImage(image=img)
         self.img_label.configure(image=img)
@@ -313,16 +462,17 @@ class SlidersApp:
         self.parameters_canvas.yview(scroll, "units")
 
     def save_png(self):
-        if self.on_parameters:  # TODO
+        resize = False if self.comparison_mode else True
+        if self.on_parameters:
             self.img = np.array(self.img)
-            self.renderer.save_rendered_image(self.img, self.outpath.as_posix())
+            self.renderer.save_rendered_image(self.img, self.outpath.as_posix(), resize=resize)
             key = self.name
             params = {key: [self.params[0].tolist()[0]]}
             with open(self.outpath.with_suffix(".json"), "w") as f:
                 json.dump(params, f)
         else:
             self.img = np.array(self.img)
-            self.renderer.save_rendered_image(self.img, self.outpath.as_posix())
+            self.renderer.save_rendered_image(self.img, self.outpath.as_posix(), resize=resize)
         new_img_id = int(self.outpath.stem) + 1
         self.outpath = self.outpath.parent / f"{new_img_id}.png"
 
@@ -360,7 +510,13 @@ class SlidersApp:
             self.verts, self.faces, self.vt, self.ft = self.utils.get_smplx_model(
                 betas=self.betas, body_pose=self.body_pose, expression=self.expression
             )
-            self.renderer.render_mesh(verts=self.verts, faces=self.faces[None], vt=self.vt, ft=self.ft)
+            self.renderer.render_mesh(
+                verts=self.verts,
+                faces=self.faces[None],
+                vt=self.vt,
+                ft=self.ft,
+                rotate_mesh=[{"degrees": self.azim, "axis": "y"}, {"degrees": self.elev, "axis": "x"}],
+            )
 
         return update_expression_values
 
@@ -372,16 +528,35 @@ class SlidersApp:
             for label in self.production_scales:
                 label.set(20)
 
+    def visual_error(self):
+        if self.visualize_error:
+            self.visualize_error = False
+        else:
+            self.visualize_error = True
+        img = self.renderer.render_mesh(
+            verts=self.verts,
+            faces=self.faces[None],
+            vt=self.vt,
+            ft=self.ft,
+            rotate_mesh=[{"degrees": self.azim, "axis": "y"}, {"degrees": self.elev, "axis": "x"}],
+        )
+        img = self.adjust_rendered_img(img)
+        self.img = img
+        img = ImageTk.PhotoImage(image=img)
+        self.img_label.configure(image=img)
+        self.img_label.image = img
+
     def reset_cam_params(self):
-        self.renderer_kwargs.update({"azim": self.azim, "elev": self.elev, "dist": self.elev})
+        self.renderer_kwargs.update({"dist": self.dist})
         self.azim = 0
+        self.elev = 0
         self.renderer = self.models_factory.get_renderer(**self.renderer_kwargs)
         img = self.renderer.render_mesh(
             verts=self.verts,
             faces=self.faces[None],
             vt=self.vt,
             ft=self.ft,
-            rotate_mesh={"degrees": self.azim, "axis": "y"},
+            rotate_mesh=[{"degrees": self.azim, "axis": "y"}, {"degrees": self.elev, "axis": "x"}],
         )
         img = self.adjust_rendered_img(img)
         self.img = img
@@ -390,7 +565,7 @@ class SlidersApp:
         self.img_label.image = img
         self.camera_scales["azim"].set(self.azim)
         self.camera_scales["elev"].set(self.elev)
-        self.camera_scales["dist"].set(self.elev)
+        self.camera_scales["dist"].set(self.dist)
 
     def _zeros_to_concat(self):
         if self.model_type == "smplx":
@@ -408,10 +583,13 @@ class SlidersApp:
         # ------------------ Create the root window ------------------
         self.root = tkinter.Tk()
         self.root.title("Text 2 Mesh - PyTorch3D")
-        if self.on_parameters:
-            self.root.geometry("1000x1000")
+        if self.comparison_mode:
+            self.root.geometry("2000x2000")
         else:
-            self.root.geometry("800x560")
+            if self.on_parameters:
+                self.root.geometry("1000x1000")
+            else:
+                self.root.geometry("800x560")
 
         img_coords = (80, 10)
 
@@ -450,28 +628,16 @@ class SlidersApp:
 
             if self.model_type == "smplx" or self.model_type == "smpl":
                 scale_kwargs = self.get_parameters_scale_kwargs()
-                if self.with_face:
-                    for expression in range(self.expression.shape[1]):
-                        expression_scale = tkinter.Scale(
-                            parameters_frame,
-                            label=f"expression {expression}",
-                            command=self.update_expression(expression),
-                            **scale_kwargs,
-                        )
-                        self.production_scales.append(expression_scale)
-                        expression_scale.set(0)
-                        expression_scale.pack()
-                else:
-                    for beta in range(self.betas.shape[1]):
-                        betas_scale = tkinter.Scale(
-                            parameters_frame,
-                            label=f"beta {beta}",
-                            command=self.update_betas(beta),
-                            **scale_kwargs,
-                        )
-                        self.production_scales.append(betas_scale)
-                        betas_scale.set(0)
-                        betas_scale.pack()
+                for beta in range(self.betas.shape[1]):
+                    betas_scale = tkinter.Scale(
+                        parameters_frame,
+                        label=f"beta {beta}",
+                        command=self.update_betas(beta),
+                        **scale_kwargs,
+                    )
+                    self.production_scales.append(betas_scale)
+                    betas_scale.set(0)
+                    betas_scale.pack()
 
             elif self.model_type == "flame":
                 scale_kwargs = self.get_parameters_scale_kwargs()
@@ -515,7 +681,7 @@ class SlidersApp:
 
         else:
             scale_kwargs = self.get_stats_scale_kwargs()
-            for idx, (label, value) in enumerate(self.mean_values.items()):
+            for idx, (label, value) in enumerate(self.sliders_values.items()):
                 label_scale = tkinter.Scale(
                     parameters_frame,
                     label=label,
@@ -589,13 +755,13 @@ class SlidersApp:
 
         # all reset button
         reset_all_button = tkinter.Button(
-            parameters_frame, text="Reset All", command=lambda: self.reset_parameters(), **reset_button_kwargs
+            parameters_frame, text="Reset Parameters", command=lambda: self.reset_parameters(), **reset_button_kwargs
         )
         reset_all_button.pack(fill=tkinter.BOTH, expand=True, side=tkinter.TOP, pady=(50, 0))
 
         # reset camera button
         reset_camera_button = tkinter.Button(
-            parameters_frame, text="Reset Camera Params", command=lambda: self.reset_cam_params(), **reset_button_kwargs
+            parameters_frame, text="Reset Camera", command=lambda: self.reset_cam_params(), **reset_button_kwargs
         )
         reset_camera_button.pack(fill=tkinter.BOTH, expand=True, side=tkinter.TOP)
 
@@ -628,6 +794,13 @@ class SlidersApp:
             parameters_frame, text="random params", command=lambda: self.random_button(), **reset_button_kwargs
         )
         random_params_button.pack(fill=tkinter.BOTH, expand=True, side=tkinter.TOP)
+
+        # if in comparison_mode, add option to visualize the error
+        if self.comparison_mode:
+            visual_error_button = tkinter.Button(
+                parameters_frame, text="error", command=lambda: self.visual_error(), **reset_button_kwargs
+            )
+            visual_error_button.pack(fill=tkinter.BOTH, expand=True, side=tkinter.TOP)
         # ------------------------------------------------------------
         self.parameters_canvas.bind("<MouseWheel>", self.mouse_wheel)
         self.root.mainloop()
@@ -723,7 +896,7 @@ class SlidersApp:
         return {
             "from_": 0,
             "to": 50,
-            "resolution": 1,
+            "resolution": 0.1,
             "orient": tkinter.HORIZONTAL,
             "bg": "white",
             "troughcolor": "pink",

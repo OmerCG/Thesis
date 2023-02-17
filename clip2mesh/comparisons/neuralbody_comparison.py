@@ -1,7 +1,7 @@
 import cv2
-import h5py
 import torch
 import hydra
+import pickle
 import numpy as np
 import pandas as pd
 from PIL import Image
@@ -18,9 +18,13 @@ class NeuralBodyComparison(ComparisonUtils):
         super().__init__(**args)
 
     @staticmethod
-    def get_gt_data(h5_path: Path) -> torch.Tensor:
-        data = h5py.File(h5_path, "r")
-        return torch.tensor(data["betas"])[None]
+    def get_gt_data(file_path: Path, betas: bool = False) -> torch.Tensor:
+        with open(file_path, "rb") as f:
+            data = pickle.load(f, encoding="latin1")
+        # data = h5py.File(h5_path, "r")
+        if betas:
+            return torch.tensor(data["betas"])[None].float()
+        return torch.tensor(data["v_personal"], device="cuda")
 
     def get_body_shapes(
         self, raw_img_path: Path, gender: Literal["male", "female", "neutral"]
@@ -33,8 +37,8 @@ class NeuralBodyComparison(ComparisonUtils):
         raw_img = cv2.cvtColor(raw_img, cv2.COLOR_BGR2RGB)
 
         # ground truth shape
-        nb_h5_path = self.gt_dir / person_id / "reconstructed_poses.hdf5"
-        gt_body_shape = self.get_gt_data(nb_h5_path)
+        nb_h5_path = self.gt_dir / person_id / "consensus.pkl"
+        gt_body_shape = self.get_gt_data(nb_h5_path, betas=True)
 
         # # shapy prediction
         # shpay_npz_path = self.comparison_dirs["shapy"] / person_id / f"{img_id}.npz"
@@ -77,11 +81,10 @@ class NeuralBodyComparison(ComparisonUtils):
 
     def __call__(self):
 
-        max_num_imgs = 50
         for person_id in self.raw_imgs_dir.iterdir():
             frames_dir = self.raw_imgs_dir / person_id.name / f"{person_id.name}_frames"
             images_counter = 0
-            images_generator = sorted(list(frames_dir.iterdir()), key=lambda x: int(x.stem))
+            images_generator = sorted(list(frames_dir.iterdir()), key=lambda x: int(x.stem))[::50]
             for raw_img_path in images_generator:
 
                 self.logger.info(f"Processing {raw_img_path.name}...\n")
@@ -107,40 +110,49 @@ class NeuralBodyComparison(ComparisonUtils):
                 meshes: Dict[str, Meshes] = self.get_meshes_from_shapes(smplx_args)
                 # TODO: add chamfer loss with and without body pose
 
+                gt_verts = self.get_gt_data(self.gt_dir / person_id.name / "consensus.pkl")
+
                 l2_vertices: Dict[str, torch.Tensor] = self.calc_verts_distances(meshes)
 
-                if raw_img_path.stem == "00000":
-                    frames_dir = output_path / "frames"
-                    frames_dir.mkdir(exist_ok=True)
+                frames_dir = output_path / "frames"
+                frames_dir.mkdir(exist_ok=True)
 
-                    num_methods = len(meshes)
-                    num_blocks = num_methods + 1  # +1 because we have also the raw image
-                    video_struct = self.get_video_structure(num_blocks)
-                    video_shape = (self.renderer.height * video_struct[0], self.renderer.width * video_struct[1])
-                    #
-                    # create video from multiview data
-                    if raw_img.shape[:2] != (self.renderer.height, self.renderer.width):
-                        raw_img = cv2.resize(raw_img, (self.renderer.width, self.renderer.height))
+                num_methods = len(meshes)
+                num_blocks = num_methods + 1  # +1 because we have also the raw image
+                video_struct = self.get_video_structure(num_blocks)
+                video_shape = (self.renderer.height * video_struct[0], self.renderer.width * video_struct[1])
+                #
+                # create video from multiview data
+                if raw_img.shape[:2] != (self.renderer.height, self.renderer.width):
+                    raw_img = cv2.resize(raw_img, (self.renderer.width, self.renderer.height))
 
-                    smplx_kwargs: Dict[str, Dict[str, np.ndarray]] = self.mesh_attributes_to_kwargs(
-                        smplx_args, to_tensor=True
-                    )
-                    self.multiview_data(frames_dir, smplx_kwargs, video_struct, raw_img)
-                    self.create_video_from_dir(frames_dir, video_shape)
+                smplx_kwargs: Dict[str, Dict[str, np.ndarray]] = self.mesh_attributes_to_kwargs(
+                    smplx_args, to_tensor=True
+                )
+                self.multiview_data(frames_dir, smplx_kwargs, video_struct, raw_img)
+                self.create_video_from_dir(frames_dir, video_shape)
 
                 # columns are: ["image_name", "loss", "shapy", "pixie", "spin", "ours"]
                 single_img_l2_results = pd.DataFrame.from_dict(
-                    {"image_name": [raw_img_path.stem], "loss": "l2_shape", **l2_shape}
+                    {
+                        "image_name": [f"{raw_img_path.parent.name.split('_')[0]}_{raw_img_path.stem}"],
+                        "loss": "l2_shape",
+                        **l2_shape,
+                    }
                 )
                 single_img_chamfer_results = pd.DataFrame.from_dict(
-                    {"image_name": [raw_img_path.stem], "loss": "l2_vertices", **l2_vertices}
+                    {
+                        "image_name": [f"{raw_img_path.parent.name.split('_')[0]}_{raw_img_path.stem}"],
+                        "loss": "l2_vertices",
+                        **l2_vertices,
+                    }
                 )
 
                 self.results_df = pd.concat([self.results_df, single_img_l2_results, single_img_chamfer_results])
 
-                images_counter += 1
-                if images_counter == max_num_imgs:
-                    break
+                # images_counter += 1
+                # if images_counter == max_num_imgs:
+                #     break
 
                 self.results_df.to_csv(output_path.parent / "results.csv", index=False)
 

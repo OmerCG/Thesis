@@ -1,0 +1,11 @@
+[2023-02-17 18:34:47,552][__main__][INFO] - Starting descriptors ablation for flamme neutral model
+[2023-02-17 18:34:47,552][__main__][INFO] - Starting with 2 descriptors
+[2023-02-17 18:34:52,006][__main__][INFO] - Chosen descriptors: ['fat', 'big forehead']
+[2023-02-17 18:34:52,006][__main__][INFO] - Starting training
+[2023-02-17 18:34:52,031][clip2mesh.optimizations.train_mapper][INFO] - Instantiating callback <pytorch_lightning.callbacks.ModelCheckpoint>
+[2023-02-17 18:34:52,032][clip2mesh.optimizations.train_mapper][INFO] - dataloader batch size: 200
+[2023-02-17 18:34:52,033][clip2mesh.optimizations.train_mapper][INFO] - tensorboard run name: flamme_neutral_2_descriptors
+[2023-02-17 18:34:52,033][clip2mesh.optimizations.train_mapper][INFO] - instantiating model
+[2023-02-17 18:34:52,039][clip2mesh.optimizations.train_mapper][INFO] - training model
+[2023-02-17 18:35:21,287][clip2mesh.optimizations.train_mapper][INFO] - finished training in 29.280858039855957 seconds
+[2023-02-17 18:35:21,288][__main__][INFO] - Starting evaluation

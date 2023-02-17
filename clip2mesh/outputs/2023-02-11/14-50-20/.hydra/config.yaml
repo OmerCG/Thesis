@@ -1,0 +1,15 @@
+renderer_kwargs:
+  dist: 4.2
+  elev: 10.0
+  azim: 0.0
+  img_size:
+  - 1024
+  - 1024
+  use_tex: false
+  model_type: ${model_type}
+out_dir: /home/nadav2/dev/data/CLIP2Shape/images/temp
+gender: neutral
+device: cuda
+image_path: /home/nadav2/dev/data/CLIP2Shape/outs/images_to_shape/HBW_DATA/data/images/012_13_20/00010_female.png
+model_path: /home/nadav2/dev/repos/Thesis/end2end_pipeline/smplx/smplx_neutral_e2e.ckpt
+model_type: smplx

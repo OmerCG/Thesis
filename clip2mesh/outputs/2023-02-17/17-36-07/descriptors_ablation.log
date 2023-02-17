@@ -1,0 +1,5 @@
+[2023-02-17 17:36:07,703][__main__][INFO] - Starting descriptors ablation for smpl neutral model
+[2023-02-17 17:36:07,703][__main__][INFO] - Starting with 2 descriptors
+[2023-02-17 17:36:12,912][__main__][INFO] - Chosen descriptors: ['long legs', 'fat']
+[2023-02-17 17:36:12,913][__main__][INFO] - Starting training
+[2023-02-17 17:36:12,913][__main__][INFO] - Starting evaluation

@@ -1,0 +1,15 @@
+renderer_kwargs:
+  dist: 4.2
+  elev: 10.0
+  azim: 0.0
+  img_size:
+  - 1024
+  - 1024
+  use_tex: false
+  model_type: ${model_type}
+out_dir: /home/nadav2/dev/data/CLIP2Shape/images/temp
+gender: female
+device: cuda
+image_path: null
+model_path: /home/nadav2/dev/repos/Thesis/sliders_ckpts/smplx/smplx_female_e2e.ckpt
+model_type: smplx

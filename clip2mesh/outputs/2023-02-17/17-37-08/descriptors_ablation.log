@@ -1,0 +1,11 @@
+[2023-02-17 17:37:08,687][__main__][INFO] - Starting descriptors ablation for smpl male model
+[2023-02-17 17:37:08,687][__main__][INFO] - Starting with 2 descriptors
+[2023-02-17 17:37:13,641][__main__][INFO] - Chosen descriptors: ['long legs', 'fat']
+[2023-02-17 17:37:13,641][__main__][INFO] - Starting training
+[2023-02-17 17:37:13,673][clip2mesh.optimizations.train_mapper][INFO] - Instantiating callback <pytorch_lightning.callbacks.ModelCheckpoint>
+[2023-02-17 17:37:13,674][clip2mesh.optimizations.train_mapper][INFO] - dataloader batch size: 200
+[2023-02-17 17:37:13,675][clip2mesh.optimizations.train_mapper][INFO] - tensorboard run name: smpl_male_2_descriptors
+[2023-02-17 17:37:13,675][clip2mesh.optimizations.train_mapper][INFO] - instantiating model
+[2023-02-17 17:37:13,680][clip2mesh.optimizations.train_mapper][INFO] - training model
+[2023-02-17 17:37:44,972][clip2mesh.optimizations.train_mapper][INFO] - finished training in 31.32982349395752 seconds
+[2023-02-17 17:37:44,972][__main__][INFO] - Starting evaluation

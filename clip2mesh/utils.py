@@ -415,14 +415,17 @@ class Pytorch3dRenderer:
         ft: Optional[Union[torch.Tensor, np.ndarray]] = None,
         mesh: Meshes = None,
         texture_color_values: Optional[torch.Tensor] = None,
-        rotate_mesh: Dict[str, Any] = None,
+        rotate_mesh: List[Dict[str, Any]] = None,
     ) -> torch.Tensor:
         assert mesh is not None or (
             verts is not None and faces is not None
         ), "either mesh or verts and faces must be provided"
         if mesh is None:
             if rotate_mesh is not None:
-                verts = self.rotate_3dmm_verts(verts, **rotate_mesh)
+                if isinstance(rotate_mesh, dict):
+                    rotate_mesh = [rotate_mesh]
+                for rot_action in rotate_mesh:
+                    verts = self.rotate_3dmm_verts(verts, **rot_action)
             mesh = self.get_mesh(verts, faces, vt, ft, texture_color_values)
 
         rendered_mesh = self.renderer(mesh, cameras=self.cameras)
@@ -452,13 +455,13 @@ class Pytorch3dRenderer:
         mesh = Meshes(verts=verts, faces=faces, textures=texture)
         return mesh
 
-    @staticmethod
-    def save_rendered_image(image, path):
+    def save_rendered_image(self, image, path, resize: bool = True):
         if isinstance(image, torch.Tensor):
             image = image.cpu().numpy().squeeze()
             image = np.clip(image, 0, 1)
             image = (image * 255).astype(np.uint8)
-        image = cv2.resize(image, (512, 512))
+        if resize:
+            image = cv2.resize(image, (512, 512))
         cv2.imwrite(path, cv2.cvtColor(image, cv2.COLOR_RGB2BGR))
 
 
@@ -722,7 +725,7 @@ class Utils:
             self._get_smal_faces()
         return verts, self.smal_faces, None, None
 
-    def get_body_pose(self) -> torch.tensor:
+    def get_body_pose(self) -> torch.Tensor:
         return self.body_pose
 
     @staticmethod
@@ -793,7 +796,7 @@ class Utils:
         return labels
 
     @staticmethod
-    def get_random_betas_smplx(num_coeffs: int = 10, tall_data: bool = False) -> torch.tensor:
+    def get_random_betas_smplx(num_coeffs: int = 10, tall_data: bool = False) -> torch.Tensor:
         """SMPLX body shape"""
         random_offset = torch.randint(-2, 2, (1, num_coeffs)).float()
         if tall_data:
@@ -801,7 +804,7 @@ class Utils:
         return torch.randn(1, num_coeffs) * random_offset
 
     @staticmethod
-    def get_random_betas_smal(num_coeffs: int = 10) -> torch.tensor:
+    def get_random_betas_smal(num_coeffs: int = 10) -> torch.Tensor:
         """SMAL body shape"""
         shape = torch.rand(1, num_coeffs) * torch.randint(-2, 2, (1, num_coeffs)).float()
         if num_coeffs < MaxCoeffs.SMAL.value:
@@ -809,7 +812,7 @@ class Utils:
         return shape
 
     @staticmethod
-    def get_random_shape(num_coeffs: int = 10) -> torch.tensor:
+    def get_random_shape(num_coeffs: int = 10) -> torch.Tensor:
         """FLAME face shape"""
         shape = torch.randn(1, num_coeffs) * torch.randint(-2, 2, (1, num_coeffs)).float()
         if num_coeffs < MaxCoeffs.FLAME_SHAPE.value:
@@ -818,7 +821,7 @@ class Utils:
         return shape
 
     @staticmethod
-    def get_random_expression_flame(num_coeffs: int = 10) -> torch.tensor:
+    def get_random_expression_flame(num_coeffs: int = 10) -> torch.Tensor:
         """FLAME face expression"""
         expression = torch.randn(1, num_coeffs)  # * torch.randint(-3, 3, (1, num_coeffs)).float()
         if num_coeffs < MaxCoeffs.FLAME_EXPRESSION.value:
@@ -826,14 +829,14 @@ class Utils:
         return expression
 
     @staticmethod
-    def get_random_jaw_pose() -> torch.tensor:
+    def get_random_jaw_pose() -> torch.Tensor:
         """FLAME jaw pose"""
         # jaw_pose = torch.randn(1, 1).abs() * torch.tensor(np.random.choice([0.5, 0], p=[0.1, 0.9]))
         jaw_pose = F.relu(torch.randn(1, 1)) * torch.tensor([0.1])
         return jaw_pose
 
     @staticmethod
-    def convert_str_list_to_float_tensor(strs_list: List[str]) -> torch.tensor:
+    def convert_str_list_to_float_tensor(strs_list: List[str]) -> torch.Tensor:
         stats = [float(stat) for stat in strs_list[0].split(" ")]
         return torch.tensor(stats, dtype=torch.float32)[None]
 
@@ -888,21 +891,21 @@ class Utils:
         return model, labels
 
     @staticmethod
-    def get_default_parameters(body_pose: bool = False, num_coeffs: int = 10) -> torch.tensor:
+    def get_default_parameters(body_pose: bool = False, num_coeffs: int = 10) -> torch.Tensor:
         if body_pose:
             return torch.eye(3).expand(1, 21, 3, 3)
         return torch.zeros(1, num_coeffs)
 
     @staticmethod
-    def get_default_face_shape() -> torch.tensor:
+    def get_default_face_shape() -> torch.Tensor:
         return torch.zeros(1, 100)
 
     @staticmethod
-    def get_default_face_expression() -> torch.tensor:
+    def get_default_face_expression() -> torch.Tensor:
         return torch.zeros(1, 50)
 
     @staticmethod
-    def get_default_shape_smal() -> torch.tensor:
+    def get_default_shape_smal() -> torch.Tensor:
         return torch.zeros(1, 41)
 
     @staticmethod

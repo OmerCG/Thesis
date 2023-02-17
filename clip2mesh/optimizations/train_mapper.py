@@ -45,7 +45,9 @@ def train(config: DictConfig):
     log.info(f"instantiating model")
     trainer = Trainer(logger=logger, callbacks=callbacks, **config.trainer)
 
-    model = C2M_pl(**config.model_conf, labels=dataset.get_labels())
+    num_stats = config.dataset.labels_to_get.__len__()
+
+    model = C2M_pl(num_stats=num_stats, **config.model_conf, labels=dataset.get_labels())
 
     log.info(f"training model")
     trainer.fit(model, train_dataloader, val_dataloader)

@@ -1,12 +1,12 @@
 defaults:
   - renderer_kwargs: smplx
 
-output_path: /home/nadav2/dev/data/CLIP2Shape/images/smplx_neutral_multiview_5k # Path to save the images
-gender: neutral
+output_path: /home/nadav2/dev/data/CLIP2Shape/images/smplx_male_multiview_3k_uniform # Path to save the images
+gender: male
 img_tag:
 model_type: smplx
 with_face: false
-num_of_imgs: 5000
+num_of_imgs: 3000
 num_coeffs: 10
 multiview: True
 get_tall_data: False

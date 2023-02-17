@@ -1,0 +1,26 @@
+[2023-02-17 16:24:55,034][__main__][INFO] - Starting descriptors ablation for smplx male model
+[2023-02-17 16:24:55,034][__main__][INFO] - Starting with 2 descriptors
+[2023-02-17 16:25:01,297][__main__][INFO] - Chosen descriptors: ['fat', 'long torso']
+[2023-02-17 16:25:01,298][__main__][INFO] - Starting training
+[2023-02-17 16:25:01,299][__main__][INFO] - Starting evaluation
+[2023-02-17 16:25:05,793][clip2mesh.data_management.data_observation.evaluate_performance][INFO] - IOU: 0.04820542191676212 | Overlap: 0.4575725026852846
+[2023-02-17 16:25:05,797][__main__][INFO] - Finished with 2 descriptors
+[2023-02-17 16:25:05,797][__main__][INFO] - Starting with 5 descriptors
+[2023-02-17 16:25:09,993][__main__][INFO] - Chosen descriptors: ['fat', 'rectangular', 'fit', 'long torso', 'petite']
+[2023-02-17 16:25:09,994][__main__][INFO] - Starting training
+[2023-02-17 16:25:09,995][__main__][INFO] - Starting evaluation
+[2023-02-17 16:25:13,984][clip2mesh.data_management.data_observation.evaluate_performance][INFO] - IOU: 0.31433753340969833 | Overlap: 0.5475405331134927
+[2023-02-17 16:25:13,987][__main__][INFO] - Finished with 5 descriptors
+[2023-02-17 16:25:13,987][__main__][INFO] - Starting with 10 descriptors
+[2023-02-17 16:25:18,391][__main__][INFO] - Chosen descriptors: ['fat', 'rectangular', 'fit', 'proportioned', 'pear shaped', 'curvy', 'long torso', 'petite', 'tall', 'small']
+[2023-02-17 16:25:18,392][__main__][INFO] - Starting training
+[2023-02-17 16:25:18,393][__main__][INFO] - Starting evaluation
+[2023-02-17 16:25:25,653][clip2mesh.data_management.data_observation.evaluate_performance][INFO] - IOU: 0.337151584574265 | Overlap: 0.8006884487331415
+[2023-02-17 16:25:25,656][__main__][INFO] - Finished with 10 descriptors
+[2023-02-17 16:25:25,656][__main__][INFO] - Starting with 15 descriptors
+[2023-02-17 16:25:29,913][__main__][INFO] - Chosen descriptors: ['fat', 'rectangular', 'fit', 'proportioned', 'pear shaped', 'curvy', 'long legs', 'heavyset', 'round apple', 'narrow waist', 'long torso', 'long', 'petite', 'tall', 'small']
+[2023-02-17 16:25:29,914][__main__][INFO] - Starting training
+[2023-02-17 16:25:29,916][__main__][INFO] - Starting evaluation
+[2023-02-17 16:25:40,333][clip2mesh.data_management.data_observation.evaluate_performance][INFO] - IOU: 0.35614738449789995 | Overlap: 0.8535254396984925
+[2023-02-17 16:25:40,337][__main__][INFO] - Finished with 15 descriptors
+[2023-02-17 16:25:40,337][__main__][INFO] - Starting with 20 descriptors

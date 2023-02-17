@@ -105,7 +105,7 @@ class ComparisonUtils(Image2ShapeUtils):
         smplx_kwargs = {}
         for method, body_shape in body_shapes.items():
             # get_smpl = True if method in ["spin"] else False
-            fixed_gender = gender if method == "gt" else "neutral"
+            fixed_gender = gender if method in "gt" else "neutral"
             smplx_kwargs[method] = self._get_smplx_attributes(body_shape, fixed_gender, get_smpl=get_smpl)
         return smplx_kwargs
 

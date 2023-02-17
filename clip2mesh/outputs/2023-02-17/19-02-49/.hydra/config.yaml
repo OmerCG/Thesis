@@ -1,0 +1,19 @@
+renderer_kwargs:
+  dist: 0.8
+  elev: 0.0
+  azim: 0.0
+  img_size:
+  - 1024
+  - 1024
+  texture_optimization: true
+  model_type: ${model_type}
+out_path: /home/nadav2/dev/data/CLIP2Shape/outs/descriptors_ablations/flame_expression
+model_path: /home/nadav2/dev/repos/Thesis/end2end_pipeline/flame/expression/flame_expression_e2e.ckpt
+min_value: 10.0
+max_value: 40.0
+effect_threshold: 0.3
+color_map: YlOrRd
+gender: neutral
+method: L2
+optimize_feature: expression_params
+model_type: flame

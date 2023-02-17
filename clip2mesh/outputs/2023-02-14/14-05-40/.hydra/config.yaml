@@ -1,0 +1,18 @@
+renderer_kwargs:
+  dist: 4.2
+  elev: 10.0
+  azim: 0.0
+  img_size:
+  - 1024
+  - 1024
+  use_tex: false
+  model_type: ${model_type}
+  texture_optimization: true
+  py3d: true
+out_dir: /home/nadav2/dev/data/CLIP2Shape/images/temp
+gender: neutral
+device: cuda
+image_path: /home/nadav2/dev/data/CLIP2Shape/outs/images_to_shape/HBW_DATA/data/images/020_12_25/00293_male.png
+comparison_mode: false
+model_path: /home/nadav2/dev/repos/Thesis/end2end_pipeline/smpl/smpl_neutral_multiview_e2e.ckpt
+model_type: smpl

@@ -1,0 +1,21 @@
+renderer_kwargs:
+  dist: 4.0
+  elev: 20.0
+  azim: -20.1
+  img_size:
+  - 1024
+  - 1024
+  use_tex: false
+  model_type: ${model_type}
+  texture_optimization: true
+  py3d: true
+out_dir: /home/nadav2/dev/data/CLIP2Shape/outs/images_from_demo/rendering_for_guy/smplx_male
+gender: neutral
+device: cuda
+image_path: /home/nadav2/dev/data/CLIP2Shape/outs/sliders_vs_blendshapes/images_to_fit/smplx_male/7.png
+comparison_mode: true
+with_face: false
+model_type: smplx
+model_path: null
+on_parameters: true
+num_coeffs: 10

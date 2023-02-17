@@ -1,0 +1,18 @@
+renderer_kwargs:
+  dist: 4.0
+  elev: 20.0
+  azim: -20.1
+  img_size:
+  - 1024
+  - 1024
+  use_tex: false
+  model_type: ${model_type}
+  texture_optimization: true
+  py3d: true
+out_dir: /home/nadav2/dev/data/CLIP2Shape/outs/sliders_vs_blendshapes/images_to_fit/smpl/female
+gender: neutral
+device: cuda
+image_path: /home/nadav2/dev/data/CLIP2Shape/outs/images_to_shape/smal/data/hippo.jpg
+comparison_mode: false
+model_path: /home/nadav2/dev/repos/Thesis/production/smal.ckpt
+model_type: smal

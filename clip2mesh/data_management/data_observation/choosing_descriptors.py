@@ -154,6 +154,14 @@ class ChoosingDescriptors(ChoosingDescriptorsUtils):
             chosen_descriptors = {0: {}}
             variances["cluster"] = np.zeros(len(variances)).astype(int)
 
+        # if there are descriptors with None in "cluster" column, remove them
+        if variances[variances["cluster"].isnull()].shape[0] > 0:
+            if self.verbose:
+                self.logger.info(
+                    f"There are {variances[variances['cluster'].isnull()].shape[0]} descriptors with no cluster"
+                )
+            variances = variances[~variances["cluster"].isnull()]
+
         # if there are descriptors to keep, add them to the chosen descriptors
         if self.descriptors_to_keep is not None:
             if self.verbose:

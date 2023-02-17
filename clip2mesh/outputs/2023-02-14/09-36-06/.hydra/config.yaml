@@ -1,0 +1,20 @@
+data_dir: /home/nadav2/dev/data/CLIP2Shape/outs/images_to_shape/NeuralBody_DATA/new/data
+predictions_dir: /home/nadav2/dev/data/CLIP2Shape/outs/images_to_shape/NeuralBody_DATA/new/predictions
+output_dir: /home/nadav2/dev/data/CLIP2Shape/outs/images_to_shape/NeuralBody_DATA/new/smpl_comparison_full_neutral_new_net
+gt_dir: /home/nadav2/dev/data/CLIP2Shape/outs/images_to_shape/NeuralBody_DATA/new/data
+comparison_kwargs:
+  raw_imgs_dir: ${data_dir}
+  gt_dir: ${gt_dir}
+  output_path: ${output_dir}
+  comparison_dirs:
+    spin: ${predictions_dir}/spin_predictions
+  smplx_models_paths:
+    smplx_neutral: /home/nadav2/dev/repos/Thesis/pre_production/smplx_neutral_e2e_candidate_2k.ckpt
+  renderer_kwargs:
+    img_size:
+    - 1024
+    - 1024
+    dist: 4.2
+    elev: 10.0
+    azim: 0.0
+    texture_optimization: true

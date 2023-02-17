@@ -1,6 +1,6 @@
 data_dir: /home/nadav2/dev/data/CLIP2Shape/outs/images_to_shape/NeuralBody_DATA/new/data
 predictions_dir: /home/nadav2/dev/data/CLIP2Shape/outs/images_to_shape/NeuralBody_DATA/new/predictions
-output_dir: /home/nadav2/dev/data/CLIP2Shape/outs/images_to_shape/NeuralBody_DATA/new/smpl_comparison_full_neutral
+output_dir: /home/nadav2/dev/data/CLIP2Shape/outs/images_to_shape/NeuralBody_DATA/new/smpl_comparison_consensus
 gt_dir: /home/nadav2/dev/data/CLIP2Shape/outs/images_to_shape/NeuralBody_DATA/new/data
 
 comparison_kwargs:
@@ -20,8 +20,8 @@ comparison_kwargs:
     smplx_neutral: /home/nadav2/dev/repos/Thesis/pre_production/smpl_neutral_multiview_e2e.ckpt
 
   renderer_kwargs:
-      img_size: [450, 300]
-      tex_path:
+      img_size: [1024, 1024]
       dist: 4.2
       elev: 10.0
       azim: 0.0
+      texture_optimization: True

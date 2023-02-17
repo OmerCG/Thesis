@@ -7,7 +7,7 @@ models_dir: /home/nadav2/dev/repos/CLIP2Shape/models
 seed: 42
 
 tensorboard_logger:
-  name: smal_e2e_5k # IMPORTANT
+  name: smpl_female_multiview_manual_new # IMPORTANT
   save_dir: /home/nadav2/dev/data/CLIP2Shape/runs
   log_graph: True
 
@@ -25,7 +25,7 @@ callbacks:
     auto_insert_metric_name: False
 
 dataloader:
-  batch_size: 500
+  batch_size: 1000
   num_workers: 1
   shuffle: True
   drop_last: False
@@ -37,18 +37,19 @@ trainer:
   log_every_n_steps: 3
 
 dataset:
-  data_dir: /home/nadav2/dev/data/CLIP2Shape/images/smal_multiview_5k
+  data_dir: /home/nadav2/dev/data/CLIP2Shape/images/smpl_female_multiview
   optimize_features:
-    - beta
+    - betas
   out_features: ${model_conf.out_features}
   labels_to_get:
-    - cow
-    - lion
-    - donkey
-    - cat
+    - fat
+    - pear shaped
+    - small
+    - narrow waist
+    - hourglass
+    - long legs
 
 model_conf:
-  num_stats: 4  # IMPORTANT
   hidden_size: [800, 500]
   out_features: 10
   num_hiddens: 1
