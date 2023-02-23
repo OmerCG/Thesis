@@ -10,7 +10,7 @@ from pathlib import Path
 from PIL import ImageTk, Image
 from pytorch3d.io import save_obj
 from omegaconf import DictConfig
-from typing import Dict, Any, Literal, List
+from typing import Dict, Any, Literal, List, Union
 from clip2mesh.utils import Utils, ModelsFactory
 
 
@@ -28,8 +28,10 @@ class SlidersApp:
         predict_jaw_pose: bool = False,
         renderer_kwargs: DictConfig = None,
         model_path: str = None,
-        image_path: str = None,
+        image_path: Union[str, Literal["random"]] = None,
         comparison_mode: bool = False,
+        A_pose: bool = False,
+        show_values: bool = False,
     ):
 
         self.root = None
@@ -38,12 +40,21 @@ class SlidersApp:
         self.visualize_error = False
         self.device = device
         self.texture = texture
+        self.A_pose = A_pose
+        self.show_values = show_values
         self.num_coeffs = num_coeffs
         self.on_parameters = on_parameters
         self.predict_jaw_pose = predict_jaw_pose
         self.comparison_mode = comparison_mode
 
         self.model_type = model_type
+
+        if image_path == "random":
+            images_dir = (
+                f"/home/nadav2/dev/data/CLIP2Shape/outs/sliders_vs_blendshapes/images_to_fit/{model_type}/{gender}"
+            )
+            image_path = np.random.choice(list(Path(images_dir).rglob("*.png"))).as_posix()
+            print(f"image_path: {image_path}")
 
         self._assertions(image_path=image_path, model_path=model_path, model_type=model_type, gender=gender)
 
@@ -53,7 +64,7 @@ class SlidersApp:
                 Path(out_dir).mkdir(parents=True)
             try:
                 img_id = int(sorted(list(Path(out_dir).glob("*.png")), key=lambda x: int(x.stem))[-1].stem) + 1
-            except IndexError:
+            except IndexError or ValueError:
                 img_id = 0
             self.outpath = Path(out_dir) / f"{img_id}.png"
 
@@ -63,6 +74,11 @@ class SlidersApp:
         self.gender = gender
         self.with_face = with_face
 
+        if self.A_pose:
+            self.body_pose = self.utils.body_pose.clone()
+        else:
+            self.body_pose = None
+
         self.model_kwargs = self.models_factory.get_default_params(with_face, num_coeffs=num_coeffs)
         if self.model_type == "smpl":
             self.model_kwargs["get_smpl"] = True
@@ -70,6 +86,8 @@ class SlidersApp:
             self.model_kwargs["num_coeffs"] = self.num_coeffs
         if hasattr(self, "gender"):
             self.model_kwargs["gender"] = self.gender
+        if hasattr(self, "body_pose") and self.model_type in ["smpl", "smplx"]:
+            self.model_kwargs["body_pose"] = self.body_pose
         self.verts, self.faces, self.vt, self.ft = self.models_factory.get_model(**self.model_kwargs)
         if self.model_type == "smplx":
             self.verts += self.utils.smplx_offset_numpy  # center the model with offsets
@@ -139,7 +157,9 @@ class SlidersApp:
         target_shape_list = data[feature]
         target_shape_tensor = torch.tensor(target_shape_list, dtype=torch.float32)
         get_smpl = True if self.model_type == "smpl" else False
-        verts, faces, vt, ft = self.models_factory.get_model(**{feature: target_shape_tensor, "get_smpl": get_smpl})
+        verts, faces, vt, ft = self.models_factory.get_model(
+            **{feature: target_shape_tensor, "get_smpl": get_smpl, "body_pose": self.body_pose}
+        )
         if get_smpl:
             verts += self.utils.smpl_offset_numpy
         else:
@@ -180,7 +200,11 @@ class SlidersApp:
             self.predicted_coeffs = self.betas.clone()
             get_smpl = True if self.model_type == "smpl" else False
             self.verts, self.faces, self.vt, self.ft = self.utils.get_smplx_model(
-                betas=self.betas, expression=self.expression, gender=self.gender, get_smpl=get_smpl
+                betas=self.betas,
+                expression=self.expression,
+                gender=self.gender,
+                get_smpl=get_smpl,
+                body_pose=self.body_pose,
             )
             if self.model_type == "smplx":
                 self.verts += self.utils.smplx_offset_numpy
@@ -264,7 +288,11 @@ class SlidersApp:
                     betas = out
                     get_smpl = True if self.model_type == "smpl" else False
                     self.verts, self.faces, self.vt, self.ft = self.utils.get_smplx_model(
-                        betas=betas, gender=self.gender, num_coeffs=self.num_coeffs, get_smpl=get_smpl
+                        betas=betas,
+                        gender=self.gender,
+                        num_coeffs=self.num_coeffs,
+                        get_smpl=get_smpl,
+                        body_pose=self.body_pose,
                     )
                     if get_smpl:
                         self.verts += self.utils.smpl_offset_numpy
@@ -643,7 +671,9 @@ class SlidersApp:
                 scale_kwargs = self.get_parameters_scale_kwargs()
                 if self.with_face:
                     for label in range(self.face_expression.shape[1]):
-                        label_tag = f"expression {label}" if label != self.face_expression.shape[1] - 1 else "jaw pose"
+                        label_tag = (
+                            f"- expression {label} +" if label != self.face_expression.shape[1] - 1 else "jaw pose"
+                        )
                         face_expression_scale = tkinter.Scale(
                             parameters_frame,
                             label=label_tag,
@@ -658,7 +688,7 @@ class SlidersApp:
                     for label in range(self.face_shape.shape[1]):
                         face_shape_scale = tkinter.Scale(
                             parameters_frame,
-                            label=f"shape param {label}",
+                            label=f"- shape param {label} +",
                             command=self.update_face_shape(label),
                             **scale_kwargs,
                         )
@@ -671,7 +701,7 @@ class SlidersApp:
                 for label in range(self.beta.shape[1]):
                     beta_shape_scale = tkinter.Scale(
                         parameters_frame,
-                        label=f"beta param {label}",
+                        label=f"- beta param {label} +",
                         command=self.update_beta_shape(label),
                         **scale_kwargs,
                     )
@@ -684,7 +714,7 @@ class SlidersApp:
             for idx, (label, value) in enumerate(self.sliders_values.items()):
                 label_scale = tkinter.Scale(
                     parameters_frame,
-                    label=label,
+                    label=f"- {label} +",
                     command=self.update_labels(idx),
                     **scale_kwargs,
                 )
@@ -817,7 +847,8 @@ class SlidersApp:
                 "highlightbackground": "white",
                 "highlightthickness": 0,
                 "troughcolor": "pink",
-                "width": 4,
+                "width": 10,
+                "showvalue": 1 if self.show_values else 0,
             }
         else:
             return {
@@ -830,11 +861,11 @@ class SlidersApp:
                 "highlightbackground": "white",
                 "highlightthickness": 0,
                 "troughcolor": "pink",
-                "width": 4,
+                "width": 10,
+                "showvalue": 1 if self.show_values else 0,
             }
 
-    @staticmethod
-    def get_azim_scale_kwargs() -> Dict[str, Any]:
+    def get_azim_scale_kwargs(self) -> Dict[str, Any]:
         return {
             "from_": -180,
             "to": 180,
@@ -845,11 +876,11 @@ class SlidersApp:
             "highlightbackground": "white",
             "highlightthickness": 0,
             "troughcolor": "pink",
-            "width": 4,
+            "width": 10,
+            "showvalue": 1 if self.show_values else 0,
         }
 
-    @staticmethod
-    def get_elev_scale_kwargs() -> Dict[str, Any]:
+    def get_elev_scale_kwargs(self) -> Dict[str, Any]:
         return {
             "from_": -90,
             "to": 90,
@@ -860,11 +891,11 @@ class SlidersApp:
             "highlightbackground": "white",
             "highlightthickness": 0,
             "troughcolor": "pink",
-            "width": 4,
+            "width": 10,
+            "showvalue": 1 if self.show_values else 0,
         }
 
-    @staticmethod
-    def get_smal_scale_kwargs() -> Dict[str, Any]:
+    def get_smal_scale_kwargs(self) -> Dict[str, Any]:
         return {
             "from_": -5,
             "to": 5,
@@ -872,13 +903,13 @@ class SlidersApp:
             "orient": tkinter.HORIZONTAL,
             "bg": "white",
             "troughcolor": "black",
-            "width": 4,
+            "width": 10,
             "length": 200,
             "borderwidth": 0,
+            "showvalue": 1 if self.show_values else 0,
         }
 
-    @staticmethod
-    def get_parameters_scale_kwargs() -> Dict[str, Any]:
+    def get_parameters_scale_kwargs(self) -> Dict[str, Any]:
         return {
             "from_": -5,
             "to": 5,
@@ -886,13 +917,13 @@ class SlidersApp:
             "orient": tkinter.HORIZONTAL,
             "bg": "white",
             "troughcolor": "pink",
-            "width": 4,
+            "width": 10,
             "length": 200,
             "borderwidth": 0,
+            "showvalue": 1 if self.show_values else 0,
         }
 
-    @staticmethod
-    def get_stats_scale_kwargs() -> Dict[str, Any]:
+    def get_stats_scale_kwargs(self) -> Dict[str, Any]:
         return {
             "from_": 0,
             "to": 50,
@@ -900,11 +931,12 @@ class SlidersApp:
             "orient": tkinter.HORIZONTAL,
             "bg": "white",
             "troughcolor": "pink",
-            "width": 4,
+            "width": 10,
             "length": 200,
             "borderwidth": 0,
             "highlightbackground": "white",
             "highlightthickness": 0,
+            "showvalue": 1 if self.show_values else 0,
         }
 
     @staticmethod

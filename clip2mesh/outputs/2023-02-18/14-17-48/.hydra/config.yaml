@@ -1,0 +1,18 @@
+renderer_kwargs:
+  dist: 4.2
+  elev: 10.0
+  azim: 0.0
+  img_size:
+  - 1024
+  - 1024
+  use_tex: false
+  model_type: ${model_type}
+  texture_optimization: true
+  py3d: true
+out_dir: /home/nadav2/dev/data/CLIP2Shape/outs/sliders_vs_blendshapes/results/${model_type}/${gender}
+gender: male
+device: cuda
+model_type: smpl
+model_path: /home/nadav2/dev/repos/Thesis/end2end_pipeline/smpl/smpl_male.ckpt
+image_path: /home/nadav2/dev/data/CLIP2Shape/outs/sliders_vs_blendshapes/images_to_fit/smpl/male/6.png
+comparison_mode: true

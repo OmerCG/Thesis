@@ -1,28 +1,34 @@
 defaults:
-  - renderer_kwargs: flame_expression
+  - renderer_kwargs: smplx
 
-out_dir: /home/nadav2/dev/data/CLIP2Shape/outs/sliders_vs_blendshapes/images_to_fit/smal
-gender: neutral
-device: cuda
-image_path: #/home/nadav2/dev/data/CLIP2Shape/outs/images_to_shape/smal/data/cow.jpg
-comparison_mode: False
+out_dir: /home/nadav2/dev/data/CLIP2Shape/outs/sliders_vs_blendshapes/results/${model_type}/${gender}
+# out_dir: /home/nadav2/dev/data/CLIP2Shape/outs/figures/sliders_app/demonstrations
+gender: male
+# image_path: /home/nadav2/dev/data/CLIP2Shape/outs/sliders_vs_blendshapes/images_to_fit/${model_type}/${gender}/8.png
+image_path: random
+comparison_mode: True 
+A_pose: True
 
-# FLAME - expression
-model_path: /home/nadav2/dev/repos/Thesis/end2end_pipeline/flame/expression/flame_expression_e2e.ckpt
-model_type: flame
-with_face: True
-predict_jaw_pose: False
+# USER STUDY CNFIGURATION
+model_type: smpl
+model_path: /home/nadav2/dev/repos/Thesis/sliders_ckpts/${model_type}/${model_type}_${gender}.ckpt
+
+# # FLAME - expression
+# model_path: /home/nadav2/dev/repos/Thesis/pre_production/flame_neutral_5_descriptors.ckpt
+# model_type: flame
+# with_face: True
+# predict_jaw_pose: False
 
 # # FLAME - shape
 # model_path: /home/nadav2/dev/repos/Thesis/end2end_pipeline/flame/shape/flame_shape_e2e.ckpt
 # model_type: flame
 
 # # SMPLX
-# model_path: /home/nadav2/dev/repos/Thesis/end2end_pipeline/smplx/smplx_male_multiview_e2e.ckpt
+# model_path: /home/nadav2/dev/repos/Thesis/sliders_ckpts/smplx/smplx_female.ckpt
 # model_type: smplx
 
 # # SMPL
-# model_path: /home/nadav2/dev/repos/Thesis/pre_production/smpl_female_multiview_manual.ckpt
+# model_path: /home/nadav2/dev/repos/Thesis/pre_production/smpl_male_5_descriptors.ckpt
 # model_type: smpl
 
 # # SMAL
@@ -31,7 +37,7 @@ predict_jaw_pose: False
 
 # # GENERIC
 # with_face: false
-# model_type: smpl
+# model_type: smplx
 # model_path: # keep empty
 # on_parameters: True
 # num_coeffs: 10

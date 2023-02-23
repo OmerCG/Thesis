@@ -239,9 +239,7 @@ class SMPLXParams:
             transl: torch.Tensor = torch.zeros(1, 3)
         jaw_pose: torch.Tensor = torch.eye(3).expand(1, 1, 3, 3)
         if smpl_model:
-            self.params = {
-                "betas": betas,
-            }
+            self.params = {"betas": betas, "body_pose": torch.cat([body_pose, torch.eye(3).expand(1, 2, 3, 3)], dim=1)}
         else:
             self.params = {
                 "betas": betas,
@@ -468,7 +466,7 @@ class Pytorch3dRenderer:
 class Utils:
     def __init__(self, device: str = "cuda", comparison_mode: bool = False):
         self.device = device
-        self.body_pose = torch.tensor(np.load("/home/nadav2/dev/repos/Thesis/SMPLX/rest_pose.npy"))
+        self.body_pose = torch.tensor(np.load("/home/nadav2/dev/repos/Thesis/SMPLX/a_pose.npy"))
         self.production_dir = "/home/nadav2/dev/repos/Thesis/pre_production"
         self.comparison_mode = comparison_mode
 

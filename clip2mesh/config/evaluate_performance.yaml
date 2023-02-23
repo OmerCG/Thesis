@@ -1,17 +1,17 @@
 defaults:
-    - renderer_kwargs: flame_shape
+    - renderer_kwargs: smplx
 
-out_path: /home/nadav2/dev/data/CLIP2Shape/outs/descriptors_ablations/flame_expression
-model_path: /home/nadav2/dev/repos/Thesis/end2end_pipeline/flame/expression/flame_expression_e2e.ckpt
+out_path: /home/nadav2/dev/data/CLIP2Shape/outs/descriptors_ablations/smplx_male
+model_path: /home/nadav2/dev/repos/Thesis/end2end_pipeline/smplx/smplx_male_e2e.ckpt
 min_value: 10.0
 max_value: 40.0
 effect_threshold: 0.3
 color_map: YlOrRd
-gender: neutral
+gender: male
 method: L2
 
-optimize_feature: expression_params
-model_type: flame
+optimize_feature: betas
+model_type: smplx
 
 renderer_kwargs:
     img_size: [1024, 1024]

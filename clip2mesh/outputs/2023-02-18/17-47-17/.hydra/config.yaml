@@ -1,0 +1,18 @@
+renderer_kwargs:
+  dist: 4.2
+  elev: 10.0
+  azim: 0.0
+  img_size:
+  - 1024
+  - 1024
+  use_tex: false
+  model_type: ${model_type}
+  texture_optimization: true
+  py3d: true
+out_dir: /home/nadav2/dev/data/CLIP2Shape/outs/figures/sliders_app/demonstrations
+gender: male
+image_path: /home/nadav2/dev/data/CLIP2Shape/outs/sliders_vs_blendshapes/images_to_fit/smplx/male/3.png
+comparison_mode: true
+A_pose: false
+model_type: smplx
+model_path: /home/nadav2/dev/repos/Thesis/sliders_ckpts/${model_type}/${model_type}_${gender}.ckpt

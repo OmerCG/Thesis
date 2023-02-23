@@ -1,0 +1,18 @@
+renderer_kwargs:
+  dist: 4.2
+  elev: 10.0
+  azim: 0.0
+  img_size:
+  - 1024
+  - 1024
+  use_tex: false
+  model_type: ${model_type}
+  texture_optimization: true
+  py3d: true
+out_dir: /home/nadav2/dev/data/CLIP2Shape/outs/sliders_vs_blendshapes/results/${model_type}/${gender}
+gender: male
+device: cuda
+model_type: smplx
+model_path: /home/nadav2/dev/repos/Thesis/sliders_ckpts/${model_type}/${model_type}_${gender}.ckpt
+comparison_mode: true
+image_path: random

@@ -7,15 +7,13 @@ model_paths:
     # - /home/nadav2/dev/repos/Thesis/pre_production/smplx_male_5_descriptors.ckpt
     # - /home/nadav2/dev/repos/Thesis/pre_production/smplx_male_10_descriptors.ckpt
     # - /home/nadav2/dev/repos/Thesis/pre_production/smplx_male_15_descriptors.ckpt
-    # - /home/nadav2/dev/repos/Thesis/pre_production/smplx_male_20_descriptors.ckpt
-    - /home/nadav2/dev/repos/Thesis/pre_production/smplx_male_25_descriptors.ckpt
 
 output_dir: /home/nadav2/dev/data/CLIP2Shape/outs/sliders_vs_blendshapes/smplx_male/descriptors_ablations
 gender: male
 num_coeffs: 10
 optimizing_feature: betas
 model_type: smplx
-display: True
+display: False
 write_videos: True
 
 total_steps: 5000
