@@ -32,10 +32,13 @@ class SlidersApp:
         comparison_mode: bool = False,
         A_pose: bool = False,
         show_values: bool = False,
+        hbw_gt: str = None,
     ):
 
         self.root = None
         self.img_label = None
+        self.vertex_colors = None
+        self.hbw_gt = hbw_gt
         self.predicted_coeffs = None
         self.visualize_error = False
         self.device = device
@@ -151,15 +154,19 @@ class SlidersApp:
         assert gender in ["male", "female", "neutral"], "Gender is not valid"
 
     def _get_target_shape(self, json_path: str):
-        feature = self.name
-        with open(json_path) as f:
-            data = json.load(f)
-        target_shape_list = data[feature]
-        target_shape_tensor = torch.tensor(target_shape_list, dtype=torch.float32)
         get_smpl = True if self.model_type == "smpl" else False
-        verts, faces, vt, ft = self.models_factory.get_model(
-            **{feature: target_shape_tensor, "get_smpl": get_smpl, "body_pose": self.body_pose}
-        )
+        if self.hbw_gt is not None:
+            verts = np.load(self.hbw_gt)
+            _, faces, vt, ft = self.models_factory.get_model()
+        else:
+            feature = self.name
+            with open(json_path) as f:
+                data = json.load(f)
+            target_shape_list = data[feature]
+            target_shape_tensor = torch.tensor(target_shape_list, dtype=torch.float32)
+            verts, faces, vt, ft = self.models_factory.get_model(
+                **{feature: target_shape_tensor, "get_smpl": get_smpl, "body_pose": self.body_pose}
+            )
         if get_smpl:
             verts += self.utils.smpl_offset_numpy
         else:
@@ -170,14 +177,14 @@ class SlidersApp:
             "vt": vt,
             "ft": ft,
         }
-        self.target_coeffs = target_shape_tensor
+        # self.target_coeffs = target_shape_tensor
 
     @staticmethod
     def _flatten_list_of_lists(list_of_lists: List[List[str]]) -> List[str]:
         return [item for sublist in list_of_lists for item in sublist]
 
     def _get_sliders_values(self, labels: List[List[str]], image_path: str = None):
-        if image_path is None or self.comparison_mode:
+        if image_path is None:  # or self.comparison_mode:
             self.sliders_values = {label[0]: 20 for label in labels}
         else:
             if not hasattr(self, "clip_model"):
@@ -323,6 +330,7 @@ class SlidersApp:
                 vt=self.vt,
                 ft=self.ft,
                 rotate_mesh=[{"degrees": self.azim, "axis": "y"}, {"degrees": self.elev, "axis": "x"}],
+                texture_color_values=self.vertex_colors,
             )
             img = self.adjust_rendered_img(img)
             self.img = img
@@ -342,7 +350,8 @@ class SlidersApp:
                 vertex_colors = torch.tensor(vertex_colors).float().to(self.device)
                 if vertex_colors.ndim == 2:
                     vertex_colors = vertex_colors[None, ...]
-                self.target_mesh_features.update({"texture_color_values": vertex_colors})
+                self.vertex_colors = vertex_colors
+                # self.target_mesh_features.update({"texture_color_values": vertex_colors})
             else:
                 self.target_mesh_features.update(
                     {

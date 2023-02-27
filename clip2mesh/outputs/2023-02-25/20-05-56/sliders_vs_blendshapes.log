@@ -1,0 +1,15 @@
+[2023-02-25 20:05:58,523][__main__][INFO] - Starting optimization for smplx betas
+[2023-02-25 20:05:58,523][__main__][INFO] - labels: [['fat'], ['muscular'], ['petite'], ['small'], ['long torso'], ['rectangular']]
+[2023-02-25 20:05:58,524][__main__][INFO] - Optimizing 7.png
+[2023-02-25 20:13:24,945][__main__][INFO] - Finished optimizing 7.png
+[2023-02-25 20:13:24,946][__main__][INFO] - Pred sliders values {'fat': 7.2811904, 'muscular': 11.932988, 'petite': -18.843502, 'small': 2.2861934, 'long torso': 11.977748, 'rectangular': 20.750866}
+[2023-02-25 20:13:24,946][__main__][INFO] - Geometric distance: [0.017430903390049934]
+[2023-02-25 20:13:24,946][__main__][INFO] - Optimizing 2.png
+[2023-02-25 20:20:18,464][__main__][INFO] - Finished optimizing 2.png
+[2023-02-25 20:20:18,464][__main__][INFO] - Pred sliders values {'fat': -3.36709, 'muscular': -6.757956, 'petite': -28.36048, 'small': 2.3336992, 'long torso': 13.530576, 'rectangular': 35.499363}
+[2023-02-25 20:20:18,464][__main__][INFO] - Geometric distance: [0.017430903390049934, 0.021220294758677483]
+[2023-02-25 20:20:18,464][__main__][INFO] - Optimizing 9.png
+[2023-02-25 20:28:54,772][__main__][INFO] - Finished optimizing 9.png
+[2023-02-25 20:28:54,772][__main__][INFO] - Pred sliders values {'fat': -14.374603, 'muscular': -34.975098, 'petite': -16.700907, 'small': 1.9416208, 'long torso': -5.338315, 'rectangular': 39.426197}
+[2023-02-25 20:28:54,772][__main__][INFO] - Geometric distance: [0.017430903390049934, 0.021220294758677483, 0.02326335944235325]
+[2023-02-25 20:28:54,772][__main__][INFO] - Optimizing 0.png

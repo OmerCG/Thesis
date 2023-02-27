@@ -1,0 +1,172 @@
+[2023-02-25 12:51:14,905][__main__][INFO] - Starting optimization for smplx betas
+[2023-02-25 12:51:14,905][__main__][INFO] - labels: [['fat'], ['long torso']]
+[2023-02-25 12:51:14,906][__main__][INFO] - Optimizing 7.png
+[2023-02-25 12:53:01,857][__main__][INFO] - Finished optimizing 7.png
+[2023-02-25 12:53:01,857][__main__][INFO] - Pred sliders values {'fat': -4.175952, 'long torso': 3.1598036}
+[2023-02-25 12:53:01,857][__main__][INFO] - Geometric distance: [0.01507032010704279]
+[2023-02-25 12:53:01,857][__main__][INFO] - Optimizing 2.png
+[2023-02-25 12:53:19,016][__main__][INFO] - Finished optimizing 2.png
+[2023-02-25 12:53:19,016][__main__][INFO] - Pred sliders values {'fat': -4.2000055, 'long torso': 3.4281588}
+[2023-02-25 12:53:19,016][__main__][INFO] - Geometric distance: [0.01507032010704279, 0.02521393820643425]
+[2023-02-25 12:53:19,016][__main__][INFO] - Optimizing 9.png
+[2023-02-25 12:54:27,891][__main__][INFO] - Finished optimizing 9.png
+[2023-02-25 12:54:27,892][__main__][INFO] - Pred sliders values {'fat': -0.6933004, 'long torso': 2.2051497}
+[2023-02-25 12:54:27,892][__main__][INFO] - Geometric distance: [0.01507032010704279, 0.02521393820643425, 0.09571291506290436]
+[2023-02-25 12:54:27,892][__main__][INFO] - Optimizing 0.png
+[2023-02-25 12:57:36,357][__main__][INFO] - Finished optimizing 0.png
+[2023-02-25 12:57:36,357][__main__][INFO] - Pred sliders values {'fat': 9.865315, 'long torso': -6.720478}
+[2023-02-25 12:57:36,357][__main__][INFO] - Geometric distance: [0.01507032010704279, 0.02521393820643425, 0.09571291506290436, 0.01975877210497856]
+[2023-02-25 12:57:36,357][__main__][INFO] - Optimizing 6.png
+[2023-02-25 12:59:34,108][__main__][INFO] - Finished optimizing 6.png
+[2023-02-25 12:59:34,108][__main__][INFO] - Pred sliders values {'fat': 3.4062374, 'long torso': 0.30552104}
+[2023-02-25 12:59:34,108][__main__][INFO] - Geometric distance: [0.01507032010704279, 0.02521393820643425, 0.09571291506290436, 0.01975877210497856, 0.033117588609457016]
+[2023-02-25 12:59:34,108][__main__][INFO] - Optimizing 4.png
+[2023-02-25 13:01:28,915][__main__][INFO] - Finished optimizing 4.png
+[2023-02-25 13:01:28,916][__main__][INFO] - Pred sliders values {'fat': 5.8149195, 'long torso': 0.15744756}
+[2023-02-25 13:01:28,917][__main__][INFO] - Geometric distance: [0.01507032010704279, 0.02521393820643425, 0.09571291506290436, 0.01975877210497856, 0.033117588609457016, 0.057626232504844666]
+[2023-02-25 13:01:28,917][__main__][INFO] - Optimizing 1.png
+[2023-02-25 13:02:49,974][__main__][INFO] - Finished optimizing 1.png
+[2023-02-25 13:02:49,974][__main__][INFO] - Pred sliders values {'fat': 0.92559725, 'long torso': 5.6734743}
+[2023-02-25 13:02:49,975][__main__][INFO] - Geometric distance: [0.01507032010704279, 0.02521393820643425, 0.09571291506290436, 0.01975877210497856, 0.033117588609457016, 0.057626232504844666, 0.052827078849077225]
+[2023-02-25 13:02:49,975][__main__][INFO] - Optimizing 3.png
+[2023-02-25 13:03:15,952][__main__][INFO] - Finished optimizing 3.png
+[2023-02-25 13:03:15,953][__main__][INFO] - Pred sliders values {'fat': 0.69253856, 'long torso': 5.5550895}
+[2023-02-25 13:03:15,954][__main__][INFO] - Geometric distance: [0.01507032010704279, 0.02521393820643425, 0.09571291506290436, 0.01975877210497856, 0.033117588609457016, 0.057626232504844666, 0.052827078849077225, 0.01509665697813034]
+[2023-02-25 13:03:15,955][__main__][INFO] - Optimizing 5.png
+[2023-02-25 13:03:36,218][__main__][INFO] - Finished optimizing 5.png
+[2023-02-25 13:03:36,218][__main__][INFO] - Pred sliders values {'fat': 2.9055634, 'long torso': 2.508215}
+[2023-02-25 13:03:36,218][__main__][INFO] - Geometric distance: [0.01507032010704279, 0.02521393820643425, 0.09571291506290436, 0.01975877210497856, 0.033117588609457016, 0.057626232504844666, 0.052827078849077225, 0.01509665697813034, 0.021077031269669533]
+[2023-02-25 13:03:36,238][__main__][INFO] - Starting optimization for smplx betas
+[2023-02-25 13:03:36,238][__main__][INFO] - labels: [['fat'], ['muscular'], ['long torso'], ['petite'], ['small']]
+[2023-02-25 13:03:36,238][__main__][INFO] - Optimizing 7.png
+[2023-02-25 13:13:06,177][__main__][INFO] - Finished optimizing 7.png
+[2023-02-25 13:13:06,177][__main__][INFO] - Pred sliders values {'fat': -9.322156, 'muscular': 2.8992097, 'long torso': 16.173239, 'petite': -19.01945, 'small': 26.330717}
+[2023-02-25 13:13:06,177][__main__][INFO] - Geometric distance: [0.01116834208369255]
+[2023-02-25 13:13:06,178][__main__][INFO] - Optimizing 2.png
+[2023-02-25 13:14:32,056][__main__][INFO] - Finished optimizing 2.png
+[2023-02-25 13:14:32,056][__main__][INFO] - Pred sliders values {'fat': -11.623016, 'muscular': 6.468437, 'long torso': 13.922774, 'petite': -23.73351, 'small': 21.86978}
+[2023-02-25 13:14:32,056][__main__][INFO] - Geometric distance: [0.01116834208369255, 0.0252520889043808]
+[2023-02-25 13:14:32,056][__main__][INFO] - Optimizing 9.png
+[2023-02-25 13:21:12,877][__main__][INFO] - Finished optimizing 9.png
+[2023-02-25 13:21:12,877][__main__][INFO] - Pred sliders values {'fat': -28.745186, 'muscular': -0.7370652, 'long torso': -12.25872, 'petite': 1.482467, 'small': 9.224903}
+[2023-02-25 13:21:12,877][__main__][INFO] - Geometric distance: [0.01116834208369255, 0.0252520889043808, 0.019242672249674797]
+[2023-02-25 13:21:12,877][__main__][INFO] - Optimizing 0.png
+[2023-02-25 13:32:04,298][__main__][INFO] - Finished optimizing 0.png
+[2023-02-25 13:32:04,298][__main__][INFO] - Pred sliders values {'fat': -23.516392, 'muscular': -25.589737, 'long torso': -24.245617, 'petite': -9.968751, 'small': -18.035877}
+[2023-02-25 13:32:04,298][__main__][INFO] - Geometric distance: [0.01116834208369255, 0.0252520889043808, 0.019242672249674797, 0.04260744899511337]
+[2023-02-25 13:32:04,299][__main__][INFO] - Optimizing 6.png
+[2023-02-25 13:39:08,522][__main__][INFO] - Finished optimizing 6.png
+[2023-02-25 13:39:08,522][__main__][INFO] - Pred sliders values {'fat': 4.8963504, 'muscular': 0.3111869, 'long torso': -0.69181824, 'petite': -8.836357, 'small': -4.3773746}
+[2023-02-25 13:39:08,522][__main__][INFO] - Geometric distance: [0.01116834208369255, 0.0252520889043808, 0.019242672249674797, 0.04260744899511337, 0.0222303569316864]
+[2023-02-25 13:39:08,522][__main__][INFO] - Optimizing 4.png
+[2023-02-25 13:40:12,688][__main__][INFO] - Finished optimizing 4.png
+[2023-02-25 13:40:12,688][__main__][INFO] - Pred sliders values {'fat': 8.319658, 'muscular': -0.5453586, 'long torso': 0.86966693, 'petite': -12.090321, 'small': -3.5283544}
+[2023-02-25 13:40:12,689][__main__][INFO] - Geometric distance: [0.01116834208369255, 0.0252520889043808, 0.019242672249674797, 0.04260744899511337, 0.0222303569316864, 0.022006457671523094]
+[2023-02-25 13:40:12,689][__main__][INFO] - Optimizing 1.png
+[2023-02-25 13:47:51,934][__main__][INFO] - Finished optimizing 1.png
+[2023-02-25 13:47:51,935][__main__][INFO] - Pred sliders values {'fat': 6.8530016, 'muscular': 0.81021327, 'long torso': 20.566051, 'petite': -1.9692875, 'small': 7.726713}
+[2023-02-25 13:47:51,935][__main__][INFO] - Geometric distance: [0.01116834208369255, 0.0252520889043808, 0.019242672249674797, 0.04260744899511337, 0.0222303569316864, 0.022006457671523094, 0.017001239582896233]
+[2023-02-25 13:47:51,936][__main__][INFO] - Optimizing 3.png
+[2023-02-25 13:52:49,393][__main__][INFO] - Finished optimizing 3.png
+[2023-02-25 13:52:49,393][__main__][INFO] - Pred sliders values {'fat': 8.165794, 'muscular': -0.9866064, 'long torso': 16.059847, 'petite': 1.6003, 'small': 20.034391}
+[2023-02-25 13:52:49,393][__main__][INFO] - Geometric distance: [0.01116834208369255, 0.0252520889043808, 0.019242672249674797, 0.04260744899511337, 0.0222303569316864, 0.022006457671523094, 0.017001239582896233, 0.01750103384256363]
+[2023-02-25 13:52:49,394][__main__][INFO] - Optimizing 5.png
+[2023-02-25 13:56:07,515][__main__][INFO] - Finished optimizing 5.png
+[2023-02-25 13:56:07,515][__main__][INFO] - Pred sliders values {'fat': 5.1840577, 'muscular': 9.118647, 'long torso': 4.5321684, 'petite': -0.45272875, 'small': 8.073081}
+[2023-02-25 13:56:07,515][__main__][INFO] - Geometric distance: [0.01116834208369255, 0.0252520889043808, 0.019242672249674797, 0.04260744899511337, 0.0222303569316864, 0.022006457671523094, 0.017001239582896233, 0.01750103384256363, 0.020724721252918243]
+[2023-02-25 13:56:07,554][__main__][INFO] - Starting optimization for smplx betas
+[2023-02-25 13:56:07,554][__main__][INFO] - labels: [['fat'], ['muscular'], ['rectangular'], ['proportioned'], ['pear shaped'], ['curvy'], ['long torso'], ['petite'], ['small'], ['tall']]
+[2023-02-25 13:56:07,554][__main__][INFO] - Optimizing 7.png
+[2023-02-25 14:07:41,843][__main__][INFO] - Finished optimizing 7.png
+[2023-02-25 14:07:41,843][__main__][INFO] - Pred sliders values {'fat': -24.066597, 'muscular': 20.579142, 'rectangular': -0.2148367, 'proportioned': -17.283825, 'pear shaped': -12.570646, 'curvy': -3.0189078, 'long torso': 15.342688, 'petite': -24.232307, 'small': 25.403702, 'tall': 20.740957}
+[2023-02-25 14:07:41,843][__main__][INFO] - Geometric distance: [0.009722110815346241]
+[2023-02-25 14:07:41,843][__main__][INFO] - Optimizing 2.png
+[2023-02-25 14:13:22,993][__main__][INFO] - Finished optimizing 2.png
+[2023-02-25 14:13:22,993][__main__][INFO] - Pred sliders values {'fat': -29.192247, 'muscular': -0.187451, 'rectangular': 3.2015858, 'proportioned': -0.4568856, 'pear shaped': -31.76827, 'curvy': -14.455682, 'long torso': 17.778288, 'petite': -32.330658, 'small': 36.67816, 'tall': -1.6889558}
+[2023-02-25 14:13:22,993][__main__][INFO] - Geometric distance: [0.009722110815346241, 0.009058590047061443]
+[2023-02-25 14:13:22,993][__main__][INFO] - Optimizing 9.png
+[2023-02-25 14:23:01,657][__main__][INFO] - Finished optimizing 9.png
+[2023-02-25 14:23:01,657][__main__][INFO] - Pred sliders values {'fat': -46.045162, 'muscular': -12.409524, 'rectangular': 0.08847826, 'proportioned': 3.3605666, 'pear shaped': -20.43836, 'curvy': -19.784782, 'long torso': 12.013512, 'petite': -7.832729, 'small': 29.002739, 'tall': -19.524624}
+[2023-02-25 14:23:01,657][__main__][INFO] - Geometric distance: [0.009722110815346241, 0.009058590047061443, 0.009755676612257957]
+[2023-02-25 14:23:01,657][__main__][INFO] - Optimizing 0.png
+[2023-02-25 14:35:03,724][__main__][INFO] - Finished optimizing 0.png
+[2023-02-25 14:35:03,724][__main__][INFO] - Pred sliders values {'fat': -33.644585, 'muscular': -6.0860167, 'rectangular': 15.087393, 'proportioned': 34.123577, 'pear shaped': 21.842323, 'curvy': 12.518751, 'long torso': 8.978228, 'petite': -40.962036, 'small': 46.457363, 'tall': -25.752144}
+[2023-02-25 14:35:03,724][__main__][INFO] - Geometric distance: [0.009722110815346241, 0.009058590047061443, 0.009755676612257957, 0.012975305318832397]
+[2023-02-25 14:35:03,724][__main__][INFO] - Optimizing 6.png
+[2023-02-25 14:46:24,538][__main__][INFO] - Finished optimizing 6.png
+[2023-02-25 14:46:24,538][__main__][INFO] - Pred sliders values {'fat': -2.8870528, 'muscular': -26.439886, 'rectangular': -1.1005684, 'proportioned': 6.6689816, 'pear shaped': -9.381236, 'curvy': -11.854142, 'long torso': 19.839748, 'petite': -20.51723, 'small': 12.776466, 'tall': -35.758297}
+[2023-02-25 14:46:24,538][__main__][INFO] - Geometric distance: [0.009722110815346241, 0.009058590047061443, 0.009755676612257957, 0.012975305318832397, 0.0029218154959380627]
+[2023-02-25 14:46:24,539][__main__][INFO] - Optimizing 4.png
+[2023-02-25 14:50:11,020][__main__][INFO] - Finished optimizing 4.png
+[2023-02-25 14:50:11,020][__main__][INFO] - Pred sliders values {'fat': -7.279025, 'muscular': -24.04487, 'rectangular': 17.084671, 'proportioned': 10.932512, 'pear shaped': -8.313647, 'curvy': -4.012463, 'long torso': 19.9088, 'petite': -26.441462, 'small': 15.668442, 'tall': -31.058681}
+[2023-02-25 14:50:11,020][__main__][INFO] - Geometric distance: [0.009722110815346241, 0.009058590047061443, 0.009755676612257957, 0.012975305318832397, 0.0029218154959380627, 0.003187469206750393]
+[2023-02-25 14:50:11,020][__main__][INFO] - Optimizing 1.png
+[2023-02-25 15:02:08,994][__main__][INFO] - Finished optimizing 1.png
+[2023-02-25 15:02:08,994][__main__][INFO] - Pred sliders values {'fat': -28.532127, 'muscular': -36.492874, 'rectangular': -22.052563, 'proportioned': -3.2967527, 'pear shaped': -3.20221, 'curvy': -1.7214277, 'long torso': 53.25797, 'petite': -0.4476529, 'small': 27.270996, 'tall': -6.4081674}
+[2023-02-25 15:02:08,994][__main__][INFO] - Geometric distance: [0.009722110815346241, 0.009058590047061443, 0.009755676612257957, 0.012975305318832397, 0.0029218154959380627, 0.003187469206750393, 0.004191867541521788]
+[2023-02-25 15:02:08,994][__main__][INFO] - Optimizing 3.png
+[2023-02-25 15:05:41,136][__main__][INFO] - Finished optimizing 3.png
+[2023-02-25 15:05:41,136][__main__][INFO] - Pred sliders values {'fat': -13.20046, 'muscular': -27.59181, 'rectangular': -23.959103, 'proportioned': 4.5108404, 'pear shaped': -17.273018, 'curvy': -11.163489, 'long torso': 47.076126, 'petite': 5.892315, 'small': 35.85664, 'tall': -18.32501}
+[2023-02-25 15:05:41,136][__main__][INFO] - Geometric distance: [0.009722110815346241, 0.009058590047061443, 0.009755676612257957, 0.012975305318832397, 0.0029218154959380627, 0.003187469206750393, 0.004191867541521788, 0.017235752195119858]
+[2023-02-25 15:05:41,136][__main__][INFO] - Optimizing 5.png
+[2023-02-25 15:17:38,564][__main__][INFO] - Finished optimizing 5.png
+[2023-02-25 15:17:38,564][__main__][INFO] - Pred sliders values {'fat': -15.829964, 'muscular': -50.567066, 'rectangular': 15.586766, 'proportioned': -25.264898, 'pear shaped': -51.913513, 'curvy': 12.9429035, 'long torso': 39.624138, 'petite': -13.286308, 'small': -4.230028, 'tall': -40.257187}
+[2023-02-25 15:17:38,565][__main__][INFO] - Geometric distance: [0.009722110815346241, 0.009058590047061443, 0.009755676612257957, 0.012975305318832397, 0.0029218154959380627, 0.003187469206750393, 0.004191867541521788, 0.017235752195119858, 0.01000863965600729]
+[2023-02-25 15:17:38,589][__main__][INFO] - Starting optimization for smplx betas
+[2023-02-25 15:17:38,589][__main__][INFO] - labels: [['fat'], ['muscular'], ['rectangular'], ['proportioned'], ['pear shaped'], ['curvy'], ['long legs'], ['heavyset'], ['round apple'], ['narrow waist'], ['long torso'], ['long'], ['petite'], ['small'], ['tall']]
+[2023-02-25 15:17:38,589][__main__][INFO] - Optimizing 7.png
+[2023-02-25 15:29:37,056][__main__][INFO] - Finished optimizing 7.png
+[2023-02-25 15:29:37,056][__main__][INFO] - Pred sliders values {'fat': 10.294024, 'muscular': 9.092402, 'rectangular': 22.797352, 'proportioned': -25.937664, 'pear shaped': 11.889258, 'curvy': -15.952794, 'long legs': 6.4387054, 'heavyset': -30.396034, 'round apple': -8.382321, 'narrow waist': 3.0092962, 'long torso': 10.565249, 'long': 31.478165, 'petite': 14.18449, 'small': -5.7894254, 'tall': -27.389248}
+[2023-02-25 15:29:37,056][__main__][INFO] - Geometric distance: [0.011324888095259666]
+[2023-02-25 15:29:37,056][__main__][INFO] - Optimizing 2.png
+[2023-02-25 15:41:33,725][__main__][INFO] - Finished optimizing 2.png
+[2023-02-25 15:41:33,725][__main__][INFO] - Pred sliders values {'fat': -9.04106, 'muscular': 48.33962, 'rectangular': 5.4715676, 'proportioned': -35.361897, 'pear shaped': 16.824799, 'curvy': 19.255686, 'long legs': -2.4917278, 'heavyset': -27.692112, 'round apple': 23.02418, 'narrow waist': 38.252426, 'long torso': 39.558735, 'long': 68.72894, 'petite': 28.22827, 'small': 21.537659, 'tall': -37.846886}
+[2023-02-25 15:41:33,725][__main__][INFO] - Geometric distance: [0.011324888095259666, 0.005130735691636801]
+[2023-02-25 15:41:33,726][__main__][INFO] - Optimizing 9.png
+[2023-02-25 15:53:31,381][__main__][INFO] - Finished optimizing 9.png
+[2023-02-25 15:53:31,381][__main__][INFO] - Pred sliders values {'fat': 18.099634, 'muscular': 54.8129, 'rectangular': 13.592435, 'proportioned': -53.76251, 'pear shaped': 46.47518, 'curvy': 7.5353627, 'long legs': 38.434666, 'heavyset': -1.9750756, 'round apple': 14.301731, 'narrow waist': 34.21077, 'long torso': 12.3674555, 'long': 69.32892, 'petite': 57.72564, 'small': 31.504936, 'tall': -2.1569922}
+[2023-02-25 15:53:31,382][__main__][INFO] - Geometric distance: [0.011324888095259666, 0.005130735691636801, 0.004766398575156927]
+[2023-02-25 15:53:31,382][__main__][INFO] - Optimizing 0.png
+[2023-02-25 16:05:37,254][__main__][INFO] - Finished optimizing 0.png
+[2023-02-25 16:05:37,255][__main__][INFO] - Pred sliders values {'fat': 34.5533, 'muscular': 17.990828, 'rectangular': 4.55321, 'proportioned': -28.584677, 'pear shaped': 52.53909, 'curvy': -6.469417, 'long legs': 2.3026025, 'heavyset': -15.220656, 'round apple': 58.004517, 'narrow waist': 49.942745, 'long torso': 28.764372, 'long': 73.08622, 'petite': 54.464592, 'small': 49.317757, 'tall': -6.004092}
+[2023-02-25 16:05:37,255][__main__][INFO] - Geometric distance: [0.011324888095259666, 0.005130735691636801, 0.004766398575156927, 0.005778948310762644]
+[2023-02-25 16:05:37,255][__main__][INFO] - Optimizing 6.png
+[2023-02-25 16:17:38,617][__main__][INFO] - Finished optimizing 6.png
+[2023-02-25 16:17:38,617][__main__][INFO] - Pred sliders values {'fat': 17.546268, 'muscular': 41.607224, 'rectangular': 4.1741347, 'proportioned': -70.80145, 'pear shaped': 66.21219, 'curvy': 6.755849, 'long legs': 37.157772, 'heavyset': 1.0783691, 'round apple': 36.54156, 'narrow waist': 68.51213, 'long torso': 22.88102, 'long': 26.684456, 'petite': 42.777687, 'small': 25.884058, 'tall': 22.109045}
+[2023-02-25 16:17:38,617][__main__][INFO] - Geometric distance: [0.011324888095259666, 0.005130735691636801, 0.004766398575156927, 0.005778948310762644, 0.005044805817306042]
+[2023-02-25 16:17:38,617][__main__][INFO] - Optimizing 4.png
+[2023-02-25 16:22:44,696][__main__][INFO] - Finished optimizing 4.png
+[2023-02-25 16:22:44,696][__main__][INFO] - Pred sliders values {'fat': 17.711294, 'muscular': 25.335754, 'rectangular': 15.671088, 'proportioned': -68.18224, 'pear shaped': 61.946423, 'curvy': 1.9910595, 'long legs': 33.350567, 'heavyset': 17.459097, 'round apple': 52.416428, 'narrow waist': 72.49286, 'long torso': 25.215635, 'long': 24.26204, 'petite': 38.164165, 'small': 16.618385, 'tall': 26.530104}
+[2023-02-25 16:22:44,696][__main__][INFO] - Geometric distance: [0.011324888095259666, 0.005130735691636801, 0.004766398575156927, 0.005778948310762644, 0.005044805817306042, 0.0011778599582612514]
+[2023-02-25 16:22:44,696][__main__][INFO] - Optimizing 1.png
+[2023-02-25 16:34:52,609][__main__][INFO] - Finished optimizing 1.png
+[2023-02-25 16:34:52,609][__main__][INFO] - Pred sliders values {'fat': 15.618786, 'muscular': 29.735987, 'rectangular': 27.615427, 'proportioned': -56.07261, 'pear shaped': 53.87838, 'curvy': 0.84224594, 'long legs': 70.31812, 'heavyset': 2.7840405, 'round apple': 45.115696, 'narrow waist': 59.16917, 'long torso': 14.568272, 'long': 30.027994, 'petite': 31.829262, 'small': -1.282604, 'tall': 4.0122924}
+[2023-02-25 16:34:52,609][__main__][INFO] - Geometric distance: [0.011324888095259666, 0.005130735691636801, 0.004766398575156927, 0.005778948310762644, 0.005044805817306042, 0.0011778599582612514, 0.002335293684154749]
+[2023-02-25 16:34:52,609][__main__][INFO] - Optimizing 3.png
+[2023-02-25 16:47:41,318][__main__][INFO] - Finished optimizing 3.png
+[2023-02-25 16:47:41,320][__main__][INFO] - Pred sliders values {'fat': 22.088753, 'muscular': 54.88904, 'rectangular': 28.768368, 'proportioned': -41.983135, 'pear shaped': 61.743343, 'curvy': 31.577211, 'long legs': 88.50221, 'heavyset': 29.28028, 'round apple': 64.543045, 'narrow waist': 33.78791, 'long torso': 24.162052, 'long': 14.025427, 'petite': 45.79925, 'small': -14.434172, 'tall': 31.560432}
+[2023-02-25 16:47:41,320][__main__][INFO] - Geometric distance: [0.011324888095259666, 0.005130735691636801, 0.004766398575156927, 0.005778948310762644, 0.005044805817306042, 0.0011778599582612514, 0.002335293684154749, 0.003620231058448553]
+[2023-02-25 16:47:41,320][__main__][INFO] - Optimizing 5.png
+[2023-02-25 17:00:03,096][__main__][INFO] - Finished optimizing 5.png
+[2023-02-25 17:00:03,096][__main__][INFO] - Pred sliders values {'fat': 32.129204, 'muscular': 57.939716, 'rectangular': -10.559772, 'proportioned': -55.019363, 'pear shaped': 73.23422, 'curvy': 9.170137, 'long legs': 79.85669, 'heavyset': 53.58694, 'round apple': 28.281387, 'narrow waist': 79.841484, 'long torso': 51.645596, 'long': 27.56175, 'petite': 63.370914, 'small': 13.372344, 'tall': 0.67048925}
+[2023-02-25 17:00:03,096][__main__][INFO] - Geometric distance: [0.011324888095259666, 0.005130735691636801, 0.004766398575156927, 0.005778948310762644, 0.005044805817306042, 0.0011778599582612514, 0.002335293684154749, 0.003620231058448553, 0.0031369172502309084]
+[2023-02-25 17:00:03,123][__main__][INFO] - Starting optimization for smplx betas
+[2023-02-25 17:00:03,123][__main__][INFO] - labels: [['fat'], ['muscular'], ['rectangular'], ['long torso'], ['petite'], ['small']]
+[2023-02-25 17:00:03,123][__main__][INFO] - Optimizing 7.png
+[2023-02-25 17:00:03,123][__main__][INFO] - Video for 7.png already exists
+[2023-02-25 17:00:03,123][__main__][INFO] - Optimizing 2.png
+[2023-02-25 17:00:03,123][__main__][INFO] - Video for 2.png already exists
+[2023-02-25 17:00:03,124][__main__][INFO] - Optimizing 9.png
+[2023-02-25 17:00:03,124][__main__][INFO] - Video for 9.png already exists
+[2023-02-25 17:00:03,124][__main__][INFO] - Optimizing 0.png
+[2023-02-25 17:00:03,124][__main__][INFO] - Video for 0.png already exists
+[2023-02-25 17:00:03,124][__main__][INFO] - Optimizing 6.png
+[2023-02-25 17:00:03,124][__main__][INFO] - Video for 6.png already exists
+[2023-02-25 17:00:03,124][__main__][INFO] - Optimizing 4.png
+[2023-02-25 17:00:03,124][__main__][INFO] - Video for 4.png already exists
+[2023-02-25 17:00:03,124][__main__][INFO] - Optimizing 1.png
+[2023-02-25 17:00:03,124][__main__][INFO] - Video for 1.png already exists
+[2023-02-25 17:00:03,124][__main__][INFO] - Optimizing 3.png
+[2023-02-25 17:00:03,125][__main__][INFO] - Video for 3.png already exists
+[2023-02-25 17:00:03,125][__main__][INFO] - Optimizing 5.png
+[2023-02-25 17:00:03,125][__main__][INFO] - Video for 5.png already exists

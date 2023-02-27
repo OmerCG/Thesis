@@ -250,17 +250,15 @@ class HBWComparison(Image2ShapeUtils):
             for raw_img_path in person_id.iterdir():
 
                 # ------ DEBUG ------
-                # if raw_img_path.stem not in [
-                #     "00377_female",
-                #     "01071_male",
-                #     "02477_male",
-                #     "01115_female",
-                #     "00000_female",
-                #     "00381_female",
-                #     "00000_female",
-                #     "01016_female",
-                # ]:
-                #     continue
+                if raw_img_path.stem not in [
+                    # "00283_male",
+                    # "01777_female",
+                    # "00472_male",
+                    # "02455_male",
+                    # "01104_female",
+                    "02453_male",
+                ]:
+                    continue
                 # -------------------
 
                 person_id_name = person_id.name.split("_")[0]
@@ -310,9 +308,12 @@ class HBWComparison(Image2ShapeUtils):
 
                 shapy_diff = np.linalg.norm(smplx_args["gt"][0] - smplx_args["shapy"][0], axis=-1)
                 our_diff = np.linalg.norm(smplx_args["gt"][0] - smplx_args["ours"][0], axis=-1)
-                shapy_diff_normed = shapy_diff / 0.12324481  # np.max(shapy_diff)
-                our_diff_normed = our_diff / 0.12324481  # np.max(shapy_diff)
-                color_map = plt.get_cmap("YlOrRd")
+                self.logger.info(f"{person_id.name} | {raw_img_path.name}")
+                self.logger.info("shapy diff", np.sqrt(shapy_diff).mean())
+
+                shapy_diff_normed = shapy_diff / np.max(shapy_diff)
+                our_diff_normed = our_diff / np.max(shapy_diff)
+                color_map = plt.get_cmap("coolwarm")
                 shapy_vertex_colors = torch.tensor(color_map(shapy_diff_normed)[:, :3]).float().to(self.device)
                 our_vertex_colors = torch.tensor(color_map(our_diff_normed)[:, :3]).float().to(self.device)
                 shapy_diff = self.adjust_rendered_img(
@@ -327,7 +328,7 @@ class HBWComparison(Image2ShapeUtils):
                 gt_img = self.adjust_rendered_img(self.renderer.render_mesh(**smplx_kwargs["gt"]))
                 colored = np.concatenate([shapy_diff, pixie_diff, our_diff, gt_img], axis=1)
                 colored = cv2.cvtColor(colored, cv2.COLOR_RGB2BGR)
-                outpath = "/home/nadav2/dev/data/CLIP2Shape/outs/images_to_shape/HBW_DATA/comparison_2k/heatmaps"
+                outpath = "/home/nadav2/dev/data/CLIP2Shape/outs/images_to_shape/HBW_DATA/comparison_2k/test"
                 cv2.imwrite(f"{outpath}/{person_id.name}_{raw_img_path.stem}.png", colored)
                 # -------------------
 

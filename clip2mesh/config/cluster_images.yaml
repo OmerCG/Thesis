@@ -1,5 +1,5 @@
 defaults:
-  - descriptors: smplx_neutral
+  - descriptors: smplx_male
 
-images_dir: /home/nadav2/dev/data/CLIP2Shape/images/smplx_neutral_multiview_3k_uniform
+images_dir: /home/nadav2/dev/data/CLIP2Shape/images/smplx_male_multiview_10K
 out_path: /home/nadav2/dev/data/CLIP2Shape/outs/clustering_images/words_jsons

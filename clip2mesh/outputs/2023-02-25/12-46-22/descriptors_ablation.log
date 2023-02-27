@@ -1,0 +1,62 @@
+[2023-02-25 12:46:22,126][__main__][INFO] - Starting descriptors ablation for flame neutral model
+[2023-02-25 12:46:22,126][__main__][INFO] - Starting with 2 descriptors
+[2023-02-25 12:46:29,435][__main__][INFO] - Chosen descriptors: ['open mouth', 'smiling']
+[2023-02-25 12:46:29,435][__main__][INFO] - Starting training
+[2023-02-25 12:46:29,476][clip2mesh.optimizations.train_mapper][INFO] - Instantiating callback <pytorch_lightning.callbacks.ModelCheckpoint>
+[2023-02-25 12:46:29,478][clip2mesh.optimizations.train_mapper][INFO] - dataloader batch size: 200
+[2023-02-25 12:46:29,478][clip2mesh.optimizations.train_mapper][INFO] - tensorboard run name: flame_neutral_2_descriptors
+[2023-02-25 12:46:29,478][clip2mesh.optimizations.train_mapper][INFO] - instantiating model
+[2023-02-25 12:46:29,483][clip2mesh.optimizations.train_mapper][INFO] - training model
+[2023-02-25 12:47:07,625][clip2mesh.optimizations.train_mapper][INFO] - finished training in 38.189335346221924 seconds
+[2023-02-25 12:47:07,625][__main__][INFO] - Starting evaluation
+[2023-02-25 12:47:09,401][clip2mesh.data_management.data_observation.evaluate_performance][INFO] - IOU: 0.10469745222929937 | Overlap: 0.47452547452547456
+[2023-02-25 12:47:09,404][__main__][INFO] - Finished with 2 descriptors
+[2023-02-25 12:47:09,404][__main__][INFO] - Starting with 5 descriptors
+[2023-02-25 12:47:13,460][__main__][INFO] - Chosen descriptors: ['open mouth', 'smiling', 'fearful', 'serious', 'scared']
+[2023-02-25 12:47:13,460][__main__][INFO] - Starting training
+[2023-02-25 12:47:13,492][clip2mesh.optimizations.train_mapper][INFO] - Instantiating callback <pytorch_lightning.callbacks.ModelCheckpoint>
+[2023-02-25 12:47:13,494][clip2mesh.optimizations.train_mapper][INFO] - dataloader batch size: 200
+[2023-02-25 12:47:13,494][clip2mesh.optimizations.train_mapper][INFO] - tensorboard run name: flame_neutral_5_descriptors
+[2023-02-25 12:47:13,495][clip2mesh.optimizations.train_mapper][INFO] - instantiating model
+[2023-02-25 12:47:13,499][clip2mesh.optimizations.train_mapper][INFO] - training model
+[2023-02-25 12:47:49,306][clip2mesh.optimizations.train_mapper][INFO] - finished training in 35.84568548202515 seconds
+[2023-02-25 12:47:49,307][__main__][INFO] - Starting evaluation
+[2023-02-25 12:47:52,758][clip2mesh.data_management.data_observation.evaluate_performance][INFO] - IOU: 0.19327229299363058 | Overlap: 0.6724021592442645
+[2023-02-25 12:47:52,761][__main__][INFO] - Finished with 5 descriptors
+[2023-02-25 12:47:52,761][__main__][INFO] - Starting with 10 descriptors
+[2023-02-25 12:47:57,045][__main__][INFO] - Chosen descriptors: ['open mouth', 'smiling', 'fearful', 'surprised', 'excited', 'open eyes', 'happy', 'serious', 'scared', 'sad']
+[2023-02-25 12:47:57,045][__main__][INFO] - Starting training
+[2023-02-25 12:47:57,078][clip2mesh.optimizations.train_mapper][INFO] - Instantiating callback <pytorch_lightning.callbacks.ModelCheckpoint>
+[2023-02-25 12:47:57,079][clip2mesh.optimizations.train_mapper][INFO] - dataloader batch size: 200
+[2023-02-25 12:47:57,080][clip2mesh.optimizations.train_mapper][INFO] - tensorboard run name: flame_neutral_10_descriptors
+[2023-02-25 12:47:57,080][clip2mesh.optimizations.train_mapper][INFO] - instantiating model
+[2023-02-25 12:47:57,085][clip2mesh.optimizations.train_mapper][INFO] - training model
+[2023-02-25 12:48:38,287][clip2mesh.optimizations.train_mapper][INFO] - finished training in 41.239853620529175 seconds
+[2023-02-25 12:48:38,287][__main__][INFO] - Starting evaluation
+[2023-02-25 12:48:44,857][clip2mesh.data_management.data_observation.evaluate_performance][INFO] - IOU: 0.2701035031847134 | Overlap: 0.7734557595993322
+[2023-02-25 12:48:44,860][__main__][INFO] - Finished with 10 descriptors
+[2023-02-25 12:48:44,860][__main__][INFO] - Starting with 15 descriptors
+[2023-02-25 12:48:48,927][__main__][INFO] - Chosen descriptors: ['open mouth', 'smiling', 'fearful', 'surprised', 'excited', 'open eyes', 'happy', 'confused', 'angry', 'worried', 'nervous', 'bored', 'serious', 'scared', 'sad']
+[2023-02-25 12:48:48,927][__main__][INFO] - Starting training
+[2023-02-25 12:48:48,959][clip2mesh.optimizations.train_mapper][INFO] - Instantiating callback <pytorch_lightning.callbacks.ModelCheckpoint>
+[2023-02-25 12:48:48,960][clip2mesh.optimizations.train_mapper][INFO] - dataloader batch size: 200
+[2023-02-25 12:48:48,961][clip2mesh.optimizations.train_mapper][INFO] - tensorboard run name: flame_neutral_15_descriptors
+[2023-02-25 12:48:48,961][clip2mesh.optimizations.train_mapper][INFO] - instantiating model
+[2023-02-25 12:48:48,966][clip2mesh.optimizations.train_mapper][INFO] - training model
+[2023-02-25 12:49:35,426][clip2mesh.optimizations.train_mapper][INFO] - finished training in 46.49838662147522 seconds
+[2023-02-25 12:49:35,427][__main__][INFO] - Starting evaluation
+[2023-02-25 12:49:45,522][clip2mesh.data_management.data_observation.evaluate_performance][INFO] - IOU: 0.3447452229299363 | Overlap: 0.8509979353062629
+[2023-02-25 12:49:45,525][__main__][INFO] - Finished with 15 descriptors
+[2023-02-25 12:49:45,526][__main__][INFO] - Starting with 20 descriptors
+[2023-02-25 12:49:49,580][__main__][INFO] - Chosen descriptors: ['open mouth', 'smiling', 'fearful', 'surprised', 'excited', 'open eyes', 'happy', 'confused', 'angry', 'worried', 'nervous', 'bored', 'relaxed', 'calm', 'sleepy', 'tired', 'disgusted', 'serious', 'scared', 'sad']
+[2023-02-25 12:49:49,581][__main__][INFO] - Starting training
+[2023-02-25 12:49:49,616][clip2mesh.optimizations.train_mapper][INFO] - Instantiating callback <pytorch_lightning.callbacks.ModelCheckpoint>
+[2023-02-25 12:49:49,617][clip2mesh.optimizations.train_mapper][INFO] - dataloader batch size: 200
+[2023-02-25 12:49:49,618][clip2mesh.optimizations.train_mapper][INFO] - tensorboard run name: flame_neutral_20_descriptors
+[2023-02-25 12:49:49,618][clip2mesh.optimizations.train_mapper][INFO] - instantiating model
+[2023-02-25 12:49:49,624][clip2mesh.optimizations.train_mapper][INFO] - training model
+[2023-02-25 12:50:40,282][clip2mesh.optimizations.train_mapper][INFO] - finished training in 50.69953966140747 seconds
+[2023-02-25 12:50:40,282][__main__][INFO] - Starting evaluation
+[2023-02-25 12:50:53,462][clip2mesh.data_management.data_observation.evaluate_performance][INFO] - IOU: 0.3539012738853503 | Overlap: 0.8720771278509245
+[2023-02-25 12:50:53,465][__main__][INFO] - Finished with 20 descriptors
+[2023-02-25 12:50:53,465][__main__][INFO] - Finished descriptors ablation for flame neutral

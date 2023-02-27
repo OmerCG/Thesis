@@ -1,0 +1,30 @@
+[2023-02-24 16:15:21,808][__main__][INFO] - Starting optimization for smplx betas
+[2023-02-24 16:15:21,808][__main__][INFO] - labels: [['fat'], ['long torso']]
+[2023-02-24 16:15:21,808][__main__][INFO] - Optimizing 7.png
+[2023-02-24 16:15:21,808][__main__][INFO] - Video for 7.png already exists
+[2023-02-24 16:15:21,808][__main__][INFO] - Optimizing 2.png
+[2023-02-24 16:15:21,808][__main__][INFO] - Video for 2.png already exists
+[2023-02-24 16:15:21,809][__main__][INFO] - Optimizing 9.png
+[2023-02-24 16:15:21,809][__main__][INFO] - Video for 9.png already exists
+[2023-02-24 16:15:21,809][__main__][INFO] - Optimizing 0.png
+[2023-02-24 16:15:21,809][__main__][INFO] - Video for 0.png already exists
+[2023-02-24 16:15:21,809][__main__][INFO] - Optimizing 6.png
+[2023-02-24 16:15:21,809][__main__][INFO] - Video for 6.png already exists
+[2023-02-24 16:15:21,809][__main__][INFO] - Optimizing 4.png
+[2023-02-24 16:15:21,809][__main__][INFO] - Video for 4.png already exists
+[2023-02-24 16:15:21,809][__main__][INFO] - Optimizing 1.png
+[2023-02-24 16:15:21,809][__main__][INFO] - Video for 1.png already exists
+[2023-02-24 16:15:21,809][__main__][INFO] - Optimizing 3.png
+[2023-02-24 16:15:21,809][__main__][INFO] - Video for 3.png already exists
+[2023-02-24 16:15:21,809][__main__][INFO] - Optimizing 5.png
+[2023-02-24 16:15:21,809][__main__][INFO] - Video for 5.png already exists
+[2023-02-24 16:15:21,824][__main__][INFO] - Starting optimization for smplx betas
+[2023-02-24 16:15:21,824][__main__][INFO] - labels: [['fat'], ['rectangular'], ['fit'], ['long torso'], ['petite']]
+[2023-02-24 16:15:21,824][__main__][INFO] - Optimizing 7.png
+[2023-02-24 16:15:21,824][__main__][INFO] - Video for 7.png already exists
+[2023-02-24 16:15:21,824][__main__][INFO] - Optimizing 2.png
+[2023-02-24 16:15:21,824][__main__][INFO] - Video for 2.png already exists
+[2023-02-24 16:15:21,824][__main__][INFO] - Optimizing 9.png
+[2023-02-24 16:15:21,824][__main__][INFO] - Video for 9.png already exists
+[2023-02-24 16:15:21,824][__main__][INFO] - Optimizing 0.png
+[2023-02-24 16:15:21,824][__main__][INFO] - Writing video to /home/nadav2/dev/data/CLIP2Shape/outs/sliders_vs_blendshapes/smplx_male/descriptors_ablations/smplx_male_5_descriptors/0.mp4

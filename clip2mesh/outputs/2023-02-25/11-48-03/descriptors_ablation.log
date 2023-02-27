@@ -1,0 +1,12 @@
+[2023-02-25 11:48:03,584][__main__][INFO] - Starting descriptors ablation for flame neutral model
+[2023-02-25 11:48:03,585][__main__][INFO] - Starting with 2 descriptors
+[2023-02-25 11:48:09,006][__main__][INFO] - Chosen descriptors: ['fat', 'long torso']
+[2023-02-25 11:48:09,006][__main__][INFO] - Starting with 5 descriptors
+[2023-02-25 11:48:13,293][__main__][INFO] - Chosen descriptors: ['fat', 'rectangular', 'fit', 'long torso', 'petite']
+[2023-02-25 11:48:13,293][__main__][INFO] - Starting with 10 descriptors
+[2023-02-25 11:48:18,057][__main__][INFO] - Chosen descriptors: ['fat', 'rectangular', 'fit', 'proportioned', 'pear shaped', 'curvy', 'long torso', 'petite', 'tall', 'small']
+[2023-02-25 11:48:18,057][__main__][INFO] - Starting with 15 descriptors
+[2023-02-25 11:48:22,248][__main__][INFO] - Chosen descriptors: ['fat', 'rectangular', 'fit', 'proportioned', 'pear shaped', 'curvy', 'long legs', 'heavyset', 'round apple', 'narrow waist', 'long torso', 'long', 'petite', 'tall', 'small']
+[2023-02-25 11:48:22,248][__main__][INFO] - Starting with 20 descriptors
+[2023-02-25 11:48:27,135][__main__][INFO] - Chosen descriptors: ['fat', 'rectangular', 'fit', 'proportioned', 'pear shaped', 'curvy', 'long legs', 'heavyset', 'round apple', 'narrow waist', 'sturdy', 'muscular', 'long torso', 'long', 'petite', 'tall', 'small', 'skinny']
+[2023-02-25 11:48:27,136][__main__][INFO] - Finished descriptors ablation for flame neutral

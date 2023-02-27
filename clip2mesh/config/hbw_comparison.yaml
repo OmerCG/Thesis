@@ -15,9 +15,9 @@ comparison_kwargs:
     pixie: ${predictions_dir}/pixie_predictions
   
   smplx_models: 
-    male: /home/nadav2/dev/repos/Thesis/end2end_pipeline/smplx/smplx_male_multiview_e2e.ckpt
-    female: /home/nadav2/dev/repos/Thesis/end2end_pipeline/smplx/smplx_female_e2e.ckpt
-    neutral: /home/nadav2/dev/repos/Thesis/pre_production/smplx_neutral_e2e_candidate_2k.ckpt
+    male: /home/nadav2/dev/repos/Thesis/end2end_pipeline/smplx/smplx_male_e2e.ckpt
+    female: /home/nadav2/dev/repos/Thesis/end2end_pipeline/smplx/smplx_female.ckpt
+    neutral: /home/nadav2/dev/repos/Thesis/end2end_pipeline/smplx/smplx_neutral.ckpt
 
   renderer_kwargs:
       img_size: [1024, 1024]

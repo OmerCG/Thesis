@@ -4,17 +4,19 @@ defaults:
 out_dir: /home/nadav2/dev/data/CLIP2Shape/outs/sliders_vs_blendshapes/results/${model_type}/${gender}
 # out_dir: /home/nadav2/dev/data/CLIP2Shape/outs/figures/sliders_app/demonstrations
 gender: male
-# image_path: /home/nadav2/dev/data/CLIP2Shape/outs/sliders_vs_blendshapes/images_to_fit/${model_type}/${gender}/8.png
-image_path: random
+# image_path: /home/nadav2/dev/data/CLIP2Shape/outs/sliders_vs_blendshapes/images_to_fit/${model_type}/${gender}/7.png
+# image_path: random
+image_path: /home/nadav2/dev/data/CLIP2Shape/outs/images_to_shape/HBW_DATA/data/images/033_85_38/02453_male.png
+hbw_gt: /home/nadav2/dev/data/CLIP2Shape/outs/images_to_shape/HBW_DATA/Ground_Truth/033.npy
 comparison_mode: True 
-A_pose: True
+A_pose: False
 
 # USER STUDY CNFIGURATION
-model_type: smpl
+model_type: smplx
 model_path: /home/nadav2/dev/repos/Thesis/sliders_ckpts/${model_type}/${model_type}_${gender}.ckpt
 
 # # FLAME - expression
-# model_path: /home/nadav2/dev/repos/Thesis/pre_production/flame_neutral_5_descriptors.ckpt
+# model_path: /home/nadav2/dev/repos/Thesis/production/flame_expression.ckpt
 # model_type: flame
 # with_face: True
 # predict_jaw_pose: False
@@ -24,7 +26,7 @@ model_path: /home/nadav2/dev/repos/Thesis/sliders_ckpts/${model_type}/${model_ty
 # model_type: flame
 
 # # SMPLX
-# model_path: /home/nadav2/dev/repos/Thesis/sliders_ckpts/smplx/smplx_female.ckpt
+# model_path: /home/nadav2/dev/repos/Thesis/pre_production/smplx_male_10k.ckpt
 # model_type: smplx
 
 # # SMPL

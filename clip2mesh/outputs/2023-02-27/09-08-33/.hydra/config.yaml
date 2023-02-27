@@ -1,0 +1,19 @@
+renderer_kwargs:
+  dist: 4.2
+  elev: 10.0
+  azim: 0.0
+  img_size:
+  - 1024
+  - 1024
+  use_tex: false
+  model_type: ${model_type}
+  texture_optimization: true
+  py3d: true
+out_dir: /home/nadav2/dev/data/CLIP2Shape/outs/sliders_vs_blendshapes/results/${model_type}/${gender}
+gender: male
+image_path: /home/nadav2/dev/data/CLIP2Shape/outs/images_to_shape/HBW_DATA/data/images/033_85_38/02462_male.png
+hbw_gt: /home/nadav2/dev/data/CLIP2Shape/outs/images_to_shape/HBW_DATA/Ground_Truth/033.npy
+comparison_mode: true
+A_pose: false
+model_type: smplx
+model_path: /home/nadav2/dev/repos/Thesis/sliders_ckpts/${model_type}/${model_type}_${gender}.ckpt

@@ -12,7 +12,7 @@ descriptors_clusters_json: /home/nadav2/dev/data/CLIP2Shape/outs/clustering_imag
 batch_size: 200
 effect_threshold: 0.3
 
-output_path: /home/nadav2/dev/data/CLIP2Shape/outs/descriptors_ablations/flame_expression
+output_path: /home/nadav2/dev/data/CLIP2Shape/outs/descriptors_ablations/correct_threshold/${model_type}_${gender}
 descriptors_options:
   - 2
   - 5

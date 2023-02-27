@@ -1,0 +1,62 @@
+[2023-02-25 12:09:23,322][__main__][INFO] - Starting descriptors ablation for smplx female model
+[2023-02-25 12:09:23,323][__main__][INFO] - Starting with 2 descriptors
+[2023-02-25 12:09:29,961][__main__][INFO] - Chosen descriptors: ['fat', 'proportioned']
+[2023-02-25 12:09:29,961][__main__][INFO] - Starting training
+[2023-02-25 12:09:29,996][clip2mesh.optimizations.train_mapper][INFO] - Instantiating callback <pytorch_lightning.callbacks.ModelCheckpoint>
+[2023-02-25 12:09:29,997][clip2mesh.optimizations.train_mapper][INFO] - dataloader batch size: 200
+[2023-02-25 12:09:29,998][clip2mesh.optimizations.train_mapper][INFO] - tensorboard run name: smplx_female_2_descriptors
+[2023-02-25 12:09:29,998][clip2mesh.optimizations.train_mapper][INFO] - instantiating model
+[2023-02-25 12:09:30,007][clip2mesh.optimizations.train_mapper][INFO] - training model
+[2023-02-25 12:10:06,623][clip2mesh.optimizations.train_mapper][INFO] - finished training in 36.66143035888672 seconds
+[2023-02-25 12:10:06,623][__main__][INFO] - Starting evaluation
+[2023-02-25 12:10:09,078][clip2mesh.data_management.data_observation.evaluate_performance][INFO] - IOU: 0.2713822069492173 | Overlap: 0.49538516151934686
+[2023-02-25 12:10:09,082][__main__][INFO] - Finished with 2 descriptors
+[2023-02-25 12:10:09,082][__main__][INFO] - Starting with 5 descriptors
+[2023-02-25 12:10:12,322][__main__][INFO] - Chosen descriptors: ['fat', 'short', 'proportioned', 'petite', 'narrow waist']
+[2023-02-25 12:10:12,323][__main__][INFO] - Starting training
+[2023-02-25 12:10:12,360][clip2mesh.optimizations.train_mapper][INFO] - Instantiating callback <pytorch_lightning.callbacks.ModelCheckpoint>
+[2023-02-25 12:10:12,361][clip2mesh.optimizations.train_mapper][INFO] - dataloader batch size: 200
+[2023-02-25 12:10:12,361][clip2mesh.optimizations.train_mapper][INFO] - tensorboard run name: smplx_female_5_descriptors
+[2023-02-25 12:10:12,362][clip2mesh.optimizations.train_mapper][INFO] - instantiating model
+[2023-02-25 12:10:12,367][clip2mesh.optimizations.train_mapper][INFO] - training model
+[2023-02-25 12:10:47,362][clip2mesh.optimizations.train_mapper][INFO] - finished training in 35.039039611816406 seconds
+[2023-02-25 12:10:47,363][__main__][INFO] - Starting evaluation
+[2023-02-25 12:10:51,605][clip2mesh.data_management.data_observation.evaluate_performance][INFO] - IOU: 0.5001909125620466 | Overlap: 0.6718642369591084
+[2023-02-25 12:10:51,609][__main__][INFO] - Finished with 5 descriptors
+[2023-02-25 12:10:51,609][__main__][INFO] - Starting with 10 descriptors
+[2023-02-25 12:10:54,988][__main__][INFO] - Chosen descriptors: ['fat', 'short', 'pear shaped', 'curvy', 'big', 'heavyset', 'long legs', 'proportioned', 'petite', 'narrow waist']
+[2023-02-25 12:10:54,989][__main__][INFO] - Starting training
+[2023-02-25 12:10:55,028][clip2mesh.optimizations.train_mapper][INFO] - Instantiating callback <pytorch_lightning.callbacks.ModelCheckpoint>
+[2023-02-25 12:10:55,029][clip2mesh.optimizations.train_mapper][INFO] - dataloader batch size: 200
+[2023-02-25 12:10:55,030][clip2mesh.optimizations.train_mapper][INFO] - tensorboard run name: smplx_female_10_descriptors
+[2023-02-25 12:10:55,030][clip2mesh.optimizations.train_mapper][INFO] - instantiating model
+[2023-02-25 12:10:55,035][clip2mesh.optimizations.train_mapper][INFO] - training model
+[2023-02-25 12:11:32,950][clip2mesh.optimizations.train_mapper][INFO] - finished training in 37.96030902862549 seconds
+[2023-02-25 12:11:32,951][__main__][INFO] - Starting evaluation
+[2023-02-25 12:11:40,610][clip2mesh.data_management.data_observation.evaluate_performance][INFO] - IOU: 0.4749904543718977 | Overlap: 0.8306330837304289
+[2023-02-25 12:11:40,613][__main__][INFO] - Finished with 10 descriptors
+[2023-02-25 12:11:40,613][__main__][INFO] - Starting with 15 descriptors
+[2023-02-25 12:11:43,817][__main__][INFO] - Chosen descriptors: ['fat', 'short', 'pear shaped', 'curvy', 'big', 'heavyset', 'long legs', 'hourglass', 'average', 'sexy', 'fit', 'proportioned', 'petite', 'narrow waist', 'skinny']
+[2023-02-25 12:11:43,817][__main__][INFO] - Starting training
+[2023-02-25 12:11:43,857][clip2mesh.optimizations.train_mapper][INFO] - Instantiating callback <pytorch_lightning.callbacks.ModelCheckpoint>
+[2023-02-25 12:11:43,859][clip2mesh.optimizations.train_mapper][INFO] - dataloader batch size: 200
+[2023-02-25 12:11:43,859][clip2mesh.optimizations.train_mapper][INFO] - tensorboard run name: smplx_female_15_descriptors
+[2023-02-25 12:11:43,859][clip2mesh.optimizations.train_mapper][INFO] - instantiating model
+[2023-02-25 12:11:43,864][clip2mesh.optimizations.train_mapper][INFO] - training model
+[2023-02-25 12:12:25,582][clip2mesh.optimizations.train_mapper][INFO] - finished training in 41.762080907821655 seconds
+[2023-02-25 12:12:25,582][__main__][INFO] - Starting evaluation
+[2023-02-25 12:12:36,159][clip2mesh.data_management.data_observation.evaluate_performance][INFO] - IOU: 0.8241695303550973 | Overlap: 0.834502587694077
+[2023-02-25 12:12:36,162][__main__][INFO] - Finished with 15 descriptors
+[2023-02-25 12:12:36,162][__main__][INFO] - Starting with 20 descriptors
+[2023-02-25 12:12:38,974][__main__][INFO] - Chosen descriptors: ['fat', 'short', 'pear shaped', 'curvy', 'big', 'heavyset', 'long legs', 'hourglass', 'average', 'sexy', 'fit', 'proportioned', 'petite', 'narrow waist', 'skinny']
+[2023-02-25 12:12:38,974][__main__][INFO] - Starting training
+[2023-02-25 12:12:39,012][clip2mesh.optimizations.train_mapper][INFO] - Instantiating callback <pytorch_lightning.callbacks.ModelCheckpoint>
+[2023-02-25 12:12:39,013][clip2mesh.optimizations.train_mapper][INFO] - dataloader batch size: 200
+[2023-02-25 12:12:39,013][clip2mesh.optimizations.train_mapper][INFO] - tensorboard run name: smplx_female_15_descriptors
+[2023-02-25 12:12:39,013][clip2mesh.optimizations.train_mapper][INFO] - instantiating model
+[2023-02-25 12:12:39,020][clip2mesh.optimizations.train_mapper][INFO] - training model
+[2023-02-25 12:13:20,587][clip2mesh.optimizations.train_mapper][INFO] - finished training in 41.61167860031128 seconds
+[2023-02-25 12:13:20,588][__main__][INFO] - Starting evaluation
+[2023-02-25 12:13:31,655][clip2mesh.data_management.data_observation.evaluate_performance][INFO] - IOU: 0.8241695303550973 | Overlap: 0.834502587694077
+[2023-02-25 12:13:31,658][__main__][INFO] - Finished with 20 descriptors
+[2023-02-25 12:13:31,659][__main__][INFO] - Finished descriptors ablation for smplx female

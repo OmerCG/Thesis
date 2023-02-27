@@ -1,0 +1,49 @@
+[2023-02-24 16:19:03,989][__main__][INFO] - Starting optimization for smplx betas
+[2023-02-24 16:19:03,989][__main__][INFO] - labels: [['fat'], ['long torso']]
+[2023-02-24 16:19:03,989][__main__][INFO] - Optimizing 7.png
+[2023-02-24 16:21:02,997][__main__][INFO] - Finished optimizing 7.png
+[2023-02-24 16:21:02,997][__main__][INFO] - Pred sliders values {'fat': -4.175952, 'long torso': 3.1598036}
+[2023-02-24 16:21:02,998][__main__][INFO] - Geometric distance: [0.01507032010704279]
+[2023-02-24 16:21:02,998][__main__][INFO] - Optimizing 2.png
+[2023-02-24 16:21:22,222][__main__][INFO] - Finished optimizing 2.png
+[2023-02-24 16:21:22,222][__main__][INFO] - Pred sliders values {'fat': -4.2000055, 'long torso': 3.4281588}
+[2023-02-24 16:21:22,222][__main__][INFO] - Geometric distance: [0.01507032010704279, 0.02521393820643425]
+[2023-02-24 16:21:22,222][__main__][INFO] - Optimizing 9.png
+[2023-02-24 16:22:37,569][__main__][INFO] - Finished optimizing 9.png
+[2023-02-24 16:22:37,570][__main__][INFO] - Pred sliders values {'fat': -0.6933004, 'long torso': 2.2051497}
+[2023-02-24 16:22:37,570][__main__][INFO] - Geometric distance: [0.01507032010704279, 0.02521393820643425, 0.09571291506290436]
+[2023-02-24 16:22:37,570][__main__][INFO] - Optimizing 0.png
+[2023-02-24 16:25:57,347][__main__][INFO] - Finished optimizing 0.png
+[2023-02-24 16:25:57,348][__main__][INFO] - Pred sliders values {'fat': 9.865315, 'long torso': -6.720478}
+[2023-02-24 16:25:57,348][__main__][INFO] - Geometric distance: [0.01507032010704279, 0.02521393820643425, 0.09571291506290436, 0.01975877210497856]
+[2023-02-24 16:25:57,348][__main__][INFO] - Optimizing 6.png
+[2023-02-24 16:28:08,731][__main__][INFO] - Finished optimizing 6.png
+[2023-02-24 16:28:08,731][__main__][INFO] - Pred sliders values {'fat': 3.4062374, 'long torso': 0.30552104}
+[2023-02-24 16:28:08,731][__main__][INFO] - Geometric distance: [0.01507032010704279, 0.02521393820643425, 0.09571291506290436, 0.01975877210497856, 0.033117588609457016]
+[2023-02-24 16:28:08,732][__main__][INFO] - Optimizing 4.png
+[2023-02-24 16:30:16,391][__main__][INFO] - Finished optimizing 4.png
+[2023-02-24 16:30:16,391][__main__][INFO] - Pred sliders values {'fat': 5.8149195, 'long torso': 0.15744756}
+[2023-02-24 16:30:16,391][__main__][INFO] - Geometric distance: [0.01507032010704279, 0.02521393820643425, 0.09571291506290436, 0.01975877210497856, 0.033117588609457016, 0.057626232504844666]
+[2023-02-24 16:30:16,391][__main__][INFO] - Optimizing 1.png
+[2023-02-24 16:31:46,696][__main__][INFO] - Finished optimizing 1.png
+[2023-02-24 16:31:46,696][__main__][INFO] - Pred sliders values {'fat': 0.92559725, 'long torso': 5.6734743}
+[2023-02-24 16:31:46,696][__main__][INFO] - Geometric distance: [0.01507032010704279, 0.02521393820643425, 0.09571291506290436, 0.01975877210497856, 0.033117588609457016, 0.057626232504844666, 0.052827078849077225]
+[2023-02-24 16:31:46,696][__main__][INFO] - Optimizing 3.png
+[2023-02-24 16:32:15,616][__main__][INFO] - Finished optimizing 3.png
+[2023-02-24 16:32:15,616][__main__][INFO] - Pred sliders values {'fat': 0.69253856, 'long torso': 5.5550895}
+[2023-02-24 16:32:15,616][__main__][INFO] - Geometric distance: [0.01507032010704279, 0.02521393820643425, 0.09571291506290436, 0.01975877210497856, 0.033117588609457016, 0.057626232504844666, 0.052827078849077225, 0.01509665697813034]
+[2023-02-24 16:32:15,616][__main__][INFO] - Optimizing 5.png
+[2023-02-24 16:32:38,644][__main__][INFO] - Finished optimizing 5.png
+[2023-02-24 16:32:38,644][__main__][INFO] - Pred sliders values {'fat': 2.9055634, 'long torso': 2.508215}
+[2023-02-24 16:32:38,644][__main__][INFO] - Geometric distance: [0.01507032010704279, 0.02521393820643425, 0.09571291506290436, 0.01975877210497856, 0.033117588609457016, 0.057626232504844666, 0.052827078849077225, 0.01509665697813034, 0.021077031269669533]
+[2023-02-24 16:32:38,672][__main__][INFO] - Starting optimization for smplx betas
+[2023-02-24 16:32:38,672][__main__][INFO] - labels: [['fat'], ['rectangular'], ['fit'], ['long torso'], ['petite']]
+[2023-02-24 16:32:38,672][__main__][INFO] - Optimizing 7.png
+[2023-02-24 16:32:38,672][__main__][INFO] - Video for 7.png already exists
+[2023-02-24 16:32:38,673][__main__][INFO] - Optimizing 2.png
+[2023-02-24 16:32:38,673][__main__][INFO] - Video for 2.png already exists
+[2023-02-24 16:32:38,673][__main__][INFO] - Optimizing 9.png
+[2023-02-24 16:32:38,673][__main__][INFO] - Video for 9.png already exists
+[2023-02-24 16:32:38,673][__main__][INFO] - Optimizing 0.png
+[2023-02-24 16:32:38,673][__main__][INFO] - Video for 0.png already exists
+[2023-02-24 16:32:38,673][__main__][INFO] - Optimizing 6.png

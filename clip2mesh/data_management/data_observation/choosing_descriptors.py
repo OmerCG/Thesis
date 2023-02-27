@@ -20,7 +20,7 @@ class ChoosingDescriptors(ChoosingDescriptorsUtils):
         max_num_of_descriptors: int,
         min_num_of_descriptors: int,
         descriptors_clusters_json: str,
-        corr_threshold: float = 0.5,
+        corr_threshold: float = 0.6,
         output_dir: Union[Path, str] = None,
         descriptors_to_keep: List[str] = None,
         verbose: bool = False,

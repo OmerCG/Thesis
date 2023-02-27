@@ -131,7 +131,7 @@ class BSOptimization:
 
         return torch.norm(pred_verts - gt_verts, dim=1).mean().item()
 
-    def display_result(self, pred_bs: torch.Tensor, gt_bs: torch.Tensor, loss: float):
+    def display_result(self, pred_bs: torch.Tensor, gt_bs: torch.Tensor, loss: float) -> np.ndarray:
         pred_model_kwargs = {self.optimizing_feature: pred_bs, "device": self.device, "gender": self.gender}
         gt_model_kwargs = {self.optimizing_feature: gt_bs, "device": self.device, "gender": self.gender}
 
@@ -175,8 +175,10 @@ class BSOptimization:
             self.write_to_video(concatenated_img)
 
         concatenated_img = cv2.resize(concatenated_img, (0, 0), fx=0.5, fy=0.5)
-        cv2.imshow("optimization process", concatenated_img)
-        cv2.waitKey(1)
+        if self.display:
+            cv2.imshow("optimization process", concatenated_img)
+            cv2.waitKey(1)
+        return concatenated_img
 
     def optimize(self):
 
@@ -184,7 +186,7 @@ class BSOptimization:
             self.logger.info(f"Optimizing {img_path.name}")
             bs_json_path = img_path.parent / f"{img_path.stem}.json"
 
-            if (self.output_dir / f"{img_path.stem}.mp4").exists():
+            if (self.output_dir / f"{img_path.stem}.mp4").exists() or (self.output_dir / f"{img_path.stem}.png").exists():
                 self.logger.info(f"Video for {img_path.name} already exists")
                 continue
 
@@ -204,8 +206,7 @@ class BSOptimization:
                 loss.backward()
                 self.optimizer.step()
 
-                if self.display:
-                    self.display_result(pred, gt, loss.item())
+                img = self.display_result(pred, gt, loss.item())
 
                 progress_bar.set_description(f"total loss: {loss.item()}")
 
@@ -216,6 +217,8 @@ class BSOptimization:
 
             if self.write_videos:
                 self.close_video_writer()
+
+            cv2.imwrite(str(self.output_dir / f"{img_path.stem}.png"), img[..., ::-1])
 
             geometric_dist = self.get_geometric_distance(pred, gt)
             labels_to_print = {

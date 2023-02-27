@@ -7,7 +7,7 @@ models_dir: /home/nadav2/dev/repos/CLIP2Shape/models
 seed: 42
 
 tensorboard_logger:
-  name: smpl_male_multiview_manual_7d # IMPORTANT
+  name: smplx_male_10k # IMPORTANT
   save_dir: /home/nadav2/dev/data/CLIP2Shape/runs
   log_graph: True
 
@@ -25,7 +25,7 @@ callbacks:
     auto_insert_metric_name: False
 
 dataloader:
-  batch_size: 500
+  batch_size: 2500
   num_workers: 1
   shuffle: True
   drop_last: False
@@ -37,18 +37,18 @@ trainer:
   log_every_n_steps: 3
 
 dataset:
-  data_dir: /home/nadav2/dev/data/CLIP2Shape/images/smpl_male_multiview
+  data_dir: /home/nadav2/dev/data/CLIP2Shape/images/smplx_male_multiview_10K
   optimize_features:
     - betas
   out_features: ${model_conf.out_features}
   labels_to_get:
     - fat
-    - small
-    - narrow waist
-    - long legs
-    - curvy
+    - muscular
+    - short torso
     - rectangular
-    - proportioned
+    - tall
+    - petite
+    - small
 
 model_conf:
   hidden_size: [800, 500]

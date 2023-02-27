@@ -1,0 +1,4 @@
+[2023-02-24 16:18:44,745][__main__][INFO] - Starting optimization for smplx betas
+[2023-02-24 16:18:44,745][__main__][INFO] - labels: [['fat'], ['long torso']]
+[2023-02-24 16:18:44,745][__main__][INFO] - Optimizing 7.png
+[2023-02-24 16:18:44,746][__main__][INFO] - Writing video to /home/nadav2/dev/data/CLIP2Shape/outs/sliders_vs_blendshapes/smplx_male/descriptors_ablations/smplx_male_2_descriptors/7.mp4
